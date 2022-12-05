@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "a68e89db-48cc-424f-a2a6-4f1b1944702b",
+		"name": "Xentral New API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List products",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/products",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List customer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/customers",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View customer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/customers/5",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"customers",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View customer (with filters)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.xentral.default.v1+json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 2|ez7EhS1wtDGFDSqcmWpnkhE41gfMKqUYsG74hrJt"
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/customers?filter[0][key]=id&filter[0][op]=in&filter[0][value][0]=5",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "filter[0][key]",
+							"value": "id"
+						},
+						{
+							"key": "filter[0][op]",
+							"value": "in"
+						},
+						{
+							"key": "filter[0][value][0]",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List sales orders",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/salesOrders",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"salesOrders"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View sales order",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/salesOrders/123",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"salesOrders",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List invoices",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/invoices",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Invoice",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/invoices/123",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"invoices",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List customers tags",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "{{ACCEPT}}",
+						"type": "default"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASEURL}}/customersTags",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"customersTags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add item to storage location",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/vnd.xentral.default.v1-beta+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"quantity\": 5,\n    \"articleSku\": \"1000016\"\n}"
+				},
+				"url": {
+					"raw": "{{BASEURL}}/warehouses/1/storageLocations/1/items",
+					"host": [
+						"{{BASEURL}}"
+					],
+					"path": [
+						"warehouses",
+						"1",
+						"storageLocations",
+						"1",
+						"items"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "2|ez7EhS1wtDGFDSqcmWpnkhE41gfMKqUYsG74hrJt",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
