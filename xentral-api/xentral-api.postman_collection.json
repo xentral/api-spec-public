@@ -13,21 +13,21 @@
 					"name": "Get API Token",
 					"event": [
 						{
-							"listen": "prerequest",
+							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"variable_key\", \"variable_value\");"
+									"const response = pm.response",
+									"const xToken = response.headers.find(header => header.key == \"X-Token\")",
+									"pm.environment.set(\"xToken\", xToken.value)"
 								],
 								"type": "text/javascript"
 							}
 						},
 						{
-							"listen": "test",
+							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const response = pm.response",
-									"console.log(response.headers[\"X-Token\"])",
-									"pm.environment.set(\"xToken\", response.headers[\"X-Token\"])"
+									"pm.collectionVariables.set(\"variable_key\", \"variable_value\");"
 								],
 								"type": "text/javascript"
 							}
@@ -71,6 +71,125 @@
 				}
 			],
 			"description": "It is advised to create a Personal Access Token and use that for making calls with a token that is persistent.\n\nThe endpoint in this collection allows the user to create a token with limited lifetime. This token expires the moment you request a new one."
+		},
+		{
+			"name": "Credit Note API",
+			"item": [
+				{
+					"name": "Credit Note",
+					"item": [
+						{
+							"name": "List Credit Notes",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.minimal.v1+json",
+										"type": "default"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/creditNotes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"creditNotes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "number",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Credit Note Tag",
+					"item": [
+						{
+							"name": "List Credit Notes Tags",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/creditNotesTags",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"creditNotesTags"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "number",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		},
 		{
 			"name": "Customer API",
@@ -216,6 +335,86 @@
 			]
 		},
 		{
+			"name": "Delivery Note API",
+			"item": [
+				{
+					"name": "[BETA] List Delivery Notes",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.default.v1-beta+json",
+								"type": "default"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/deliveryNotes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"deliveryNotes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice API",
+			"item": [
+				{
+					"name": "List invoices",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.minimal.v1+json",
+								"type": "default"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/invoices",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Product API",
 			"item": [
 				{
@@ -292,6 +491,422 @@
 										"type": "default"
 									}
 								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Purchase Prices",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/purchasePrices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"purchasePrices"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Sales Prices",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/salesPrices",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"salesPrices"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Purchase Orders Positions",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/purchaseOrdersPositions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"purchaseOrdersPositions"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Sales Orders Positions",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/salesOrdersPositions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"salesOrdersPositions"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Productions Positions",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/productionsPositions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"productionsPositions"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Properties",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/properties",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"properties"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Reservations",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"reservations"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Parts",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/parts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"parts"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Storage Locations",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/products/:productId/storageLocations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products",
+										":productId",
+										"storageLocations"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Multiple Products Tags",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": \"1\",\n        \"tags\": [\n            {\n                \"id\": \"1\",\n                \"key\": \"sku\",\n                \"name\": \"Amazon\",\n                \"color\": \"12AB34\"\n            }\n        ]\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product Tags",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\n        \"tags\": [\n            {\n                \"id\": \"1\",\n                \"key\": \"sku\",\n                \"name\": \"Amazon\",\n                \"color\": \"12AB34\"\n            }\n        ]\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{baseUrl}}/api/products/:productId",
 									"host": [
@@ -598,11 +1213,7 @@
 			]
 		},
 		{
-			"name": "User",
-			"item": []
-		},
-		{
-			"name": "Sales Order",
+			"name": "Sales Order API",
 			"item": [
 				{
 					"name": "List sales orders",
@@ -616,7 +1227,7 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "{{ACCEPT}}",
+								"value": "application/vnd.xentral.minimal.v1+json",
 								"type": "default"
 							},
 							{
@@ -627,11 +1238,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASEURL}}/salesOrders",
+							"raw": "{{baseUrl}}/api/salesOrders",
 							"host": [
-								"{{BASEURL}}"
+								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"salesOrders"
 							],
 							"query": [
@@ -667,7 +1279,7 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "{{ACCEPT}}",
+								"value": "application/vnd.xentral.minimal.v1+json",
 								"type": "default"
 							},
 							{
@@ -678,13 +1290,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASEURL}}/salesOrders/123",
+							"raw": "{{baseUrl}}/api/salesOrders/:salesOrderId",
 							"host": [
-								"{{BASEURL}}"
+								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"salesOrders",
-								"123"
+								":salesOrderId"
+							],
+							"variable": [
+								{
+									"key": "salesOrderId",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -693,44 +1312,197 @@
 			]
 		},
 		{
-			"name": "Invoice",
+			"name": "Supplier API",
 			"item": [
 				{
-					"name": "List invoices",
+					"name": "Supplier",
+					"item": [
+						{
+							"name": "List Supplier",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/suppliers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"suppliers"
+									],
+									"query": [
+										{
+											"key": "filter[0][key]",
+											"value": "id",
+											"disabled": true
+										},
+										{
+											"key": "filter[0][op]",
+											"value": "equals",
+											"disabled": true
+										},
+										{
+											"key": "filter[0][value]",
+											"value": "5",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Supplier",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/suppliers/:supplierId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"suppliers",
+										":supplierId"
+									],
+									"variable": [
+										{
+											"key": "supplierId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Supplier Tag",
+					"item": [
+						{
+							"name": "List Suppliers Tags",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.xentral.default.v1+json",
+										"type": "default"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/suppliersTags",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"suppliersTags"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User API",
+			"item": [
+				{
+					"name": "Create User",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
 						}
 					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Accept",
-								"value": "{{ACCEPT}}",
+								"value": "application/vnd.xentral.default.v1+json",
 								"type": "default"
 							},
 							{
-								"key": "",
-								"value": "",
-								"type": "default",
-								"disabled": true
+								"key": "Content-Type",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"John\",\n    \"password\": \"StrongPassword123\",\n    \"description\": \"A user named John\",\n    \"color\": \"FF0000\",\n    \"locale\": \"de_DE\",\n    \"email\": \"john.doe@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASEURL}}/invoices",
+							"raw": "{{baseUrl}}/api/users",
 							"host": [
-								"{{BASEURL}}"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"invoices"
+								"api",
+								"users"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "View Invoice",
+					"name": "List Users",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -741,24 +1513,222 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "{{ACCEPT}}",
+								"value": "application/vnd.xentral.default.v1+json",
 								"type": "default"
-							},
-							{
-								"key": "",
-								"value": "",
-								"type": "default",
-								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "{{BASEURL}}/invoices/123",
+							"raw": "{{baseUrl}}/api/users",
 							"host": [
-								"{{BASEURL}}"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"invoices",
-								"123"
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Permissions",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:userId/permissions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userId",
+								"permissions"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.password.v1+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.xentral.password.v1+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"old\": \"oldPassword\",\n   \"new\": \"newPassword\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"John\",\n    \"password\": \"StrongPassword123\",\n    \"description\": \"A user named John\",\n    \"color\": \"FF0000\",\n    \"locale\": \"de_DE\",\n    \"email\": \"john.doe@email.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.xentral.default.v1+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": null
+								}
 							]
 						}
 					},
