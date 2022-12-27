@@ -1279,7 +1279,7 @@
 						"header": [
 							{
 								"key": "Accept",
-								"value": "application/vnd.xentral.minimal.v1+json",
+								"value": "application/vnd.xentral.default.v1-beta+json",
 								"type": "default"
 							},
 							{
