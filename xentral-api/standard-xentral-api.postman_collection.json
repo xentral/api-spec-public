@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "25d5d736-f177-484e-9a70-bf42ff308219",
-		"name": "Xentral API Endpoints",
+		"name": "Xentral API Endpoints Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1373626"
 	},
@@ -4079,1187 +4079,1273 @@
 			"name": "Standard-API",
 			"item": [
 				{
-					"name": "AdresseCreate",
-					"event": [
+					"name": "Adresse",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <kundennummer>NEW</kundennummer>\n    <name>Max Mustermann 22</name>\n    <strasse>Musterstrasse 3</strasse>\n    <plz>86152</plz>\n    <ort>Augsburg</ort>\n    <land>DE</land>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelList",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelList",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelList"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelEdit",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <nummer>99999</nummer>\n    <name_de>API-Edited Product</name_de>\n    <aktiv>1</aktiv>\n    <anabregs_text>Text für Angebot, Auftrag, Rechnung usw.</anabregs_text>\n    <abckategorie>B</abckategorie>\n    <hersteller>Herstellername</hersteller>\n    <herstellernummer>123</herstellernummer>\n    <ean>234</ean>\n    <zolltarifnummer>345</zolltarifnummer>\n    <mindestlager>10</mindestlager>\n    <mindestbestellung>5</mindestbestellung>\n    <gewicht>1.5</gewicht>\n    <lagerartikel>1</lagerartikel>\n    <einkaufspreise>\n        <staffelpreis>\n            <lieferantennummer>70000</lieferantennummer>\n            <ab_menge>1</ab_menge>\n            <bestellnummer>123456789</bestellnummer>\n            <bezeichnunglieferant>Artikel 123456789</bezeichnunglieferant>\n            <preis>1.20</preis>\n            <waehrung/>\n        </staffelpreis>\n    </einkaufspreise>\n    <verkaufspreise>\n        <staffelpreis>\n            <ab_menge>1</ab_menge>\n            <preis>2.20</preis>\n            <waehrung>EUR</waehrung>\n        </staffelpreis>\n    </verkaufspreise>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelEdit Lagerbestand",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <nummer>1900066</nummer>\n    <lager_platz>ZZ01</lager_platz>\n    <lager_menge>100</lager_menge>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelEdit Lagerbestand mit Freifeldern",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<nummer>1000002</nummer>\n<einkaufspreise>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>235</preis>\n<waehrung>EUR</waehrung>\n<lieferantennummer>70002</lieferantennummer>\n</staffelpreis>\n</einkaufspreise>\n<verkaufspreise>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>6</preis>\n<vpe>1</vpe>\n<waehrung>EUR</waehrung>\n<gruppe>2</gruppe>\n<art>gruppe</art>\n</staffelpreis>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>5</preis>\n<vpe>1</vpe>\n<waehrung>EUR</waehrung>\n</staffelpreis>\n</verkaufspreise>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelEdit A,B,C-Kategorie",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <nummer>100001</nummer>\n    <name_de>Name neu von Artikel</name_de>\n    <aktiv>1</aktiv>\n    <anabregs_text>Text für Angebot, Auftrag, Rechnung usw.</anabregs_text>\n    <hersteller>Herstellername</hersteller>\n    <herstellernummer>123</herstellernummer>\n    <ean>234</ean>\n    <zolltarifnummer>345</zolltarifnummer>\n    <mindestlager>10</mindestlager>\n    <mindestbestellung>5</mindestbestellung>\n    <gewicht>1.5</gewicht>\n    <lagerartikel>1</lagerartikel>\n    <einkaufspreise>\n        <staffelpreis>\n            <lieferantennummer>70000</lieferantennummer>\n            <ab_menge>1</ab_menge>\n            <bestellnummer>123456789</bestellnummer>\n            <bezeichnunglieferant>Artikel 123456789</bezeichnunglieferant>\n            <preis>1.20</preis>\n            <waehrung/>\n        </staffelpreis>\n    </einkaufspreise>\n    <verkaufspreise>\n        <staffelpreis>\n            <ab_menge>1</ab_menge>\n            <preis>2.20</preis>\n            <waehrung>EUR</waehrung>\n        </staffelpreis>\n    </verkaufspreise>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseListeGet",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseListeGet",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseListeGet"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseGet",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/AdresseGet?id=186",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseGet"
-							],
-							"query": [
+							"name": "AdresseCreate",
+							"event": [
 								{
-									"key": "id",
-									"value": "186"
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <kundennummer>NEW</kundennummer>\n    <name>Max Mustermann 22</name>\n    <strasse>Musterstrasse 3</strasse>\n    <plz>86152</plz>\n    <ort>Augsburg</ort>\n    <land>DE</land>\n</xml>"
 								},
-								{
-									"key": "action",
-									"value": "lieferadresse",
-									"disabled": true
+								"url": {
+									"raw": "{{BASEURL}}/AdresseCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseCreate"
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseAccountsGet",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseListeGet",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseListeGet"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtikelStuecklisteList",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>12</id>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/ArtikelStuecklisteList",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ArtikelStuecklisteList"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragVersenden",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <id>1</id>\n    <versandart>email</versandart>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragVersenden",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragVersenden"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragCreate",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var internet = pm.variables.replaceIn('{{$randomPassword}}');",
-									"pm.variables.set(\"internet\",internet);",
-									"var transaktion = pm.variables.replaceIn('{{$randomPhoneNumber}}');",
-									"pm.variables.set(\"transaktion\",transaktion);",
-									"var value = pm.collectionVariables.get(\"artikelnummer\");",
-									"if (!value) {",
-									"    pm.collectionVariables.set(\"artikelnummer\",1000006)",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var value = pm.collectionVariables.get(\"artikelnummer\");",
-									"pm.collectionVariables.set(\"artikelnummer\", value+1);",
-									"pm.test(\"Auftrag created successfully\", function() {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <kundennummer>10004</kundennummer>\n    <internet>{{internet}}</internet>\n    <transaktionsnummer>{{transaktion}}</transaktionsnummer>\n    <projekt>2</projekt>\n    <artikelliste>\n        <position>\n            <nummer>1000231</nummer>\n            <!--<preis>19.95</preis>-->\n            <menge>2</menge>\n            <!--waehrung>EUR</waehrung-->\n        </position>\n    </artikelliste>\n    <versandart>keinversand</versandart>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragGet",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <belegnr>A1102901</belegnr>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragGet",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragGet"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragCreate inkl. Adress Copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n\t\t<kundennummer>10017</kundennummer>\n\t\t<status>angelegt</status>\n\t\t<bearbeiter>EDI-API</bearbeiter>\n\t\t\t<artikelliste>\n\t\t\t\t<position>\n\t\t\t\t\t\t<nummer>6910100</nummer>\n    \t\t\t\t<preis>9.99</preis>\n   \t\t\t\t\t<menge>2</menge>\n\t\t\t\t</position>\n\t\t\t</artikelliste>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragCreate JSON",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"kundennummer\": \"K10013\",\n\t\"artikelliste\": {\n\t\t\"position\": [{\n\t\t\t\"nummer\": \"1000046\",\n\t\t\t\"menge\": 1\n\t\t}]\n\t}\n}"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AuftragEdit",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>294</id>\n<status>versendet</status> \n<gln>1234</gln>\n<artikelliste>\n  <position>\n<nummer>1000001</nummer>\n<menge>2</menge>\n<preis>5</preis>\n<umsatz_netto_einzeln>2.0</umsatz_netto_einzeln>\n</position>\n</artikelliste>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AuftragEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AuftragEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AccountLogin",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/xml",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<user>test@example.com</user>\n<passwort>meinpasswort</passwort>\n<art>shop</art>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AccountLogin",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AccountLogin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseAccountCreate",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n  <adresse>4</adresse>\n  <benutzername>test4@novomind.com</benutzername>\n  <passwort>meinpasswort4</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseAccountCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseAccountCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseAccountEdit",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n\t<id>3</id>\n\t<aktiv>1</aktiv>\n\t<adresse>4</adresse>\n\t<benutzername>test3@test.com</benutzername>\n\t<passwort>meinpasswortneu</passwort>\n\t<art>iShop</art>\n\t<bezeichnung>iShop (Pflichtfeld)</bezeichnung>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseAccountEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseAccountEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AdresseAccountsGet",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n  <adresse>4</adresse>\n  <benutzername>test4@test.com</benutzername>\n  <passwort>meinpasswort4</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseAccountCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseAccountCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BelegeList",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/BelegeList",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"BelegeList"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BestellungList",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <kundennummer>K10013</kundennummer>\n    <projekt>1</projekt>\n    <artikelliste>\n        <position>\n            <nummer>1000046</nummer>\n            <menge>1</menge>\n        </position>\n    </artikelliste>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/BestellungCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"BestellungCreate"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BelegeList - Aufträge - Limit 10",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <beleg>auftrag</beleg>\n    <limit>10</limit>\n    <offset>0</offset>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/BelegeList",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"BelegeList"
-							],
-							"query": [
-								{
-									"key": "beleg",
-									"value": "auftrag",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BelegPDF",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n    <id>1</id>\n    <versandart>email</versandart>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/BelegPDF?beleg=auftrag&id=1",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"BelegPDF"
-							],
-							"query": [
-								{
-									"key": "beleg",
-									"value": "auftrag"
-								},
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BerichteGet",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/BerichteGet?id=84",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"BerichteGet"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "84"
-								}
-							]
-						},
-						"description": "Holt einen vorgefertigten Bericht via API ab"
-					},
-					"response": []
-				},
-				{
-					"name": "Etikettendrucker",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<anzahl>5</anzahl>\n<tabelle>artikel</tabelle>\n<id>1</id>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/Etikettendrucker",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"Etikettendrucker"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Etikettendruck",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "{{HEADER_ACCEPT}}"
 							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{BASEURL}}/v1/adressen",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"v1",
-								"adressen"
-							],
-							"query": [
+							"response": []
+						},
+						{
+							"name": "AdresseListeGet",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseListeGet",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseListeGet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AdresseGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/AdresseGet?id=186",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseGet"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "186"
+										},
+										{
+											"key": "action",
+											"value": "lieferadresse",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AdresseAccountsGet",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseListeGet",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseListeGet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AdresseAccountCreate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n  <adresse>4</adresse>\n  <benutzername>test4@novomind.com</benutzername>\n  <passwort>meinpasswort4</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseAccountCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseAccountCreate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AdresseAccountEdit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n\t<id>3</id>\n\t<aktiv>1</aktiv>\n\t<adresse>4</adresse>\n\t<benutzername>test3@test.com</benutzername>\n\t<passwort>meinpasswortneu</passwort>\n\t<art>iShop</art>\n\t<bezeichnung>iShop (Pflichtfeld)</bezeichnung>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseAccountEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseAccountEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AdresseAccountsGet",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n  <adresse>4</adresse>\n  <benutzername>test4@test.com</benutzername>\n  <passwort>meinpasswort4</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseAccountCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseAccountCreate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Artikel",
+					"item": [
+						{
+							"name": "ArtikelList",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelList",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtikelEdit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <nummer>99999</nummer>\n    <name_de>API-Edited Product</name_de>\n    <aktiv>1</aktiv>\n    <anabregs_text>Text für Angebot, Auftrag, Rechnung usw.</anabregs_text>\n    <abckategorie>B</abckategorie>\n    <hersteller>Herstellername</hersteller>\n    <herstellernummer>123</herstellernummer>\n    <ean>234</ean>\n    <zolltarifnummer>345</zolltarifnummer>\n    <mindestlager>10</mindestlager>\n    <mindestbestellung>5</mindestbestellung>\n    <gewicht>1.5</gewicht>\n    <lagerartikel>1</lagerartikel>\n    <einkaufspreise>\n        <staffelpreis>\n            <lieferantennummer>70000</lieferantennummer>\n            <ab_menge>1</ab_menge>\n            <bestellnummer>123456789</bestellnummer>\n            <bezeichnunglieferant>Artikel 123456789</bezeichnunglieferant>\n            <preis>1.20</preis>\n            <waehrung/>\n        </staffelpreis>\n    </einkaufspreise>\n    <verkaufspreise>\n        <staffelpreis>\n            <ab_menge>1</ab_menge>\n            <preis>2.20</preis>\n            <waehrung>EUR</waehrung>\n        </staffelpreis>\n    </verkaufspreise>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtikelEdit Lagerbestand",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <nummer>1900066</nummer>\n    <lager_platz>ZZ01</lager_platz>\n    <lager_menge>100</lager_menge>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtikelEdit A,B,C-Kategorie",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <nummer>100001</nummer>\n    <name_de>Name neu von Artikel</name_de>\n    <aktiv>1</aktiv>\n    <anabregs_text>Text für Angebot, Auftrag, Rechnung usw.</anabregs_text>\n    <hersteller>Herstellername</hersteller>\n    <herstellernummer>123</herstellernummer>\n    <ean>234</ean>\n    <zolltarifnummer>345</zolltarifnummer>\n    <mindestlager>10</mindestlager>\n    <mindestbestellung>5</mindestbestellung>\n    <gewicht>1.5</gewicht>\n    <lagerartikel>1</lagerartikel>\n    <einkaufspreise>\n        <staffelpreis>\n            <lieferantennummer>70000</lieferantennummer>\n            <ab_menge>1</ab_menge>\n            <bestellnummer>123456789</bestellnummer>\n            <bezeichnunglieferant>Artikel 123456789</bezeichnunglieferant>\n            <preis>1.20</preis>\n            <waehrung/>\n        </staffelpreis>\n    </einkaufspreise>\n    <verkaufspreise>\n        <staffelpreis>\n            <ab_menge>1</ab_menge>\n            <preis>2.20</preis>\n            <waehrung>EUR</waehrung>\n        </staffelpreis>\n    </verkaufspreise>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtikelEdit Lagerbestand mit Freifeldern",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<nummer>1000002</nummer>\n<einkaufspreise>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>235</preis>\n<waehrung>EUR</waehrung>\n<lieferantennummer>70002</lieferantennummer>\n</staffelpreis>\n</einkaufspreise>\n<verkaufspreise>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>6</preis>\n<vpe>1</vpe>\n<waehrung>EUR</waehrung>\n<gruppe>2</gruppe>\n<art>gruppe</art>\n</staffelpreis>\n<staffelpreis>\n<ab_menge>1</ab_menge>\n<preis>5</preis>\n<vpe>1</vpe>\n<waehrung>EUR</waehrung>\n</staffelpreis>\n</verkaufspreise>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtikelStuecklisteList",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>12</id>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/ArtikelStuecklisteList",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ArtikelStuecklisteList"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auftrag",
+					"item": [
+						{
+							"name": "AuftragVersenden",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <id>1</id>\n    <versandart>email</versandart>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AuftragVersenden",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragVersenden"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AuftragCreate",
+							"event": [
 								{
-									"key": "kundennummer",
-									"value": "10001",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ExportVorlageGet",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/ExportVorlageGet?id=4",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ExportVorlageGet"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "4"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gruppenlist",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/Gruppenlist",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"Gruppenlist"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gruppenlist",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/Gruppenlist",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"Gruppenlist"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LieferscheinEdit",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>294</id>\n<status>versendet</status> \n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/LieferscheinEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"LieferscheinEdit"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LieferscheinFreigabe",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>294</id>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/LieferscheinFreigabe",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"LieferscheinFreigabe"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LieferscheinVersenden",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>294</id>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/LieferscheinVersenden",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"LieferscheinVersenden"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LieferscheinArchivieren",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n<id>294</id>\n</xml>",
-							"options": {
-								"raw": {
-									"language": "xml"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASEURL}}/LieferscheinArchivieren",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"LieferscheinArchivieren"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RetoureGet",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/RetoureGet?id=4",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"RetoureGet"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "4"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RechnungArchivieren",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Projektliste",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/Projektliste",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"Projektliste"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ProjektGet",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASEURL}}/ProjektGet",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"ProjektGet"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "2",
-									"disabled": true
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var internet = pm.variables.replaceIn('{{$randomPassword}}');",
+											"pm.variables.set(\"internet\",internet);",
+											"var transaktion = pm.variables.replaceIn('{{$randomPhoneNumber}}');",
+											"pm.variables.set(\"transaktion\",transaktion);",
+											"var value = pm.collectionVariables.get(\"artikelnummer\");",
+											"if (!value) {",
+											"    pm.collectionVariables.set(\"artikelnummer\",1000006)",
+											"}"
+										],
+										"type": "text/javascript"
+									}
 								},
 								{
-									"key": "artikel",
-									"value": "1",
-									"disabled": true
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var value = pm.collectionVariables.get(\"artikelnummer\");",
+											"pm.collectionVariables.set(\"artikelnummer\", value+1);",
+											"pm.test(\"Auftrag created successfully\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AccountList",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/xml",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AccountList?api_id=3",
-							"host": [
-								"{{BASEURL}}"
 							],
-							"path": [
-								"AccountList"
-							],
-							"query": [
-								{
-									"key": "api_id",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AccountCreate",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/xml",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n  <adresse>1</adresse>\n  <benutzername>ctr</benutzername>\n  <passwort>pw</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang per API</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
-						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseAccountCreate",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseAccountCreate"
-							],
-							"query": [
-								{
-									"key": "api_id",
-									"value": "3",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AccountCreate MD5",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "xml",
-									"value": "<xml>\n\t<xml>\n    <aktiv>1</aktiv>\n    <adresse>4</adresse>\n<benutzername>test@novomind.com</benutzername>\n<passwort_md5>050e4d72c6214f1a058e518bfd93b579</passwort_md5>\n<art>iShop</art>\n<bezeichnung>iShop (Pflichtfeld)</bezeichnung>\n</xml>\n</xml>",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{host}}/index.php?module=api&action=AccountCreate&hash=17d14dca8e26e9a0d5e41b74546dc32a65eb4a48&api_id=2",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"index.php"
-							],
-							"query": [
-								{
-									"key": "module",
-									"value": "api"
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <kundennummer>10004</kundennummer>\n    <internet>{{internet}}</internet>\n    <transaktionsnummer>{{transaktion}}</transaktionsnummer>\n    <projekt>2</projekt>\n    <artikelliste>\n        <position>\n            <nummer>1000231</nummer>\n            <!--<preis>19.95</preis>-->\n            <menge>2</menge>\n            <!--waehrung>EUR</waehrung-->\n        </position>\n    </artikelliste>\n    <versandart>keinversand</versandart>\n</xml>"
 								},
-								{
-									"key": "action",
-									"value": "AccountCreate"
-								},
-								{
-									"key": "hash",
-									"value": "17d14dca8e26e9a0d5e41b74546dc32a65eb4a48"
-								},
-								{
-									"key": "api_id",
-									"value": "2"
+								"url": {
+									"raw": "{{BASEURL}}/AuftragCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragCreate"
+									]
 								}
-							]
+							},
+							"response": []
+						},
+						{
+							"name": "AuftragCreate inkl. Adress Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n\t\t<kundennummer>10017</kundennummer>\n\t\t<status>angelegt</status>\n\t\t<bearbeiter>EDI-API</bearbeiter>\n\t\t\t<artikelliste>\n\t\t\t\t<position>\n\t\t\t\t\t\t<nummer>6910100</nummer>\n    \t\t\t\t<preis>9.99</preis>\n   \t\t\t\t\t<menge>2</menge>\n\t\t\t\t</position>\n\t\t\t</artikelliste>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AuftragCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragCreate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AuftragGet",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <belegnr>A1102901</belegnr>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AuftragGet",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragGet"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AuftragCreate JSON",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"kundennummer\": \"K10013\",\n\t\"artikelliste\": {\n\t\t\"position\": [{\n\t\t\t\"nummer\": \"1000046\",\n\t\t\t\"menge\": 1\n\t\t}]\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AuftragCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragCreate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AuftragEdit",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>294</id>\n<status>versendet</status> \n<gln>1234</gln>\n<artikelliste>\n  <position>\n<nummer>1000001</nummer>\n<menge>2</menge>\n<preis>5</preis>\n<umsatz_netto_einzeln>2.0</umsatz_netto_einzeln>\n</position>\n</artikelliste>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AuftragEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AuftragEdit"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "AccountEdit",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/xml",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "<xml>\n\t<id>1</id>\n\t<aktiv>1</aktiv>\n</xml>"
+					"name": "Belege",
+					"item": [
+						{
+							"name": "BelegeList",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/BelegeList",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"BelegeList"
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{BASEURL}}/AdresseAccountEdit",
-							"host": [
-								"{{BASEURL}}"
-							],
-							"path": [
-								"AdresseAccountEdit"
-							]
+						{
+							"name": "BelegeList - Aufträge - Limit 10",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <beleg>auftrag</beleg>\n    <limit>10</limit>\n    <offset>0</offset>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/BelegeList",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"BelegeList"
+									],
+									"query": [
+										{
+											"key": "beleg",
+											"value": "auftrag",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BelegPDF",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <id>1</id>\n    <versandart>email</versandart>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/BelegPDF?beleg=auftrag&id=1",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"BelegPDF"
+									],
+									"query": [
+										{
+											"key": "beleg",
+											"value": "auftrag"
+										},
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "AccountLogin",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<user>test@example.com</user>\n<passwort>meinpasswort</passwort>\n<art>shop</art>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AccountLogin",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AccountLogin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccountList",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AccountList?api_id=3",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AccountList"
+									],
+									"query": [
+										{
+											"key": "api_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccountCreate",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n  <adresse>1</adresse>\n  <benutzername>ctr</benutzername>\n  <passwort>pw</passwort>\n  <art>iShop</art>\n  <bezeichnung>Shop-Zugang per API</bezeichnung>\n  <aktiv>1</aktiv>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseAccountCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseAccountCreate"
+									],
+									"query": [
+										{
+											"key": "api_id",
+											"value": "3",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccountCreate MD5",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "xml",
+											"value": "<xml>\n\t<xml>\n    <aktiv>1</aktiv>\n    <adresse>4</adresse>\n<benutzername>test@novomind.com</benutzername>\n<passwort_md5>050e4d72c6214f1a058e518bfd93b579</passwort_md5>\n<art>iShop</art>\n<bezeichnung>iShop (Pflichtfeld)</bezeichnung>\n</xml>\n</xml>",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/index.php?module=api&action=AccountCreate&hash=17d14dca8e26e9a0d5e41b74546dc32a65eb4a48&api_id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"index.php"
+									],
+									"query": [
+										{
+											"key": "module",
+											"value": "api"
+										},
+										{
+											"key": "action",
+											"value": "AccountCreate"
+										},
+										{
+											"key": "hash",
+											"value": "17d14dca8e26e9a0d5e41b74546dc32a65eb4a48"
+										},
+										{
+											"key": "api_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccountEdit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n\t<id>1</id>\n\t<aktiv>1</aktiv>\n</xml>"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/AdresseAccountEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"AdresseAccountEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BestellungList",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <kundennummer>K10013</kundennummer>\n    <projekt>1</projekt>\n    <artikelliste>\n        <position>\n            <nummer>1000046</nummer>\n            <menge>1</menge>\n        </position>\n    </artikelliste>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/BestellungCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"BestellungCreate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Etiketten",
+					"item": [
+						{
+							"name": "Etikettendrucker",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<anzahl>5</anzahl>\n<tabelle>artikel</tabelle>\n<id>1</id>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/Etikettendrucker",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"Etikettendrucker"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Etikettendruck",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "{{HEADER_ACCEPT}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{BASEURL}}/v1/adressen",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"v1",
+										"adressen"
+									],
+									"query": [
+										{
+											"key": "kundennummer",
+											"value": "10001",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Lieferschein",
+					"item": [
+						{
+							"name": "LieferscheinEdit",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>294</id>\n<status>versendet</status> \n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/LieferscheinEdit",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"LieferscheinEdit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LieferscheinFreigabe",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>294</id>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/LieferscheinFreigabe",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"LieferscheinFreigabe"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LieferscheinArchivieren",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>294</id>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/LieferscheinArchivieren",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"LieferscheinArchivieren"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LieferscheinVersenden",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n<id>294</id>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/LieferscheinVersenden",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"LieferscheinVersenden"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Berichte",
+					"item": [
+						{
+							"name": "BerichteGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/BerichteGet?id=84",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"BerichteGet"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "84"
+										}
+									]
+								},
+								"description": "Holt einen vorgefertigten Bericht via API ab"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Gruppen",
+					"item": [
+						{
+							"name": "Gruppenlist",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/Gruppenlist",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"Gruppenlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Gruppenlist",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"limit\": \"2\",\n        \"offset\": \"0\",\n        \"gruppen\": {\n            \"kennziffer\": \"\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{BASEURL}}/Gruppenlist",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"Gruppenlist"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Projekte",
+					"item": [
+						{
+							"name": "ProjektGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/ProjektGet",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ProjektGet"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "artikel",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Projektliste",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/Projektliste",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"Projektliste"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Utils",
+					"item": [
+						{
+							"name": "ExportVorlageGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/ExportVorlageGet?id=4",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"ExportVorlageGet"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RechnungArchivieren",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retoure",
+					"item": [
+						{
+							"name": "RetoureGet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASEURL}}/RetoureGet?id=4",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"RetoureGet"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RetoureGet Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<xml>\n    <kundennummer>10004</kundennummer>\n    <project>1</project>\n    <artikelliste>\n        <position>\n            <nummer>1</nummer>\n            <menge>1</menge>\n        </position>\n    </artikelliste>\n    <versandart>DPD</versandart>\n</xml>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASEURL}}/RetoureCreate",
+									"host": [
+										"{{BASEURL}}"
+									],
+									"path": [
+										"RetoureCreate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			],
 			"event": [
