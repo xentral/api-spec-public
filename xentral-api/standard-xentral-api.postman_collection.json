@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "25d5d736-f177-484e-9a70-bf42ff308219",
-		"name": "Xentral API Endpoints Copy",
+		"_postman_id": "35909d0a-80b7-4207-a227-a4ad52fcce03",
+		"name": "Standard Xentral API Endpoints (Legacy)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1373626"
 	},
@@ -5320,13 +5320,22 @@
 							"response": []
 						},
 						{
-							"name": "RetoureGet Copy",
+							"name": "RetoureCreate",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"method": "POST",
-								"header": [],
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
 								"body": {
 									"mode": "raw",
-									"raw": "<xml>\n    <kundennummer>10004</kundennummer>\n    <project>1</project>\n    <artikelliste>\n        <position>\n            <nummer>1</nummer>\n            <menge>1</menge>\n        </position>\n    </artikelliste>\n    <versandart>DPD</versandart>\n</xml>",
+									"raw": "<xml>\n    <projekt>1</projekt>\n    <auftrag>200307</auftrag>\n    <auftragid>492</auftragid>\n    <status>freigegeben</status>\n    <kundennummer>10012</kundennummer>\n    <versandart>keinversand</versandart>\n    <artikelliste>\n        <position>\n            <nummer>100002</nummer>\n            <menge>1</menge>\n            <grund>14 Tage Rückgaberecht</grund>\n        </position>\n    </artikelliste>\n</xml>",
 									"options": {
 										"raw": {
 											"language": "xml"
