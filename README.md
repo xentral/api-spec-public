@@ -62,6 +62,7 @@ Class | HTTP request | Description
 *ProductApi* | **POST** /api/products | Create new product
 *ProductApi* | **DELETE** /api/products/{id} | Delete product
 *ProductApi* | **GET** /api/products | List products
+*ProductApi* | **GET** /api/products/{id}/media | [ALPHA] View media
 *ProductApi* | **GET** /api/products/{id}/parts | View parts
 *ProductApi* | **GET** /api/products/{id}/productionsPositions | View productions positions
 *ProductApi* | **GET** /api/products/{id}/properties | View properties
@@ -76,6 +77,13 @@ Class | HTTP request | Description
 *ProductApi* | **PATCH** /api/products/{id}/properties | Update properties
 *ProductApi* | **GET** /api/products/{id} | View Product
 *ProductCategoryApi* | **GET** /api/productsCategories | List products categories
+*ProductMediaApi* | **POST** /api/productMedia | [ALPHA] Create product media
+*ProductMediaApi* | **POST** /api/productMedia/{id}/versions | [ALPHA] Create product media version
+*ProductMediaApi* | **DELETE** /api/productMedia/{id} | [ALPHA] Delete product media
+*ProductMediaApi* | **DELETE** /api/productMedia/{id}/versions/{versionId} | [ALPHA] Delete product media version
+*ProductMediaApi* | **GET** /api/productMedia | [ALPHA] List product media
+*ProductMediaApi* | **PATCH** /api/productMedia/{id} | [ALPHA] Update product media
+*ProductMediaApi* | **GET** /api/productMedia/{id} | [ALPHA] View product media
 *ProductPropertyApi* | **POST** /api/productsProperties | Create products properties
 *ProductPropertyApi* | **DELETE** /api/productsProperties | Delete multiple products properties
 *ProductPropertyApi* | **GET** /api/productsProperties | List products properties
@@ -86,6 +94,7 @@ Class | HTTP request | Description
 *PurchasePriceApi* | **GET** /api/purchasePrices | List purchase prices
 *PurchasePriceApi* | **PATCH** /api/purchasePrices | Update multiple purchase prices
 *PurchasePriceApi* | **GET** /api/purchasePrices/{id} | View purchase price
+*SalesOrderApi* | **POST** /api/salesOrders/importOrder | Import sales order
 *SalesOrderApi* | **GET** /api/salesOrders | List sales orders
 *SalesOrderApi* | **GET** /api/salesOrders/{id} | View sale order
 *SalesPriceApi* | **POST** /api/salesPrices | Create sales price
