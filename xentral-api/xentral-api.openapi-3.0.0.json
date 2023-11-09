@@ -203,6 +203,10 @@
       "name": "Warehouse",
       "description": "Represents a location with storage space"
     },
+    {
+      "name": "QualityControlAttribute",
+      "description": "A best before date and batch combination currently available in the system"
+    },
     { "name": "Webhook", "description": "Manage webhooks." }
   ],
   "components": {
