@@ -124,6 +124,10 @@
       "description": "Point Of Sale (POS) endpoints."
     },
     {
+      "name": "Printer",
+      "description": "An entity represent the physical printer connected to the instance."
+    },
+    {
       "name": "Product",
       "description": "Product represents the services or things given company sells in the business."
     },
@@ -202,6 +206,10 @@
     {
       "name": "Supplier Tag",
       "description": "Supplier resource tags management."
+    },
+    {
+      "name": "Tax Rates",
+      "description": "Tax Rates resource"
     },
     {
       "name": "Token",
@@ -9752,7 +9760,8 @@
                           "balance",
                           "currency",
                           "shippingMethod",
-                          "amountNet"
+                          "amountNet",
+                          "salesOrder"
                         ]
                       },
                       "op": {
@@ -17324,25 +17333,32 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the product."
                   },
                   "shortDescription": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "EAN of the product."
                   },
                   "internalComment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Text only for internal information."
                   },
                   "project": {
                     "type": "object",
@@ -17385,10 +17401,12 @@
                     }
                   },
                   "minimumOrderQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -17445,13 +17463,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -17598,7 +17619,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -17752,7 +17774,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "ageRating": {
                     "type": "string",
@@ -17760,12 +17783,14 @@
                       "",
                       "16",
                       "18"
-                    ]
+                    ],
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -17797,7 +17822,8 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "isStockItem": {
                     "oneOf": [
@@ -17877,7 +17903,8 @@
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "category": {
                     "type": "object",
@@ -17913,18 +17940,21 @@
                     "nullable": true
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -18068,10 +18098,57 @@
               "examples": {
                 "Create Product": {
                   "value": {
-                    "name": "Test Product",
+                    "name": "Test Product Beverage",
                     "number": "123456",
+                    "description": "This is a very long description for the Test Product Beverage.",
+                    "shortDescription": "This is a short description.",
                     "project": {
                       "id": "7"
+                    },
+                    "category": {
+                      "id": "1001"
+                    },
+                    "customsTariffNumber": "12345678",
+                    "ean": "1234567890",
+                    "internalComment": "Attention: Only available for customers over the age of 18.",
+                    "minimumOrderQuantity": 100,
+                    "minimumStorageQuantity": 30,
+                    "allowPurchaseFromAllSuppliers": false,
+                    "hidePriceOnDocuments": false,
+                    "hasBatches": true,
+                    "serialNumbersMode": "disabled",
+                    "hasBestBeforeDate": true,
+                    "hasBillOfMaterials": false,
+                    "isAssembledJustInTime": false,
+                    "isProductionProduct": false,
+                    "isExternallyProduced": false,
+                    "isDisabled": false,
+                    "countryOfOrigin": "DE",
+                    "regionOfOrigin": "01",
+                    "salesTax": "standard",
+                    "isStockItem": true,
+                    "manufacturer": {
+                      "name": "Beverage Manufacturer",
+                      "number": "BM#1",
+                      "link": "https://example.com"
+                    },
+                    "ageRating": "18",
+                    "freeFields": [
+                      {
+                        "id": "8",
+                        "value": "FF8"
+                      },
+                      {
+                        "id": "16",
+                        "value": "FF16"
+                      },
+                      {
+                        "id": "32",
+                        "value": "FF32"
+                      }
+                    ],
+                    "variantOf": {
+                      "id": "1336"
                     }
                   }
                 }
@@ -18083,25 +18160,32 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the product."
                   },
                   "shortDescription": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "EAN of the product."
                   },
                   "internalComment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Text only for internal information."
                   },
                   "project": {
                     "type": "object",
@@ -18144,10 +18228,12 @@
                     }
                   },
                   "minimumOrderQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -18204,13 +18290,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -18357,7 +18446,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -18511,7 +18601,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "ageRating": {
                     "type": "string",
@@ -18519,12 +18610,14 @@
                       "",
                       "16",
                       "18"
-                    ]
+                    ],
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -18556,7 +18649,8 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "isStockItem": {
                     "oneOf": [
@@ -18636,7 +18730,8 @@
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "category": {
                     "type": "object",
@@ -18672,18 +18767,21 @@
                     "nullable": true
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -18842,25 +18940,32 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the product."
                   },
                   "shortDescription": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "EAN of the product."
                   },
                   "internalComment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Text only for internal information."
                   },
                   "project": {
                     "type": "object",
@@ -18903,10 +19008,12 @@
                     }
                   },
                   "minimumOrderQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -18963,13 +19070,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -19116,7 +19226,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -19270,7 +19381,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "ageRating": {
                     "type": "string",
@@ -19278,12 +19390,14 @@
                       "",
                       "16",
                       "18"
-                    ]
+                    ],
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -19315,7 +19429,8 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "isStockItem": {
                     "oneOf": [
@@ -19395,7 +19510,8 @@
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "merchandiseGroup": {
                     "type": "object",
@@ -19431,18 +19547,21 @@
                     "nullable": true
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -19612,10 +19731,65 @@
               "examples": {
                 "Create Product": {
                   "value": {
-                    "name": "Test Product",
+                    "name": "Test Product Beverage",
                     "number": "123456",
+                    "description": "This is a very long description for the Test Product Beverage.",
+                    "shortDescription": "This is a short description.",
                     "project": {
                       "id": "7"
+                    },
+                    "merchandiseGroup": {
+                      "id": "1001"
+                    },
+                    "categories": [
+                      {
+                        "id": "10"
+                      },
+                      {
+                        "id": "11"
+                      }
+                    ],
+                    "customsTariffNumber": "12345678",
+                    "ean": "1234567890",
+                    "internalComment": "Attention: Only available for customers over the age of 18.",
+                    "minimumOrderQuantity": 100,
+                    "minimumStorageQuantity": 30,
+                    "allowPurchaseFromAllSuppliers": false,
+                    "hidePriceOnDocuments": false,
+                    "hasBatches": true,
+                    "serialNumbersMode": "disabled",
+                    "hasBestBeforeDate": true,
+                    "hasBillOfMaterials": false,
+                    "isAssembledJustInTime": false,
+                    "isProductionProduct": false,
+                    "isExternallyProduced": false,
+                    "isDisabled": false,
+                    "countryOfOrigin": "DE",
+                    "regionOfOrigin": "01",
+                    "salesTax": "standard",
+                    "isStockItem": true,
+                    "manufacturer": {
+                      "name": "Beverage Manufacturer",
+                      "number": "BM#1",
+                      "link": "https://example.com"
+                    },
+                    "ageRating": "18",
+                    "freeFields": [
+                      {
+                        "id": "8",
+                        "value": "FF8"
+                      },
+                      {
+                        "id": "16",
+                        "value": "FF16"
+                      },
+                      {
+                        "id": "32",
+                        "value": "FF32"
+                      }
+                    ],
+                    "variantOf": {
+                      "id": "1336"
                     }
                   }
                 }
@@ -19627,25 +19801,32 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "description": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Description of the product."
                   },
                   "shortDescription": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "EAN of the product."
                   },
                   "internalComment": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Text only for internal information."
                   },
                   "project": {
                     "type": "object",
@@ -19688,10 +19869,12 @@
                     }
                   },
                   "minimumOrderQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -19748,13 +19931,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -19901,7 +20087,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -20055,7 +20242,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "ageRating": {
                     "type": "string",
@@ -20063,12 +20251,14 @@
                       "",
                       "16",
                       "18"
-                    ]
+                    ],
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -20100,7 +20290,8 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "isStockItem": {
                     "oneOf": [
@@ -20180,7 +20371,8 @@
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "merchandiseGroup": {
                     "type": "object",
@@ -20216,18 +20408,21 @@
                     "nullable": true
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -20783,7 +20978,9 @@
                       "updatedAt",
                       "isStockItem",
                       "categoryId",
-                      "tagId"
+                      "tagId",
+                      "isDiscountProduct",
+                      "isShippingCostsProduct"
                     ]
                   },
                   "op": {
@@ -20979,74 +21176,94 @@
                             "nullable": true
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Name of the product."
                           },
                           "stockCount": {
                             "type": "number"
                           },
                           "number": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Number / SKU of the product."
                           },
                           "description": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Description of the product."
                           },
                           "internalComment": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Text only for internal information."
                           },
                           "shortDescription": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Short description of the product."
                           },
                           "thumbnailUrl": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "URL of the product's thumbnail."
                           },
                           "thumbnailId": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "ID of the product's thumbnail."
                           },
                           "minimumOrderQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum order quantity of the product."
                           },
                           "minimumStorageQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum storage quantity of the product."
                           },
                           "allowPurchaseFromAllSuppliers": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product can be purchased from all suppliers."
                           },
                           "hasBatches": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has batches."
                           },
                           "serialNumbersMode": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Shows one of the 4 different modes if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                           },
                           "hasBestBeforeDate": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a best before date."
                           },
                           "hasBillOfMaterials": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a bill of materials."
                           },
                           "isAssembledJustInTime": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is assembled just in time."
                           },
                           "isProductionProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is made in production."
                           },
                           "isExternallyProduced": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is externally produced."
                           },
                           "hidePriceOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the price is hidden on documents."
                           },
                           "ageRating": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows if the product has an age rating. Currently only used for the shipping service provider DHL."
                           },
                           "countryOfOrigin": {
                             "type": "string",
                             "pattern": "[A-Z]{2}",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Two-digit ISO country code for country of origin of the product."
                           },
                           "measurements": {
                             "type": "object",
@@ -21160,20 +21377,25 @@
                             }
                           },
                           "isStockItem": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is a stock item."
                           },
                           "isStockTakingDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is used for stock taking."
                           },
                           "hideJustInTimeItemsOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the just in time items of the parts list are visible on documents."
                           },
                           "isDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is locked."
                           },
                           "disabledReason": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows the reason why the product is locked when clicking into the product."
                           },
                           "salesTax": {
                             "type": "string",
@@ -21181,45 +21403,55 @@
                               "standard",
                               "reduced",
                               "free"
-                            ]
+                            ],
+                            "description": "Selection of three possible values for the sales tax of the product."
                           },
                           "shopPriceDisplay": {
                             "type": "string",
                             "format": "float",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Only used by some online shops. For more information have a look into our handbook."
                           },
                           "ean": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "EAN of the product."
                           },
                           "manufacturerName": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Name of the manufacturer."
                           },
                           "manufacturerNumber": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Product number at the manufacturer."
                           },
                           "customsTariffNumber": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Customs tariff number of the product."
                           },
                           "regionOfOrigin": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Region where the product originates from."
                           },
                           "isShippingCostsProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                           },
                           "discount": {
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "isDiscountProduct": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                               },
                               "discountPercentage": {
                                 "type": "number",
-                                "format": "float"
+                                "format": "float",
+                                "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                               }
                             }
                           },
@@ -21389,7 +21621,7 @@
                             }
                           },
                           "isVariant": {
-                            "description": "...",
+                            "description": "Shows if the product is a variant from another product.",
                             "type": "boolean",
                             "nullable": true
                           },
@@ -21412,7 +21644,8 @@
                           },
                           "updatedAt": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "description": "Timestamp of when the product was updated."
                           }
                         }
                       }
@@ -21512,24 +21745,29 @@
                             }
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Name of the product."
                           },
                           "stockCount": {
                             "type": "number"
                           },
                           "number": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Number / SKU of the product."
                           },
                           "description": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Description of the product."
                           },
                           "internalComment": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Text only for internal information."
                           },
                           "shortDescription": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Short description of the product."
                           },
                           "standardSupplier": {
                             "type": "object",
@@ -21551,11 +21789,13 @@
                           },
                           "thumbnailUrl": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "URL of the product's thumbnail."
                           },
                           "thumbnailId": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "ID of the product's thumbnail."
                           },
                           "tags": {
                             "type": "array",
@@ -21677,11 +21917,13 @@
                           "shopPriceDisplay": {
                             "type": "string",
                             "format": "float",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Only used by some online shops. For more information have a look into our handbook."
                           },
                           "ean": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "EAN of the product."
                           },
                           "manufacturer": {
                             "type": "object",
@@ -21689,35 +21931,42 @@
                             "properties": {
                               "name": {
                                 "type": "string",
-                                "nullable": true
+                                "nullable": true,
+                                "description": "Name of the manufacturer."
                               },
                               "number": {
                                 "type": "string",
-                                "nullable": true
+                                "nullable": true,
+                                "description": "Product number at the manufacturer."
                               },
                               "link": {
                                 "type": "string",
-                                "nullable": true
+                                "nullable": true,
+                                "description": "URI of the manufacturer."
                               }
                             }
                           },
                           "customsTariffNumber": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Customs tariff number of the product."
                           },
                           "isShippingCostsProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                           },
                           "discount": {
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "isDiscountProduct": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                               },
                               "discountPercentage": {
                                 "type": "number",
-                                "format": "float"
+                                "format": "float",
+                                "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                               }
                             }
                           },
@@ -21748,46 +21997,59 @@
                             }
                           },
                           "minimumOrderQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum order quantity of the product."
                           },
                           "minimumStorageQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum storage quantity of the product."
                           },
                           "allowPurchaseFromAllSuppliers": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product can be purchased from all suppliers."
                           },
                           "hasBatches": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has batches."
                           },
                           "serialNumbersMode": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Shows one of the 4 different modes if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                           },
                           "hasBestBeforeDate": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a best before date."
                           },
                           "hasBillOfMaterials": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a bill of materials."
                           },
                           "isAssembledJustInTime": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is assembled just in time."
                           },
                           "isProductionProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is made in production."
                           },
                           "isExternallyProduced": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is externally produced."
                           },
                           "hidePriceOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the price is hidden on documents."
                           },
                           "ageRating": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows if the product has an age rating. Currently only used for the shipping service provider DHL."
                           },
                           "countryOfOrigin": {
                             "type": "string",
                             "pattern": "[A-Z]{2}",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Two-digit ISO country code for country of origin of the product."
                           },
                           "measurements": {
                             "type": "object",
@@ -21901,20 +22163,25 @@
                             }
                           },
                           "isStockItem": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is a stock item."
                           },
                           "isStockTakingDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is used for stock taking."
                           },
                           "hideJustInTimeItemsOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the just in time items of the parts list are visible on documents."
                           },
                           "isDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is locked."
                           },
                           "disabledReason": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows the reason why the product is locked when clicking into the product."
                           },
                           "salesTax": {
                             "type": "string",
@@ -21922,10 +22189,12 @@
                               "standard",
                               "reduced",
                               "free"
-                            ]
+                            ],
+                            "description": "Shows the sales tax of the product."
                           },
                           "regionOfOrigin": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Region where the product originates from."
                           },
                           "freeFields": {
                             "type": "array",
@@ -21950,7 +22219,7 @@
                             }
                           },
                           "isVariant": {
-                            "description": "Indicates if a product is a variant of another product",
+                            "description": "Shows if the product is a variant from another product.",
                             "type": "boolean",
                             "nullable": true
                           },
@@ -21988,7 +22257,8 @@
                           },
                           "updatedAt": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "description": "Timestamp of when the product was updated."
                           }
                         }
                       }
@@ -22111,74 +22381,94 @@
                             "nullable": true
                           },
                           "name": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Name of the product."
                           },
                           "stockCount": {
                             "type": "number"
                           },
                           "number": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Number / SKU of the product."
                           },
                           "description": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Description of the product."
                           },
                           "internalComment": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Text only for internal information."
                           },
                           "shortDescription": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Short description of the product."
                           },
                           "thumbnailUrl": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "URL of the product's thumbnail."
                           },
                           "thumbnailId": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "ID of the product's thumbnail."
                           },
                           "minimumOrderQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum order quantity of the product."
                           },
                           "minimumStorageQuantity": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Numerical minimum storage quantity of the product."
                           },
                           "allowPurchaseFromAllSuppliers": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product can be purchased from all suppliers."
                           },
                           "hasBatches": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has batches."
                           },
                           "serialNumbersMode": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Shows one of the 4 different modes if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                           },
                           "hasBestBeforeDate": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a best before date."
                           },
                           "hasBillOfMaterials": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product has a bill of materials."
                           },
                           "isAssembledJustInTime": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is assembled just in time."
                           },
                           "isProductionProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is made in production."
                           },
                           "isExternallyProduced": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is externally produced."
                           },
                           "hidePriceOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the price is hidden on documents."
                           },
                           "ageRating": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows if the product has an age rating. Currently only used for the shipping service provider DHL."
                           },
                           "countryOfOrigin": {
                             "type": "string",
                             "pattern": "[A-Z]{2}",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Two-digit ISO country code for country of origin of the product."
                           },
                           "measurements": {
                             "type": "object",
@@ -22292,20 +22582,25 @@
                             }
                           },
                           "isStockItem": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is a stock item."
                           },
                           "isStockTakingDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is used for stock taking."
                           },
                           "hideJustInTimeItemsOnDocuments": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the just in time items of the parts list are visible on documents."
                           },
                           "isDisabled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the product is locked."
                           },
                           "disabledReason": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Shows the reason why the product is locked when clicking into the product."
                           },
                           "salesTax": {
                             "type": "string",
@@ -22313,45 +22608,55 @@
                               "standard",
                               "reduced",
                               "free"
-                            ]
+                            ],
+                            "description": "Selection of three possible values for the sales tax of the product."
                           },
                           "shopPriceDisplay": {
                             "type": "string",
                             "format": "float",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Only used by some online shops. For more information have a look into our handbook."
                           },
                           "ean": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "EAN of the product."
                           },
                           "manufacturerName": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Name of the manufacturer."
                           },
                           "manufacturerNumber": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Product number at the manufacturer."
                           },
                           "customsTariffNumber": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Customs tariff number of the product."
                           },
                           "regionOfOrigin": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Region where the product originates from."
                           },
                           "isShippingCostsProduct": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                           },
                           "discount": {
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "isDiscountProduct": {
-                                "type": "boolean"
+                                "type": "boolean",
+                                "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                               },
                               "discountPercentage": {
                                 "type": "number",
-                                "format": "float"
+                                "format": "float",
+                                "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                               }
                             }
                           },
@@ -22521,7 +22826,7 @@
                             }
                           },
                           "isVariant": {
-                            "description": "...",
+                            "description": "Shows if the product is a variant from another product.",
                             "type": "boolean",
                             "nullable": true
                           },
@@ -22544,7 +22849,8 @@
                           },
                           "updatedAt": {
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "description": "Timestamp of when the product was updated."
                           }
                         }
                       }
@@ -22770,6 +23076,17 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Unable to authorize the client"
           },
@@ -22806,10 +23123,12 @@
                       "description": "Resource identifier."
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Name of the product."
                     },
                     "number": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Number / SKU of the product."
                     },
                     "project": {
                       "type": "object",
@@ -22828,29 +23147,36 @@
                     },
                     "description": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Description of the product."
                     },
                     "internalComment": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Text only for internal information."
                     },
                     "shortDescription": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Short description of the product."
                     },
                     "customsTariffNumber": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Customs tariff number of the product."
                     },
                     "ean": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "EAN of the product."
                     },
                     "minimumOrderQuantity": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Numerical minimum order quantity of the product."
                     },
                     "minimumStorageQuantity": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Numerical minimum storage quantity of the product."
                     },
                     "allowPurchaseFromAllSuppliers": {
                       "oneOf": [
@@ -22909,7 +23235,8 @@
                         "user",
                         "product",
                         "productAndWarehouse"
-                      ]
+                      ],
+                      "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                     },
                     "hasBestBeforeDate": {
                       "oneOf": [
@@ -23063,7 +23390,8 @@
                     },
                     "disabledReason": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Shows the reason why the product is locked when clicking into the product."
                     },
                     "hidePriceOnDocuments": {
                       "oneOf": [
@@ -23097,12 +23425,14 @@
                         "16",
                         "18"
                       ],
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                     },
                     "countryOfOrigin": {
                       "type": "string",
                       "pattern": "[A-Z]{2}",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Two-digit ISO country code for country of origin of the product."
                     },
                     "measurements": {
                       "type": "object",
@@ -23220,13 +23550,16 @@
                       "additionalProperties": false,
                       "properties": {
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Name of the manufacturer."
                         },
                         "number": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Product number at the manufacturer."
                         },
                         "link": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "URI of the manufacturer."
                         }
                       }
                     },
@@ -23311,12 +23644,14 @@
                         "standard",
                         "reduced",
                         "free"
-                      ]
+                      ],
+                      "description": "Selection of three possible values for the sales tax of the product."
                     },
                     "shopPriceDisplay": {
                       "type": "string",
                       "format": "float",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Only used by some online shops. For more information have a look into our handbook."
                     },
                     "category": {
                       "type": "object",
@@ -23352,18 +23687,21 @@
                       "nullable": true
                     },
                     "isShippingCostsProduct": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                     },
                     "discount": {
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
                         "isDiscountProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                         },
                         "discountPercentage": {
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                         }
                       }
                     },
@@ -23466,11 +23804,27 @@
                   "value": [
                     {
                       "id": "17",
-                      "name": "Product 1"
+                      "name": "Shipping Discount Small",
+                      "category": {
+                        "id": "2000"
+                      },
+                      "discount": {
+                        "isDiscountProduct": true,
+                        "discountPercentage": 2
+                      },
+                      "isStockItem": false
                     },
                     {
                       "id": "18",
-                      "name": "Product 2"
+                      "name": "Shipping Discount Big",
+                      "category": {
+                        "id": "2000"
+                      },
+                      "discount": {
+                        "isDiscountProduct": true,
+                        "discountPercentage": 5
+                      },
+                      "isStockItem": false
                     }
                   ]
                 }
@@ -23491,10 +23845,12 @@
                       "description": "Resource identifier."
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Name of the product."
                     },
                     "number": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Number / SKU of the product."
                     },
                     "project": {
                       "type": "object",
@@ -23513,29 +23869,36 @@
                     },
                     "description": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Description of the product."
                     },
                     "internalComment": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Text only for internal information."
                     },
                     "shortDescription": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Short description of the product."
                     },
                     "customsTariffNumber": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Customs tariff number of the product."
                     },
                     "ean": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "EAN of the product."
                     },
                     "minimumOrderQuantity": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Numerical minimum order quantity of the product."
                     },
                     "minimumStorageQuantity": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Numerical minimum storage quantity of the product."
                     },
                     "allowPurchaseFromAllSuppliers": {
                       "oneOf": [
@@ -23594,7 +23957,8 @@
                         "user",
                         "product",
                         "productAndWarehouse"
-                      ]
+                      ],
+                      "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                     },
                     "hasBestBeforeDate": {
                       "oneOf": [
@@ -23748,7 +24112,8 @@
                     },
                     "disabledReason": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Shows the reason why the product is locked when clicking into the product."
                     },
                     "hidePriceOnDocuments": {
                       "oneOf": [
@@ -23782,12 +24147,14 @@
                         "16",
                         "18"
                       ],
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                     },
                     "countryOfOrigin": {
                       "type": "string",
                       "pattern": "[A-Z]{2}",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Two-digit ISO country code for country of origin of the product."
                     },
                     "measurements": {
                       "type": "object",
@@ -23905,13 +24272,16 @@
                       "additionalProperties": false,
                       "properties": {
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Name of the manufacturer."
                         },
                         "number": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Product number at the manufacturer."
                         },
                         "link": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "URI of the manufacturer."
                         }
                       }
                     },
@@ -23996,12 +24366,14 @@
                         "standard",
                         "reduced",
                         "free"
-                      ]
+                      ],
+                      "description": "Selection of three possible values for the sales tax of the product."
                     },
                     "shopPriceDisplay": {
                       "type": "string",
                       "format": "float",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Only used by some online shops. For more information have a look into our handbook."
                     },
                     "merchandiseGroup": {
                       "type": "object",
@@ -24063,18 +24435,21 @@
                       "nullable": true
                     },
                     "isShippingCostsProduct": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                     },
                     "discount": {
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
                         "isDiscountProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                         },
                         "discountPercentage": {
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                         }
                       }
                     },
@@ -24177,11 +24552,27 @@
                   "value": [
                     {
                       "id": "17",
-                      "name": "Product 1"
+                      "name": "Shipping Discount Small",
+                      "merchandiseGroup": {
+                        "id": "2000"
+                      },
+                      "discount": {
+                        "isDiscountProduct": true,
+                        "discountPercentage": 2
+                      },
+                      "isStockItem": false
                     },
                     {
                       "id": "18",
-                      "name": "Product 2"
+                      "name": "Shipping Discount Small",
+                      "merchandiseGroup": {
+                        "id": "2000"
+                      },
+                      "discount": {
+                        "isDiscountProduct": true,
+                        "discountPercentage": 5
+                      },
+                      "isStockItem": false
                     }
                   ]
                 }
@@ -24355,6 +24746,20 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
           },
           "409": {
             "description": "Request conflict with the current state of the target resource",
@@ -24442,6 +24847,9 @@
               }
             }
           },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
           "429": {
             "description": "Too many API calls made."
           }
@@ -24472,6 +24880,21 @@
                     }
                   }
                 }
+              },
+              "examples": {
+                "Delete multiple products": {
+                  "value": [
+                    {
+                      "id": "1337"
+                    },
+                    {
+                      "id": "1339"
+                    },
+                    {
+                      "id": "1340"
+                    }
+                  ]
+                }
               }
             },
             "application/vnd.xentral.force.v1+json": {
@@ -24488,6 +24911,21 @@
                       "description": "Resource identifier."
                     }
                   }
+                }
+              },
+              "examples": {
+                "Delete multiple products": {
+                  "value": [
+                    {
+                      "id": "1337"
+                    },
+                    {
+                      "id": "1339"
+                    },
+                    {
+                      "id": "1340"
+                    }
+                  ]
                 }
               }
             }
@@ -24659,6 +25097,20 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
           },
           "409": {
             "description": "Request conflict with the current state of the target resource",
@@ -24856,7 +25308,8 @@
                           "nullable": true
                         },
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Name of the product."
                         },
                         "description": {
                           "type": "string",
@@ -24864,30 +25317,36 @@
                         },
                         "ean": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "EAN of the product."
                         },
                         "stockCount": {
                           "type": "number"
                         },
                         "number": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Number / SKU of the product."
                         },
                         "thumbnailUrl": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "URL of the product's thumbnail."
                         },
                         "thumbnailId": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "ID of the product's thumbnail."
                         },
                         "customsTariffNumber": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Customs tariff number of the product."
                         },
                         "countryOfOrigin": {
                           "type": "string",
                           "pattern": "[A-Z]{2}",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Two-digit ISO country code for country of origin of the product."
                         },
                         "tags": {
                           "type": "array",
@@ -24916,75 +25375,98 @@
                         },
                         "shortDescription": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Short description of the product."
                         },
                         "internalComment": {
-                          "type": "string"
-                        },
-                        "minimumStorageQuantity": {
-                          "type": "number"
+                          "type": "string",
+                          "description": "Text only for internal information."
                         },
                         "minimumOrderQuantity": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Numerical minimum order quantity of the product."
+                        },
+                        "minimumStorageQuantity": {
+                          "type": "number",
+                          "description": "Numerical minimum storage quantity of the product."
                         },
                         "isMatrixProduct": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Shows if the product is a matrix product."
                         },
                         "hasBatches": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has batches."
                         },
                         "serialNumbersMode": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Shows one of the 4 different modes if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                         },
                         "hasBestBeforeDate": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has a best before date."
                         },
                         "allowPurchaseFromAllSuppliers": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product can be purchased from all suppliers."
                         },
                         "isStockTakingDisabled": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is used for stock taking."
                         },
                         "ageRating": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Shows if the product has an age rating. Currently only used for the shipping service provider DHL."
                         },
                         "hasBillOfMaterials": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has a bill of materials."
                         },
                         "isAssembledJustInTime": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is assembled just in time."
                         },
                         "hideJustInTimeItemsOnDocuments": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the just in time items of the parts list are visible on documents."
                         },
                         "isProductionProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is made in production."
                         },
                         "isExternallyProduced": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is externally produced."
                         },
                         "isCustomProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is a custom product."
                         },
                         "hidePriceOnDocuments": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the price is hidden on documents."
                         },
                         "isDisabled": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is locked."
                         },
                         "disabledReason": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Shows the reason why the product is locked when clicking into the product."
                         },
                         "markAsSoldOut": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is sold out."
                         },
                         "markAsInactive": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is inactive."
                         },
                         "isDeleted": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is deleted."
                         },
                         "measurements": {
                           "type": "object",
@@ -25103,20 +25585,24 @@
                           "properties": {
                             "name": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "Name of the manufacturer."
                             },
                             "number": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "Product number at the manufacturer."
                             },
                             "url": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "URI of the manufacturer."
                             }
                           }
                         },
                         "isStockItem": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is a stock item."
                         },
                         "salesTax": {
                           "type": "string",
@@ -25124,32 +25610,39 @@
                             "standard",
                             "reduced",
                             "free"
-                          ]
+                          ],
+                          "description": "Shows the sales tax of the product."
                         },
                         "shopPriceDisplay": {
                           "type": "string",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Only used by some online shops. For more information have a look into our handbook."
                         },
                         "isRemainingQuantity": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if only the remaining quantity of the product is left."
                         },
                         "regionOfOrigin": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Region where the product originates from."
                         },
                         "isShippingCostsProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                         },
                         "discount": {
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "isDiscountProduct": {
-                              "type": "boolean"
+                              "type": "boolean",
+                              "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                             },
                             "discountPercentage": {
                               "type": "number",
-                              "format": "float"
+                              "format": "float",
+                              "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                             }
                           }
                         },
@@ -25301,7 +25794,7 @@
                           }
                         },
                         "isVariant": {
-                          "description": "...",
+                          "description": "Shows if the product is a variant from another product.",
                           "type": "boolean",
                           "nullable": true
                         },
@@ -25324,7 +25817,8 @@
                         },
                         "updatedAt": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "Timestamp of when the product was updated."
                         }
                       }
                     }
@@ -25391,7 +25885,8 @@
                           }
                         },
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Name of the product."
                         },
                         "standardSupplier": {
                           "type": "object",
@@ -25413,34 +25908,41 @@
                         },
                         "description": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Description of the product."
                         },
                         "ean": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "EAN of the product."
                         },
                         "stockCount": {
                           "type": "number"
                         },
                         "number": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Number / SKU of the product."
                         },
                         "thumbnailUrl": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "URL of the product's thumbnail."
                         },
                         "thumbnailId": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "ID of the product's thumbnail."
                         },
                         "customsTariffNumber": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Customs tariff number of the product."
                         },
                         "countryOfOrigin": {
                           "type": "string",
                           "pattern": "[A-Z]{2}",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Two-digit ISO country code for country of origin of the product."
                         },
                         "tags": {
                           "type": "array",
@@ -25469,78 +25971,102 @@
                         },
                         "shortDescription": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Short description of the product."
                         },
                         "internalComment": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Text only for internal information."
                         },
                         "minimumStorageQuantity": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Numerical minimum storage quantity of the product."
                         },
                         "minimumOrderQuantity": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Numerical minimum order quantity of the product."
                         },
                         "isMatrixProduct": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Shows if the product is a matrix product."
                         },
                         "hasBatches": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has batches."
                         },
                         "serialNumbersMode": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Shows one of the 4 different modes if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                         },
                         "hasBestBeforeDate": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has a best before date."
                         },
                         "allowPurchaseFromAllSuppliers": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product can be purchased from all suppliers."
                         },
                         "isStockTakingDisabled": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is used for stock taking."
                         },
                         "ageRating": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Shows if the product has an age rating. Currently only used for the shipping service provider DHL."
                         },
                         "hasBillOfMaterials": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product has a bill of materials."
                         },
                         "isAssembledJustInTime": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is assembled just in time."
                         },
                         "hideJustInTimeItemsOnDocuments": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the just in time items of the parts list are visible on documents."
                         },
                         "isProductionProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is made in production."
                         },
                         "isExternallyProduced": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is externally produced."
                         },
                         "isCustomProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is a custom product."
                         },
                         "hidePriceOnDocuments": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the price is hidden on documents."
                         },
                         "isDisabled": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is locked."
                         },
                         "disabledReason": {
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Shows the reason why the product is locked when clicking into the product."
                         },
                         "markAsSoldOut": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is sold out."
                         },
                         "markAsInactive": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is inactive."
                         },
                         "isDeleted": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is deleted."
                         },
                         "regionOfOrigin": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Region where the product originates from."
                         },
                         "measurements": {
                           "type": "object",
@@ -25659,20 +26185,24 @@
                           "properties": {
                             "name": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "Name of the manufacturer."
                             },
                             "number": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "Product number at the manufacturer."
                             },
                             "link": {
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "description": "URI of the manufacturer."
                             }
                           }
                         },
                         "isStockItem": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if the product is a stock item."
                         },
                         "salesTax": {
                           "type": "string",
@@ -25680,29 +26210,35 @@
                             "standard",
                             "reduced",
                             "free"
-                          ]
+                          ],
+                          "description": "Shows the sales tax of the product."
                         },
                         "shopPriceDisplay": {
                           "type": "string",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Only used by some online shops. For more information have a look into our handbook."
                         },
                         "isRemainingQuantity": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Shows if only the remaining quantity of the product is left."
                         },
                         "isShippingCostsProduct": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                         },
                         "discount": {
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "isDiscountProduct": {
-                              "type": "boolean"
+                              "type": "boolean",
+                              "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                             },
                             "discountPercentage": {
                               "type": "number",
-                              "format": "float"
+                              "format": "float",
+                              "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                             }
                           }
                         },
@@ -25854,7 +26390,7 @@
                           }
                         },
                         "isVariant": {
-                          "description": "Indicates if a product is a variant of another product",
+                          "description": "Shows if the product is a variant from another product.",
                           "type": "boolean",
                           "nullable": true
                         },
@@ -25892,7 +26428,8 @@
                         },
                         "updatedAt": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "Timestamp of when the product was updated."
                         }
                       }
                     }
@@ -25920,11 +26457,186 @@
                           "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
                         },
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Name of the product."
                         }
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
@@ -25970,10 +26682,12 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "project": {
                     "type": "object",
@@ -25992,29 +26706,36 @@
                   },
                   "description": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Description of the product."
                   },
                   "internalComment": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Text only for internal information."
                   },
                   "shortDescription": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "EAN of the product."
                   },
                   "minimumOrderQuantity": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -26073,7 +26794,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -26227,7 +26949,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "hidePriceOnDocuments": {
                     "oneOf": [
@@ -26261,12 +26984,14 @@
                       "16",
                       "18"
                     ],
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -26409,13 +27134,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -26500,26 +27228,31 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -26696,7 +27429,49 @@
               "examples": {
                 "Update Product": {
                   "value": {
-                    "description": "This a product example for demonstration purposes"
+                    "name": "Test Product Beverage",
+                    "description": "This is a very long description for the Test Product Beverage.",
+                    "shortDescription": "This is a short description.",
+                    "project": {
+                      "id": "7"
+                    },
+                    "category": {
+                      "id": "1001"
+                    },
+                    "customsTariffNumber": "12345678",
+                    "ean": "1234567890",
+                    "internalComment": "Attention: Only available for customers over the age of 18.",
+                    "minimumOrderQuantity": 100,
+                    "minimumStorageQuantity": 30,
+                    "allowPurchaseFromAllSuppliers": false,
+                    "hidePriceOnDocuments": false,
+                    "hasBatches": true,
+                    "serialNumbersMode": "disabled",
+                    "hasBestBeforeDate": true,
+                    "hasBillOfMaterials": false,
+                    "isAssembledJustInTime": false,
+                    "isProductionProduct": false,
+                    "isExternallyProduced": false,
+                    "isDisabled": false,
+                    "countryOfOrigin": "DE",
+                    "regionOfOrigin": "01",
+                    "salesTax": "standard",
+                    "isStockItem": true,
+                    "manufacturer": {
+                      "name": "Beverage Manufacturer",
+                      "number": "BM#1",
+                      "link": "https://example.com"
+                    },
+                    "ageRating": "18",
+                    "freeFields": [
+                      {
+                        "id": "8",
+                        "value": "FF8"
+                      }
+                    ],
+                    "variantOf": {
+                      "id": "1336"
+                    }
                   }
                 }
               }
@@ -26707,10 +27482,12 @@
                 "additionalProperties": false,
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Name of the product."
                   },
                   "number": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Number / SKU of the product."
                   },
                   "project": {
                     "type": "object",
@@ -26729,29 +27506,36 @@
                   },
                   "description": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Description of the product."
                   },
                   "internalComment": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Text only for internal information."
                   },
                   "shortDescription": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Short description of the product."
                   },
                   "customsTariffNumber": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Customs tariff number of the product."
                   },
                   "ean": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "EAN of the product"
                   },
                   "minimumOrderQuantity": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Numerical minimum order quantity of the product."
                   },
                   "minimumStorageQuantity": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Numerical minimum storage quantity of the product."
                   },
                   "allowPurchaseFromAllSuppliers": {
                     "oneOf": [
@@ -26810,7 +27594,8 @@
                       "user",
                       "product",
                       "productAndWarehouse"
-                    ]
+                    ],
+                    "description": "4 different modes available if the product has serial numbers or not and how they are handled. For more information about the different modes have a look into our handbook."
                   },
                   "hasBestBeforeDate": {
                     "oneOf": [
@@ -26964,7 +27749,8 @@
                   },
                   "disabledReason": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Shows the reason why the product is locked when clicking into the product."
                   },
                   "hidePriceOnDocuments": {
                     "oneOf": [
@@ -26998,12 +27784,14 @@
                       "16",
                       "18"
                     ],
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Sets an age rating for the product. Currently only used for the shipping service provider DHL."
                   },
                   "countryOfOrigin": {
                     "type": "string",
                     "pattern": "[A-Z]{2}",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Two-digit ISO country code for country of origin of the product."
                   },
                   "regionOfOrigin": {
                     "type": "string",
@@ -27146,13 +27934,16 @@
                     "additionalProperties": false,
                     "properties": {
                       "name": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Name of the manufacturer."
                       },
                       "number": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Product number at the manufacturer."
                       },
                       "link": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URI of the manufacturer."
                       }
                     }
                   },
@@ -27237,26 +28028,31 @@
                       "standard",
                       "reduced",
                       "free"
-                    ]
+                    ],
+                    "description": "Selection of three possible values for the sales tax of the product."
                   },
                   "shopPriceDisplay": {
                     "type": "string",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Only used by some online shops. For more information have a look into our handbook."
                   },
                   "isShippingCostsProduct": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "isDiscountProduct": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "Determines if a product is used as a discount. For more information have a look into our handbook."
                       },
                       "discountPercentage": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
                       }
                     }
                   },
@@ -27459,7 +28255,49 @@
               "examples": {
                 "Update Product": {
                   "value": {
-                    "description": "This a product example for demonstration purposes"
+                    "name": "Test Product Beverage",
+                    "description": "This is a very long description for the Test Product Beverage.",
+                    "shortDescription": "This is a short description.",
+                    "project": {
+                      "id": "7"
+                    },
+                    "merchandiseGroup": {
+                      "id": "2001"
+                    },
+                    "customsTariffNumber": "12345678",
+                    "ean": "1234567890",
+                    "internalComment": "Attention: Only available for customers over the age of 18.",
+                    "minimumOrderQuantity": 100,
+                    "minimumStorageQuantity": 30,
+                    "allowPurchaseFromAllSuppliers": false,
+                    "hidePriceOnDocuments": false,
+                    "hasBatches": true,
+                    "serialNumbersMode": "disabled",
+                    "hasBestBeforeDate": true,
+                    "hasBillOfMaterials": false,
+                    "isAssembledJustInTime": false,
+                    "isProductionProduct": false,
+                    "isExternallyProduced": false,
+                    "isDisabled": false,
+                    "countryOfOrigin": "DE",
+                    "regionOfOrigin": "01",
+                    "salesTax": "standard",
+                    "isStockItem": true,
+                    "manufacturer": {
+                      "name": "Beverage Manufacturer",
+                      "number": "BM#1",
+                      "link": "https://example.com"
+                    },
+                    "ageRating": "18",
+                    "freeFields": [
+                      {
+                        "id": "8",
+                        "value": "FF8"
+                      }
+                    ],
+                    "variantOf": {
+                      "id": "1336"
+                    }
                   }
                 }
               }
@@ -27633,6 +28471,20 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
           "404": {
             "description": "Resource was not found or not enough access privileges"
           },
@@ -27722,6 +28574,9 @@
               }
             }
           },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
           "429": {
             "description": "Too many API calls made."
           }
@@ -27751,6 +28606,20 @@
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
@@ -32105,7 +32974,7 @@
                 }
               },
               "examples": {
-                "Update optionss for product": {
+                "Update options for product": {
                   "value": [
                     {
                       "id": "17",
@@ -45038,8 +45907,18 @@
                     "nullable": true
                   },
                   "amount": {
-                    "type": "number",
-                    "format": "float"
+                    "oneOf": [
+                      {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Accepts the value as a positive float or int"
+                      },
+                      {
+                        "type": "string",
+                        "format": "float",
+                        "description": "Accepts the value as a positive float or int as a string"
+                      }
+                    ]
                   },
                   "packageAmount": {
                     "type": "number",
@@ -45116,6 +45995,19 @@
                     }
                   }
                 },
+                "Create sales price with float as string for amount": {
+                  "value": {
+                    "product": {
+                      "id": "14"
+                    },
+                    "validFrom": "2023-12-01",
+                    "amount": "10.5",
+                    "price": {
+                      "amount": "24.20",
+                      "currency": "EUR"
+                    }
+                  }
+                },
                 "Create customer-specific sales price": {
                   "value": {
                     "product": {
@@ -45124,7 +46016,7 @@
                     "customer": {
                       "id": "35"
                     },
-                    "amount": 1,
+                    "amount": 10.5,
                     "price": {
                       "amount": "24.20",
                       "currency": "EUR"
@@ -45721,8 +46613,18 @@
                       "nullable": true
                     },
                     "amount": {
-                      "type": "number",
-                      "format": "float"
+                      "oneOf": [
+                        {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Accepts the value as a positive float or int"
+                        },
+                        {
+                          "type": "string",
+                          "format": "float",
+                          "description": "Accepts the value as a positive float or int as a string"
+                        }
+                      ]
                     },
                     "packageAmount": {
                       "type": "number",
@@ -45787,7 +46689,7 @@
                 }
               },
               "examples": {
-                "Update Multiple Sales Prices": {
+                "Update Multiple Sales Prices with different types for amount": {
                   "value": [
                     {
                       "id": "14",
@@ -45801,9 +46703,18 @@
                     {
                       "id": "16",
                       "validFrom": "2023-12-01",
-                      "amount": 1,
+                      "amount": 10.5,
                       "price": {
                         "amount": "19.24",
+                        "currency": "EUR"
+                      }
+                    },
+                    {
+                      "id": "16",
+                      "validFrom": "2023-12-01",
+                      "amount": "22.5",
+                      "price": {
+                        "amount": "55.55",
                         "currency": "EUR"
                       }
                     }
@@ -46375,8 +47286,18 @@
                     "nullable": true
                   },
                   "amount": {
-                    "type": "number",
-                    "format": "float"
+                    "oneOf": [
+                      {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Accepts the value as a positive float or int"
+                      },
+                      {
+                        "type": "string",
+                        "format": "float",
+                        "description": "Accepts the value as a positive float or int as a string"
+                      }
+                    ]
                   },
                   "packageAmount": {
                     "type": "number",
@@ -46444,6 +47365,26 @@
                   "value": {
                     "validFrom": "2023-12-01",
                     "amount": 1,
+                    "price": {
+                      "amount": "24.20",
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Update Sales Prices with float as string for amount": {
+                  "value": {
+                    "validFrom": "2023-12-01",
+                    "amount": "10.5",
+                    "price": {
+                      "amount": "24.20",
+                      "currency": "EUR"
+                    }
+                  }
+                },
+                "Update Sales Prices with float for amount": {
+                  "value": {
+                    "validFrom": "2023-12-01",
+                    "amount": 10.5,
                     "price": {
                       "amount": "24.20",
                       "currency": "EUR"
@@ -46865,7 +47806,7 @@
         "description": "This endpoint is only available as beta version and will introduce breaking changes without further notice or versioning. Returns all storage location items for the specified warehouse / location.",
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Operation completed successfully. Note (only for application/vnd.xentral.default.v2-beta+json response content): support for products where a product is both serial number tracked AND batch/best before date tracked at the same time is limited. In case serial number tracking is set to \"Generate own\" in the product master data, the qualityControlAttribute quantities will be reported (a) for the serial numbers on shelf and (b) for the batch/bestBeforeDate records on shelf, thus potentially resulting in a double count in the total across all qualityControlAttribute->quantity values. The quantity on the product->quantity level reflects the correct quantity on shelf in any case.",
             "content": {
               "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
@@ -46924,6 +47865,102 @@
                                   "description": "The serial number of the items"
                                 }
                               }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/vnd.xentral.default.v2-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "productId": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "sku": {
+                            "type": "string",
+                            "description": "SKU code of the item"
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "description": "Quantity of the item to stock to storage location"
+                          },
+                          "qualityControlAttributes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "quantity": {
+                                  "type": "number",
+                                  "description": "Quantity of the item to stock to storage location"
+                                },
+                                "batch": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "Batch of the item"
+                                },
+                                "bestBeforeDate": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "Best before date of the item"
+                                },
+                                "serialNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "number": {
+                                        "type": "string",
+                                        "description": "The serial numbers of the item"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
                             }
                           }
                         }
@@ -49919,6 +50956,261 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/taxRates/{countryCode}/{date}": {
+      "get": {
+        "tags": [
+          "Tax Rates"
+        ],
+        "operationId": "taxRate.list",
+        "summary": "[EARLY ACCESS] Tax rate list",
+        "description": "Lists all tax rates.",
+        "parameters": [
+          {
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This is the country code for which the tax rates are requested",
+            "example": "de"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "This is the date for which the tax rates are requested",
+            "example": "2023-12-01"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "key",
+                  "op",
+                  "value"
+                ],
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "type",
+                      "project"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "type",
+                      "project"
+                    ],
+                    "example": "type"
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "rate": {
+                            "type": "string",
+                            "nullable": false,
+                            "example": "19.00"
+                          },
+                          "type": {
+                            "type": "string",
+                            "nullable": false,
+                            "example": "paypal"
+                          },
+                          "designation": {
+                            "type": "string",
+                            "nullable": false,
+                            "example": "Paypal"
+                          },
+                          "project": {
+                            "type": "object",
+                            "nullable": true,
+                            "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
