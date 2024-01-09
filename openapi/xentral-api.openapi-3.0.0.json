@@ -39343,6 +39343,250 @@
             "description": "Too many API calls made."
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Product Tag"
+        ],
+        "operationId": "productTag.create",
+        "summary": "Create new product tag",
+        "description": "Creates a new product tag.",
+        "parameters": [],
+        "requestBody": {
+          "description": "Product tag create request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9_-]{3,24}$"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string",
+                    "pattern": "[a-fA-F0-9]{6}",
+                    "example": "ff0000",
+                    "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                  }
+                }
+              },
+              "examples": {
+                "Create product tag": {
+                  "value": {
+                    "key": "new-name",
+                    "name": "New name",
+                    "color": "#ff0000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {}
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
       }
     },
     "/api/productsTags/{id}": {
