@@ -128,6 +128,10 @@
       "description": "An entity represent the physical printer connected to the instance."
     },
     {
+      "name": "Printer Setup",
+      "description": "A printer setup for the wizard."
+    },
+    {
       "name": "Product",
       "description": "Product represents the services or things given company sells in the business."
     },
@@ -293,7 +297,7 @@
       }
     },
     {
-      "url": "{domain}",
+      "url": "https://{domain}",
       "description": "Xentral at a custom domain",
       "variables": {
         "domain": {
@@ -6301,6 +6305,10 @@
                                 "type": "string",
                                 "description": "Carrier that shipping the delivery"
                               }
+                            },
+                            "description": "Tracking information for the delivery",
+                            "example": {
+                              "number": "101010101010101"
                             }
                           },
                           "deliveryNote": {
@@ -6544,15 +6552,21 @@
                             "description": "Resource identifier."
                           },
                           "number": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Number of the document",
+                            "example": "200001"
                           },
                           "createdAt": {
                             "type": "string",
-                            "format": "datetime"
+                            "format": "datetime",
+                            "description": "Creation date of the delivery note",
+                            "example": "2024-01-01 00:00:00"
                           },
                           "documentDate": {
                             "type": "string",
-                            "format": "date"
+                            "format": "date",
+                            "description": "Date of the document",
+                            "example": "2024-01-01"
                           },
                           "receiver": {
                             "type": "object",
@@ -6577,10 +6591,17 @@
                                 "type": "string",
                                 "nullable": true
                               }
+                            },
+                            "description": "Receiver contact for the delivery",
+                            "example": {
+                              "name": "Mr. John Doe",
+                              "number": "10"
                             }
                           },
                           "country": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Country code for the delivery",
+                            "example": "DE"
                           },
                           "project": {
                             "type": "object",
@@ -6595,6 +6616,10 @@
                               "name": {
                                 "type": "string"
                               }
+                            },
+                            "description": "Project to which the delivery note belongs to",
+                            "example": {
+                              "id": "1"
                             }
                           },
                           "shippingMethod": {
@@ -6610,10 +6635,16 @@
                               "name": {
                                 "type": "string"
                               }
+                            },
+                            "description": "Shipping method used for the delivery note",
+                            "example": {
+                              "id": "1"
                             }
                           },
                           "type": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Internal type of the delivery note",
+                            "example": "type"
                           },
                           "status": {
                             "type": "string",
@@ -6623,7 +6654,9 @@
                               "canceled",
                               "sent",
                               "unknown"
-                            ]
+                            ],
+                            "description": "Status of the delivery note",
+                            "example": "created"
                           },
                           "salesOrder": {
                             "type": "object",
@@ -6907,7 +6940,9 @@
                           "description": "Resource identifier."
                         },
                         "documentNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Internal identification for the delivery note",
+                          "example": "200001"
                         },
                         "salesOrder": {
                           "type": "object",
@@ -6926,10 +6961,14 @@
                           }
                         },
                         "transactionNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Transaction number associated with a delivery note",
+                          "example": "transaction1"
                         },
                         "customerOrderNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Customer order associated with a delivery note",
+                          "example": "customerOrder1"
                         },
                         "salesChannel": {
                           "type": "object",
@@ -6948,17 +6987,25 @@
                           }
                         },
                         "bodyIntroduction": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Initial description message for delivery note",
+                          "example": "Initial info"
                         },
                         "bodyOutroduction": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Ending description message for delivery note",
+                          "example": "Additional info"
                         },
                         "internalDesignation": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Internal designation for delivery note",
+                          "example": "InternalDN1"
                         },
                         "date": {
                           "type": "string",
-                          "format": "date"
+                          "format": "date",
+                          "description": "Date of creation of a delivery note",
+                          "example": "2025-01-01"
                         },
                         "status": {
                           "type": "string",
@@ -6968,7 +7015,9 @@
                             "released",
                             "canceled",
                             "unknown"
-                          ]
+                          ],
+                          "description": "Status of the delivery note",
+                          "example": "completed"
                         },
                         "customer": {
                           "type": "object",
@@ -6984,11 +7033,16 @@
                               "type": "string",
                               "nullable": true
                             }
+                          },
+                          "description": "Customer linked to a Sales Order",
+                          "example": {
+                            "id": "1"
                           }
                         },
                         "comment": {
                           "type": "string",
-                          "example": "A comment about this delivery note"
+                          "example": "A comment about this delivery note",
+                          "description": "Comment included in the delivery note"
                         },
                         "project": {
                           "type": "object",
@@ -7017,6 +7071,10 @@
                               "description": "ISO 639-1 Code",
                               "nullable": true
                             }
+                          },
+                          "description": "Language information for a Sales Order",
+                          "example": {
+                            "iso2": "DE"
                           }
                         },
                         "log": {
@@ -7045,6 +7103,14 @@
                                   "format": "email"
                                 }
                               }
+                            }
+                          },
+                          "description": "Logging information for the delivery note",
+                          "example": {
+                            "createdAt": "2023-12-01 00:00:00",
+                            "createdBy": {
+                              "id": "1",
+                              "name": "User 1"
                             }
                           }
                         },
@@ -7304,7 +7370,26 @@
                                 }
                               }
                             }
-                          ]
+                          ],
+                          "description": "Delivery information for the delivery note",
+                          "example": {
+                            "autoShipping": true,
+                            "fastLane": true,
+                            "shippingMethod": {
+                              "id": "1"
+                            },
+                            "shippingCosts": [
+                              {
+                                "id": "1",
+                                "quantity": 3,
+                                "shippingCostProduct": {
+                                  "id": "1"
+                                }
+                              }
+                            ],
+                            "email": "user.email@email.org",
+                            "conditions": "none"
+                          }
                         },
                         "tags": {
                           "type": "array",
@@ -7329,7 +7414,13 @@
                                 "nullable": true
                               }
                             }
-                          }
+                          },
+                          "description": "Tags associated with the delivery note",
+                          "example": [
+                            {
+                              "id": "1"
+                            }
+                          ]
                         },
                         "positions": {
                           "type": "array",
@@ -7467,8 +7558,83 @@
                                 "type": "string"
                               }
                             }
-                          }
+                          },
+                          "description": "Items included within the delivery note",
+                          "example": [
+                            {
+                              "product": {
+                                "id": "1"
+                              },
+                              "quantity": 5
+                            }
+                          ]
                         }
+                      },
+                      "description": "Data representation of a single delivery note",
+                      "example": {
+                        "id": "1",
+                        "documentNumber": "200001",
+                        "salesOrder": {
+                          "id": "1"
+                        },
+                        "transactionNumber": "transaction1",
+                        "customerOrderNumber": "customerOrder1",
+                        "salesChannel": {
+                          "id": "1"
+                        },
+                        "bodyIntroduction": "Initial info",
+                        "bodyOutroduction": "Additional info",
+                        "internalDesignation": "internalDN1",
+                        "date": "2025-01-01",
+                        "status": "completed",
+                        "customer": {
+                          "id": "1"
+                        },
+                        "comment": "A comment about this delivery note",
+                        "project": {
+                          "id": "1"
+                        },
+                        "language": {
+                          "iso2": "DE"
+                        },
+                        "log": {
+                          "createdAt": "2023-12-01 00:00:00",
+                          "createdBy": {
+                            "id": "1",
+                            "name": "User 1"
+                          }
+                        },
+                        "delivery": {
+                          "autoShipping": true,
+                          "fastLane": true,
+                          "shippingMethod": {
+                            "id": "1"
+                          },
+                          "shippingCosts": [
+                            {
+                              "id": "1",
+                              "quantity": 3,
+                              "shippingCostProduct": {
+                                "id": "1"
+                              }
+                            }
+                          ],
+                          "email": "user.email@email.org",
+                          "conditions": "none"
+                        },
+                        "tags": [
+                          {
+                            "id": "1"
+                          }
+                        ],
+                        "positions": [
+                          {
+                            "product": {
+                              "id": "1"
+                            },
+                            "quantity": 5
+                          }
+                        ]
                       }
                     }
                   }
@@ -7567,7 +7733,9 @@
                             "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
                           },
                           "designation": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Designation of delivery term",
+                            "example": "Term"
                           }
                         }
                       }
@@ -17495,9 +17663,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -17516,9 +17684,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -17537,9 +17705,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -17558,9 +17726,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -17579,9 +17747,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -18322,9 +18490,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -18343,9 +18511,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -18364,9 +18532,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -18385,9 +18553,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -18406,9 +18574,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -19102,9 +19270,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -19123,9 +19291,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -19144,9 +19312,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -19165,9 +19333,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -19186,9 +19354,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -19963,9 +20131,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -19984,9 +20152,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -20005,9 +20173,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -20026,9 +20194,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -20047,9 +20215,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -21071,9 +21239,6 @@
                       "purchasePriceGross",
                       "salesPriceNet",
                       "salesPriceGross",
-                      "shopPriceDisplay",
-                      "purchasedCount",
-                      "inProductionCount",
                       "ean",
                       "manufacturerName",
                       "manufacturerNumber",
@@ -21269,69 +21434,6 @@
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
-                              "weight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "netWeight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "length": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
                               "width": {
                                 "type": "object",
                                 "additionalProperties": false,
@@ -21347,9 +21449,9 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
                                   }
                                 }
                               },
@@ -21368,9 +21470,72 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "length": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "weight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
                                       "kg"
-                                    ]
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
+                                  }
+                                }
+                              },
+                              "netWeight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "kg"
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
                                   }
                                 }
                               }
@@ -22008,6 +22173,26 @@
                             "type": "boolean",
                             "description": "Shows if the product can be purchased from all suppliers."
                           },
+                          "isCustomProduct": {
+                            "type": "boolean",
+                            "description": "Shows if the product is a custom product."
+                          },
+                          "isSoldOut": {
+                            "type": "boolean",
+                            "description": "Shows if the product is sold out."
+                          },
+                          "isInactive": {
+                            "type": "boolean",
+                            "description": "Shows if the product is inactive."
+                          },
+                          "isDeleted": {
+                            "type": "boolean",
+                            "description": "Shows if the product is deleted."
+                          },
+                          "isRemainingQuantity": {
+                            "type": "boolean",
+                            "description": "Shows if only the remaining quantity of the product is left."
+                          },
                           "hasBatches": {
                             "type": "boolean",
                             "description": "Shows if the product has batches."
@@ -22055,69 +22240,6 @@
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
-                              "weight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "netWeight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "length": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
                               "width": {
                                 "type": "object",
                                 "additionalProperties": false,
@@ -22133,9 +22255,9 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
                                   }
                                 }
                               },
@@ -22154,9 +22276,72 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "length": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "weight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
                                       "kg"
-                                    ]
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
+                                  }
+                                }
+                              },
+                              "netWeight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "kg"
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
                                   }
                                 }
                               }
@@ -22218,6 +22403,88 @@
                               }
                             }
                           },
+                          "isMatrixProduct": {
+                            "type": "boolean",
+                            "description": "Shows if the product is a matrix product."
+                          },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "selectedOptions": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "isVariant": {
                             "description": "Shows if the product is a variant from another product.",
                             "type": "boolean",
@@ -22238,6 +22505,53 @@
                               }
                             },
                             "description": "Reference to a parent product",
+                            "nullable": true
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "mainVariant": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "description": "Reference to a main variant of this product",
                             "nullable": true
                           },
                           "categories": {
@@ -22474,69 +22788,6 @@
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
-                              "weight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "netWeight": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
-                              "length": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "value",
-                                  "unit"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "format": "float"
-                                  },
-                                  "unit": {
-                                    "type": "string",
-                                    "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
-                                  }
-                                }
-                              },
                               "width": {
                                 "type": "object",
                                 "additionalProperties": false,
@@ -22552,9 +22803,9 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
-                                      "kg"
-                                    ]
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
                                   }
                                 }
                               },
@@ -22573,9 +22824,72 @@
                                   "unit": {
                                     "type": "string",
                                     "enum": [
-                                      "cm",
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "length": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cm"
+                                    ],
+                                    "description": "Currently only cm as unit allowed."
+                                  }
+                                }
+                              },
+                              "weight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
                                       "kg"
-                                    ]
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
+                                  }
+                                }
+                              },
+                              "netWeight": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "kg"
+                                    ],
+                                    "description": "Currently only kg as unit allowed."
                                   }
                                 }
                               }
@@ -23453,9 +23767,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -23474,9 +23788,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -23495,9 +23809,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -23516,9 +23830,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
                                 "kg"
-                              ]
+                              ],
+                              "description": "Currently only kg as unit allowed."
                             }
                           }
                         },
@@ -23537,9 +23851,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
                                 "kg"
-                              ]
+                              ],
+                              "description": "Currently only kg as unit allowed."
                             }
                           }
                         }
@@ -24175,9 +24489,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -24196,9 +24510,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -24217,9 +24531,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
-                                "kg"
-                              ]
+                                "cm"
+                              ],
+                              "description": "Currently only cm as unit allowed."
                             }
                           }
                         },
@@ -24238,9 +24552,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
                                 "kg"
-                              ]
+                              ],
+                              "description": "Currently only kg as unit allowed."
                             }
                           }
                         },
@@ -24259,9 +24573,9 @@
                             "unit": {
                               "type": "string",
                               "enum": [
-                                "cm",
                                 "kg"
-                              ]
+                              ],
+                              "description": "Currently only kg as unit allowed."
                             }
                           }
                         }
@@ -25210,7 +25524,7 @@
           "Product"
         ],
         "operationId": "product.view",
-        "summary": "View Product",
+        "summary": "View product",
         "description": "Returns details of a single product",
         "parameters": [
           {
@@ -25391,7 +25705,7 @@
                           "description": "Numerical minimum storage quantity of the product."
                         },
                         "isMatrixProduct": {
-                          "type": "number",
+                          "type": "boolean",
                           "description": "Shows if the product is a matrix product."
                         },
                         "hasBatches": {
@@ -25472,69 +25786,6 @@
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
-                            "weight": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
-                            "netWeight": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
-                            "length": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
                             "width": {
                               "type": "object",
                               "additionalProperties": false,
@@ -25550,9 +25801,9 @@
                                 "unit": {
                                   "type": "string",
                                   "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
                                 }
                               }
                             },
@@ -25571,9 +25822,72 @@
                                 "unit": {
                                   "type": "string",
                                   "enum": [
-                                    "cm",
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
+                                }
+                              }
+                            },
+                            "length": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
+                                }
+                              }
+                            },
+                            "weight": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
                                     "kg"
-                                  ]
+                                  ],
+                                  "description": "Currently only kg as unit allowed."
+                                }
+                              }
+                            },
+                            "netWeight": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
+                                    "kg"
+                                  ],
+                                  "description": "Currently only kg as unit allowed."
                                 }
                               }
                             }
@@ -25987,7 +26301,7 @@
                           "description": "Numerical minimum order quantity of the product."
                         },
                         "isMatrixProduct": {
-                          "type": "number",
+                          "type": "boolean",
                           "description": "Shows if the product is a matrix product."
                         },
                         "hasBatches": {
@@ -26052,11 +26366,11 @@
                           "nullable": true,
                           "description": "Shows the reason why the product is locked when clicking into the product."
                         },
-                        "markAsSoldOut": {
+                        "isSoldOut": {
                           "type": "boolean",
                           "description": "Shows if the product is sold out."
                         },
-                        "markAsInactive": {
+                        "isInactive": {
                           "type": "boolean",
                           "description": "Shows if the product is inactive."
                         },
@@ -26072,69 +26386,6 @@
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
-                            "weight": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
-                            "netWeight": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
-                            "length": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "value",
-                                "unit"
-                              ],
-                              "properties": {
-                                "value": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "unit": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
-                                }
-                              }
-                            },
                             "width": {
                               "type": "object",
                               "additionalProperties": false,
@@ -26150,9 +26401,9 @@
                                 "unit": {
                                   "type": "string",
                                   "enum": [
-                                    "cm",
-                                    "kg"
-                                  ]
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
                                 }
                               }
                             },
@@ -26171,9 +26422,72 @@
                                 "unit": {
                                   "type": "string",
                                   "enum": [
-                                    "cm",
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
+                                }
+                              }
+                            },
+                            "length": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
+                                    "cm"
+                                  ],
+                                  "description": "Currently only cm as unit allowed."
+                                }
+                              }
+                            },
+                            "weight": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
                                     "kg"
-                                  ]
+                                  ],
+                                  "description": "Currently only kg as unit allowed."
+                                }
+                              }
+                            },
+                            "netWeight": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "number",
+                                  "format": "float"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
+                                    "kg"
+                                  ],
+                                  "description": "Currently only kg as unit allowed."
                                 }
                               }
                             }
@@ -27037,9 +27351,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27058,9 +27372,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27079,9 +27393,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27100,9 +27414,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -27121,9 +27435,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -27837,9 +28151,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27858,9 +28172,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27879,9 +28193,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
-                              "kg"
-                            ]
+                              "cm"
+                            ],
+                            "description": "Currently only cm as unit allowed."
                           }
                         }
                       },
@@ -27900,9 +28214,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       },
@@ -27921,9 +28235,9 @@
                           "unit": {
                             "type": "string",
                             "enum": [
-                              "cm",
                               "kg"
-                            ]
+                            ],
+                            "description": "Currently only kg as unit allowed."
                           }
                         }
                       }
@@ -28589,6 +28903,12 @@
         "operationId": "product.delete",
         "summary": "Delete product",
         "description": "Deletes a single product",
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1+json": {},
+            "application/vnd.xentral.force.v1+json": {}
+          }
+        },
         "parameters": [
           {
             "in": "path",
@@ -31532,7 +31852,7 @@
           "Product"
         ],
         "operationId": "product.listCrossSelling",
-        "summary": "View cross selling of a product",
+        "summary": "List cross selling of a product",
         "description": "Returns a list of product's cross-selling products",
         "parameters": [
           {
@@ -31585,8 +31905,9 @@
                   "field": {
                     "type": "string",
                     "enum": [
-                      "product",
+                      "productId",
                       "productName",
+                      "productNumber",
                       "type",
                       "salesChannelId",
                       "sort"
@@ -31626,13 +31947,16 @@
                             "description": "Resource identifier."
                           },
                           "active": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the cross selling relation is active."
                           },
                           "assignToEachOther": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Shows if the selected products are assigned to each other. For more information have a look into our handbook."
                           },
                           "type": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Shows the type of the cross selling product. 1 means similar product, 2 means accessory. For more information have a look into our handbook."
                           },
                           "salesChannel": {
                             "type": "object",
@@ -31653,11 +31977,13 @@
                             "nullable": true
                           },
                           "sort": {
-                            "type": "number"
+                            "type": "number",
+                            "description": "Sorting order of the cross selling entries. 0 means automatically."
                           },
                           "note": {
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Internal note."
                           },
                           "product": {
                             "type": "object",
@@ -31711,6 +32037,180 @@
               }
             }
           },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Unable to authorize the client"
           },
@@ -31730,7 +32230,7 @@
           "Product"
         ],
         "operationId": "product.createCrossSellingProducts",
-        "summary": "Creates new cross selling for a product",
+        "summary": "Create new cross selling for a product",
         "description": "Creates new cross selling for a product.",
         "parameters": [
           {
@@ -31775,11 +32275,13 @@
                     },
                     "active": {
                       "type": "boolean",
-                      "default": true
+                      "default": true,
+                      "description": "Determines if the cross selling relation is active."
                     },
                     "assignToEachOther": {
                       "type": "boolean",
-                      "default": false
+                      "default": false,
+                      "description": "Determines if the selected products are assigned to each other. For more information have a look into our handbook."
                     },
                     "type": {
                       "type": "number",
@@ -31787,7 +32289,8 @@
                         1,
                         2
                       ],
-                      "default": 1
+                      "default": 1,
+                      "description": "Determines the type of the cross selling product. 1 means similar product, 2 means accessory. For more information have a look into our handbook."
                     },
                     "salesChannel": {
                       "type": "object",
@@ -31809,11 +32312,13 @@
                     },
                     "sort": {
                       "type": "number",
-                      "default": 0
+                      "default": 0,
+                      "description": "Sorting order of the cross selling entries. 0 means automatically."
                     },
                     "note": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Internal note."
                     }
                   }
                 }
@@ -31825,6 +32330,8 @@
                       "product": {
                         "id": "17"
                       },
+                      "active": false,
+                      "assignToEachOther": false,
                       "type": 1,
                       "salesChannel": {
                         "id": "17"
@@ -32017,11 +32524,108 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Unable to authorize the client"
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "415": {
             "description": "Resource representation send in the request is not supported."
@@ -32036,7 +32640,7 @@
           "Product"
         ],
         "operationId": "product.updateCrossSellingProducts",
-        "summary": "Update cross selling products of a product",
+        "summary": "Update cross selling of a product",
         "description": "Updates cross selling products of a product.",
         "parameters": [
           {
@@ -32071,13 +32675,20 @@
                       "description": "Resource identifier."
                     },
                     "active": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Determines if the cross selling relation is active."
                     },
                     "assignToEachOther": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Determines if the selected products are assigned to each other. For more information have a look into our handbook."
                     },
                     "type": {
-                      "type": "number"
+                      "type": "number",
+                      "enum": [
+                        1,
+                        2
+                      ],
+                      "description": "Determines the type of the cross selling product. 1 means similar product, 2 means accessory. For more information have a look into our handbook."
                     },
                     "salesChannel": {
                       "type": "object",
@@ -32098,11 +32709,13 @@
                       "nullable": true
                     },
                     "sort": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Sorting order of the cross selling entries. 0 means automatically."
                     },
                     "note": {
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Internal note."
                     }
                   }
                 }
@@ -32113,6 +32726,12 @@
                     {
                       "id": "17",
                       "active": false,
+                      "assignToEachOther": true,
+                      "type": 1,
+                      "salesChannel": {
+                        "id": "17"
+                      },
+                      "sort": 0,
                       "note": "A sample note for the cross selling association"
                     }
                   ]
@@ -32288,11 +32907,108 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Unable to authorize the client"
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "415": {
             "description": "Resource representation send in the request is not supported."
@@ -32307,7 +33023,7 @@
           "Product"
         ],
         "operationId": "product.deleteCrossSelling",
-        "summary": "Deletes cross selling items of a product",
+        "summary": "Delete cross selling of a product",
         "description": "Deletes cross selling items of a product.",
         "parameters": [
           {
@@ -32511,11 +33227,108 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Unable to authorize the client"
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "415": {
             "description": "Resource representation send in the request is not supported."
@@ -38334,6 +39147,126 @@
         "operationId": "productTag.list",
         "summary": "List products tags",
         "description": "Returns a collection with all products tags.",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "name",
+                      "id"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith' and 'endsWith'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in' and 'notIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "name",
+                      "number",
+                      "description",
+                      "project",
+                      "purchasePriceNet",
+                      "purchasePriceGross",
+                      "salesPriceNet",
+                      "salesPriceGross",
+                      "ean",
+                      "manufacturerName",
+                      "manufacturerNumber",
+                      "customsTariffNumber"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Operation completed successfully.",
@@ -38405,6 +39338,250 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product Tag"
+        ],
+        "operationId": "productTag.create",
+        "summary": "Create new product tag",
+        "description": "Creates a new product tag.",
+        "parameters": [],
+        "requestBody": {
+          "description": "Product tag create request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9_-]{3,24}$"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string",
+                    "pattern": "[a-fA-F0-9]{6}",
+                    "example": "ff0000",
+                    "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                  }
+                }
+              },
+              "examples": {
+                "Create product tag": {
+                  "value": {
+                    "key": "new-name",
+                    "name": "New name",
+                    "color": "#ff0000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {}
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
           },
           "429": {
             "description": "Too many API calls made."
@@ -41143,6 +42320,11 @@
         "operationId": "purchasePrice.delete",
         "summary": "Delete purchase price",
         "description": "Deletes a single purchase price",
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1+json": {}
+          }
+        },
         "parameters": [
           {
             "in": "path",
@@ -42202,7 +43384,8 @@
                             "type": "string",
                             "nullable": true,
                             "format": "date",
-                            "example": "2023-03-16"
+                            "example": "2023-03-16",
+                            "description": "Date of creation of the Return order"
                           },
                           "status": {
                             "type": "string",
@@ -42217,12 +43400,15 @@
                               "released",
                               "checked",
                               "done"
-                            ]
+                            ],
+                            "description": "Status of the Return order",
+                            "example": "completed"
                           },
                           "documentNumber": {
                             "type": "string",
                             "nullable": true,
-                            "example": "2023-000001"
+                            "example": "2023-000001",
+                            "description": "Internal identification of the Return order"
                           },
                           "tags": {
                             "type": "array",
@@ -42282,10 +43468,32 @@
                                 "example": "K-000001",
                                 "nullable": true
                               }
+                            },
+                            "description": "Customer linked to the Return order",
+                            "example": {
+                              "id": "1",
+                              "number": "K-000001"
                             }
                           }
                         }
-                      }
+                      },
+                      "description": "Data representation of a list of Return orders",
+                      "example": [
+                        {
+                          "id": "1",
+                          "date": "2023-03-16",
+                          "documentNumber": "2023-000001",
+                          "tags": [],
+                          "customer": {
+                            "id": "1",
+                            "number": "K-000001"
+                          },
+                          "salesOrder": {
+                            "id": "1"
+                          },
+                          "status": "completed"
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -42399,7 +43607,8 @@
                           "type": "string",
                           "nullable": true,
                           "format": "date",
-                          "example": "2023-03-16"
+                          "example": "2023-03-16",
+                          "description": "Date of creation of the Return order"
                         },
                         "salesOrder": {
                           "type": "object",
@@ -42496,8 +43705,51 @@
                                 }
                               }
                             }
-                          }
+                          },
+                          "description": "Items included within the Return order",
+                          "example": [
+                            {
+                              "id": "1",
+                              "quantity": 3,
+                              "salesOrderPosition": {
+                                "id": "1"
+                              },
+                              "product": {
+                                "id": "1",
+                                "number": "SKU-700010",
+                                "name": "Product name"
+                              },
+                              "returnReason": {
+                                "designation": "Damaged"
+                              }
+                            }
+                          ]
                         }
+                      },
+                      "description": "Representation of a Return order",
+                      "example": {
+                        "id": "1",
+                        "date": "2023-03-16",
+                        "salesOrder": {
+                          "id": "1"
+                        },
+                        "positions": [
+                          {
+                            "id": "1",
+                            "quantity": 3,
+                            "salesOrderPosition": {
+                              "id": "1"
+                            },
+                            "product": {
+                              "id": "1",
+                              "number": "SKU-700010",
+                              "name": "Product name"
+                            },
+                            "returnReason": {
+                              "designation": "Damaged"
+                            }
+                          }
+                        ]
                       }
                     }
                   }
@@ -42812,15 +44064,18 @@
                           },
                           "designation": {
                             "type": "string",
-                            "example": "Broken packaging"
+                            "example": "Broken packaging",
+                            "description": "Designation of the return reason"
                           },
                           "description": {
                             "type": "string",
-                            "example": "The boxes have been ripped off during transit"
+                            "example": "The boxes have been ripped off during transit",
+                            "description": "Description of the return reason"
                           },
                           "language": {
                             "type": "string",
-                            "example": "DE"
+                            "example": "DE",
+                            "description": "Language in which the return reason is written"
                           },
                           "project": {
                             "type": "object",
@@ -42835,10 +44090,26 @@
                                 "example": "17",
                                 "description": "Resource identifier."
                               }
+                            },
+                            "description": "Project for the return reason",
+                            "example": {
+                              "id": "1"
                             }
                           }
                         }
-                      }
+                      },
+                      "description": "Data representation of a list of return reasons",
+                      "example": [
+                        {
+                          "id": "1",
+                          "designation": "Broken packaging",
+                          "description": "The boxes have been ripped off during transit",
+                          "language": "DE",
+                          "project": {
+                            "id": "1"
+                          }
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -43031,26 +44302,40 @@
                             "description": "Resource identifier."
                           },
                           "documentNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Internal identification associated with a Sales Order",
+                            "example": "SO-1234"
                           },
                           "externalOrderNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "External identification associated with a Sales Order",
+                            "example": "ESO-1234"
                           },
                           "transactionNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Transaction number associated with a Sales Order",
+                            "example": "transaction1"
                           },
                           "customerOrderNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Customer order associated with a Sales Order",
+                            "example": "customerOrder1"
                           },
                           "externalOrderId": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "External ID associated with a Sales Order",
+                            "example": "10"
                           },
                           "bodyOutroduction": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Ending description message for Sales Order",
+                            "example": "Additional info"
                           },
                           "date": {
                             "type": "string",
-                            "format": "date"
+                            "format": "date",
+                            "description": "Date of creation of a Sales Order",
+                            "example": "2025-01-01"
                           },
                           "status": {
                             "type": "string",
@@ -43060,7 +44345,9 @@
                               "released",
                               "canceled",
                               "unknown"
-                            ]
+                            ],
+                            "description": "Status of the Sales Order",
+                            "example": "completed"
                           },
                           "customer": {
                             "type": "object",
@@ -43076,10 +44363,16 @@
                                 "type": "string",
                                 "nullable": true
                               }
+                            },
+                            "description": "Customer linked to a Sales Order",
+                            "example": {
+                              "id": "1"
                             }
                           },
                           "comment": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Comment included in the Sales Order",
+                            "example": "Comment"
                           },
                           "project": {
                             "type": "object",
@@ -43108,6 +44401,10 @@
                                 "description": "ISO 639-1 Code",
                                 "nullable": true
                               }
+                            },
+                            "description": "Language information for a Sales Order",
+                            "example": {
+                              "iso2": "DE"
                             }
                           },
                           "log": {
@@ -43132,6 +44429,14 @@
                                     "type": "string"
                                   }
                                 }
+                              }
+                            },
+                            "description": "Logging information for the Sales Order",
+                            "example": {
+                              "createdAt": "2023-12-01 00:00:00",
+                              "createdBy": {
+                                "id": "1",
+                                "name": "User 1"
                               }
                             }
                           },
@@ -43273,6 +44578,12 @@
                                     "format": "int64"
                                   }
                                 }
+                              }
+                            },
+                            "description": "Financial information for a Sales Order",
+                            "example": {
+                              "paymentMethod": {
+                                "id": "3"
                               }
                             }
                           },
@@ -43498,10 +44809,80 @@
                                   }
                                 }
                               }
-                            ]
+                            ],
+                            "description": "Delivery information for the Sales Order",
+                            "example": {
+                              "autoShipping": true,
+                              "fastLane": true,
+                              "shippingMethod": {
+                                "id": "1"
+                              },
+                              "shippingCosts": [
+                                {
+                                  "id": "1",
+                                  "quantity": 3,
+                                  "shippingCostProduct": {
+                                    "id": "1"
+                                  }
+                                }
+                              ],
+                              "email": "user.email@email.org",
+                              "conditions": "none"
+                            }
                           }
                         }
-                      }
+                      },
+                      "description": "Response data containing list of Sales Orders",
+                      "example": [
+                        {
+                          "id": "1",
+                          "documentNumber": "SO1",
+                          "externalOrderNumber": "ES01",
+                          "transactionNumber": "transaction1",
+                          "customerOrderNumber": "customerOrder1",
+                          "externalOrderId": "10",
+                          "bodyOutroduction": "body",
+                          "date": "2024-01-01",
+                          "status": "created",
+                          "customer": {
+                            "id": "1"
+                          },
+                          "comment": "Additional comments",
+                          "project": {
+                            "id": "1"
+                          },
+                          "language": {
+                            "iso2": "DE"
+                          },
+                          "log": {
+                            "createdAt": "2023-12-01 00:00:00",
+                            "createdBy": {
+                              "id": "1",
+                              "name": "User 1"
+                            }
+                          },
+                          "financials": {
+                            "paymentMethod": {
+                              "id": "3"
+                            }
+                          },
+                          "delivery": {
+                            "autoShipping": true,
+                            "fastLane": true,
+                            "shippingCosts": [
+                              {
+                                "id": "1",
+                                "quantity": 3,
+                                "shippingCostProduct": {
+                                  "id": "1"
+                                }
+                              }
+                            ],
+                            "email": "user.email@email.org",
+                            "conditions": "none"
+                          }
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -43553,14 +44934,15 @@
                             "example": "17",
                             "description": "Resource identifier."
                           },
-                          "type": {
-                            "type": "string"
-                          },
                           "documentNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Internal identification associated with a Sales Order",
+                            "example": "SO-1234"
                           },
                           "date": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Date of creation of a Sales Order",
+                            "example": "2025-01-01"
                           },
                           "status": {
                             "type": "string",
@@ -43570,10 +44952,28 @@
                               "released",
                               "canceled",
                               "unknown"
-                            ]
+                            ],
+                            "description": "Status of the Sales Order",
+                            "example": "completed"
                           }
+                        },
+                        "description": "Minimal representation of a Sales Order",
+                        "example": {
+                          "id": "1",
+                          "documentNumber": "SO1",
+                          "date": "2025-01-01",
+                          "status": "completed"
                         }
-                      }
+                      },
+                      "description": "Response data containing list with minimal information of Sales Orders",
+                      "example": [
+                        {
+                          "id": "1",
+                          "documentNumber": "SO1",
+                          "date": "2025-01-01",
+                          "status": "completed"
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -43749,6 +45149,10 @@
                         "description": "ISO 639-1 Code",
                         "nullable": true
                       }
+                    },
+                    "description": "Language information for a Sales Order",
+                    "example": {
+                      "iso2": "DE"
                     }
                   },
                   "financials": {
@@ -43889,6 +45293,12 @@
                             "format": "int64"
                           }
                         }
+                      }
+                    },
+                    "description": "Financial information for a Sales Order",
+                    "example": {
+                      "paymentMethod": {
+                        "id": "3"
                       }
                     }
                   },
@@ -45053,6 +46463,147 @@
         }
       }
     },
+    "/api/salesOrders/{id}/actions/cancel": {
+      "post": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.actions.cancel",
+        "summary": "Cancel a sales order",
+        "description": "Cancels a sales order. Only sales orders in status 'created' or 'completed' can be canceled. For draft sales orders use the delete endpoint.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Empty",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {}
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/salesOrders/{id}": {
       "get": {
         "tags": [
@@ -45095,19 +46646,29 @@
                           "description": "Resource identifier."
                         },
                         "documentNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Internal identification associated with a Sales Order",
+                          "example": "SO-1234"
                         },
                         "externalOrderNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "External identification associated with a Sales Order",
+                          "example": "ESO-1234"
                         },
                         "transactionNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Transaction number associated with a Sales Order",
+                          "example": "transaction1"
                         },
                         "customerOrderNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Customer order associated with a Sales Order",
+                          "example": "customerOrder1"
                         },
                         "externalOrderId": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "External ID associated with a Sales Order",
+                          "example": "10"
                         },
                         "salesChannel": {
                           "type": "object",
@@ -45126,17 +46687,25 @@
                           }
                         },
                         "bodyIntroduction": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Initial description message for Sales Order",
+                          "example": "Initial info"
                         },
                         "bodyOutroduction": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Ending description message for Sales Order",
+                          "example": "Additional info"
                         },
                         "internalDesignation": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Internal designation for Sales Order",
+                          "example": "InternalSO1"
                         },
                         "date": {
                           "type": "string",
-                          "format": "date"
+                          "format": "date",
+                          "description": "Date of creation of a Sales Order",
+                          "example": "2025-01-01"
                         },
                         "status": {
                           "type": "string",
@@ -45146,7 +46715,9 @@
                             "released",
                             "canceled",
                             "unknown"
-                          ]
+                          ],
+                          "description": "Status of the Sales Order",
+                          "example": "completed"
                         },
                         "customer": {
                           "type": "object",
@@ -45162,10 +46733,16 @@
                               "type": "string",
                               "nullable": true
                             }
+                          },
+                          "description": "Customer linked to a Sales Order",
+                          "example": {
+                            "id": "1"
                           }
                         },
                         "comment": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Comment included in the Sales Order",
+                          "example": "Comment"
                         },
                         "project": {
                           "type": "object",
@@ -45194,6 +46771,10 @@
                               "description": "ISO 639-1 Code",
                               "nullable": true
                             }
+                          },
+                          "description": "Language information for a Sales Order",
+                          "example": {
+                            "iso2": "DE"
                           }
                         },
                         "log": {
@@ -45222,6 +46803,14 @@
                                   "format": "email"
                                 }
                               }
+                            }
+                          },
+                          "description": "Logging information for the Sales Order",
+                          "example": {
+                            "createdAt": "2023-12-01 00:00:00",
+                            "createdBy": {
+                              "id": "1",
+                              "name": "User 1"
                             }
                           }
                         },
@@ -45363,6 +46952,12 @@
                                   "format": "int64"
                                 }
                               }
+                            }
+                          },
+                          "description": "Financial information for a Sales Order",
+                          "example": {
+                            "paymentMethod": {
+                              "id": "3"
                             }
                           }
                         },
@@ -45622,7 +47217,26 @@
                                 }
                               }
                             }
-                          ]
+                          ],
+                          "description": "Delivery information for the Sales Order",
+                          "example": {
+                            "autoShipping": true,
+                            "fastLane": true,
+                            "shippingMethod": {
+                              "id": "1"
+                            },
+                            "shippingCosts": [
+                              {
+                                "id": "1",
+                                "quantity": 3,
+                                "shippingCostProduct": {
+                                  "id": "1"
+                                }
+                              }
+                            ],
+                            "email": "user.email@email.org",
+                            "conditions": "none"
+                          }
                         },
                         "tags": {
                           "type": "array",
@@ -45647,7 +47261,13 @@
                                 "nullable": true
                               }
                             }
-                          }
+                          },
+                          "description": "Tags associated with the Sales Order",
+                          "example": [
+                            {
+                              "id": "1"
+                            }
+                          ]
                         },
                         "positions": {
                           "type": "array",
@@ -45785,8 +47405,87 @@
                                 "type": "string"
                               }
                             }
-                          }
+                          },
+                          "description": "Items included within the Sales Order",
+                          "example": [
+                            {
+                              "product": {
+                                "id": "1"
+                              },
+                              "quantity": 5
+                            }
+                          ]
                         }
+                      },
+                      "description": "Representation of a Sales Order",
+                      "example": {
+                        "id": "1",
+                        "documentNumber": "SO1",
+                        "externalOrderNumber": "ES01",
+                        "transactionNumber": "transaction1",
+                        "customerOrderNumber": "customerOrder1",
+                        "externalOrderId": "10",
+                        "salesChannel": {
+                          "id": "1"
+                        },
+                        "bodyIntroduction": "intro",
+                        "bodyOutroduction": "outro",
+                        "internalDesignation": "interalSO1",
+                        "date": "2024-01-01",
+                        "status": "created",
+                        "customer": {
+                          "id": "1"
+                        },
+                        "comment": "Additional comments",
+                        "project": {
+                          "id": "1"
+                        },
+                        "language": {
+                          "iso2": "DE"
+                        },
+                        "log": {
+                          "createdAt": "2023-12-01 00:00:00",
+                          "createdBy": {
+                            "id": "1",
+                            "name": "User 1"
+                          }
+                        },
+                        "financials": {
+                          "paymentMethod": {
+                            "id": "3"
+                          }
+                        },
+                        "delivery": {
+                          "autoShipping": true,
+                          "fastLane": true,
+                          "shippingMethod": {
+                            "id": "1"
+                          },
+                          "shippingCosts": [
+                            {
+                              "id": "1",
+                              "quantity": 3,
+                              "shippingCostProduct": {
+                                "id": "1"
+                              }
+                            }
+                          ],
+                          "email": "user.email@email.org",
+                          "conditions": "none"
+                        },
+                        "tags": [
+                          {
+                            "id": "1"
+                          }
+                        ],
+                        "positions": [
+                          {
+                            "product": {
+                              "id": "1"
+                            },
+                            "quantity": 5
+                          }
+                        ]
                       }
                     }
                   }
@@ -45807,14 +47506,15 @@
                           "example": "17",
                           "description": "Resource identifier."
                         },
-                        "type": {
-                          "type": "string"
-                        },
                         "documentNumber": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Internal identification associated with a Sales Order",
+                          "example": "SO-1234"
                         },
                         "date": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Date of creation of a Sales Order",
+                          "example": "2025-01-01"
                         },
                         "status": {
                           "type": "string",
@@ -45824,8 +47524,17 @@
                             "released",
                             "canceled",
                             "unknown"
-                          ]
+                          ],
+                          "description": "Status of the Sales Order",
+                          "example": "completed"
                         }
+                      },
+                      "description": "Minimal representation of a Sales Order",
+                      "example": {
+                        "id": "1",
+                        "documentNumber": "SO1",
+                        "date": "2025-01-01",
+                        "status": "completed"
                       }
                     }
                   }
@@ -45852,6 +47561,139 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.delete",
+        "summary": "Delete draft sales order",
+        "description": "Deletes a sales order in draft status",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "429": {
             "description": "Too many API calls made."
@@ -47740,6 +49582,11 @@
         "operationId": "salesPrice.delete",
         "summary": "Delete sales price",
         "description": "Deletes a single sales price",
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1+json": {}
+          }
+        },
         "parameters": [
           {
             "in": "path",
@@ -47814,6 +49661,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "data": {
+                      "description": "Representation of a list of Items in storage",
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -47826,6 +49674,7 @@
                             "description": "Resource identifier."
                           },
                           "product": {
+                            "description": "Information from the Product in storage",
                             "required": [
                               "sku"
                             ],
@@ -47835,25 +49684,35 @@
                                 "type": "string",
                                 "description": "SKU code of the item"
                               }
+                            },
+                            "example": {
+                              "sku": "ABC-12345-S-BL"
                             }
                           },
                           "quantity": {
                             "type": "number",
-                            "description": "Quantity of the item to stock to storage location"
+                            "description": "Quantity of the item to stock to storage location",
+                            "example": 5
                           },
                           "batches": {
                             "type": "array",
                             "items": {
                               "type": "string"
                             },
-                            "description": "Batches of the items"
+                            "description": "Batches of the items",
+                            "example": [
+                              "Batch1"
+                            ]
                           },
                           "bestBeforeDates": {
                             "type": "array",
                             "items": {
                               "type": "string"
                             },
-                            "description": "Best before dates of the items"
+                            "description": "Best before dates of the items",
+                            "example": [
+                              "2023-01-01 00:00:00"
+                            ]
                           },
                           "serialNumbers": {
                             "type": "array",
@@ -47865,10 +49724,46 @@
                                   "description": "The serial number of the items"
                                 }
                               }
-                            }
+                            },
+                            "description": "The serial number list of the items",
+                            "example": [
+                              {
+                                "number": "001"
+                              },
+                              {
+                                "number": "002"
+                              }
+                            ]
                           }
                         }
-                      }
+                      },
+                      "example": [
+                        {
+                          "id": "1",
+                          "product": {
+                            "sku": "ABC-12345-S-BL"
+                          },
+                          "quantity": 3,
+                          "batches": [
+                            "Batch1",
+                            "Batch2"
+                          ],
+                          "bestBeforeDates": [
+                            "2025-01-01 00:00:00"
+                          ],
+                          "serialNumbers": [
+                            {
+                              "number": "001"
+                            },
+                            {
+                              "number": "002"
+                            },
+                            {
+                              "number": "003"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 }
@@ -47879,6 +49774,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "data": {
+                      "description": "Representation of a list of Items in storage",
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -47892,11 +49788,13 @@
                           },
                           "sku": {
                             "type": "string",
-                            "description": "SKU code of the item"
+                            "description": "SKU code of the item",
+                            "example": "ABC-12345-S-BL"
                           },
                           "quantity": {
                             "type": "number",
-                            "description": "Quantity of the item to stock to storage location"
+                            "description": "Quantity of the item to stock to storage location",
+                            "example": 5
                           },
                           "qualityControlAttributes": {
                             "type": "array",
@@ -47931,10 +49829,42 @@
                                   }
                                 }
                               }
-                            }
+                            },
+                            "description": "List of Product unit specific quality properties",
+                            "example": [
+                              {
+                                "quantity": 5,
+                                "batch": "Batch1",
+                                "bestBeforeDate": "2025-01-01 00:00:00",
+                                "serialNumbers": [
+                                  {
+                                    "number": "001"
+                                  }
+                                ]
+                              }
+                            ]
                           }
                         }
-                      }
+                      },
+                      "example": [
+                        {
+                          "productId": "1",
+                          "sku": "ABC-12345-S-BL",
+                          "quantity": 5,
+                          "qualityControlAttributes": [
+                            {
+                              "quantity": 5,
+                              "batch": "Batch1",
+                              "bestBeforeDate": "2025-01-01 00:00:00",
+                              "serialNumbers": [
+                                {
+                                  "number": "001"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -48937,6 +50867,7 @@
                   "additionalProperties": false,
                   "properties": {
                     "data": {
+                      "description": "Representation of a list of Storage Locations",
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -48995,7 +50926,20 @@
                             }
                           }
                         }
-                      }
+                      },
+                      "example": [
+                        {
+                          "id": "1",
+                          "warehouse": {
+                            "id": "1"
+                          },
+                          "designation": "StorageLocation1",
+                          "description": "Storage Location Number 1",
+                          "project": {
+                            "id": "1"
+                          }
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -49287,13 +51231,19 @@
                             "description": "Resource identifier."
                           },
                           "module": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Module used by the given Shipping Method",
+                            "example": "glsapi"
                           },
                           "type": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Type of the given Shipping Method",
+                            "example": "gls"
                           },
                           "designation": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Description given to a particular Shipping Method",
+                            "example": "GLS International"
                           },
                           "project": {
                             "type": "object",
@@ -49312,7 +51262,19 @@
                             }
                           }
                         }
-                      }
+                      },
+                      "description": "Response data containing list of Shipping Methods",
+                      "example": [
+                        {
+                          "id": "1",
+                          "module": "glsapi",
+                          "type": "gls",
+                          "designation": "GLS International",
+                          "project": {
+                            "id": "1"
+                          }
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
@@ -52472,6 +54434,7 @@
                             "required": [
                               "id"
                             ],
+                            "description": "Information for the project used by a Warehouse",
                             "type": "object",
                             "nullable": true,
                             "properties": {
@@ -52479,14 +54442,28 @@
                                 "type": "string",
                                 "description": "Id of project"
                               }
+                            },
+                            "example": {
+                              "id": "1"
                             }
                           },
                           "designation": {
                             "type": "string",
-                            "description": "Name of the project"
+                            "description": "Name of the project",
+                            "example": "STANDARD"
                           }
                         }
-                      }
+                      },
+                      "description": "Representation of a list of Warehouses",
+                      "example": [
+                        {
+                          "id": "1",
+                          "project": {
+                            "id": "2"
+                          },
+                          "designation": "STANDARD"
+                        }
+                      ]
                     },
                     "extra": {
                       "type": "object",
