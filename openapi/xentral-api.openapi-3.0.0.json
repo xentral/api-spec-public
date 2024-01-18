@@ -16568,10 +16568,6 @@
                             "type": "string",
                             "nullable": true
                           },
-                          "qrString": {
-                            "type": "string",
-                            "nullable": true
-                          },
                           "salesOrder": {
                             "type": "object",
                             "additionalProperties": false,
@@ -16770,11 +16766,6 @@
                                 "description": "Resource identifier."
                               }
                             }
-                          },
-                          "qrString": {
-                            "type": "string",
-                            "description": "When `entry.type` is `invoice` or `credit_note` a string representing the QR code will be provided",
-                            "additionalProperties": false
                           }
                         }
                       },
@@ -21157,9 +21148,7 @@
                       "categoryId",
                       "tagId",
                       "isDiscountProduct",
-                      "isShippingCostsProduct",
-                      "isVariant",
-                      "variantOf"
+                      "isShippingCostsProduct"
                     ]
                   },
                   "op": {
@@ -28916,26 +28905,8 @@
         "description": "Deletes a single product",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            },
-            "application/vnd.xentral.force.v1": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1+json": {},
+            "application/vnd.xentral.force.v1+json": {}
           }
         },
         "parameters": [
@@ -34237,380 +34208,6 @@
         }
       }
     },
-    "/api/products/{id}/actions/createVariants": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "operationId": "product.createVariants",
-        "summary": "Creates variants for a matrix product",
-        "description": "Creates variants for a matrix product",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "The resource's identifier.",
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "mode",
-                  "variants"
-                ],
-                "properties": {
-                  "variants": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "options"
-                      ],
-                      "properties": {
-                        "options": {
-                          "description": "...",
-                          "allOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "required": [
-                                  "id"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string",
-                                    "pattern": "\\d+",
-                                    "example": "17",
-                                    "description": "Resource identifier."
-                                  }
-                                }
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    }
-                  },
-                  "mode": {
-                    "type": "string",
-                    "enum": [
-                      "1",
-                      "2",
-                      "3",
-                      "4"
-                    ],
-                    "description": "1: Use item numbers from number range of merchandise group.\n2: Add product numbers from options to the main number.\n3: Create product numbers from the main number and the appendix to product numbers. No additional separators.\n4: Product numbers of main products with suffix."
-                  },
-                  "prefixSeparator": {
-                    "type": "string",
-                    "description": "Separator of prefix (applicable to mode 4 only)"
-                  },
-                  "prefixDigits": {
-                    "type": "integer",
-                    "description": "Number of digits of prefix (applicable to mode 4 only)"
-                  },
-                  "prefixNextNumber": {
-                    "type": "string",
-                    "pattern": "\\d+",
-                    "description": "Next number of prefix (applicable to mode 4 only)"
-                  },
-                  "appendOptionsToDescription": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "number",
-                        "enum": [
-                          0,
-                          1
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "true",
-                          "false",
-                          "True",
-                          "False",
-                          "TRUE",
-                          "FALSE"
-                        ]
-                      }
-                    ]
-                  },
-                  "createAdditionalDescription": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "number",
-                        "enum": [
-                          0,
-                          1
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "true",
-                          "false",
-                          "True",
-                          "False",
-                          "TRUE",
-                          "FALSE"
-                        ]
-                      }
-                    ]
-                  }
-                }
-              },
-              "examples": {
-                "Create 2 variants": {
-                  "value": {
-                    "mode": "1",
-                    "variants": [
-                      {
-                        "options": [
-                          {
-                            "id": "2"
-                          },
-                          {
-                            "id": "5"
-                          }
-                        ]
-                      },
-                      {
-                        "options": [
-                          {
-                            "id": "3"
-                          },
-                          {
-                            "id": "6"
-                          }
-                        ]
-                      }
-                    ],
-                    "prefixSeparator": "_",
-                    "prefixDigits": 3,
-                    "prefixNextNumber": "001",
-                    "appendOptionsToDescription": true,
-                    "createAdditionalDescription": true
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Resource successfully created response",
-            "headers": {
-              "Location": {
-                "schema": {
-                  "type": "string",
-                  "example": "https://example.xentral.biz/api/users/17"
-                },
-                "description": "URI of the created resource"
-              }
-            },
-            "content": {
-              "text/html": {}
-            }
-          },
-          "400": {
-            "description": "IETF RFC 7807 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "404": {
-            "description": "Resource was not found or not enough access privileges"
-          },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
-      }
-    },
     "/api/productsCategories": {
       "get": {
         "tags": [
@@ -35712,119 +35309,6 @@
         "operationId": "productFreeField.list",
         "summary": "[BETA] list product free fields",
         "description": "Returns a list of product free fields",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "style": "deepObject",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "key": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "name"
-                    ]
-                  },
-                  "op": {
-                    "type": "string",
-                    "enum": [
-                      "equals",
-                      "notEquals",
-                      "in",
-                      "notIn",
-                      "exactlyIn",
-                      "allIn",
-                      "allNotIn",
-                      "contains",
-                      "notContains",
-                      "startsWith",
-                      "endsWith",
-                      "greaterThan",
-                      "lessThan",
-                      "is"
-                    ]
-                  },
-                  "value": {
-                    "oneOf": [
-                      {
-                        "type": "string",
-                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                        "title": "String"
-                      },
-                      {
-                        "type": "array",
-                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                        "title": "Array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "style": "deepObject",
-            "schema": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "number",
-                "size"
-              ],
-              "properties": {
-                "number": {
-                  "type": "string",
-                  "pattern": "\\d+",
-                  "description": "Page number should be an integer greater than or equal to 1"
-                },
-                "size": {
-                  "type": "string",
-                  "pattern": "\\d+",
-                  "description": "Page size should usually be an integer between 10 and 50."
-                }
-              }
-            }
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "style": "deepObject",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "field": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "name"
-                    ]
-                  },
-                  "dir": {
-                    "type": "string",
-                    "enum": [
-                      "asc",
-                      "desc"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Operation completed successfully.",
@@ -42838,16 +42322,7 @@
         "description": "Deletes a single purchase price",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1+json": {}
           }
         },
         "parameters": [
@@ -46792,16 +46267,7 @@
         "requestBody": {
           "description": "Empty",
           "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1-beta+json": {}
           }
         },
         "responses": {
@@ -47022,16 +46488,7 @@
         "requestBody": {
           "description": "Empty",
           "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1-beta+json": {}
           }
         },
         "responses": {
@@ -50127,16 +49584,7 @@
         "description": "Deletes a single sales price",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1+json": {}
           }
         },
         "parameters": [
