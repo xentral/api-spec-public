@@ -13021,7 +13021,6 @@
               "schema": {
                 "anyOf": [
                   {
-                    "type": "object",
                     "properties": {
                       "email": {
                         "type": "object",
@@ -13067,14 +13066,12 @@
                     }
                   },
                   {
-                    "type": "object",
                     "properties": {
                       "printer": {
                         "type": "object",
                         "additionalProperties": false,
                         "oneOf": [
                           {
-                            "type": "object",
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -13085,7 +13082,6 @@
                             }
                           },
                           {
-                            "type": "object",
                             "properties": {
                               "name": {
                                 "type": "string"
@@ -19731,32 +19727,6 @@
                     "type": "boolean",
                     "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
-                  "isVisibleInOnlineShops": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "number",
-                        "enum": [
-                          0,
-                          1
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "true",
-                          "false",
-                          "True",
-                          "False",
-                          "TRUE",
-                          "FALSE"
-                        ]
-                      }
-                    ],
-                    "description": "Determines if a product is visible in online shops."
-                  },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
@@ -20617,32 +20587,6 @@
                   "isShippingCostsProduct": {
                     "type": "boolean",
                     "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
-                  },
-                  "isVisibleInOnlineShops": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "number",
-                        "enum": [
-                          0,
-                          1
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "true",
-                          "false",
-                          "True",
-                          "False",
-                          "TRUE",
-                          "FALSE"
-                        ]
-                      }
-                    ],
-                    "description": "Determines if a product is visible in online shops."
                   },
                   "discount": {
                     "type": "object",
@@ -22251,32 +22195,6 @@
                           "isInactive": {
                             "type": "boolean",
                             "description": "Shows if the product is inactive."
-                          },
-                          "isVisibleInOnlineShops": {
-                            "oneOf": [
-                              {
-                                "type": "boolean"
-                              },
-                              {
-                                "type": "number",
-                                "enum": [
-                                  0,
-                                  1
-                                ]
-                              },
-                              {
-                                "type": "string",
-                                "enum": [
-                                  "true",
-                                  "false",
-                                  "True",
-                                  "False",
-                                  "TRUE",
-                                  "FALSE"
-                                ]
-                              }
-                            ],
-                            "description": "Shows if the product is visible in online shops."
                           },
                           "isDeleted": {
                             "type": "boolean",
@@ -24845,32 +24763,6 @@
                       "type": "boolean",
                       "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                     },
-                    "isVisibleInOnlineShops": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "number",
-                          "enum": [
-                            0,
-                            1
-                          ]
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "true",
-                            "false",
-                            "True",
-                            "False",
-                            "TRUE",
-                            "FALSE"
-                          ]
-                        }
-                      ],
-                      "description": "Determines if a product is visible in online shops."
-                    },
                     "discount": {
                       "type": "object",
                       "additionalProperties": false,
@@ -26492,32 +26384,6 @@
                         "isInactive": {
                           "type": "boolean",
                           "description": "Shows if the product is inactive."
-                        },
-                        "isVisibleInOnlineShops": {
-                          "oneOf": [
-                            {
-                              "type": "boolean"
-                            },
-                            {
-                              "type": "number",
-                              "enum": [
-                                0,
-                                1
-                              ]
-                            },
-                            {
-                              "type": "string",
-                              "enum": [
-                                "true",
-                                "false",
-                                "True",
-                                "False",
-                                "TRUE",
-                                "FALSE"
-                              ]
-                            }
-                          ],
-                          "description": "Shows if the product is visible in online shops."
                         },
                         "isDeleted": {
                           "type": "boolean",
@@ -28499,32 +28365,6 @@
                   "isShippingCostsProduct": {
                     "type": "boolean",
                     "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
-                  },
-                  "isVisibleInOnlineShops": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "number",
-                        "enum": [
-                          0,
-                          1
-                        ]
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "true",
-                          "false",
-                          "True",
-                          "False",
-                          "TRUE",
-                          "FALSE"
-                        ]
-                      }
-                    ],
-                    "description": "Determines if a product is visible in online shops."
                   },
                   "discount": {
                     "type": "object",
@@ -43258,19 +43098,24 @@
                           "type": "string"
                         },
                         "adapterBoxId": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "warehouse": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "priceGroup": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "cashRegister": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "defaultCustomer": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "allowAllCustomers": {
                           "type": "boolean"
@@ -43282,7 +43127,8 @@
                           "type": "boolean"
                         },
                         "discountItems": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "createDeliveryNote": {
                           "type": "boolean"
@@ -43375,10 +43221,12 @@
                           "type": "boolean"
                         },
                         "cashierAutologout": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "cashierAutologoutAfterPaymenet": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "extendedAddressFields": {
                           "type": "boolean"
@@ -43393,19 +43241,24 @@
                           "type": "string"
                         },
                         "printerId": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerNumberOfDeliveryNotes": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerNumberOfInvoices": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerNumberOfCreditNotes": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerNumberOfDeliveryNoteDuplicates": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerPrintReceiptWithInvoice": {
                           "type": "boolean"
@@ -43417,7 +43270,8 @@
                           "type": "boolean"
                         },
                         "printerReceiptCount": {
-                          "type": "integer"
+                          "type": "number",
+                          "format": "integer"
                         },
                         "printerReceiptLine1": {
                           "type": "string"
@@ -44479,16 +44333,7 @@
         "requestBody": {
           "description": "Empty",
           "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true,
-                "additionalProperties": false
-              }
-            }
+            "application/vnd.xentral.default.v1-beta+json": {}
           }
         },
         "responses": {
