@@ -662,7 +662,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -3398,7 +3406,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -4360,7 +4376,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -4757,7 +4781,7 @@
                           },
                           "project": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -7672,6 +7696,63 @@
         "description": "Lists existing Delivery Terms",
         "parameters": [
           {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "designation"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
             "in": "query",
             "name": "page",
             "required": false,
@@ -8448,7 +8529,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -9682,7 +9771,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -10614,10 +10711,12 @@
                         },
                         "project": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
+                          "nullable": true,
                           "required": [
                             "id",
-                            "name"
+                            "name",
+                            "abbreviation"
                           ],
                           "properties": {
                             "id": {
@@ -10628,12 +10727,15 @@
                             },
                             "name": {
                               "type": "string"
+                            },
+                            "abbreviation": {
+                              "type": "string"
                             }
                           }
                         },
                         "customer": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -12586,7 +12688,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -14080,7 +14190,7 @@
                         },
                         "supplier": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -14154,7 +14264,7 @@
                         },
                         "project": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -14173,7 +14283,7 @@
                         },
                         "subProject": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -15316,7 +15426,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -16901,7 +17019,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -17304,7 +17430,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -20849,7 +20983,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "204": {
@@ -21352,7 +21494,7 @@
                           },
                           "project": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -21371,7 +21513,7 @@
                           },
                           "category": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -21939,7 +22081,7 @@
                           },
                           "project": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -21958,7 +22100,7 @@
                           },
                           "merchandiseGroup": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -22732,7 +22874,7 @@
                           },
                           "project": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -22751,7 +22893,7 @@
                           },
                           "category": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -23958,14 +24100,17 @@
                       "properties": {
                         "name": {
                           "type": "string",
+                          "nullable": true,
                           "description": "Name of the manufacturer."
                         },
                         "number": {
                           "type": "string",
+                          "nullable": true,
                           "description": "Product number at the manufacturer."
                         },
                         "link": {
                           "type": "string",
+                          "nullable": true,
                           "description": "URI of the manufacturer."
                         }
                       }
@@ -24680,14 +24825,17 @@
                       "properties": {
                         "name": {
                           "type": "string",
+                          "nullable": true,
                           "description": "Name of the manufacturer."
                         },
                         "number": {
                           "type": "string",
+                          "nullable": true,
                           "description": "Product number at the manufacturer."
                         },
                         "link": {
                           "type": "string",
+                          "nullable": true,
                           "description": "URI of the manufacturer."
                         }
                       }
@@ -25685,7 +25833,7 @@
                         },
                         "project": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -25704,7 +25852,7 @@
                         },
                         "category": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -26280,7 +26428,7 @@
                         },
                         "project": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -26299,7 +26447,7 @@
                         },
                         "merchandiseGroup": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -27594,14 +27742,17 @@
                     "properties": {
                       "name": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Name of the manufacturer."
                       },
                       "number": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Product number at the manufacturer."
                       },
                       "link": {
                         "type": "string",
+                        "nullable": true,
                         "description": "URI of the manufacturer."
                       }
                     }
@@ -28394,14 +28545,17 @@
                     "properties": {
                       "name": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Name of the manufacturer."
                       },
                       "number": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Product number at the manufacturer."
                       },
                       "link": {
                         "type": "string",
+                        "nullable": true,
                         "description": "URI of the manufacturer."
                       }
                     }
@@ -29082,8 +29236,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             },
             "application/vnd.xentral.force.v1": {
@@ -29092,8 +29245,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -29517,7 +29669,7 @@
                           },
                           "supplier": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -29713,7 +29865,7 @@
                           },
                           "customer": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -29733,7 +29885,7 @@
                           },
                           "customerGroup": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -29958,7 +30110,7 @@
                               },
                               "supplier": {
                                 "type": "object",
-                                "additionalProperties": {},
+                                "additionalProperties": false,
                                 "required": [
                                   "id",
                                   "name"
@@ -30491,7 +30643,7 @@
                           },
                           "property": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -31226,7 +31378,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -32547,7 +32707,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -33750,7 +33918,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -34590,7 +34766,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -34805,7 +34989,7 @@
                           },
                           "parent": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -34851,7 +35035,7 @@
                           },
                           "parent": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -34886,7 +35070,7 @@
                                 },
                                 "parent": {
                                   "type": "object",
-                                  "additionalProperties": {},
+                                  "additionalProperties": false,
                                   "required": [
                                     "id",
                                     "name"
@@ -34921,7 +35105,7 @@
                                       },
                                       "parent": {
                                         "type": "object",
-                                        "additionalProperties": {},
+                                        "additionalProperties": false,
                                         "required": [
                                           "id",
                                           "name"
@@ -34956,7 +35140,7 @@
                                             },
                                             "parent": {
                                               "type": "object",
-                                              "additionalProperties": {},
+                                              "additionalProperties": false,
                                               "required": [
                                                 "id",
                                                 "name"
@@ -35072,7 +35256,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -35382,7 +35574,7 @@
                         },
                         "parent": {
                           "type": "object",
-                          "additionalProperties": {},
+                          "additionalProperties": false,
                           "required": [
                             "id",
                             "name"
@@ -36719,7 +36911,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -37382,6 +37582,65 @@
         "operationId": "productMedia.list",
         "summary": "[EARLY ACCESS] List product media",
         "description": "Returns list of a product media",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "product"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Operation completed successfully.",
@@ -38137,7 +38396,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -39130,7 +39397,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -39848,24 +40123,28 @@
                       "notEquals",
                       "in",
                       "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
                       "contains",
                       "notContains",
                       "startsWith",
                       "endsWith",
                       "greaterThan",
-                      "lessThan"
+                      "lessThan",
+                      "is"
                     ]
                   },
                   "value": {
                     "oneOf": [
                       {
                         "type": "string",
-                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith' and 'endsWith'.",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
                         "title": "String"
                       },
                       {
                         "type": "array",
-                        "description": "Used for the operations 'in' and 'notIn'.",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
                         "title": "Array",
                         "items": {
                           "type": "string"
@@ -40076,7 +40355,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -40894,7 +41181,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -43004,8 +43299,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -43759,7 +44053,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -44485,8 +44787,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -46747,7 +47048,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -46953,8 +47262,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -47183,8 +47491,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -48399,6 +48706,756 @@
         }
       }
     },
+    "/api/salesOrders/{id}/documents": {
+      "post": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.createDocument",
+        "summary": "[EARLY ACCESS] Create sales order document",
+        "description": "Creates new sales order document",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Sales order document create request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "keyword": {
+                    "type": "string",
+                    "enum": [
+                      "otherFile",
+                      "coverPage",
+                      "attachment"
+                    ]
+                  },
+                  "fileName": {
+                    "type": "string"
+                  },
+                  "fileContent": {
+                    "type": "string",
+                    "description": "A base64 encoded document. Supported formats PDF",
+                    "format": "byte"
+                  }
+                }
+              },
+              "examples": {
+                "Create product media": {
+                  "value": {
+                    "title": "Sales order document",
+                    "description": "Sales order document",
+                    "keyword": "otherFile",
+                    "fileName": "sample.pdf",
+                    "fileContent": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.listDocument",
+        "summary": "[EARLY ACCESS] View sales order document list",
+        "description": "Returns a list of given sales order documents",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "currentFileVersionId",
+                      "fileName"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "entity": {
+                            "type": "string"
+                          },
+                          "entityId": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "keyword": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "sort": {
+                            "type": "integer"
+                          },
+                          "currentVersion": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "version": {
+                                "type": "integer"
+                              },
+                              "remark": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "filename": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "integer"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "byte"
+                                    ],
+                                    "description": "Currently only byte as unit allowed."
+                                  }
+                                }
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/salesOrders/{id}/documents/{documentId}": {
+      "get": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.viewDocument",
+        "summary": "[EARLY ACCESS] View sales order document",
+        "description": "Returns details of a single sales order document",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "ID of document",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "entity": {
+                          "type": "string"
+                        },
+                        "entityId": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "keyword": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "sort": {
+                          "type": "integer"
+                        },
+                        "versions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "version": {
+                                "type": "integer"
+                              },
+                              "remark": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "filename": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "value",
+                                  "unit"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "integer"
+                                  },
+                                  "unit": {
+                                    "type": "string",
+                                    "enum": [
+                                      "byte"
+                                    ],
+                                    "description": "Currently only byte as unit allowed."
+                                  }
+                                }
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          }
+                        },
+                        "currentVersion": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "version": {
+                              "type": "integer"
+                            },
+                            "remark": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "filename": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "value",
+                                "unit"
+                              ],
+                              "properties": {
+                                "value": {
+                                  "type": "integer"
+                                },
+                                "unit": {
+                                  "type": "string",
+                                  "enum": [
+                                    "byte"
+                                  ],
+                                  "description": "Currently only byte as unit allowed."
+                                }
+                              }
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          }
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/salesPrices": {
       "post": {
         "tags": [
@@ -48580,7 +49637,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -50288,8 +51353,7 @@
                 "enum": [
                   ""
                 ],
-                "nullable": true,
-                "additionalProperties": false
+                "nullable": true
               }
             }
           }
@@ -50932,7 +51996,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "201": {
@@ -50947,7 +52019,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
@@ -52250,7 +53330,7 @@
                           },
                           "project": {
                             "type": "object",
-                            "additionalProperties": {},
+                            "additionalProperties": false,
                             "required": [
                               "id",
                               "name"
@@ -53975,7 +55055,15 @@
               }
             },
             "content": {
-              "text/html": {}
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
             }
           },
           "400": {
