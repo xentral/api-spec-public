@@ -16873,9 +16873,7 @@
                           "timestamp": {
                             "type": "string",
                             "format": "date-time",
-                            "nullable": false,
-                            "description": "the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z",
-                            "example": "2017-07-21T17:32:28Z"
+                            "example": "2023-08-13T14:45:36+02:00"
                           },
                           "document": {
                             "type": "object",
