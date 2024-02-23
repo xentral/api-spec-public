@@ -168,6 +168,10 @@
       "description": "Project resource."
     },
     {
+      "name": "Purchase Order",
+      "description": "Purchase Orders made at a supplier."
+    },
+    {
       "name": "Purchase Price",
       "description": "PurchasePrices determine the prices used for the purchasing of products."
     },
@@ -13642,52 +13646,24 @@
           "content": {
             "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
-                "anyOf": [
-                  {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [
-                      "paymentStatus"
-                    ],
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "released",
-                          "sent"
-                        ]
-                      },
-                      "paymentStatus": {
-                        "type": "string",
-                        "enum": [
-                          "paid"
-                        ]
-                      }
-                    }
+                "type": "object",
+                "additionalProperties": false,
+                "description": "At least one of the properties must be present.",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "released",
+                      "sent"
+                    ]
                   },
-                  {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [
-                      "status"
-                    ],
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "enum": [
-                          "released",
-                          "sent"
-                        ]
-                      },
-                      "paymentStatus": {
-                        "type": "string",
-                        "enum": [
-                          "paid"
-                        ]
-                      }
-                    }
+                  "paymentStatus": {
+                    "type": "string",
+                    "enum": [
+                      "paid"
+                    ]
                   }
-                ]
+                }
               },
               "examples": {
                 "Mark invoice as released": {
@@ -21950,6 +21926,11 @@
                             "items": {
                               "type": "object",
                               "additionalProperties": false,
+                              "required": [
+                                "id",
+                                "name",
+                                "value"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string",
@@ -22286,12 +22267,6 @@
                               }
                             }
                           },
-                          "shopPriceDisplay": {
-                            "type": "string",
-                            "format": "float",
-                            "nullable": true,
-                            "description": "Only used by some online shops. For more information have a look into our handbook."
-                          },
                           "ean": {
                             "type": "string",
                             "nullable": true,
@@ -22384,47 +22359,9 @@
                             "type": "boolean",
                             "description": "Shows if the product is a custom product."
                           },
-                          "isSoldOut": {
-                            "type": "boolean",
-                            "description": "Shows if the product is sold out."
-                          },
-                          "isInactive": {
-                            "type": "boolean",
-                            "description": "Shows if the product is inactive."
-                          },
-                          "isVisibleInOnlineShops": {
-                            "oneOf": [
-                              {
-                                "type": "boolean"
-                              },
-                              {
-                                "type": "number",
-                                "enum": [
-                                  0,
-                                  1
-                                ]
-                              },
-                              {
-                                "type": "string",
-                                "enum": [
-                                  "true",
-                                  "false",
-                                  "True",
-                                  "False",
-                                  "TRUE",
-                                  "FALSE"
-                                ]
-                              }
-                            ],
-                            "description": "Shows if the product is visible in online shops."
-                          },
                           "isDeleted": {
                             "type": "boolean",
                             "description": "Shows if the product is deleted."
-                          },
-                          "isRemainingQuantity": {
-                            "type": "boolean",
-                            "description": "Shows if only the remaining quantity of the product is left."
                           },
                           "hasBatches": {
                             "type": "boolean",
@@ -22619,6 +22556,11 @@
                             "items": {
                               "type": "object",
                               "additionalProperties": false,
+                              "required": [
+                                "id",
+                                "name",
+                                "value"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string",
@@ -22639,6 +22581,140 @@
                           "isMatrixProduct": {
                             "type": "boolean",
                             "description": "Shows if the product is a matrix product."
+                          },
+                          "salesChannel": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "meta": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "keywords": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "isStockNumberSyncActive": {
+                                "oneOf": [
+                                  {
+                                    "type": "boolean"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ]
+                                  },
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "true",
+                                      "false",
+                                      "True",
+                                      "False",
+                                      "TRUE",
+                                      "FALSE"
+                                    ]
+                                  }
+                                ],
+                                "description": "Shows if the stock number synchronization to the sales channel is active."
+                              },
+                              "isSoldOut": {
+                                "oneOf": [
+                                  {
+                                    "type": "boolean"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ]
+                                  },
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "true",
+                                      "false",
+                                      "True",
+                                      "False",
+                                      "TRUE",
+                                      "FALSE"
+                                    ]
+                                  }
+                                ],
+                                "description": "Shows if the product is sold out."
+                              },
+                              "isRemainingQuantity": {
+                                "oneOf": [
+                                  {
+                                    "type": "boolean"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ]
+                                  },
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "true",
+                                      "false",
+                                      "True",
+                                      "False",
+                                      "TRUE",
+                                      "FALSE"
+                                    ]
+                                  }
+                                ],
+                                "description": "Shows if only the remaining quantity of the product is left."
+                              },
+                              "suggestedRetailPrice": {
+                                "type": "string",
+                                "format": "float",
+                                "nullable": true,
+                                "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
+                              },
+                              "isVisible": {
+                                "oneOf": [
+                                  {
+                                    "type": "boolean"
+                                  },
+                                  {
+                                    "type": "number",
+                                    "enum": [
+                                      0,
+                                      1
+                                    ]
+                                  },
+                                  {
+                                    "type": "string",
+                                    "enum": [
+                                      "true",
+                                      "false",
+                                      "True",
+                                      "False",
+                                      "TRUE",
+                                      "FALSE"
+                                    ]
+                                  }
+                                ],
+                                "description": "Shows if a product is visible in online shops."
+                              }
+                            }
                           },
                           "options": {
                             "type": "array",
@@ -23330,6 +23406,11 @@
                             "items": {
                               "type": "object",
                               "additionalProperties": false,
+                              "required": [
+                                "id",
+                                "name",
+                                "value"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string",
@@ -26355,6 +26436,11 @@
                           "items": {
                             "type": "object",
                             "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "name",
+                              "value"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -26631,40 +26717,6 @@
                           "nullable": true,
                           "description": "Shows the reason why the product is locked when clicking into the product."
                         },
-                        "isSoldOut": {
-                          "type": "boolean",
-                          "description": "Shows if the product is sold out."
-                        },
-                        "isInactive": {
-                          "type": "boolean",
-                          "description": "Shows if the product is inactive."
-                        },
-                        "isVisibleInOnlineShops": {
-                          "oneOf": [
-                            {
-                              "type": "boolean"
-                            },
-                            {
-                              "type": "number",
-                              "enum": [
-                                0,
-                                1
-                              ]
-                            },
-                            {
-                              "type": "string",
-                              "enum": [
-                                "true",
-                                "false",
-                                "True",
-                                "False",
-                                "TRUE",
-                                "FALSE"
-                              ]
-                            }
-                          ],
-                          "description": "Shows if the product is visible in online shops."
-                        },
                         "isDeleted": {
                           "type": "boolean",
                           "description": "Shows if the product is deleted."
@@ -26818,16 +26870,6 @@
                           ],
                           "description": "Shows the sales tax of the product."
                         },
-                        "shopPriceDisplay": {
-                          "type": "string",
-                          "format": "float",
-                          "nullable": true,
-                          "description": "Only used by some online shops. For more information have a look into our handbook."
-                        },
-                        "isRemainingQuantity": {
-                          "type": "boolean",
-                          "description": "Shows if only the remaining quantity of the product is left."
-                        },
                         "isShippingCostsProduct": {
                           "type": "boolean",
                           "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
@@ -26844,6 +26886,140 @@
                               "type": "number",
                               "format": "float",
                               "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
+                            }
+                          }
+                        },
+                        "salesChannel": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "description": {
+                              "type": "string"
+                            },
+                            "meta": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "keywords": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "isStockNumberSyncActive": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "number",
+                                  "enum": [
+                                    0,
+                                    1
+                                  ]
+                                },
+                                {
+                                  "type": "string",
+                                  "enum": [
+                                    "true",
+                                    "false",
+                                    "True",
+                                    "False",
+                                    "TRUE",
+                                    "FALSE"
+                                  ]
+                                }
+                              ],
+                              "description": "Shows if the stock number synchronization to the sales channel is active."
+                            },
+                            "isSoldOut": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "number",
+                                  "enum": [
+                                    0,
+                                    1
+                                  ]
+                                },
+                                {
+                                  "type": "string",
+                                  "enum": [
+                                    "true",
+                                    "false",
+                                    "True",
+                                    "False",
+                                    "TRUE",
+                                    "FALSE"
+                                  ]
+                                }
+                              ],
+                              "description": "Shows if the product is sold out."
+                            },
+                            "isRemainingQuantity": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "number",
+                                  "enum": [
+                                    0,
+                                    1
+                                  ]
+                                },
+                                {
+                                  "type": "string",
+                                  "enum": [
+                                    "true",
+                                    "false",
+                                    "True",
+                                    "False",
+                                    "TRUE",
+                                    "FALSE"
+                                  ]
+                                }
+                              ],
+                              "description": "Shows if only the remaining quantity of the product is left."
+                            },
+                            "suggestedRetailPrice": {
+                              "type": "string",
+                              "format": "float",
+                              "nullable": true,
+                              "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
+                            },
+                            "isVisible": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "number",
+                                  "enum": [
+                                    0,
+                                    1
+                                  ]
+                                },
+                                {
+                                  "type": "string",
+                                  "enum": [
+                                    "true",
+                                    "false",
+                                    "True",
+                                    "False",
+                                    "TRUE",
+                                    "FALSE"
+                                  ]
+                                }
+                              ],
+                              "description": "Shows if a product is visible in online shops."
                             }
                           }
                         },
@@ -26977,6 +27153,11 @@
                           "items": {
                             "type": "object",
                             "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "name",
+                              "value"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -40867,6 +41048,633 @@
         }
       }
     },
+    "/api/purchaseOrders": {
+      "get": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.list",
+        "summary": "Lists available purchase orders",
+        "description": "Lists all available purchase orders.",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "status",
+                      "date",
+                      "supplier",
+                      "documentNumber",
+                      "project",
+                      "paymentMethod"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "date",
+                      "project",
+                      "status",
+                      "documentNumber",
+                      "paymentMethod"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "project": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            }
+                          },
+                          "supplier": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "honorific": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "department": {
+                                "type": "string"
+                              },
+                              "subDepartment": {
+                                "type": "string"
+                              },
+                              "extraAddressLine": {
+                                "type": "string"
+                              },
+                              "street": {
+                                "type": "string"
+                              },
+                              "zipCode": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "country": {
+                                "type": "string"
+                              },
+                              "contactPerson": {
+                                "type": "string"
+                              },
+                              "telephone": {
+                                "type": "string"
+                              },
+                              "telefax": {
+                                "type": "string"
+                              },
+                              "email": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "hasDifferentDeliveryAddress": {
+                            "type": "boolean"
+                          },
+                          "differentDeliveryAddress": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "honorific": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "department": {
+                                "type": "string"
+                              },
+                              "subDepartment": {
+                                "type": "string"
+                              },
+                              "extraAddressLine": {
+                                "type": "string"
+                              },
+                              "street": {
+                                "type": "string"
+                              },
+                              "zipCode": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "country": {
+                                "type": "string"
+                              },
+                              "contactPerson": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "documentNumber": {
+                            "type": "string"
+                          },
+                          "total": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "amount": {
+                                "type": "string",
+                                "format": "float"
+                              },
+                              "currency": {
+                                "type": "string",
+                                "pattern": "[A-Z]{3}",
+                                "enum": [
+                                  "EUR",
+                                  "PLN",
+                                  "CHF",
+                                  "USD",
+                                  "GBP"
+                                ],
+                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                              }
+                            }
+                          },
+                          "paymentMethod": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "integer"
+                            },
+                            "size": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/purchaseOrders/{id}": {
+      "get": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.view",
+        "summary": "View a single purchase order",
+        "description": "Returns details of a single purchase order",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "project": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "supplier": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "honorific": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "department": {
+                              "type": "string"
+                            },
+                            "subDepartment": {
+                              "type": "string"
+                            },
+                            "extraAddressLine": {
+                              "type": "string"
+                            },
+                            "street": {
+                              "type": "string"
+                            },
+                            "zipCode": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "contactPerson": {
+                              "type": "string"
+                            },
+                            "telephone": {
+                              "type": "string"
+                            },
+                            "telefax": {
+                              "type": "string"
+                            },
+                            "email": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "hasDifferentDeliveryAddress": {
+                          "type": "boolean"
+                        },
+                        "differentDeliveryAddress": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "honorific": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "department": {
+                              "type": "string"
+                            },
+                            "subDepartment": {
+                              "type": "string"
+                            },
+                            "extraAddressLine": {
+                              "type": "string"
+                            },
+                            "street": {
+                              "type": "string"
+                            },
+                            "zipCode": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "contactPerson": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "documentNumber": {
+                          "type": "string"
+                        },
+                        "total": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217."
+                            }
+                          }
+                        },
+                        "paymentMethod": {
+                          "type": "string"
+                        },
+                        "positions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "project": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "pattern": "\\d+",
+                                    "example": "17",
+                                    "description": "Resource identifier."
+                                  }
+                                }
+                              },
+                              "product": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "pattern": "\\d+",
+                                    "example": "17",
+                                    "description": "Resource identifier."
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "amount": {
+                                "type": "string",
+                                "format": "float"
+                              },
+                              "price": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "amount": {
+                                    "type": "string",
+                                    "format": "float"
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "pattern": "[A-Z]{3}",
+                                    "enum": [
+                                      "EUR",
+                                      "PLN",
+                                      "CHF",
+                                      "USD",
+                                      "GBP"
+                                    ],
+                                    "description": "Currency matches one of currency values as specified in ISO-4217."
+                                  }
+                                }
+                              },
+                              "taxRate": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/purchasePrices": {
       "post": {
         "tags": [
@@ -43366,6 +44174,106 @@
                 }
               }
             }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "search",
+                      "id",
+                      "name",
+                      "keyName",
+                      "description",
+                      "currency",
+                      "normalTaxRate",
+                      "reducedTaxRate",
+                      "storageProcess",
+                      "pickingProcess"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "name",
+                      "keyName",
+                      "description",
+                      "currency",
+                      "normalTaxRate",
+                      "reducedTaxRate",
+                      "storageProcess",
+                      "pickingProcess"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -45423,7 +46331,8 @@
                             "type": "object",
                             "additionalProperties": false,
                             "required": [
-                              "paymentMethod"
+                              "paymentMethod",
+                              "currency"
                             ],
                             "properties": {
                               "paymentMethod": {
@@ -45563,7 +46472,8 @@
                             "example": {
                               "paymentMethod": {
                                 "id": "3"
-                              }
+                              },
+                              "currency": "EUR"
                             }
                           },
                           "delivery": {
@@ -45843,7 +46753,8 @@
                           "financials": {
                             "paymentMethod": {
                               "id": "3"
-                            }
+                            },
+                            "currency": "EUR"
                           },
                           "delivery": {
                             "autoShipping": true,
@@ -46138,7 +47049,8 @@
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
-                      "paymentMethod"
+                      "paymentMethod",
+                      "currency"
                     ],
                     "properties": {
                       "paymentMethod": {
@@ -46278,7 +47190,8 @@
                     "example": {
                       "paymentMethod": {
                         "id": "3"
-                      }
+                      },
+                      "currency": "EUR"
                     }
                   },
                   "delivery": {
@@ -47821,7 +48734,8 @@
                           "type": "object",
                           "additionalProperties": false,
                           "required": [
-                            "paymentMethod"
+                            "paymentMethod",
+                            "currency"
                           ],
                           "properties": {
                             "paymentMethod": {
@@ -47961,7 +48875,8 @@
                           "example": {
                             "paymentMethod": {
                               "id": "3"
-                            }
+                            },
+                            "currency": "EUR"
                           }
                         },
                         "delivery": {
@@ -48278,8 +49193,12 @@
                             "type": "object",
                             "additionalProperties": false,
                             "required": [
+                              "id",
+                              "quantity",
+                              "sort",
                               "product",
-                              "quantity"
+                              "hasChildren",
+                              "parent"
                             ],
                             "properties": {
                               "id": {
@@ -48291,6 +49210,23 @@
                               "quantity": {
                                 "type": "number",
                                 "format": "double"
+                              },
+                              "sort": {
+                                "type": "number",
+                                "format": "integer",
+                                "example": 12
+                              },
+                              "hasChildren": {
+                                "type": "boolean",
+                                "description": "Whether a position has children",
+                                "example": false
+                              },
+                              "parent": {
+                                "type": "string",
+                                "format": "integer",
+                                "nullable": true,
+                                "description": "An id reference to the parent of the current position, null when position is not a child",
+                                "example": "1430"
                               },
                               "comment": {
                                 "type": "string"
@@ -48409,15 +49345,7 @@
                               }
                             }
                           },
-                          "description": "Items included within the Sales Order",
-                          "example": [
-                            {
-                              "product": {
-                                "id": "1"
-                              },
-                              "quantity": 5
-                            }
-                          ]
+                          "description": "Items included within the Sales Order"
                         }
                       },
                       "description": "Representation of a Sales Order",
@@ -48456,7 +49384,8 @@
                         "financials": {
                           "paymentMethod": {
                             "id": "3"
-                          }
+                          },
+                          "currency": "EUR"
                         },
                         "delivery": {
                           "autoShipping": true,
@@ -48483,6 +49412,10 @@
                         ],
                         "positions": [
                           {
+                            "id": "1402",
+                            "sort": 12,
+                            "hasChildren": false,
+                            "parent": null,
                             "product": {
                               "id": "1"
                             },
@@ -48960,6 +49893,509 @@
               }
             }
           },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.updateMultiple",
+        "summary": "[EARLY ACCESS] Update multiple sales order documents",
+        "description": "Updates multiple sales order documents",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Sales order documents update multiple request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "\\d+",
+                      "example": "17",
+                      "description": "Resource identifier."
+                    },
+                    "title": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "keyword": {
+                      "type": "string",
+                      "enum": [
+                        "otherFile",
+                        "coverPage",
+                        "attachment"
+                      ]
+                    },
+                    "sort": {
+                      "type": "integer",
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Update multiple sales order documents": {
+                  "value": [
+                    {
+                      "id": "52",
+                      "title": "Sales order document",
+                      "description": "Sales order document",
+                      "keyword": "attachment",
+                      "sort": 1
+                    },
+                    {
+                      "id": "53",
+                      "title": "Second sales order document",
+                      "description": "Second sales order document",
+                      "sort": 2
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Sales Order"
+        ],
+        "operationId": "salesOrder.deleteMultiple",
+        "summary": "[EARLY ACCESS] Delete multiple sales order documents",
+        "description": "Deletes a multiple sales order documents",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Sales order documents delete multiple request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "\\d+",
+                      "example": "17",
+                      "description": "Resource identifier."
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Delete multiple sales order documents": {
+                  "value": [
+                    {
+                      "id": "52"
+                    },
+                    {
+                      "id": "53"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
           "404": {
             "description": "Resource was not found or not enough access privileges"
           },
@@ -49214,6 +50650,9 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
           },
           "429": {
             "description": "Too many API calls made."
