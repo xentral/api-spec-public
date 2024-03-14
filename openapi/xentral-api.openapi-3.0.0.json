@@ -278,6 +278,10 @@
     {
       "name": "Webhook",
       "description": "Manage webhooks."
+    },
+    {
+      "name": "Tax Rate",
+      "description": "Represents a tax rate for a product on given day and for given country"
     }
   ],
   "components": {
@@ -54103,16 +54107,15 @@
                             }
                           },
                           "price": {
-                            "description": "Money object with amount and currency",
-                            "example": {
-                              "amount": "123.45",
-                              "currency": "EUR"
-                            },
+                            "description": "Price object with amount, amount gross, currency and tax rate",
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "amount": {
-                                "description": "A string representing the amount",
+                                "type": "string",
+                                "format": "float"
+                              },
+                              "amountGross": {
                                 "type": "string",
                                 "format": "float"
                               },
@@ -54127,6 +54130,10 @@
                                   "GBP"
                                 ],
                                 "description": "Currency matches one of currency values as specified in ISO-4217."
+                              },
+                              "taxRate": {
+                                "type": "number",
+                                "format": "float"
                               }
                             }
                           }
@@ -54642,16 +54649,15 @@
                           }
                         },
                         "price": {
-                          "description": "Money object with amount and currency",
-                          "example": {
-                            "amount": "123.45",
-                            "currency": "EUR"
-                          },
+                          "description": "Price object with amount, amount gross, currency and tax rate",
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "amount": {
-                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "amountGross": {
                               "type": "string",
                               "format": "float"
                             },
@@ -54666,6 +54672,10 @@
                                 "GBP"
                               ],
                               "description": "Currency matches one of currency values as specified in ISO-4217."
+                            },
+                            "taxRate": {
+                              "type": "number",
+                              "format": "float"
                             }
                           }
                         }
@@ -58815,35 +58825,24 @@
         }
       }
     },
-    "/api/taxRates/{countryCode}/{date}": {
+    "/api/taxRates/{countryCode}": {
       "get": {
         "tags": [
-          "Tax Rates"
+          "Tax Rate"
         ],
         "operationId": "taxRate.list",
-        "summary": "[EARLY ACCESS] Tax rate list",
-        "description": "Lists all tax rates.",
+        "summary": "List tax rates",
+        "description": "This endpoint returns the tax rate for a given country code. The country code is a two-letter ISO 3166-1 alpha-2 code. The response is a list of applicable tax rates for the given country code.\nTo get a more granular response you can use the query parameters to filter the response, for example by product or project.\n\nThe applicable tax rate is determined in the following order:\n1. If a custom tax rate is defined for the product, it is returned.\n2. If a tax rate is defined in the taxRates module for that country, it is returned.\n3. If a tax rate is defined in the taxRates module for the project, or a generic tax Rate without country or project it is returned.\n4. If a tax rate is defined for the applicable project it is returned.\n5. If a tax rate is defined for the system it is returned.\n6. If no tax rate is defined anywhere we will return an empty list.\n\nTo see which step was used to determine the tax rate, the source field is returned in the response.",
         "parameters": [
           {
-            "name": "countryCode",
             "in": "path",
+            "name": "countryCode",
             "required": true,
+            "description": "This is the country code for which the tax rates are requested",
             "schema": {
               "type": "string"
             },
-            "description": "This is the country code for which the tax rates are requested",
-            "example": "de"
-          },
-          {
-            "name": "date",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "description": "This is the date for which the tax rates are requested",
-            "example": "2023-12-01"
+            "example": "DE"
           },
           {
             "name": "filter",
@@ -58854,18 +58853,14 @@
               "items": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "key",
-                  "op",
-                  "value"
-                ],
                 "properties": {
                   "key": {
                     "type": "string",
                     "enum": [
-                      "id",
+                      "productId",
+                      "date",
                       "type",
-                      "project"
+                      "projectId"
                     ]
                   },
                   "op": {
@@ -58875,21 +58870,29 @@
                       "notEquals",
                       "in",
                       "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
                       "contains",
                       "notContains",
                       "startsWith",
                       "endsWith",
                       "greaterThan",
-                      "lessThan"
+                      "lessThan",
+                      "is"
                     ]
                   },
                   "value": {
                     "oneOf": [
                       {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
                       },
                       {
                         "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
                         "items": {
                           "type": "string"
                         }
@@ -58925,36 +58928,6 @@
                 }
               }
             }
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "style": "deepObject",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "field": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "type",
-                      "project"
-                    ],
-                    "example": "type"
-                  },
-                  "dir": {
-                    "type": "string",
-                    "enum": [
-                      "asc",
-                      "desc"
-                    ]
-                  }
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -58972,35 +58945,29 @@
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
-                          "id": {
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
-                          },
                           "rate": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": false,
-                            "example": "19.00"
+                            "description": "Tax rate value in percent"
                           },
                           "type": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": false,
-                            "example": "paypal"
+                            "description": "Tax rate type: standard, reduced or custom"
                           },
-                          "designation": {
-                            "x-description-missing": true,
+                          "date": {
                             "type": "string",
-                            "nullable": false,
-                            "example": "Paypal"
+                            "format": "date",
+                            "description": "Requested date or current date if no date was specified"
                           },
-                          "project": {
-                            "x-description-missing": true,
-                            "type": "object",
+                          "name": {
+                            "type": "string",
                             "nullable": true,
+                            "description": "Tax rate's designation"
+                          },
+                          "product": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
                             "additionalProperties": false,
+                            "nullable": true,
                             "required": [
                               "id"
                             ],
@@ -59012,6 +58979,27 @@
                                 "description": "Resource identifier."
                               }
                             }
+                          },
+                          "project": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            }
+                          },
+                          "source": {
+                            "type": "string",
+                            "description": "Informs how was the tax rate determined"
                           }
                         }
                       }
@@ -59051,6 +59039,169 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
