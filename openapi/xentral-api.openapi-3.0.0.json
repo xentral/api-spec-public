@@ -42108,41 +42108,81 @@
           "Production"
         ],
         "operationId": "productions.list",
-        "summary": "List Productions.",
-        "description": "List Productions.",
+        "summary": "List Productions",
+        "description": "List Productions",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "key": {
-                    "type": "string",
-                    "enum": [
-                      "date",
-                      "created_at",
-                      "updated_at",
-                      "status",
-                      "sales_order_id",
-                      "project_id"
-                    ]
-                  },
-                  "op": {
-                    "type": "string",
-                    "enum": [
-                      "equals",
-                      "notEquals"
-                    ]
-                  },
-                  "value": {
-                    "type": "string"
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "enum": [
+                          "id",
+                          "date",
+                          "createdAt",
+                          "updatedAt",
+                          "status",
+                          "salesOrderId",
+                          "projectId"
+                        ]
+                      },
+                      "op": {
+                        "type": "string",
+                        "enum": [
+                          "equals",
+                          "notEquals",
+                          "in",
+                          "notIn",
+                          "allIn",
+                          "allNotIn",
+                          "contains",
+                          "notContains",
+                          "startsWith",
+                          "endsWith",
+                          "greaterThan",
+                          "lessThan"
+                        ]
+                      },
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
                   }
                 }
-              }
+              ]
             }
           },
           {
@@ -42160,8 +42200,8 @@
                     "enum": [
                       "id",
                       "date",
-                      "created_at",
-                      "updated_at"
+                      "createdAt",
+                      "updatedAt"
                     ]
                   },
                   "dir": {
@@ -42204,7 +42244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Productions list.",
+            "description": "Productions list",
             "content": {
               "application/vnd.xentral.default.v1+json": {
                 "schema": {
@@ -42492,7 +42532,7 @@
                         "dateProvision": null,
                         "dateProduction": null,
                         "dateProductionEnd": null,
-                        "status": "angelegt",
+                        "status": "released",
                         "customer": null,
                         "project": {
                           "id": "1"
@@ -42533,7 +42573,7 @@
                         "dateProvision": null,
                         "dateProduction": null,
                         "dateProductionEnd": null,
-                        "status": "freigegeben",
+                        "status": "released",
                         "customer": {
                           "id": "2"
                         },
@@ -42773,8 +42813,8 @@
           "Production"
         ],
         "operationId": "productions.view",
-        "summary": "View Production.",
-        "description": "View a production.",
+        "summary": "View Production",
+        "description": "View a production",
         "parameters": [
           {
             "in": "path",
@@ -42791,7 +42831,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Productions view based on id.",
+            "description": "Productions view based on id",
             "content": {
               "application/vnd.xentral.default.v1+json": {
                 "schema": {
@@ -43040,7 +43080,7 @@
                       "dateProvision": null,
                       "dateProduction": null,
                       "dateProductionEnd": null,
-                      "status": "angelegt",
+                      "status": "created",
                       "customer": null,
                       "project": {
                         "id": "1"
