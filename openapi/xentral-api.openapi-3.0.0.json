@@ -22236,6 +22236,16 @@
                             "nullable": true,
                             "description": "Two-digit ISO country code for country of origin of the product."
                           },
+                          "unit": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "description": "Shows the name of the product unit."
+                          },
                           "measurements": {
                             "x-description-missing": true,
                             "type": "object",
@@ -23060,6 +23070,16 @@
                             "nullable": true,
                             "description": "Two-digit ISO country code for country of origin of the product."
                           },
+                          "unit": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "description": "Shows the name of the product unit."
+                          },
                           "measurements": {
                             "x-description-missing": true,
                             "type": "object",
@@ -23765,6 +23785,16 @@
                             "pattern": "[A-Z]{2}",
                             "nullable": true,
                             "description": "Two-digit ISO country code for country of origin of the product."
+                          },
+                          "unit": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "description": "Shows the name of the product unit."
                           },
                           "measurements": {
                             "x-description-missing": true,
@@ -26902,6 +26932,16 @@
                           "type": "boolean",
                           "description": "Shows if the product is deleted."
                         },
+                        "unit": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "Shows the name of the product unit."
+                        },
                         "measurements": {
                           "x-description-missing": true,
                           "type": "object",
@@ -27513,6 +27553,16 @@
                         "regionOfOrigin": {
                           "type": "string",
                           "description": "Region where the product originates from."
+                        },
+                        "unit": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "Shows the name of the product unit."
                         },
                         "measurements": {
                           "x-description-missing": true,
@@ -43498,12 +43548,69 @@
                               },
                               "customerNumberAtSupplier": {
                                 "type": "string"
+                              },
+                              "honorific": {
+                                "type": "string",
+                                "description": "Honorific of the billing address."
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "Name of the billing address."
+                              },
+                              "department": {
+                                "type": "string",
+                                "description": "Department of the billing address."
+                              },
+                              "subDepartment": {
+                                "type": "string",
+                                "description": "Subdepartment of the billing address."
+                              },
+                              "extraAddressLine": {
+                                "type": "string",
+                                "description": "Extra address line of the billing address."
+                              },
+                              "street": {
+                                "type": "string",
+                                "description": "Street of the billing address."
+                              },
+                              "zipCode": {
+                                "type": "string",
+                                "description": "Zip code of the billing address."
+                              },
+                              "city": {
+                                "type": "string",
+                                "description": "City of the billing address."
+                              },
+                              "state": {
+                                "type": "string",
+                                "description": "State of the billing address."
+                              },
+                              "country": {
+                                "type": "string",
+                                "description": "Country of the billing address."
+                              },
+                              "contactPerson": {
+                                "type": "string",
+                                "description": "Contact person of the billing address."
+                              },
+                              "telephone": {
+                                "type": "string",
+                                "description": "Telephone of the billing address."
+                              },
+                              "telefax": {
+                                "type": "string",
+                                "description": "Telefax of the billing address."
+                              },
+                              "email": {
+                                "type": "string",
+                                "description": "E-mail of the billing address."
                               }
                             },
                             "description": "Information about the supplier of the purchase order."
                           },
                           "requestForQuotation": {
                             "type": "object",
+                            "nullable": true,
                             "additionalProperties": false,
                             "properties": {
                               "id": {
@@ -43564,6 +43671,7 @@
                             "properties": {
                               "paymentMethod": {
                                 "type": "object",
+                                "nullable": true,
                                 "additionalProperties": false,
                                 "properties": {
                                   "id": {
@@ -43600,78 +43708,6 @@
                                       "GBP"
                                     ],
                                     "description": "Currency matches one of currency values as specified in ISO-4217."
-                                  }
-                                }
-                              },
-                              "billingAddress": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "description": "Billing address of the purchase order.",
-                                "properties": {
-                                  "id": {
-                                    "type": "string",
-                                    "pattern": "\\d+",
-                                    "example": "17",
-                                    "description": "Resource identifier."
-                                  },
-                                  "type": {
-                                    "type": "string"
-                                  },
-                                  "honorific": {
-                                    "type": "string",
-                                    "description": "Honorific of the billing address."
-                                  },
-                                  "name": {
-                                    "type": "string",
-                                    "description": "Name of the billing address."
-                                  },
-                                  "department": {
-                                    "type": "string",
-                                    "description": "Department of the billing address."
-                                  },
-                                  "subDepartment": {
-                                    "type": "string",
-                                    "description": "Subdepartment of the billing address."
-                                  },
-                                  "extraAddressLine": {
-                                    "type": "string",
-                                    "description": "Extra address line of the billing address."
-                                  },
-                                  "street": {
-                                    "type": "string",
-                                    "description": "Street of the billing address."
-                                  },
-                                  "zipCode": {
-                                    "type": "string",
-                                    "description": "Zip code of the billing address."
-                                  },
-                                  "city": {
-                                    "type": "string",
-                                    "description": "City of the billing address."
-                                  },
-                                  "state": {
-                                    "type": "string",
-                                    "description": "State of the billing address."
-                                  },
-                                  "country": {
-                                    "type": "string",
-                                    "description": "Country of the billing address."
-                                  },
-                                  "contactPerson": {
-                                    "type": "string",
-                                    "description": "Contact person of the billing address."
-                                  },
-                                  "telephone": {
-                                    "type": "string",
-                                    "description": "Telephone of the billing address."
-                                  },
-                                  "telefax": {
-                                    "type": "string",
-                                    "description": "Telefax of the billing address."
-                                  },
-                                  "email": {
-                                    "type": "string",
-                                    "description": "E-mail of the billing address."
                                   }
                                 }
                               },
@@ -43727,7 +43763,21 @@
                             "description": "Delivery information of the purchase order.",
                             "properties": {
                               "deliveryTerms": {
-                                "type": "string"
+                                "description": "Nullable reference to another resource",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "nullable": true,
+                                "required": [
+                                  "id"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "pattern": "\\d+",
+                                    "example": "17",
+                                    "description": "Resource identifier."
+                                  }
+                                }
                               },
                               "hasDifferentDeliveryAddress": {
                                 "type": "boolean"
@@ -43876,6 +43926,751 @@
             "description": "Too many API calls made."
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.create",
+        "summary": "Create new purchase order",
+        "description": "Creates a new purchase order.",
+        "parameters": [],
+        "requestBody": {
+          "description": "Purchase order create request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date of the purchase order."
+                  },
+                  "project": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  },
+                  "supplier": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      },
+                      "honorific": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "department": {
+                        "type": "string"
+                      },
+                      "subDepartment": {
+                        "type": "string"
+                      },
+                      "extraAddressLine": {
+                        "type": "string"
+                      },
+                      "street": {
+                        "type": "string"
+                      },
+                      "zipCode": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "contactPerson": {
+                        "type": "string"
+                      },
+                      "telephone": {
+                        "type": "string"
+                      },
+                      "telefax": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "requestForQuotation": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  },
+                  "bodyIntroduction": {
+                    "type": "string",
+                    "description": "Text above the position table in the PDF."
+                  },
+                  "bodyOutroduction": {
+                    "type": "string",
+                    "description": "Text below the position table in the PDF."
+                  },
+                  "salesOrderConfirmationReference": {
+                    "type": "string",
+                    "description": "Reference of the sales order confirmation."
+                  },
+                  "isConfirmationRequested": {
+                    "type": "boolean",
+                    "description": "Shows if a confirmation is requested."
+                  },
+                  "suppliersOfferReference": {
+                    "type": "string",
+                    "description": "Offer reference of the supplier."
+                  },
+                  "internalDesignation": {
+                    "type": "string",
+                    "description": "Internal designation of the purchase order."
+                  },
+                  "language": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "iso2": {
+                        "type": "string",
+                        "pattern": "[A-Z]{2}",
+                        "default": "DE"
+                      }
+                    },
+                    "description": "Language of the purchase order."
+                  },
+                  "isConfirmed": {
+                    "type": "boolean",
+                    "description": "Shows if the purchase order is confirmed."
+                  },
+                  "confirmedVia": {
+                    "type": "string",
+                    "enum": [
+                      "Internet",
+                      "E-Mail",
+                      "Telephone",
+                      "Telefax",
+                      "Letter",
+                      "Other"
+                    ],
+                    "default": "Internet",
+                    "description": "Determines how the purchase order was confirmed."
+                  },
+                  "financials": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Financial information about the purchase order.",
+                    "properties": {
+                      "paymentMethod": {
+                        "description": "Reference to another resource",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          }
+                        }
+                      },
+                      "paymentTerms": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Information about payment terms of the purchase order.",
+                        "properties": {
+                          "paymentTargetDiscount": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "paymentTargetDays": {
+                            "type": "number"
+                          },
+                          "paymentTargetDiscountDays": {
+                            "type": "number"
+                          },
+                          "paymentTargetDiscountAmount": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "isPaymentTargetDiscountApplied": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "costCenter": {
+                        "type": "string",
+                        "description": "The assigned cost center for the purchase order."
+                      },
+                      "tax": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Tax information of the purchase order.",
+                        "properties": {
+                          "taxation": {
+                            "type": "string",
+                            "enum": [
+                              "Domestic",
+                              "EU delivery",
+                              "Import",
+                              "Tax free domestic"
+                            ],
+                            "default": "Domestic"
+                          },
+                          "vatId": {
+                            "type": "string"
+                          },
+                          "taxDisplay": {
+                            "type": "string",
+                            "enum": [
+                              "Automatic",
+                              "Net",
+                              "Gross"
+                            ],
+                            "default": "Automatic"
+                          }
+                        }
+                      },
+                      "currency": {
+                        "type": "string",
+                        "pattern": "[A-Z]{3}",
+                        "enum": [
+                          "EUR",
+                          "PLN",
+                          "CHF",
+                          "USD",
+                          "GBP"
+                        ],
+                        "description": "Currency matches one of currency values as specified in ISO-4217."
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Delivery information of the purchase order.",
+                    "properties": {
+                      "deliveryTerms": {
+                        "description": "Reference to another resource",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          }
+                        }
+                      },
+                      "hasDifferentDeliveryAddress": {
+                        "type": "boolean"
+                      },
+                      "deliveryAddress": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "honorific": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "department": {
+                            "type": "string"
+                          },
+                          "subDepartment": {
+                            "type": "string"
+                          },
+                          "extraAddressLine": {
+                            "type": "string"
+                          },
+                          "street": {
+                            "type": "string"
+                          },
+                          "zipCode": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "contactPerson": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "dates": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "desiredDeliveryDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Desired delivery date of the purchase order."
+                          },
+                          "confirmedDeliveryDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Confirmed delivery date of the purchase order."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "formatting": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Formatting settings for the PDF of a purchase order.",
+                    "properties": {
+                      "hideLetterHead": {
+                        "type": "boolean"
+                      },
+                      "hidePrices": {
+                        "type": "boolean"
+                      },
+                      "hideProductNumbers": {
+                        "type": "boolean"
+                      },
+                      "showLongProductNumbers": {
+                        "type": "boolean"
+                      },
+                      "hideProductDescriptions": {
+                        "type": "boolean"
+                      },
+                      "showOwnProductNumberInColumn": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "internalComment": {
+                    "type": "string",
+                    "description": "Internal comment about the purchase order."
+                  },
+                  "liabilitiesInfo": {
+                    "type": "string",
+                    "description": "Information for liabilities."
+                  },
+                  "positions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "project": {
+                          "description": "Reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "product": {
+                          "description": "Reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "price": {
+                          "description": "Money object with amount and currency",
+                          "example": {
+                            "amount": "123.45",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217."
+                            }
+                          }
+                        },
+                        "taxRate": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "reduced",
+                            "free"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
       }
     },
     "/api/purchaseOrders/{id}": {
@@ -43962,12 +44757,69 @@
                             },
                             "customerNumberAtSupplier": {
                               "type": "string"
+                            },
+                            "honorific": {
+                              "type": "string",
+                              "description": "Honorific of the billing address."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Name of the billing address."
+                            },
+                            "department": {
+                              "type": "string",
+                              "description": "Department of the billing address."
+                            },
+                            "subDepartment": {
+                              "type": "string",
+                              "description": "Subdepartment of the billing address."
+                            },
+                            "extraAddressLine": {
+                              "type": "string",
+                              "description": "Extra address line of the billing address."
+                            },
+                            "street": {
+                              "type": "string",
+                              "description": "Street of the billing address."
+                            },
+                            "zipCode": {
+                              "type": "string",
+                              "description": "Zip code of the billing address."
+                            },
+                            "city": {
+                              "type": "string",
+                              "description": "City of the billing address."
+                            },
+                            "state": {
+                              "type": "string",
+                              "description": "State of the billing address."
+                            },
+                            "country": {
+                              "type": "string",
+                              "description": "Country of the billing address."
+                            },
+                            "contactPerson": {
+                              "type": "string",
+                              "description": "Contact person of the billing address."
+                            },
+                            "telephone": {
+                              "type": "string",
+                              "description": "Telephone of the billing address."
+                            },
+                            "telefax": {
+                              "type": "string",
+                              "description": "Telefax of the billing address."
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "E-mail of the billing address."
                             }
                           },
                           "description": "Information about the supplier of the purchase order."
                         },
                         "requestForQuotation": {
                           "type": "object",
+                          "nullable": true,
                           "additionalProperties": false,
                           "properties": {
                             "id": {
@@ -44028,6 +44880,7 @@
                           "properties": {
                             "paymentMethod": {
                               "type": "object",
+                              "nullable": true,
                               "additionalProperties": false,
                               "properties": {
                                 "id": {
@@ -44064,78 +44917,6 @@
                                     "GBP"
                                   ],
                                   "description": "Currency matches one of currency values as specified in ISO-4217."
-                                }
-                              }
-                            },
-                            "billingAddress": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "description": "Billing address of the purchase order.",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "pattern": "\\d+",
-                                  "example": "17",
-                                  "description": "Resource identifier."
-                                },
-                                "type": {
-                                  "type": "string"
-                                },
-                                "honorific": {
-                                  "type": "string",
-                                  "description": "Honorific of the billing address."
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "Name of the billing address."
-                                },
-                                "department": {
-                                  "type": "string",
-                                  "description": "Department of the billing address."
-                                },
-                                "subDepartment": {
-                                  "type": "string",
-                                  "description": "Subdepartment of the billing address."
-                                },
-                                "extraAddressLine": {
-                                  "type": "string",
-                                  "description": "Extra address line of the billing address."
-                                },
-                                "street": {
-                                  "type": "string",
-                                  "description": "Street of the billing address."
-                                },
-                                "zipCode": {
-                                  "type": "string",
-                                  "description": "Zip code of the billing address."
-                                },
-                                "city": {
-                                  "type": "string",
-                                  "description": "City of the billing address."
-                                },
-                                "state": {
-                                  "type": "string",
-                                  "description": "State of the billing address."
-                                },
-                                "country": {
-                                  "type": "string",
-                                  "description": "Country of the billing address."
-                                },
-                                "contactPerson": {
-                                  "type": "string",
-                                  "description": "Contact person of the billing address."
-                                },
-                                "telephone": {
-                                  "type": "string",
-                                  "description": "Telephone of the billing address."
-                                },
-                                "telefax": {
-                                  "type": "string",
-                                  "description": "Telefax of the billing address."
-                                },
-                                "email": {
-                                  "type": "string",
-                                  "description": "E-mail of the billing address."
                                 }
                               }
                             },
@@ -44191,7 +44972,21 @@
                           "description": "Delivery information of the purchase order.",
                           "properties": {
                             "deliveryTerms": {
-                              "type": "string"
+                              "description": "Nullable reference to another resource",
+                              "type": "object",
+                              "additionalProperties": false,
+                              "nullable": true,
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                }
+                              }
                             },
                             "hasDifferentDeliveryAddress": {
                               "type": "boolean"
@@ -44931,6 +45726,67 @@
         "summary": "List purchase prices",
         "parameters": [
           {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "product",
+                      "supplier",
+                      "currency",
+                      "fromQuantity",
+                      "isValidAt"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
             "in": "query",
             "name": "page",
             "required": false,
@@ -44952,6 +45808,33 @@
                   "type": "string",
                   "pattern": "\\d+",
                   "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
                 }
               }
             }
@@ -62492,7 +63375,7 @@
           "Webhook"
         ],
         "operationId": "webhook.create",
-        "summary": "[ALPHA] Create a webhook",
+        "summary": "Create a webhook",
         "description": "Creates a new webhook.",
         "requestBody": {
           "description": "Webhook create request payload",
@@ -62783,7 +63666,7 @@
           "Webhook"
         ],
         "operationId": "webhook.list",
-        "summary": "[ALPHA] List webhooks",
+        "summary": "List webhooks",
         "description": "List webhooks.",
         "responses": {
           "200": {
@@ -62905,7 +63788,7 @@
           "Webhook"
         ],
         "operationId": "webhook.view",
-        "summary": "[ALPHA] View a webhook",
+        "summary": "View a webhook",
         "description": "View a webhook.",
         "parameters": [
           {
@@ -63200,7 +64083,7 @@
           "Webhook"
         ],
         "operationId": "webhook.update",
-        "summary": "[ALPHA] Update a webhook",
+        "summary": "Update a webhook",
         "description": "Update a webhook.",
         "parameters": [
           {
@@ -63239,7 +64122,7 @@
                   },
                   "events": {
                     "type": "array",
-                    "description": "The webhookEventType resource.",
+                    "description": "The webhookEventType resource",
                     "items": {
                       "type": "object",
                       "additionalProperties": false,
@@ -63473,7 +64356,7 @@
           "Webhook"
         ],
         "operationId": "webhook.delete",
-        "summary": "[ALPHA] Delete a webhook.",
+        "summary": "Delete a webhook.",
         "description": "Delete a webhook",
         "parameters": [
           {
@@ -63519,13 +64402,13 @@
           "Webhook"
         ],
         "operationId": "webhookEventTypes.list",
-        "summary": "[ALPHA] List webhook event types",
+        "summary": "List webhook event types",
         "description": "List webhooks event types.",
         "parameters": [
           {
             "name": "xentralVersion",
             "in": "query",
-            "example": "22.4.24",
+            "example": "24.11.0",
             "schema": {
               "type": "string",
               "default": "latest"
