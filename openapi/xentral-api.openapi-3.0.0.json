@@ -18746,6 +18746,10 @@
                     "type": "boolean",
                     "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
+                  },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
@@ -19607,6 +19611,10 @@
                     "type": "boolean",
                     "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook."
                   },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
+                  },
                   "discount": {
                     "type": "object",
                     "additionalProperties": false,
@@ -20447,6 +20455,10 @@
                         ]
                       }
                     ]
+                  },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
@@ -21369,6 +21381,10 @@
                         ]
                       }
                     ]
+                  },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
@@ -25116,6 +25132,10 @@
                       "description": "01 - Schleswig-Holstein, 02 - Hamburg, 03 - Niedersachsen, 04 - Bremen, 05 - Nordhrein-Westfalen, 06 - Hessen, 07 - Rheinland-Pfalz, 08 - Baden-Württemberg, 09 - Bayern, 10 - Saarland, 11 - Berlin, 12 - Brandenburg, 13 - Mecklenburg-Vorpommern, 14 - Sachsen, 15 - Sachsen-Anhalt, 16 - Thüringen, 99 - foreign origin",
                       "nullable": true
                     },
+                    "isMatrixProduct": {
+                      "type": "boolean",
+                      "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
+                    },
                     "freeFields": {
                       "type": "array",
                       "nullable": true,
@@ -25889,6 +25909,10 @@
                           ]
                         }
                       ]
+                    },
+                    "isMatrixProduct": {
+                      "type": "boolean",
+                      "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
                     },
                     "discount": {
                       "x-description-missing": true,
@@ -28929,6 +28953,10 @@
                       }
                     }
                   },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
+                  },
                   "category": {
                     "description": "Reference to another resource",
                     "type": "object",
@@ -29777,6 +29805,10 @@
                         ]
                       }
                     ]
+                  },
+                  "isMatrixProduct": {
+                    "type": "boolean",
+                    "description": "Determines if a product is a matrix product. For more information have a look into our handbook."
                   },
                   "discount": {
                     "type": "object",
@@ -51515,9 +51547,6 @@
                                   "gln": {
                                     "type": "string"
                                   },
-                                  "salutation": {
-                                    "type": "string"
-                                  },
                                   "email": {
                                     "type": "string",
                                     "format": "email"
@@ -52243,9 +52272,6 @@
                             "type": "string"
                           },
                           "gln": {
-                            "type": "string"
-                          },
-                          "salutation": {
                             "type": "string"
                           },
                           "email": {
@@ -53933,9 +53959,6 @@
                                   "type": "string"
                                 },
                                 "gln": {
-                                  "type": "string"
-                                },
-                                "salutation": {
                                   "type": "string"
                                 },
                                 "email": {
