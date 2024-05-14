@@ -12,6 +12,10 @@
   },
   "tags": [
     {
+      "name": "Accounting Export",
+      "description": "Accounting Export endpoints"
+    },
+    {
       "name": "Analytics",
       "description": "Analytics Platform proxy API."
     },
@@ -564,8 +568,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -1488,8 +1491,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -1518,8 +1520,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -1754,8 +1755,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -2650,8 +2650,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -2699,8 +2698,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -2815,8 +2813,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -3546,8 +3543,7 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float",
-                          "example": "13.37"
+                          "format": "float"
                         },
                         "currency": {
                           "type": "string",
@@ -3923,8 +3919,7 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float",
-                          "example": "13.37"
+                          "format": "float"
                         },
                         "currency": {
                           "type": "string",
@@ -10195,8 +10190,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -10797,8 +10791,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -10827,8 +10820,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -11555,8 +11547,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -12367,8 +12358,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -12416,8 +12406,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -12532,8 +12521,7 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float",
-                                        "example": "13.37"
+                                        "format": "float"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -13298,8 +13286,7 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float",
-                          "example": "13.37"
+                          "format": "float"
                         },
                         "currency": {
                           "type": "string",
@@ -14441,15 +14428,10 @@
                       "key": {
                         "type": "string",
                         "enum": [
-                          "id",
-                          "number",
-                          "supplierNumber",
                           "supplier",
-                          "invoice_date",
-                          "invoice_number",
-                          "purpose",
-                          "iban",
-                          "bic"
+                          "status",
+                          "project",
+                          "createdAt"
                         ]
                       },
                       "op": {
@@ -14461,10 +14443,6 @@
                           "notIn",
                           "allIn",
                           "allNotIn",
-                          "contains",
-                          "notContains",
-                          "startsWith",
-                          "endsWith",
                           "greaterThan",
                           "lessThan"
                         ]
@@ -14527,16 +14505,11 @@
                   "field": {
                     "type": "string",
                     "enum": [
-                      "search",
                       "id",
-                      "number",
-                      "supplierNumber",
-                      "supplier",
-                      "invoiceDate",
-                      "invoiceNumber",
-                      "purpose",
-                      "iban",
-                      "bic"
+                      "documentNumber",
+                      "status",
+                      "project",
+                      "createdAt"
                     ]
                   },
                   "dir": {
@@ -14573,125 +14546,338 @@
                             "example": "17",
                             "description": "Resource identifier."
                           },
-                          "number": {
-                            "x-description-missing": true,
+                          "documentNumber": {
+                            "description": "Incremental document number. Before the document is approved, there is no document number.",
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "LB-100001"
                           },
-                          "supplierNumber": {
+                          "date": {
+                            "description": "Date of the supplier's invoice",
+                            "type": "string",
+                            "nullable": false,
+                            "format": "date",
+                            "example": "2020-01-15"
+                          },
+                          "createdAt": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": false,
+                            "format": "date-time",
+                            "example": "2020-01-01 12:00:00+02:00"
+                          },
+                          "createdBy": {
+                            "description": "The user that created the liability",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "name"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "updatedAt": {
+                            "x-description-missing": true,
+                            "type": "string",
+                            "nullable": false,
+                            "format": "date-time",
+                            "example": "2020-01-01 13:00:00+02:00"
+                          },
+                          "status": {
+                            "description": "Workflow status of the liability",
+                            "type": "string",
+                            "nullable": false,
+                            "enum": [
+                              "PENDING",
+                              "PAID",
+                              "PARTIALLY_PAID",
+                              "CANCELLED"
+                            ],
+                            "example": "PENDING"
                           },
                           "supplier": {
-                            "x-description-missing": true,
+                            "description": "The supplier that issued the invoice",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "123456"
+                            }
+                          },
+                          "supplierInvoiceNumber": {
+                            "description": "Document number and receipt Day of the invoice in the supplier's system",
                             "type": "string",
-                            "nullable": true
+                            "example": "INV-23456"
                           },
-                          "bank": {
-                            "x-description-missing": true,
+                          "receiptDate": {
+                            "description": "Day when the invoice was received",
+                            "type": "string",
+                            "nullable": true,
+                            "format": "date",
+                            "example": "2020-01-01"
+                          },
+                          "financials": {
+                            "description": "Financial information",
                             "type": "object",
                             "additionalProperties": false,
-                            "required": [
-                              "iban",
-                              "bic"
-                            ],
                             "properties": {
-                              "iban": {
-                                "type": "string",
-                                "nullable": true
+                              "amountGross": {
+                                "description": "Gross value of the liability",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "amount",
+                                  "currency"
+                                ],
+                                "properties": {
+                                  "amount": {
+                                    "type": "string",
+                                    "nullable": false,
+                                    "format": "float",
+                                    "example": "1234.56",
+                                    "x-description-missing": true
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "nullable": false,
+                                    "example": "EUR",
+                                    "x-description-missing": true
+                                  }
+                                }
                               },
-                              "bic": {
-                                "type": "string",
-                                "nullable": true
-                              }
-                            }
-                          },
-                          "invoice": {
-                            "x-description-missing": true,
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "date",
-                              "number",
-                              "purpose",
-                              "amount"
-                            ],
-                            "properties": {
-                              "date": {
-                                "type": "string",
-                                "format": "date-time"
+                              "freightCharge": {
+                                "x-description-missing": true,
+                                "type": "number",
+                                "nullable": true,
+                                "example": 9.3
                               },
-                              "number": {
+                              "taxation": {
+                                "description": "The taxation method",
                                 "type": "string",
-                                "nullable": true
+                                "example": "Domestic",
+                                "nullable": false
                               },
-                              "purpose": {
-                                "type": "string",
-                                "nullable": true
+                              "taxes": {
+                                "x-description-missing": true,
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "normalTax",
+                                  "reducedTax",
+                                  "customTax1",
+                                  "customTax2"
+                                ],
+                                "properties": {
+                                  "normalTax": {
+                                    "description": "The normal tax rate",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "rate",
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "rate": {
+                                        "description": "The tax rate in percent",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 19
+                                      },
+                                      "amount": {
+                                        "description": "The tax amount",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 120.5
+                                      }
+                                    }
+                                  },
+                                  "reducedTax": {
+                                    "description": "The reduced tax rate",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "rate",
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "rate": {
+                                        "description": "The tax rate in percent",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 7
+                                      },
+                                      "amount": {
+                                        "description": "The tax amount",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 60.5
+                                      }
+                                    }
+                                  },
+                                  "customTax1": {
+                                    "description": "The first custom tax rate",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "rate",
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "rate": {
+                                        "description": "The tax rate in percent",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 8.1
+                                      },
+                                      "amount": {
+                                        "description": "The tax amount",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 50.5
+                                      }
+                                    }
+                                  },
+                                  "customTax2": {
+                                    "description": "The second custom tax rate",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "rate",
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "rate": {
+                                        "description": "The tax rate in percent",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 10
+                                      },
+                                      "amount": {
+                                        "description": "The tax amount",
+                                        "type": "number",
+                                        "nullable": false,
+                                        "example": 50.5
+                                      }
+                                    }
+                                  }
+                                }
                               },
-                              "amount": {
+                              "bookingText": {
+                                "description": "header booking text",
                                 "type": "string"
-                              }
-                            }
-                          },
-                          "payment": {
-                            "x-description-missing": true,
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "method",
-                              "status"
-                            ],
-                            "properties": {
-                              "method": {
-                                "type": "string"
                               },
-                              "status": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "additionalFields": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "properties": {
-                                "key": {
-                                  "type": "string",
-                                  "enum": [
-                                    "invoiceReceiptDate",
-                                    "dueDate",
-                                    "totalAmount"
-                                  ]
-                                },
-                                "value": {
-                                  "type": "string",
-                                  "nullable": true
+                              "paymentTerms": {
+                                "description": "The payment terms",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "dueDate",
+                                  "earlyPaymentDate",
+                                  "earlyPaymentDiscount"
+                                ],
+                                "properties": {
+                                  "dueDate": {
+                                    "description": "The due date of the payment",
+                                    "type": "string",
+                                    "nullable": true,
+                                    "example": "2020-01-15"
+                                  },
+                                  "earlyPaymentDate": {
+                                    "description": "The date when the early payment discount is valid",
+                                    "type": "string",
+                                    "nullable": true,
+                                    "example": "2020-01-10"
+                                  },
+                                  "earlyPaymentDiscount": {
+                                    "description": "The discount for early payment",
+                                    "type": "number",
+                                    "nullable": false,
+                                    "example": 2.5
+                                  }
+                                }
+                              },
+                              "payment": {
+                                "description": "Information about the payment",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "methodName",
+                                  "paidAmount",
+                                  "paidOnDate",
+                                  "discountReceived"
+                                ],
+                                "properties": {
+                                  "methodName": {
+                                    "description": "Name of the used payment method",
+                                    "type": "string",
+                                    "nullable": false,
+                                    "example": "invoice"
+                                  },
+                                  "paidAmount": {
+                                    "description": "The amount that was paid already",
+                                    "type": "number",
+                                    "nullable": false,
+                                    "example": 1234.56
+                                  },
+                                  "paidOnDate": {
+                                    "description": "The date when the latest payment was made",
+                                    "type": "string",
+                                    "nullable": true,
+                                    "example": "2020-01-12"
+                                  },
+                                  "discountReceived": {
+                                    "description": "The discount that was received from the supplier",
+                                    "type": "number",
+                                    "nullable": false,
+                                    "example": 12.34
+                                  }
                                 }
                               }
                             }
                           },
-                          "statusIconsMapping": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "properties": {
-                                "key": {
-                                  "type": "string",
-                                  "enum": [
-                                    "accountAssignmentStatus",
-                                    "paymentStatus",
-                                    "bankLinkingStatus",
-                                    "incomingGoodsInspectionStatus",
-                                    "incomingInvoiceVerificationStatus"
-                                  ]
-                                },
-                                "value": {
-                                  "type": "string"
-                                }
+                          "purchaseOrder": {
+                            "description": "The purchase order associated with the liability",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            }
+                          },
+                          "project": {
+                            "x-description-missing": true,
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
                               }
                             }
                           }
@@ -14840,7 +15026,25 @@
                         "updatedAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "nullable": false,
+                          "format": "date-time",
+                          "example": "2020-01-01 13:00:00+02:00"
+                        },
+                        "supplierInvoice": {
+                          "type": "string",
+                          "description": "The invoice number issued by the supplier"
+                        },
+                        "receiptDate": {
+                          "description": "The date when the supplier invoice was received by the recipient",
+                          "type": "string",
+                          "format": "date-time",
+                          "nullable": true
+                        },
+                        "deliveryDate": {
+                          "description": "The date on which the goods where shipped or the services where rendered",
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true
                         },
                         "status": {
                           "type": "string",
@@ -14869,12 +15073,6 @@
                           "type": "string",
                           "description": "The invoice number issued by the supplier"
                         },
-                        "receiptDate": {
-                          "description": "The date when the supplier invoice was received by the recipient",
-                          "type": "string",
-                          "format": "date-time",
-                          "nullable": true
-                        },
                         "financials": {
                           "type": "object",
                           "additionalProperties": false,
@@ -14892,8 +15090,7 @@
                                 "amount": {
                                   "description": "A string representing the amount",
                                   "type": "string",
-                                  "format": "float",
-                                  "example": "13.37"
+                                  "format": "float"
                                 },
                                 "currency": {
                                   "type": "string",
@@ -15158,8 +15355,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -15268,8 +15464,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -22895,7 +23090,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -22923,7 +23119,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -22951,7 +23148,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -22979,7 +23177,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -23559,7 +23758,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -23587,7 +23787,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -23615,7 +23816,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -23643,7 +23845,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -25010,7 +25213,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -25038,7 +25242,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -25066,7 +25271,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -25094,7 +25300,8 @@
                                   "USD",
                                   "GBP"
                                 ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217."
+                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                "example": "PLN"
                               }
                             }
                           },
@@ -32307,8 +32514,7 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float",
-                                "example": "13.37"
+                                "format": "float"
                               },
                               "currency": {
                                 "type": "string",
@@ -32594,8 +32800,7 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float",
-                                "example": "13.37"
+                                "format": "float"
                               },
                               "currency": {
                                 "type": "string",
@@ -47459,8 +47664,12 @@
                             "description": "Date of the purchase order."
                           },
                           "project": {
+                            "description": "Reference to another resource",
                             "type": "object",
                             "additionalProperties": false,
+                            "required": [
+                              "id"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -47469,7 +47678,9 @@
                                 "description": "Resource identifier."
                               }
                             },
-                            "description": "Project ID the purchase order is assigned to."
+                            "example": {
+                              "id": "1337"
+                            }
                           },
                           "status": {
                             "type": "string",
@@ -47555,9 +47766,13 @@
                             "description": "Information about the supplier of the purchase order."
                           },
                           "requestForQuotation": {
+                            "description": "Nullable reference to another resource",
                             "type": "object",
-                            "nullable": true,
                             "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -47566,7 +47781,9 @@
                                 "description": "Resource identifier."
                               }
                             },
-                            "description": "ID of the request for quotation."
+                            "example": {
+                              "id": "1337"
+                            }
                           },
                           "bodyIntroduction": {
                             "type": "string",
@@ -47595,12 +47812,14 @@
                           "language": {
                             "type": "object",
                             "additionalProperties": false,
+                            "description": "Language of the purchase order.",
                             "properties": {
                               "iso2": {
-                                "type": "string"
+                                "type": "string",
+                                "pattern": "[A-Z]{2}",
+                                "default": "DE"
                               }
-                            },
-                            "description": "Language of the purchase order."
+                            }
                           },
                           "isConfirmed": {
                             "type": "boolean",
@@ -47616,9 +47835,13 @@
                             "description": "Financial information about the purchase order.",
                             "properties": {
                               "paymentMethod": {
+                                "description": "Nullable reference to another resource",
                                 "type": "object",
-                                "nullable": true,
                                 "additionalProperties": false,
+                                "nullable": true,
+                                "required": [
+                                  "id"
+                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string",
@@ -47627,7 +47850,9 @@
                                     "description": "Resource identifier."
                                   }
                                 },
-                                "description": "ID of the payment method used for the purchase order."
+                                "example": {
+                                  "id": "1337"
+                                }
                               },
                               "total": {
                                 "description": "Money object with amount and currency",
@@ -47641,8 +47866,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -48032,14 +48256,14 @@
                   "language": {
                     "type": "object",
                     "additionalProperties": false,
+                    "description": "Language of the purchase order.",
                     "properties": {
                       "iso2": {
                         "type": "string",
                         "pattern": "[A-Z]{2}",
                         "default": "DE"
                       }
-                    },
-                    "description": "Language of the purchase order."
+                    }
                   },
                   "isConfirmed": {
                     "type": "boolean",
@@ -48149,7 +48373,8 @@
                           "USD",
                           "GBP"
                         ],
-                        "description": "Currency matches one of currency values as specified in ISO-4217."
+                        "description": "Currency matches one of currency values as specified in ISO-4217.",
+                        "example": "PLN"
                       }
                     }
                   },
@@ -48322,7 +48547,7 @@
                         "description": {
                           "type": "string"
                         },
-                        "amount": {
+                        "quantity": {
                           "type": "number",
                           "format": "float"
                         },
@@ -48338,8 +48563,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -48707,8 +48931,12 @@
                           "description": "Date of the purchase order."
                         },
                         "project": {
+                          "description": "Reference to another resource",
                           "type": "object",
                           "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
                           "properties": {
                             "id": {
                               "type": "string",
@@ -48717,7 +48945,9 @@
                               "description": "Resource identifier."
                             }
                           },
-                          "description": "Project ID the purchase order is assigned to."
+                          "example": {
+                            "id": "1337"
+                          }
                         },
                         "status": {
                           "type": "string",
@@ -48803,9 +49033,13 @@
                           "description": "Information about the supplier of the purchase order."
                         },
                         "requestForQuotation": {
+                          "description": "Nullable reference to another resource",
                           "type": "object",
-                          "nullable": true,
                           "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
                           "properties": {
                             "id": {
                               "type": "string",
@@ -48814,7 +49048,9 @@
                               "description": "Resource identifier."
                             }
                           },
-                          "description": "ID of the request for quotation."
+                          "example": {
+                            "id": "1337"
+                          }
                         },
                         "bodyIntroduction": {
                           "type": "string",
@@ -48843,12 +49079,14 @@
                         "language": {
                           "type": "object",
                           "additionalProperties": false,
+                          "description": "Language of the purchase order.",
                           "properties": {
                             "iso2": {
-                              "type": "string"
+                              "type": "string",
+                              "pattern": "[A-Z]{2}",
+                              "default": "DE"
                             }
-                          },
-                          "description": "Language of the purchase order."
+                          }
                         },
                         "isConfirmed": {
                           "type": "boolean",
@@ -48889,8 +49127,7 @@
                                 "amount": {
                                   "description": "A string representing the amount",
                                   "type": "string",
-                                  "format": "float",
-                                  "example": "13.37"
+                                  "format": "float"
                                 },
                                 "currency": {
                                   "type": "string",
@@ -49087,8 +49324,12 @@
                                 "description": "Resource identifier."
                               },
                               "project": {
+                                "description": "Reference to another resource",
                                 "type": "object",
                                 "additionalProperties": false,
+                                "required": [
+                                  "id"
+                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string",
@@ -49096,28 +49337,38 @@
                                     "example": "17",
                                     "description": "Resource identifier."
                                   }
+                                },
+                                "example": {
+                                  "id": "1337"
                                 }
                               },
                               "product": {
+                                "description": "Reference to another resource",
                                 "type": "object",
                                 "additionalProperties": false,
+                                "required": [
+                                  "id"
+                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string",
                                     "pattern": "\\d+",
                                     "example": "17",
                                     "description": "Resource identifier."
-                                  },
-                                  "name": {
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "type": "string"
                                   }
+                                },
+                                "example": {
+                                  "id": "1337"
                                 }
                               },
-                              "amount": {
-                                "type": "string",
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "number",
                                 "format": "float"
                               },
                               "price": {
@@ -49132,8 +49383,7 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float",
-                                    "example": "13.37"
+                                    "format": "float"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -49194,6 +49444,1031 @@
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.update",
+        "summary": "Update existing purchase order",
+        "description": "Updates an existing purchase order.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Purchase order update request payload",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date of the purchase order."
+                  },
+                  "project": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "example": {
+                      "id": "1337"
+                    }
+                  },
+                  "supplier": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      },
+                      "honorific": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "department": {
+                        "type": "string"
+                      },
+                      "subDepartment": {
+                        "type": "string"
+                      },
+                      "extraAddressLine": {
+                        "type": "string"
+                      },
+                      "street": {
+                        "type": "string"
+                      },
+                      "zipCode": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "contactPerson": {
+                        "type": "string"
+                      },
+                      "telephone": {
+                        "type": "string"
+                      },
+                      "telefax": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "requestForQuotation": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "example": {
+                      "id": "1337"
+                    }
+                  },
+                  "bodyIntroduction": {
+                    "type": "string",
+                    "description": "Text above the position table in the PDF."
+                  },
+                  "bodyOutroduction": {
+                    "type": "string",
+                    "description": "Text below the position table in the PDF."
+                  },
+                  "salesOrderConfirmationReference": {
+                    "type": "string",
+                    "description": "Reference of the sales order confirmation."
+                  },
+                  "isConfirmationRequested": {
+                    "type": "boolean",
+                    "description": "Shows if a confirmation is requested."
+                  },
+                  "suppliersOfferReference": {
+                    "type": "string",
+                    "description": "Offer reference of the supplier."
+                  },
+                  "internalDesignation": {
+                    "type": "string",
+                    "description": "Internal designation of the purchase order."
+                  },
+                  "language": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Language of the purchase order.",
+                    "properties": {
+                      "iso2": {
+                        "type": "string",
+                        "pattern": "[A-Z]{2}",
+                        "default": "DE"
+                      }
+                    }
+                  },
+                  "isConfirmed": {
+                    "type": "boolean",
+                    "description": "Shows if the purchase order is confirmed."
+                  },
+                  "confirmedVia": {
+                    "type": "string",
+                    "enum": [
+                      "Internet",
+                      "E-Mail",
+                      "Telephone",
+                      "Telefax",
+                      "Letter",
+                      "Other"
+                    ],
+                    "default": "Internet",
+                    "description": "Determines how the purchase order was confirmed."
+                  },
+                  "financials": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Financial information about the purchase order.",
+                    "properties": {
+                      "paymentMethod": {
+                        "description": "Reference to another resource",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          }
+                        },
+                        "example": {
+                          "id": "1337"
+                        }
+                      },
+                      "paymentTerms": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Information about payment terms of the purchase order.",
+                        "properties": {
+                          "paymentTargetDiscount": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "paymentTargetDays": {
+                            "type": "number"
+                          },
+                          "paymentTargetDiscountDays": {
+                            "type": "number"
+                          },
+                          "paymentTargetDiscountAmount": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "isPaymentTargetDiscountApplied": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "costCenter": {
+                        "type": "string",
+                        "description": "The assigned cost center for the purchase order."
+                      },
+                      "tax": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "Tax information of the purchase order.",
+                        "properties": {
+                          "taxation": {
+                            "type": "string",
+                            "enum": [
+                              "Domestic",
+                              "EU delivery",
+                              "Import",
+                              "Tax free domestic"
+                            ],
+                            "default": "Domestic"
+                          },
+                          "vatId": {
+                            "type": "string"
+                          },
+                          "taxDisplay": {
+                            "type": "string",
+                            "enum": [
+                              "Automatic",
+                              "Net",
+                              "Gross"
+                            ],
+                            "default": "Automatic"
+                          }
+                        }
+                      },
+                      "currency": {
+                        "type": "string",
+                        "pattern": "[A-Z]{3}",
+                        "enum": [
+                          "EUR",
+                          "PLN",
+                          "CHF",
+                          "USD",
+                          "GBP"
+                        ],
+                        "description": "Currency matches one of currency values as specified in ISO-4217.",
+                        "example": "PLN"
+                      }
+                    }
+                  },
+                  "delivery": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Delivery information of the purchase order.",
+                    "properties": {
+                      "deliveryTerms": {
+                        "description": "Reference to another resource",
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          }
+                        },
+                        "example": {
+                          "id": "1337"
+                        }
+                      },
+                      "hasDifferentDeliveryAddress": {
+                        "type": "boolean"
+                      },
+                      "deliveryAddress": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "honorific": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "department": {
+                            "type": "string"
+                          },
+                          "subDepartment": {
+                            "type": "string"
+                          },
+                          "extraAddressLine": {
+                            "type": "string"
+                          },
+                          "street": {
+                            "type": "string"
+                          },
+                          "zipCode": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "contactPerson": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "dates": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "desiredDeliveryDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Desired delivery date of the purchase order."
+                          },
+                          "confirmedDeliveryDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Confirmed delivery date of the purchase order."
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "formatting": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Formatting settings for the PDF of a purchase order.",
+                    "properties": {
+                      "hideLetterHead": {
+                        "type": "boolean"
+                      },
+                      "hidePrices": {
+                        "type": "boolean"
+                      },
+                      "hideProductNumbers": {
+                        "type": "boolean"
+                      },
+                      "showLongProductNumbers": {
+                        "type": "boolean"
+                      },
+                      "hideProductDescriptions": {
+                        "type": "boolean"
+                      },
+                      "showOwnProductNumberInColumn": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "internalComment": {
+                    "type": "string",
+                    "description": "Internal comment about the purchase order."
+                  },
+                  "liabilitiesInfo": {
+                    "type": "string",
+                    "description": "Information for liabilities."
+                  },
+                  "positions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "project": {
+                          "description": "Reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "product": {
+                          "type": "object",
+                          "description": "Reference to position Product, only one value is allowed at a time",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "sku": {
+                              "type": "string",
+                              "example": "SKU1"
+                            },
+                            "externalReferenceNumber": {
+                              "type": "string",
+                              "example": "REF2"
+                            }
+                          }
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "price": {
+                          "description": "Money object with amount and currency",
+                          "example": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217.",
+                              "example": "PLN"
+                            }
+                          }
+                        },
+                        "taxRate": {
+                          "type": "string",
+                          "enum": [
+                            "standard",
+                            "reduced",
+                            "free"
+                          ]
+                        },
+                        "isDeleted": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/purchaseOrders/{id}/actions/cancel": {
+      "patch": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.actions.cancel",
+        "summary": "Cancels a purchase order",
+        "description": "Cancels the purchase order",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/purchaseOrders/{id}/actions/release": {
+      "patch": {
+        "tags": [
+          "Purchase Order"
+        ],
+        "operationId": "purchaseOrder.actions.release",
+        "summary": "Releases a purchase order",
+        "description": "Releases the purchase order",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "429": {
             "description": "Too many API calls made."
@@ -49467,8 +50742,7 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float",
-                        "example": "13.37"
+                        "format": "float"
                       },
                       "currency": {
                         "type": "string",
@@ -50159,8 +51433,7 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float",
-                                "example": "13.37"
+                                "format": "float"
                               },
                               "currency": {
                                 "type": "string",
@@ -50755,8 +52028,7 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float",
-                          "example": "13.37"
+                          "format": "float"
                         },
                         "currency": {
                           "type": "string",
@@ -51293,8 +52565,7 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float",
-                              "example": "13.37"
+                              "format": "float"
                             },
                             "currency": {
                               "type": "string",
@@ -60554,8 +61825,7 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float",
-                        "example": "13.37"
+                        "format": "float"
                       },
                       "currency": {
                         "type": "string",
@@ -61346,8 +62616,7 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float",
-                          "example": "13.37"
+                          "format": "float"
                         },
                         "currency": {
                           "type": "string",
@@ -62128,8 +63397,7 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float",
-                        "example": "13.37"
+                        "format": "float"
                       },
                       "currency": {
                         "type": "string",
@@ -64366,6 +65634,443 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/run/{runUuid}/actions/downloadError": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.downloadError.view",
+        "summary": "Download error file",
+        "description": "Returns details of a single Accounting Export error",
+        "parameters": [
+          {
+            "name": "runUuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "UUID identifier of the resource.",
+              "type": "string",
+              "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+              "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+            },
+            "description": "This is the run identifier",
+            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+text": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/run/{runUuid}/actions/downloadExport": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.downloadExport.view",
+        "summary": "Download export file",
+        "description": "Returns details of a single Accounting Export file",
+        "parameters": [
+          {
+            "name": "runUuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "UUID identifier of the resource.",
+              "type": "string",
+              "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+              "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+            },
+            "description": "This is the run identifier",
+            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/exportConfigurations/{id}": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.exportConfiguration.view",
+        "summary": "View a single Accounting Export configuration",
+        "description": "Returns details of a single Accounting Export configuration",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Accounting Export configuration is a configuration for one-time or recurring data exports.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "uuid": {
+                          "description": "UUID identifier of the resource.",
+                          "type": "string",
+                          "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                          "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the configuration create by user"
+                        },
+                        "active": {
+                          "type": "boolean",
+                          "description": "Flag that shows if an configuration is active"
+                        },
+                        "recurringPeriod": {
+                          "type": "string",
+                          "enum": [
+                            "monthly",
+                            "weekly",
+                            "daily",
+                            "onetime"
+                          ],
+                          "description": "The period that the export will run again"
+                        },
+                        "executionStart": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "executionStop": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "nextRun": {
+                          "description": "a atom formatted date time or null value",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00",
+                          "nullable": true
+                        },
+                        "inputProvider": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Accounting Export configuration reference to the provider.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the provider"
+                            }
+                          }
+                        },
+                        "outputProvider": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Accounting Export configuration reference to the provider.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the provider"
+                            }
+                          }
+                        },
+                        "outputFormat": {
+                          "type": "string",
+                          "description": "This field represents the output format and version specific to each provider"
+                        },
+                        "transactionAccountConfiguration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "This field represents an object with configurations for the accounts"
+                        },
+                        "additionalConfiguration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "This field represents an object with additional configurations for the output provider"
+                        },
+                        "filterStartDate": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "filterEndDate": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "createdAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "updatedAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "deletedAt": {
+                          "description": "a atom formatted date time or null value",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/providers/{id}": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.provider.view",
+        "summary": "View a single Accounting Export provider",
+        "description": "Returns details of a single Accounting Export provider",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Accounting Export provider indicates where to take the the data from (input providers) and where to export the data (output providers).",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "uuid": {
+                          "description": "UUID identifier of the resource.",
+                          "type": "string",
+                          "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                          "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the provider"
+                        },
+                        "usedFor": {
+                          "type": "string",
+                          "enum": [
+                            "input",
+                            "output"
+                          ],
+                          "description": "The usage of the provider: input for getting data, output for putting data into the provider system"
+                        },
+                        "vendorKey": {
+                          "type": "string",
+                          "enum": [
+                            "paypal",
+                            "datev"
+                          ],
+                          "description": "The identifier key of the provider"
+                        },
+                        "credentialsKey": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "The field stores the value of credentials identifier from the Vault"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "Provider additional configuration"
+                        },
+                        "createdAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "updatedAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
           },
           "429": {
             "description": "Too many API calls made."
