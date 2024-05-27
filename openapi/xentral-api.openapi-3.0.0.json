@@ -228,10 +228,6 @@
       "description": "Shipping methods"
     },
     {
-      "name": "Stock Movement Types",
-      "description": "Stock movement type"
-    },
-    {
       "name": "Supplier",
       "description": "Suppliers represents an information related to providers of goods the company is managing."
     },
@@ -644,9 +640,6 @@
             "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "invoice"
-                ],
                 "additionalProperties": false,
                 "properties": {
                   "invoice": {
@@ -667,28 +660,15 @@
                     "example": {
                       "id": "1337"
                     }
-                  },
-                  "documentNumber": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 20
                   }
                 }
               },
               "examples": {
-                "Create credit not from an invoice": {
+                "id": {
                   "value": {
                     "invoice": {
                       "id": "1337"
                     }
-                  }
-                },
-                "Create credit not from an invoice with a document number": {
-                  "value": {
-                    "invoice": {
-                      "id": "1337"
-                    },
-                    "documentNumber": "415263"
                   }
                 }
               }
@@ -9962,276 +9942,6 @@
         }
       }
     },
-    "/api/stockMovementTypes": {
-      "post": {
-        "tags": [
-          "Stock Movement Types"
-        ],
-        "operationId": "stockMovementType.create",
-        "summary": "[EARLY ACCESS] Create a stockMovementType",
-        "description": "Creates a new stock movement type.",
-        "requestBody": {
-          "description": "Stock movement type creation request.",
-          "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "name",
-                  "direction",
-                  "active"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "nullable": false,
-                    "example": "TestName",
-                    "description": "Name of stock movement type"
-                  },
-                  "direction": {
-                    "type": "string",
-                    "nullable": false,
-                    "example": "relocation",
-                    "description": "Direction of stock movement type"
-                  },
-                  "active": {
-                    "type": "boolean",
-                    "nullable": false,
-                    "example": true,
-                    "description": "Only active stock movement types can be used"
-                  },
-                  "doctypeReference": {
-                    "type": "string",
-                    "nullable": true,
-                    "example": "salesOrder",
-                    "description": "Related document type"
-                  }
-                }
-              },
-              "examples": {
-                "Create an stock movement type": {
-                  "value": {
-                    "name": "Test stock movement type",
-                    "direction": "inbound",
-                    "active": true,
-                    "doctypeReference": "salesOrder"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Resource successfully created response",
-            "headers": {
-              "Location": {
-                "schema": {
-                  "type": "string",
-                  "example": "https://example.xentral.biz/api/users/17"
-                },
-                "description": "URI of the created resource"
-              }
-            },
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "enum": [
-                    ""
-                  ],
-                  "nullable": true
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "IETF RFC 7807 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unable to authenticate the client",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
-      }
-    },
     "/api/invoices": {
       "post": {
         "tags": [
@@ -10540,9 +10250,6 @@
             "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "salesOrder"
-                ],
                 "additionalProperties": false,
                 "properties": {
                   "salesOrder": {
@@ -10564,11 +10271,6 @@
                     "example": {
                       "id": "1337"
                     }
-                  },
-                  "documentNumber": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 20
                   }
                 }
               },
@@ -10578,14 +10280,6 @@
                     "salesOrder": {
                       "id": "12"
                     }
-                  }
-                },
-                "Create invoice from sales order and assign a document number": {
-                  "value": {
-                    "salesOrder": {
-                      "id": "12"
-                    },
-                    "documentNumber": "415263"
                   }
                 }
               }
@@ -14701,8 +14395,8 @@
           "Liability"
         ],
         "operationId": "liability.list",
-        "summary": "[ALPHA] List Liabilities",
-        "description": "Returns a collection with all Liabilities",
+        "summary": "List Liability",
+        "description": "Returns a collection with all Liability",
         "parameters": [
           {
             "name": "filter",
@@ -65940,6 +65634,443 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/run/{runUuid}/actions/downloadError": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.downloadError.view",
+        "summary": "Download error file",
+        "description": "Returns details of a single Accounting Export error",
+        "parameters": [
+          {
+            "name": "runUuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "UUID identifier of the resource.",
+              "type": "string",
+              "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+              "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+            },
+            "description": "This is the run identifier",
+            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+text": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/run/{runUuid}/actions/downloadExport": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.downloadExport.view",
+        "summary": "Download export file",
+        "description": "Returns details of a single Accounting Export file",
+        "parameters": [
+          {
+            "name": "runUuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "description": "UUID identifier of the resource.",
+              "type": "string",
+              "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+              "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+            },
+            "description": "This is the run identifier",
+            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/exportConfigurations/{id}": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.exportConfiguration.view",
+        "summary": "View a single Accounting Export configuration",
+        "description": "Returns details of a single Accounting Export configuration",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Accounting Export configuration is a configuration for one-time or recurring data exports.",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "uuid": {
+                          "description": "UUID identifier of the resource.",
+                          "type": "string",
+                          "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                          "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the configuration create by user"
+                        },
+                        "active": {
+                          "type": "boolean",
+                          "description": "Flag that shows if an configuration is active"
+                        },
+                        "recurringPeriod": {
+                          "type": "string",
+                          "enum": [
+                            "monthly",
+                            "weekly",
+                            "daily",
+                            "onetime"
+                          ],
+                          "description": "The period that the export will run again"
+                        },
+                        "executionStart": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "executionStop": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "nextRun": {
+                          "description": "a atom formatted date time or null value",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00",
+                          "nullable": true
+                        },
+                        "inputProvider": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Accounting Export configuration reference to the provider.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the provider"
+                            }
+                          }
+                        },
+                        "outputProvider": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Accounting Export configuration reference to the provider.",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "The name of the provider"
+                            }
+                          }
+                        },
+                        "outputFormat": {
+                          "type": "string",
+                          "description": "This field represents the output format and version specific to each provider"
+                        },
+                        "transactionAccountConfiguration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "This field represents an object with configurations for the accounts"
+                        },
+                        "additionalConfiguration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "This field represents an object with additional configurations for the output provider"
+                        },
+                        "filterStartDate": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "filterEndDate": {
+                          "description": "a yyyy-mm-dd formatted date or null value",
+                          "type": "string",
+                          "format": "date",
+                          "example": "2023-08-13",
+                          "nullable": true
+                        },
+                        "createdAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "updatedAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "deletedAt": {
+                          "description": "a atom formatted date time or null value",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/accountingExport/providers/{id}": {
+      "get": {
+        "tags": [
+          "Accounting Export"
+        ],
+        "operationId": "accountingExport.provider.view",
+        "summary": "View a single Accounting Export provider",
+        "description": "Returns details of a single Accounting Export provider",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Accounting Export provider indicates where to take the the data from (input providers) and where to export the data (output providers).",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "uuid": {
+                          "description": "UUID identifier of the resource.",
+                          "type": "string",
+                          "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                          "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the provider"
+                        },
+                        "usedFor": {
+                          "type": "string",
+                          "enum": [
+                            "input",
+                            "output"
+                          ],
+                          "description": "The usage of the provider: input for getting data, output for putting data into the provider system"
+                        },
+                        "vendorKey": {
+                          "type": "string",
+                          "enum": [
+                            "paypal",
+                            "datev"
+                          ],
+                          "description": "The identifier key of the provider"
+                        },
+                        "credentialsKey": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "The field stores the value of credentials identifier from the Vault"
+                        },
+                        "configuration": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "description": "Provider additional configuration"
+                        },
+                        "createdAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        },
+                        "updatedAt": {
+                          "description": "a atom formatted date time",
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
           },
           "429": {
             "description": "Too many API calls made."
