@@ -5047,7 +5047,8 @@
                           },
                           "type": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "company"
                           },
                           "project": {
                             "description": "An optional object with id and name",
@@ -5196,6 +5197,44 @@
                                     "type": "string"
                                   }
                                 }
+                              }
+                            },
+                            "example": {
+                              "number": "1201",
+                              "fax": "123456",
+                              "mobile": "123456",
+                              "department": "IT",
+                              "subdivision": "Development",
+                              "vatNumber": "DE123456789",
+                              "taxNumber": "123456",
+                              "gln": "123456",
+                              "employeeNumber": "123456",
+                              "honorific": "Herr",
+                              "title": "Dr.",
+                              "name": "Tom Schneider",
+                              "birthday": "1980-04-30",
+                              "tags": [
+                                {
+                                  "id": "1101",
+                                  "name": "Tag#1",
+                                  "color": "FF0000"
+                                },
+                                {
+                                  "id": "1102",
+                                  "name": "Tag#2",
+                                  "color": "0000FF"
+                                }
+                              ],
+                              "customerNumber": "123456",
+                              "phone": "123456",
+                              "email": "max@musterman.com",
+                              "address": {
+                                "note": "Erster Stock",
+                                "street": "Musterstrasse 20",
+                                "zip": "12345",
+                                "city": "Musterstadt",
+                                "state": "Bayern",
+                                "country": "Deutschland"
                               }
                             }
                           },
@@ -5525,15 +5564,18 @@
                           "id": {
                             "type": "string",
                             "pattern": "\\d+",
-                            "description": "Either ID or name and key."
+                            "description": "Either ID or name and key.",
+                            "example": "1101"
                           },
                           "key": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "Tag3"
                           },
                           "name": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "Tag#3"
                           },
                           "color": {
                             "type": "string",
@@ -5814,11 +5856,13 @@
                         },
                         "type": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "company"
                         },
                         "number": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "1201"
                         },
                         "general": {
                           "x-description-missing": true,
@@ -5875,6 +5919,20 @@
                                 }
                               }
                             }
+                          },
+                          "example": {
+                            "honorific": "Herr",
+                            "title": "Dr.",
+                            "name": "Tom Schneider",
+                            "birthday": "1980-04-30",
+                            "address": {
+                              "note": "Erster Stock",
+                              "street": "Musterstrasse 20",
+                              "zip": "12345",
+                              "city": "Musterstadt",
+                              "state": "Bayern",
+                              "country": "Deutschland"
+                            }
                           }
                         },
                         "tags": {
@@ -5904,6 +5962,37 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "id": "1201",
+                        "type": "company",
+                        "number": "1201",
+                        "general": {
+                          "honorific": "Herr",
+                          "title": "Dr.",
+                          "name": "Tom Schneider",
+                          "birthday": "1980-04-30",
+                          "address": {
+                            "note": "Erster Stock",
+                            "street": "Musterstrasse 20",
+                            "zip": "12345",
+                            "city": "Musterstadt",
+                            "state": "Bayern",
+                            "country": "Deutschland"
+                          }
+                        },
+                        "tags": [
+                          {
+                            "id": "1101",
+                            "name": "Tag#1",
+                            "color": "FF0000"
+                          },
+                          {
+                            "id": "1102",
+                            "name": "Tag#2",
+                            "color": "0000FF"
+                          }
+                        ]
                       }
                     }
                   }
@@ -16260,7 +16349,8 @@
                           },
                           "isActive": {
                             "x-description-missing": true,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true
                           },
                           "comment": {
                             "x-description-missing": true,
@@ -16305,6 +16395,15 @@
                                 "example": 99.99,
                                 "description": "null = no free shipping; 0 = free shipping for all orders; > 0 = free shipping for orders with a value of at least this value"
                               }
+                            },
+                            "example": {
+                              "basicDiscount": 5,
+                              "paymentTargetDays": 30,
+                              "earlyPaymentDiscount": {
+                                "value": 2,
+                                "paymentTargetDays": 7
+                              },
+                              "postageFreeFrom": 99.99
                             }
                           },
                           "project": {
@@ -16319,6 +16418,9 @@
                                 "example": "17",
                                 "description": "Resource identifier."
                               }
+                            },
+                            "example": {
+                              "id": "1"
                             }
                           },
                           "category": {
@@ -16333,6 +16435,9 @@
                                 "example": "17",
                                 "description": "Resource identifier."
                               }
+                            },
+                            "example": {
+                              "id": "789"
                             }
                           }
                         },
@@ -16595,6 +16700,9 @@
                         "example": "17",
                         "description": "Resource identifier."
                       }
+                    },
+                    "example": {
+                      "id": "1"
                     }
                   },
                   "category": {
@@ -16609,6 +16717,9 @@
                         "example": "17",
                         "description": "Resource identifier."
                       }
+                    },
+                    "example": {
+                      "id": "789"
                     }
                   }
                 }
@@ -16894,7 +17005,8 @@
                         },
                         "isActive": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "comment": {
                           "x-description-missing": true,
@@ -16939,6 +17051,15 @@
                               "example": 99.99,
                               "description": "null = no free shipping; 0 = free shipping for all orders; > 0 = free shipping for orders with a value of at least this value"
                             }
+                          },
+                          "example": {
+                            "basicDiscount": 5,
+                            "paymentTargetDays": 30,
+                            "earlyPaymentDiscount": {
+                              "value": 2,
+                              "paymentTargetDays": 7
+                            },
+                            "postageFreeFrom": 99.99
                           }
                         },
                         "project": {
@@ -16953,6 +17074,9 @@
                               "example": "17",
                               "description": "Resource identifier."
                             }
+                          },
+                          "example": {
+                            "id": "1"
                           }
                         },
                         "category": {
@@ -16967,6 +17091,9 @@
                               "example": "17",
                               "description": "Resource identifier."
                             }
+                          },
+                          "example": {
+                            "id": "789"
                           }
                         }
                       },
