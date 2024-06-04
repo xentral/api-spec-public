@@ -184,6 +184,10 @@
       "description": "Project resource."
     },
     {
+      "name": "Provisional Return",
+      "description": "Provisional Return resource."
+    },
+    {
       "name": "Purchase Order",
       "description": "Purchase Orders made at a supplier."
     },
@@ -6798,6 +6802,275 @@
                             }
                           },
                           "shippingMethod": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/provisionalReturns": {
+      "get": {
+        "tags": [
+          "Provisional Return"
+        ],
+        "operationId": "provisionalReturns.list",
+        "summary": "List provisional returns",
+        "description": "Lists existing provisional returns",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "deliveryNoteId"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "salesOrder"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "in"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provisional Return list",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "deliveryNote",
+                          "tracking",
+                          "salesOrder"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "tracking": {
+                            "type": "object",
+                            "required": [
+                              "number"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "number": {
+                                "type": "string",
+                                "description": "The tracking number provided by the carrier."
+                              }
+                            },
+                            "description": "Tracking information for the provisional return",
+                            "example": {
+                              "number": "101010101010101"
+                            }
+                          },
+                          "deliveryNote": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          },
+                          "salesOrder": {
                             "description": "Nullable reference to another resource",
                             "type": "object",
                             "additionalProperties": false,
@@ -14785,6 +15058,920 @@
       }
     },
     "/api/liabilities": {
+      "post": {
+        "tags": [
+          "Liability"
+        ],
+        "operationId": "liability.create",
+        "summary": "[ALPHA] Create liability",
+        "description": "Creates a single new liability.",
+        "requestBody": {
+          "description": "Create a liability object",
+          "content": {
+            "application/vnd.xentral.default.v1-alpha+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "supplier"
+                ],
+                "properties": {
+                  "date": {
+                    "x-description-missing": true,
+                    "type": "string",
+                    "format": "date",
+                    "nullable": true
+                  },
+                  "supplier": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "description": "Supplier reference"
+                  },
+                  "supplierInvoiceNumber": {
+                    "type": "string",
+                    "description": "The invoice number issued by the supplier"
+                  },
+                  "receiptDate": {
+                    "description": "The date when the supplier invoice was received by the recipient",
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "financials": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "financial information",
+                    "example": {
+                      "amountGross": {
+                        "amount": "100.0",
+                        "currency": "EUR"
+                      },
+                      "freightCharge": 10,
+                      "taxation": "VAT",
+                      "taxes": {
+                        "normalTax": {
+                          "rate": 19,
+                          "amount": 19
+                        },
+                        "reducedTax": {
+                          "rate": 7,
+                          "amount": 7
+                        },
+                        "customTax1": {
+                          "rate": 8.1,
+                          "amount": 50.5
+                        },
+                        "customTax2": {
+                          "rate": 10,
+                          "amount": 50.5
+                        }
+                      },
+                      "paymentTerms": {
+                        "dueDate": "2020-01-31",
+                        "earlyPaymentDate": "2020-01-15",
+                        "earlyPaymentDiscount": 2
+                      },
+                      "bookingText": "Liability booking text",
+                      "payment": {
+                        "methodName": "Bank transfer",
+                        "paidAmount": 100,
+                        "paidOnDate": "2020-01-01",
+                        "discountReceived": 2
+                      },
+                      "glAccount": "123456",
+                      "costCenter": "123456"
+                    },
+                    "properties": {
+                      "amountGross": {
+                        "description": "Money object with amount and currency",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
+                      },
+                      "freightCharge": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Freigth costs"
+                      },
+                      "taxation": {
+                        "x-description-missing": true,
+                        "type": "string"
+                      },
+                      "taxes": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "normalTax": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "properties": {
+                              "rate": {
+                                "type": "number",
+                                "description": "percentual rate"
+                              },
+                              "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "absolut amount"
+                              }
+                            }
+                          },
+                          "reducedTax": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "properties": {
+                              "rate": {
+                                "type": "number",
+                                "description": "percentual rate"
+                              },
+                              "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "absolut amount"
+                              }
+                            }
+                          },
+                          "customTax1": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "properties": {
+                              "rate": {
+                                "type": "number",
+                                "description": "percentual rate"
+                              },
+                              "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "absolut amount"
+                              }
+                            }
+                          },
+                          "customTax2": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "properties": {
+                              "rate": {
+                                "type": "number",
+                                "description": "percentual rate"
+                              },
+                              "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "absolut amount"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "paymentTerms": {
+                        "x-description-missing": true,
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "dueDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                          },
+                          "earlyPaymentDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                          },
+                          "earlyPaymentDiscount": {
+                            "type": "number",
+                            "format": "float"
+                          }
+                        }
+                      },
+                      "bookingText": {
+                        "description": "header booking text",
+                        "type": "string"
+                      },
+                      "payment": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "methodName": {
+                            "x-description-missing": true,
+                            "type": "string"
+                          },
+                          "paidAmount": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "paidOnDate": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true
+                          },
+                          "discountReceived": {
+                            "type": "number",
+                            "format": "float"
+                          }
+                        },
+                        "description": "payment information"
+                      },
+                      "glAccount": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "ledger account"
+                      },
+                      "costCenter": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "cost center"
+                      }
+                    }
+                  },
+                  "assignedPurchaseOrders": {
+                    "x-description-missing": true,
+                    "type": "array",
+                    "nullable": true,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "project",
+                        "salesOrder"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "number": {
+                          "type": "string"
+                        },
+                        "amountGross": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "amountNet": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "project": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "related project ID",
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "salesOrder": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "costCenter": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "bookingText": {
+                    "description": "header booking text",
+                    "type": "string"
+                  },
+                  "project": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "related project ID",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  },
+                  "accounting": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "glAccount": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "bookingText": {
+                          "type": "string",
+                          "description": "1st accounting entry text"
+                        },
+                        "amount": {
+                          "description": "Money object with amount and currency",
+                          "example": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217.",
+                              "example": "PLN"
+                            }
+                          }
+                        },
+                        "tax": {
+                          "type": "object",
+                          "description": "percentual tax rate",
+                          "additionalProperties": false,
+                          "properties": {
+                            "rate": {
+                              "type": "number",
+                              "format": "float"
+                            }
+                          }
+                        },
+                        "costCenter": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "paymentTerms": {
+                    "x-description-missing": true,
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "dueDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                      },
+                      "earlyPaymentDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                      },
+                      "earlyPaymentDiscount": {
+                        "type": "number",
+                        "format": "float"
+                      }
+                    }
+                  },
+                  "payment": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "methodName": {
+                        "x-description-missing": true,
+                        "type": "string"
+                      },
+                      "paidAmount": {
+                        "type": "number",
+                        "format": "float"
+                      },
+                      "paidOnDate": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                      },
+                      "discountReceived": {
+                        "type": "number",
+                        "format": "float"
+                      }
+                    },
+                    "description": "payment information"
+                  },
+                  "positions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "product",
+                        "price",
+                        "tax"
+                      ],
+                      "properties": {
+                        "sort": {
+                          "description": "The position of the position in the list",
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "number": {
+                          "type": "string"
+                        },
+                        "purchaseOrder": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "product": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
+                            "supplierProductNumber": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "deliveryDate": {
+                          "description": "The date the position was delivered",
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true
+                        },
+                        "quantity": {
+                          "description": "The quantity of the position",
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "unit": {
+                          "type": "string"
+                        },
+                        "packagingUnit": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "description": "Money object with amount and currency",
+                          "example": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217.",
+                              "example": "PLN"
+                            }
+                          }
+                        },
+                        "costCenter": {
+                          "type": "string"
+                        },
+                        "tax": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "rate"
+                          ],
+                          "properties": {
+                            "vatCategory": {
+                              "description": "The category of the value added tax",
+                              "type": "string"
+                            },
+                            "rate": {
+                              "description": "Tax rate in percent",
+                              "type": "number",
+                              "format": "float",
+                              "minimum": 0,
+                              "nullable": false
+                            },
+                            "taxText": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "create liability": {
+                  "value": {
+                    "date": "2024-01-01",
+                    "supplier": {
+                      "id": "123456"
+                    },
+                    "supplierInvoiceNumber": "123456",
+                    "receiptDate": "2024-01-01T12:00:00Z",
+                    "financials": {
+                      "amountGross": {
+                        "amount": "100.0",
+                        "currency": "EUR"
+                      },
+                      "freightCharge": 10,
+                      "taxation": "VAT",
+                      "taxes": {
+                        "normalTax": {
+                          "rate": 19,
+                          "amount": 19
+                        },
+                        "reducedTax": {
+                          "rate": 7,
+                          "amount": 7
+                        },
+                        "customTax1": {
+                          "rate": 8.1,
+                          "amount": 50.5
+                        },
+                        "customTax2": {
+                          "rate": 10,
+                          "amount": 50.5
+                        }
+                      },
+                      "paymentTerms": {
+                        "dueDate": "2020-01-31",
+                        "earlyPaymentDate": "2020-01-15",
+                        "earlyPaymentDiscount": 2
+                      },
+                      "bookingText": "Liability booking text",
+                      "payment": {
+                        "methodName": "Bank transfer",
+                        "paidAmount": 100,
+                        "paidOnDate": "2020-01-01",
+                        "discountReceived": 2
+                      },
+                      "glAccount": "123456",
+                      "costCenter": "123456"
+                    },
+                    "assignedPurchaseOrders": [
+                      {
+                        "id": "123456",
+                        "number": "123456",
+                        "amountGross": 100,
+                        "amountNet": 100,
+                        "project": {
+                          "id": "123456"
+                        },
+                        "salesOrder": {
+                          "id": "123456"
+                        },
+                        "costCenter": "123456"
+                      }
+                    ],
+                    "bookingText": "Liability booking text",
+                    "project": {
+                      "id": "123456"
+                    },
+                    "accounting": [
+                      {
+                        "glAccount": "123456",
+                        "bookingText": "Liability booking text",
+                        "amount": {
+                          "amount": "100.0",
+                          "currency": "EUR"
+                        },
+                        "tax": {
+                          "rate": 19
+                        },
+                        "costCenter": "123456"
+                      }
+                    ],
+                    "paymentTerms": {
+                      "dueDate": "2020-01-31",
+                      "earlyPaymentDate": "2020-01-15"
+                    },
+                    "positions": [
+                      {
+                        "sort": 1,
+                        "number": "123456",
+                        "purchaseOrder": {
+                          "id": "123456"
+                        },
+                        "product": {
+                          "id": "123456",
+                          "supplierProductNumber": "123456"
+                        },
+                        "deliveryDate": "2024-01-01",
+                        "quantity": 1,
+                        "unit": "pcs",
+                        "packagingUnit": "pcs",
+                        "price": {
+                          "amount": "100.0",
+                          "currency": "EUR"
+                        },
+                        "costCenter": "123456",
+                        "tax": {
+                          "vatCategory": "19%",
+                          "rate": 19,
+                          "taxText": "VAT 19%"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
       "get": {
         "tags": [
           "Liability"
@@ -14930,6 +16117,68 @@
                   "properties": {
                     "data": {
                       "description": "A list of liabilities",
+                      "example": [
+                        {
+                          "id": "123456",
+                          "documentNumber": "LB-100001",
+                          "date": "2020-01-15",
+                          "createdAt": "2020-01-01 12:00:00+02:00",
+                          "createdBy": {
+                            "name": "John Doe"
+                          },
+                          "updatedAt": "2020-01-01 13:00:00+02:00",
+                          "status": "PENDING",
+                          "supplier": {
+                            "id": "123456"
+                          },
+                          "supplierInvoiceNumber": "INV-23456",
+                          "receiptDate": "2020-01-01",
+                          "financials": {
+                            "amountGross": {
+                              "amount": "100.0",
+                              "currency": "EUR"
+                            },
+                            "freightCharge": 10,
+                            "taxation": "VAT",
+                            "taxes": {
+                              "normalTax": {
+                                "rate": 19,
+                                "amount": 19
+                              },
+                              "reducedTax": {
+                                "rate": 7,
+                                "amount": 7
+                              },
+                              "customTax1": {
+                                "rate": 8.1,
+                                "amount": 50.5
+                              },
+                              "customTax2": {
+                                "rate": 10,
+                                "amount": 50.5
+                              }
+                            },
+                            "paymentTerms": {
+                              "dueDate": "2020-01-31",
+                              "earlyPaymentDate": "2020-01-15",
+                              "earlyPaymentDiscount": 2
+                            },
+                            "bookingText": "Liability booking text",
+                            "payment": {
+                              "methodName": "Bank transfer",
+                              "paidAmount": 100,
+                              "paidOnDate": "2020-01-01",
+                              "discountReceived": 2
+                            }
+                          },
+                          "purchaseOrder": {
+                            "id": "123"
+                          },
+                          "project": {
+                            "id": "1"
+                          }
+                        }
+                      ],
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -14963,6 +16212,9 @@
                           },
                           "createdBy": {
                             "description": "The user that created the liability",
+                            "example": {
+                              "name": "John Doe"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "required": [
@@ -15027,6 +16279,44 @@
                           },
                           "financials": {
                             "description": "Financial information",
+                            "example": {
+                              "amountGross": {
+                                "amount": "100.0",
+                                "currency": "EUR"
+                              },
+                              "freightCharge": 10,
+                              "taxation": "VAT",
+                              "taxes": {
+                                "normalTax": {
+                                  "rate": 19,
+                                  "amount": 19
+                                },
+                                "reducedTax": {
+                                  "rate": 7,
+                                  "amount": 7
+                                },
+                                "customTax1": {
+                                  "rate": 8.1,
+                                  "amount": 50.5
+                                },
+                                "customTax2": {
+                                  "rate": 10,
+                                  "amount": 50.5
+                                }
+                              },
+                              "paymentTerms": {
+                                "dueDate": "2020-01-31",
+                                "earlyPaymentDate": "2020-01-15",
+                                "earlyPaymentDiscount": 2
+                              },
+                              "bookingText": "Liability booking text",
+                              "payment": {
+                                "methodName": "Bank transfer",
+                                "paidAmount": 100,
+                                "paidOnDate": "2020-01-01",
+                                "discountReceived": 2
+                              }
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
@@ -15246,6 +16536,9 @@
                           },
                           "purchaseOrder": {
                             "description": "The purchase order associated with the liability",
+                            "example": {
+                              "id": "123"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "required": [
@@ -15264,6 +16557,9 @@
                             "x-description-missing": true,
                             "type": "object",
                             "additionalProperties": false,
+                            "example": {
+                              "id": "1"
+                            },
                             "required": [
                               "id"
                             ],
@@ -15379,6 +16675,101 @@
                   ],
                   "properties": {
                     "data": {
+                      "example": {
+                        "id": "123456",
+                        "documentNumber": "LB-100001",
+                        "date": "2020-01-15",
+                        "createdAt": "2020-01-01 12:00:00+02:00",
+                        "createdBy": {
+                          "name": "John Doe"
+                        },
+                        "updatedAt": "2020-01-01 13:00:00+02:00",
+                        "supplierInvoice": "INV-12345",
+                        "receiptDate": "2020-01-01T12:00:00Z",
+                        "deliveryDate": "2020-01-01",
+                        "status": "PENDING",
+                        "supplier": {
+                          "id": "123456"
+                        },
+                        "supplierInvoiceNumber": "INV-12345",
+                        "financials": {
+                          "amountGross": {
+                            "amount": "100.0",
+                            "currency": "EUR"
+                          },
+                          "freightCharge": 10,
+                          "taxation": "VAT",
+                          "taxes": {
+                            "normalTax": {
+                              "rate": 19,
+                              "amount": 19
+                            },
+                            "reducedTax": {
+                              "rate": 7,
+                              "amount": 7
+                            },
+                            "customTax1": {
+                              "rate": 8.1,
+                              "amount": 50.5
+                            },
+                            "customTax2": {
+                              "rate": 10,
+                              "amount": 50.5
+                            }
+                          },
+                          "paymentTerms": {
+                            "dueDate": "2020-01-31",
+                            "earlyPaymentDate": "2020-01-15",
+                            "earlyPaymentDiscount": 2
+                          },
+                          "bookingText": "Liability booking text",
+                          "payment": {
+                            "methodName": "Bank transfer",
+                            "paidAmount": 100,
+                            "paidOnDate": "2020-01-01",
+                            "discountReceived": 2
+                          },
+                          "glAccount": "123456",
+                          "costCenter": "123456"
+                        },
+                        "purchaseOrder": {
+                          "id": "123456"
+                        },
+                        "assignedPurchaseOrders": [
+                          {
+                            "id": "123456",
+                            "number": "123456",
+                            "amountGross": 100,
+                            "amountNet": 100,
+                            "project": {
+                              "id": "123456"
+                            },
+                            "salesOrder": {
+                              "id": "123456"
+                            },
+                            "costCenter": "123456"
+                          }
+                        ],
+                        "project": {
+                          "id": "1"
+                        },
+                        "accounting": [
+                          {
+                            "glAccount": {
+                              "id": "123456"
+                            },
+                            "bookingText": "Liability booking text",
+                            "amount": {
+                              "amount": "100.0",
+                              "currency": "EUR"
+                            },
+                            "tax": {
+                              "rate": 19
+                            },
+                            "costCenter": "123456"
+                          }
+                        ]
+                      },
                       "x-description-missing": true,
                       "type": "object",
                       "additionalProperties": false,
@@ -15392,17 +16783,20 @@
                         "documentNumber": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "LB-100001"
                         },
                         "date": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date"
+                          "format": "date",
+                          "example": "2020-01-15"
                         },
                         "createdAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2020-01-01 12:00:00+02:00"
                         },
                         "createdBy": {
                           "x-description-missing": true,
@@ -15416,6 +16810,9 @@
                             "name": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "name": "John Doe"
                           }
                         },
                         "updatedAt": {
@@ -15427,19 +16824,22 @@
                         },
                         "supplierInvoice": {
                           "type": "string",
-                          "description": "The invoice number issued by the supplier"
+                          "description": "The invoice number issued by the supplier",
+                          "example": "INV-12345"
                         },
                         "receiptDate": {
                           "description": "The date when the supplier invoice was received by the recipient",
                           "type": "string",
                           "format": "date-time",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "2020-01-01T12:00:00Z"
                         },
                         "deliveryDate": {
                           "description": "The date on which the goods where shipped or the services where rendered",
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "2020-01-01"
                         },
                         "status": {
                           "type": "string",
@@ -15449,7 +16849,8 @@
                             "PARTIALLY_PAID",
                             "CANCELLED"
                           ],
-                          "description": "Status of liability"
+                          "description": "Status of liability",
+                          "example": "PENDING"
                         },
                         "supplier": {
                           "type": "object",
@@ -15462,16 +16863,60 @@
                               "description": "Resource identifier."
                             }
                           },
-                          "description": "Supplier reference"
+                          "description": "Supplier reference",
+                          "example": {
+                            "id": "123456"
+                          }
                         },
                         "supplierInvoiceNumber": {
                           "type": "string",
-                          "description": "The invoice number issued by the supplier"
+                          "description": "The invoice number issued by the supplier",
+                          "example": "INV-12345"
                         },
                         "financials": {
                           "type": "object",
                           "additionalProperties": false,
                           "description": "financial information",
+                          "example": {
+                            "amountGross": {
+                              "amount": "100.0",
+                              "currency": "EUR"
+                            },
+                            "freightCharge": 10,
+                            "taxation": "VAT",
+                            "taxes": {
+                              "normalTax": {
+                                "rate": 19,
+                                "amount": 19
+                              },
+                              "reducedTax": {
+                                "rate": 7,
+                                "amount": 7
+                              },
+                              "customTax1": {
+                                "rate": 8.1,
+                                "amount": 50.5
+                              },
+                              "customTax2": {
+                                "rate": 10,
+                                "amount": 50.5
+                              }
+                            },
+                            "paymentTerms": {
+                              "dueDate": "2020-01-31",
+                              "earlyPaymentDate": "2020-01-15",
+                              "earlyPaymentDiscount": 2
+                            },
+                            "bookingText": "Liability booking text",
+                            "payment": {
+                              "methodName": "Bank transfer",
+                              "paidAmount": 100,
+                              "paidOnDate": "2020-01-01",
+                              "discountReceived": 2
+                            },
+                            "glAccount": "123456",
+                            "costCenter": "123456"
+                          },
                           "properties": {
                             "amountGross": {
                               "description": "Money object with amount and currency",
@@ -15647,6 +17092,9 @@
                           "additionalProperties": false,
                           "nullable": true,
                           "description": "global connected purchase order",
+                          "example": {
+                            "id": "123456"
+                          },
                           "properties": {
                             "id": {
                               "type": "string",
@@ -15713,6 +17161,9 @@
                           "type": "object",
                           "additionalProperties": false,
                           "description": "related project ID",
+                          "example": {
+                            "id": "1"
+                          },
                           "properties": {
                             "id": {
                               "type": "string",
@@ -30126,6 +31577,15 @@
                         "name": {
                           "type": "string",
                           "description": "Name of the product."
+                        },
+                        "number": {
+                          "type": "string",
+                          "description": "Number / SKU of the product."
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Timestamp of when the product was updated."
                         }
                       }
                     }
@@ -30137,7 +31597,9 @@
                       "data": {
                         "id": "1",
                         "uuid": "018a2690-647a-7a8b-b100-cfc11ab7d4e8",
-                        "name": "Screw M10x20"
+                        "name": "Screw M10x20",
+                        "number": "P123456",
+                        "updatedAt": "2024-02-16T14:32:41+02:00"
                       }
                     }
                   }
