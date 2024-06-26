@@ -73417,17 +73417,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unable to authenticate the client",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                }
-              }
-            }
-          },
           "403": {
             "description": "Unable to authorize the client"
           },
