@@ -200,8 +200,8 @@
       "description": "PurchasePrices determine the prices used for the purchasing of products."
     },
     {
-      "name": "Report Builder",
-      "description": "Report Builder API endpoints for accessing Analytics Platform."
+      "name": "Report",
+      "description": "Report Module allows you to generate reports and query your data via the Xentral Analytics Platform."
     },
     {
       "name": "Return",
@@ -25774,6 +25774,45 @@
                               }
                             }
                           },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "selectedOptions": {
                             "type": "array",
                             "items": {
@@ -25806,6 +25845,36 @@
                                       },
                                       "sort": {
                                         "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
                                       }
                                     }
                                   }
@@ -27897,6 +27966,45 @@
                               }
                             }
                           },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "selectedOptions": {
                             "type": "array",
                             "items": {
@@ -27929,6 +28037,36 @@
                                       },
                                       "sort": {
                                         "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
                                       }
                                     }
                                   }
