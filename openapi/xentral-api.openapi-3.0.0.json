@@ -200,8 +200,8 @@
       "description": "PurchasePrices determine the prices used for the purchasing of products."
     },
     {
-      "name": "Report Builder",
-      "description": "Report Builder API endpoints for accessing Analytics Platform."
+      "name": "Report",
+      "description": "Report Module allows you to generate reports and query your data via the Xentral Analytics Platform."
     },
     {
       "name": "Return",
@@ -8455,221 +8455,6 @@
         }
       }
     },
-    "/api/deliveryTerms": {
-      "get": {
-        "tags": [
-          "Delivery Terms"
-        ],
-        "operationId": "DeliveryTerms.list",
-        "summary": "List Delivery Terms",
-        "description": "Lists existing Delivery Terms",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "style": "deepObject",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "key": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "designation"
-                    ]
-                  },
-                  "op": {
-                    "type": "string",
-                    "enum": [
-                      "equals",
-                      "notEquals",
-                      "in",
-                      "notIn",
-                      "exactlyIn",
-                      "allIn",
-                      "allNotIn",
-                      "contains",
-                      "notContains",
-                      "startsWith",
-                      "endsWith",
-                      "greaterThan",
-                      "lessThan",
-                      "is"
-                    ]
-                  },
-                  "value": {
-                    "oneOf": [
-                      {
-                        "type": "string",
-                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                        "title": "String"
-                      },
-                      {
-                        "type": "array",
-                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                        "title": "Array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "style": "deepObject",
-            "schema": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "number",
-                "size"
-              ],
-              "properties": {
-                "number": {
-                  "type": "string",
-                  "pattern": "\\d+",
-                  "description": "Page number should be an integer greater than or equal to 1"
-                },
-                "size": {
-                  "type": "string",
-                  "pattern": "\\d+",
-                  "description": "Page size should usually be an integer between 10 and 50."
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delivery Terms list",
-            "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": [
-                    "data",
-                    "extra"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "required": [
-                          "id",
-                          "designation"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
-                          },
-                          "uuid": {
-                            "description": "UUID identifier of the resource.",
-                            "type": "string",
-                            "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
-                            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
-                          },
-                          "designation": {
-                            "type": "string",
-                            "description": "Designation of delivery term",
-                            "example": "Term"
-                          }
-                        }
-                      }
-                    },
-                    "extra": {
-                      "type": "object",
-                      "required": [
-                        "totalCount",
-                        "page"
-                      ],
-                      "additionalProperties": false,
-                      "x-description-ignore": true,
-                      "properties": {
-                        "totalCount": {
-                          "description": "the total count of all items",
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "page": {
-                          "description": "The pagination object containing the current page number and size",
-                          "type": "object",
-                          "required": [
-                            "number",
-                            "size"
-                          ],
-                          "additionalProperties": false,
-                          "properties": {
-                            "number": {
-                              "description": "The current page number",
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "size": {
-                              "description": "The size of the pages",
-                              "type": "integer",
-                              "example": 10
-                            }
-                          },
-                          "example": {
-                            "number": 1,
-                            "size": 10
-                          }
-                        }
-                      },
-                      "example": {
-                        "totalCount": 1,
-                        "page": {
-                          "number": 1,
-                          "size": 10
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unable to authenticate the client",
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "404": {
-            "description": "Resource was not found or not enough access privileges"
-          },
-          "406": {
-            "description": "Requested resource representation does not exist."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
-      }
-    },
     "/api/deliveryNotesTags": {
       "get": {
         "tags": [
@@ -8907,6 +8692,221 @@
           },
           "403": {
             "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/deliveryTerms": {
+      "get": {
+        "tags": [
+          "Delivery Terms"
+        ],
+        "operationId": "DeliveryTerms.list",
+        "summary": "List Delivery Terms",
+        "description": "Lists existing Delivery Terms",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "designation"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delivery Terms list",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "designation"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "uuid": {
+                            "description": "UUID identifier of the resource.",
+                            "type": "string",
+                            "pattern": "^$|^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                            "example": "a00fd11e-3a67-433b-83c0-4e815fd4a0e1"
+                          },
+                          "designation": {
+                            "type": "string",
+                            "description": "Designation of delivery term",
+                            "example": "Term"
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
           },
           "406": {
             "description": "Requested resource representation does not exist."
@@ -25010,6 +25010,7 @@
                       "projectName",
                       "purchasePriceNet",
                       "purchasePriceGross",
+                      "salesChannel",
                       "salesPriceNet",
                       "salesPriceGross",
                       "shopPriceDisplay",
@@ -25774,6 +25775,45 @@
                               }
                             }
                           },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "selectedOptions": {
                             "type": "array",
                             "items": {
@@ -25806,6 +25846,36 @@
                                       },
                                       "sort": {
                                         "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
                                       }
                                     }
                                   }
@@ -27897,6 +27967,45 @@
                               }
                             }
                           },
+                          "options": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "values": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sort": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "selectedOptions": {
                             "type": "array",
                             "items": {
@@ -27929,6 +28038,36 @@
                                       },
                                       "sort": {
                                         "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "variants": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
                                       }
                                     }
                                   }
