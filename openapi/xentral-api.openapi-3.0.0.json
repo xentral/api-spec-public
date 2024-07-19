@@ -21857,6 +21857,62 @@
                       }
                     }
                   },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
+                      }
+                    }
+                  },
                   "freeFields": {
                     "type": "array",
                     "nullable": true,
@@ -22728,6 +22784,62 @@
                       }
                     }
                   },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
+                      }
+                    }
+                  },
                   "freeFields": {
                     "type": "array",
                     "nullable": true,
@@ -23576,6 +23688,62 @@
                         "type": "number",
                         "format": "float",
                         "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
+                      }
+                    }
+                  },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
                       }
                     }
                   },
@@ -24508,6 +24676,62 @@
                         "type": "number",
                         "format": "float",
                         "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
+                      }
+                    }
+                  },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
                       }
                     }
                   },
@@ -25575,6 +25799,62 @@
                                 "type": "number",
                                 "format": "float",
                                 "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
+                              }
+                            }
+                          },
+                          "stockTaking": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for stock taking.",
+                            "properties": {
+                              "hasStockTakingValue": {
+                                "type": "boolean",
+                                "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                              },
+                              "stockTakingValue": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "Shows the stock taking value for stock taking."
+                              }
+                            }
+                          },
+                          "calculatedPurchasePrice": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for the calculated purchase price.",
+                            "properties": {
+                              "hasCalculatedPurchasePrice": {
+                                "type": "boolean",
+                                "description": "Shows if the calculatedPurchasePrice should be used."
+                              },
+                              "price": {
+                                "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                                "example": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "amount": {
+                                    "description": "A string representing the amount",
+                                    "type": "string",
+                                    "format": "float"
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "pattern": "[A-Z]{3}",
+                                    "enum": [
+                                      "EUR",
+                                      "PLN",
+                                      "CHF",
+                                      "USD",
+                                      "GBP"
+                                    ],
+                                    "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                    "example": "PLN"
+                                  }
+                                }
                               }
                             }
                           },
@@ -26765,6 +27045,62 @@
                             "type": "boolean",
                             "description": "Shows if the product is a matrix product."
                           },
+                          "stockTaking": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for stock taking.",
+                            "properties": {
+                              "hasStockTakingValue": {
+                                "type": "boolean",
+                                "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                              },
+                              "stockTakingValue": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "Shows the stock taking value for stock taking."
+                              }
+                            }
+                          },
+                          "calculatedPurchasePrice": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for the calculated purchase price.",
+                            "properties": {
+                              "hasCalculatedPurchasePrice": {
+                                "type": "boolean",
+                                "description": "Shows if the calculatedPurchasePrice should be used."
+                              },
+                              "price": {
+                                "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                                "example": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "amount": {
+                                    "description": "A string representing the amount",
+                                    "type": "string",
+                                    "format": "float"
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "pattern": "[A-Z]{3}",
+                                    "enum": [
+                                      "EUR",
+                                      "PLN",
+                                      "CHF",
+                                      "USD",
+                                      "GBP"
+                                    ],
+                                    "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                    "example": "PLN"
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "salesChannel": {
                             "x-description-missing": true,
                             "type": "object",
@@ -27767,6 +28103,62 @@
                                 "type": "number",
                                 "format": "float",
                                 "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
+                              }
+                            }
+                          },
+                          "stockTaking": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for stock taking.",
+                            "properties": {
+                              "hasStockTakingValue": {
+                                "type": "boolean",
+                                "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                              },
+                              "stockTakingValue": {
+                                "type": "number",
+                                "format": "float",
+                                "description": "Shows the stock taking value for stock taking."
+                              }
+                            }
+                          },
+                          "calculatedPurchasePrice": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for the calculated purchase price.",
+                            "properties": {
+                              "hasCalculatedPurchasePrice": {
+                                "type": "boolean",
+                                "description": "Shows if the calculatedPurchasePrice should be used."
+                              },
+                              "price": {
+                                "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                                "example": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "amount": {
+                                    "description": "A string representing the amount",
+                                    "type": "string",
+                                    "format": "float"
+                                  },
+                                  "currency": {
+                                    "type": "string",
+                                    "pattern": "[A-Z]{3}",
+                                    "enum": [
+                                      "EUR",
+                                      "PLN",
+                                      "CHF",
+                                      "USD",
+                                      "GBP"
+                                    ],
+                                    "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                    "example": "PLN"
+                                  }
+                                }
                               }
                             }
                           },
@@ -29016,6 +29408,62 @@
                         }
                       }
                     },
+                    "stockTaking": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Contains settings for stock taking.",
+                      "properties": {
+                        "hasStockTakingValue": {
+                          "type": "boolean",
+                          "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                        },
+                        "stockTakingValue": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Shows the stock taking value for stock taking."
+                        }
+                      }
+                    },
+                    "calculatedPurchasePrice": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Contains settings for the calculated purchase price.",
+                      "properties": {
+                        "hasCalculatedPurchasePrice": {
+                          "type": "boolean",
+                          "description": "Sets if the calculatedPurchasePrice should be used."
+                        },
+                        "price": {
+                          "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                          "example": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217.",
+                              "example": "PLN"
+                            }
+                          }
+                        }
+                      }
+                    },
                     "regionOfOrigin": {
                       "type": "string",
                       "enum": [
@@ -29842,6 +30290,62 @@
                           "type": "number",
                           "format": "float",
                           "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
+                        }
+                      }
+                    },
+                    "stockTaking": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Contains settings for stock taking.",
+                      "properties": {
+                        "hasStockTakingValue": {
+                          "type": "boolean",
+                          "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                        },
+                        "stockTakingValue": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Shows the stock taking value for stock taking."
+                        }
+                      }
+                    },
+                    "calculatedPurchasePrice": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Contains settings for the calculated purchase price.",
+                      "properties": {
+                        "hasCalculatedPurchasePrice": {
+                          "type": "boolean",
+                          "description": "Sets if the calculatedPurchasePrice should be used."
+                        },
+                        "price": {
+                          "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                          "example": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          },
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "amount": {
+                              "description": "A string representing the amount",
+                              "type": "string",
+                              "format": "float"
+                            },
+                            "currency": {
+                              "type": "string",
+                              "pattern": "[A-Z]{3}",
+                              "enum": [
+                                "EUR",
+                                "PLN",
+                                "CHF",
+                                "USD",
+                                "GBP"
+                              ],
+                              "description": "Currency matches one of currency values as specified in ISO-4217.",
+                              "example": "PLN"
+                            }
+                          }
                         }
                       }
                     },
@@ -31075,6 +31579,62 @@
                             }
                           }
                         },
+                        "stockTaking": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for stock taking.",
+                          "properties": {
+                            "hasStockTakingValue": {
+                              "type": "boolean",
+                              "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                            },
+                            "stockTakingValue": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "Shows the stock taking value for stock taking."
+                            }
+                          }
+                        },
+                        "calculatedPurchasePrice": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for the calculated purchase price.",
+                          "properties": {
+                            "hasCalculatedPurchasePrice": {
+                              "type": "boolean",
+                              "description": "Shows if the calculatedPurchasePrice should be used."
+                            },
+                            "price": {
+                              "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                              "example": {
+                                "amount": "13.37",
+                                "currency": "EUR"
+                              },
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "amount": {
+                                  "description": "A string representing the amount",
+                                  "type": "string",
+                                  "format": "float"
+                                },
+                                "currency": {
+                                  "type": "string",
+                                  "pattern": "[A-Z]{3}",
+                                  "enum": [
+                                    "EUR",
+                                    "PLN",
+                                    "CHF",
+                                    "USD",
+                                    "GBP"
+                                  ],
+                                  "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                  "example": "PLN"
+                                }
+                              }
+                            }
+                          }
+                        },
                         "options": {
                           "type": "array",
                           "items": {
@@ -31828,6 +32388,62 @@
                             }
                           }
                         },
+                        "stockTaking": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for stock taking.",
+                          "properties": {
+                            "hasStockTakingValue": {
+                              "type": "boolean",
+                              "description": "Shows if the stock taking value should be used instead of the purchase price for stock taking."
+                            },
+                            "stockTakingValue": {
+                              "type": "number",
+                              "format": "float",
+                              "description": "Shows the stock taking value for stock taking."
+                            }
+                          }
+                        },
+                        "calculatedPurchasePrice": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for the calculated purchase price.",
+                          "properties": {
+                            "hasCalculatedPurchasePrice": {
+                              "type": "boolean",
+                              "description": "Shows if the calculatedPurchasePrice should be used."
+                            },
+                            "price": {
+                              "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                              "example": {
+                                "amount": "13.37",
+                                "currency": "EUR"
+                              },
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "amount": {
+                                  "description": "A string representing the amount",
+                                  "type": "string",
+                                  "format": "float"
+                                },
+                                "currency": {
+                                  "type": "string",
+                                  "pattern": "[A-Z]{3}",
+                                  "enum": [
+                                    "EUR",
+                                    "PLN",
+                                    "CHF",
+                                    "USD",
+                                    "GBP"
+                                  ],
+                                  "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                  "example": "PLN"
+                                }
+                              }
+                            }
+                          }
+                        },
                         "salesChannel": {
                           "x-description-missing": true,
                           "type": "object",
@@ -32348,6 +32964,10 @@
                           "type": "string",
                           "description": "Number / SKU of the product."
                         },
+                        "isVariant": {
+                          "type": "boolean",
+                          "description": "Shows if the product is a variant of another product."
+                        },
                         "updatedAt": {
                           "type": "string",
                           "format": "date-time",
@@ -32365,6 +32985,7 @@
                         "uuid": "018a2690-647a-7a8b-b100-cfc11ab7d4e8",
                         "name": "Screw M10x20",
                         "number": "P123456",
+                        "isVariant": true,
                         "updatedAt": "2024-02-16T14:32:41+02:00"
                       }
                     }
@@ -33195,6 +33816,62 @@
                         "type": "number",
                         "format": "float",
                         "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
+                      }
+                    }
+                  },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
                       }
                     }
                   },
@@ -34073,6 +34750,62 @@
                         "type": "number",
                         "format": "float",
                         "description": "Sets the discount value if the product is a discount. For more information have a look into our handbook."
+                      }
+                    }
+                  },
+                  "stockTaking": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for stock taking.",
+                    "properties": {
+                      "hasStockTakingValue": {
+                        "type": "boolean",
+                        "description": "Determines if the stock taking value should be used instead of the purchase price for stock taking."
+                      },
+                      "stockTakingValue": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Sets the stock taking value for stock taking."
+                      }
+                    }
+                  },
+                  "calculatedPurchasePrice": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contains settings for the calculated purchase price.",
+                    "properties": {
+                      "hasCalculatedPurchasePrice": {
+                        "type": "boolean",
+                        "description": "Sets if the calculatedPurchasePrice should be used."
+                      },
+                      "price": {
+                        "description": "Money object with amount and currency. If no currency is set, EUR is returned.",
+                        "example": {
+                          "amount": "13.37",
+                          "currency": "EUR"
+                        },
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "amount": {
+                            "description": "A string representing the amount",
+                            "type": "string",
+                            "format": "float"
+                          },
+                          "currency": {
+                            "type": "string",
+                            "pattern": "[A-Z]{3}",
+                            "enum": [
+                              "EUR",
+                              "PLN",
+                              "CHF",
+                              "USD",
+                              "GBP"
+                            ],
+                            "description": "Currency matches one of currency values as specified in ISO-4217.",
+                            "example": "PLN"
+                          }
+                        }
                       }
                     }
                   },
@@ -52723,7 +53456,7 @@
         ],
         "operationId": "purchaseOrder.update",
         "summary": "Update existing purchase order",
-        "description": "Updates an existing purchase order.",
+        "description": "Updates an existing purchase order as long as no writing protection is active. When the writing protection is active only isConfirmed, confirmedVia, confirmedDeliveryDate and salesOrderConfirmationReference can be updated.",
         "parameters": [
           {
             "in": "path",
@@ -52853,7 +53586,7 @@
                   },
                   "salesOrderConfirmationReference": {
                     "type": "string",
-                    "description": "Reference of the sales order confirmation."
+                    "description": "Reference of the sales order confirmation. Can be updated even if the write protection is active."
                   },
                   "isConfirmationRequested": {
                     "type": "boolean",
@@ -52881,7 +53614,7 @@
                   },
                   "isConfirmed": {
                     "type": "boolean",
-                    "description": "Shows if the purchase order is confirmed."
+                    "description": "Shows if the purchase order is confirmed. Can be updated even if the write protection is active."
                   },
                   "confirmedVia": {
                     "type": "string",
@@ -52894,7 +53627,7 @@
                       "Other"
                     ],
                     "default": "Internet",
-                    "description": "Determines how the purchase order was confirmed."
+                    "description": "Determines how the purchase order was confirmed. Can be updated even if the write protection is active."
                   },
                   "financials": {
                     "type": "object",
@@ -53072,7 +53805,7 @@
                             "type": "string",
                             "format": "date",
                             "nullable": true,
-                            "description": "Confirmed delivery date of the purchase order."
+                            "description": "Confirmed delivery date of the purchase order. Can be updated even if the write protection is active."
                           }
                         }
                       }
