@@ -6825,7 +6825,8 @@
                               "id": "1337"
                             }
                           }
-                        }
+                        },
+                        "description": "Data representation of a single delivery aka shipment"
                       }
                     },
                     "extra": {
@@ -6897,6 +6898,334 @@
           },
           "429": {
             "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/deliveries/{id}": {
+      "get": {
+        "tags": [
+          "Delivery"
+        ],
+        "operationId": "delivery.view",
+        "summary": "[EARLY ACCESS] View delivery aka shipment",
+        "description": "Returns details of a delivery aka shipment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "deliveryNote",
+                        "tracking",
+                        "salesOrder",
+                        "shippingMethod"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "tracking": {
+                          "type": "object",
+                          "required": [
+                            "number"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "string",
+                              "description": "The tracking number provided by the carrier."
+                            },
+                            "link": {
+                              "type": "string",
+                              "description": "Carrier tracking link"
+                            },
+                            "carrier": {
+                              "type": "string",
+                              "description": "Carrier that shipping the delivery"
+                            }
+                          },
+                          "description": "Tracking information for the delivery",
+                          "example": {
+                            "number": "101010101010101"
+                          }
+                        },
+                        "deliveryNote": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "salesOrder": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "shippingMethod": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        }
+                      },
+                      "description": "Data representation of a single delivery aka shipment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          }
+        }
+      }
+    },
+    "/api/shipments/{id}": {
+      "get": {
+        "tags": [
+          "Delivery"
+        ],
+        "operationId": "shipment.view",
+        "summary": "[EARLY ACCESS] View shipment aka delivery",
+        "description": "Returns details of a shipment aka delivery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "deliveryNote",
+                        "tracking",
+                        "salesOrder",
+                        "shippingMethod"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "tracking": {
+                          "type": "object",
+                          "required": [
+                            "number"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "type": "string",
+                              "description": "The tracking number provided by the carrier."
+                            },
+                            "link": {
+                              "type": "string",
+                              "description": "Carrier tracking link"
+                            },
+                            "carrier": {
+                              "type": "string",
+                              "description": "Carrier that shipping the delivery"
+                            }
+                          },
+                          "description": "Tracking information for the delivery",
+                          "example": {
+                            "number": "101010101010101"
+                          }
+                        },
+                        "deliveryNote": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "salesOrder": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "shippingMethod": {
+                          "description": "Nullable reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        }
+                      },
+                      "description": "Data representation of a single delivery aka shipment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
           }
         }
       }
@@ -8686,6 +9015,768 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/deliveryNotes/{id}/deliveries": {
+      "get": {
+        "tags": [
+          "Delivery Note"
+        ],
+        "operationId": "deliveryNote.deliveries.list",
+        "summary": "[EARLY ACCESS] View delivery note deliveries aka shipments",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delivery list",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "deliveryNote",
+                          "tracking",
+                          "salesOrder",
+                          "shippingMethod"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "tracking": {
+                            "type": "object",
+                            "required": [
+                              "number"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "number": {
+                                "type": "string",
+                                "description": "The tracking number provided by the carrier."
+                              },
+                              "link": {
+                                "type": "string",
+                                "description": "Carrier tracking link"
+                              },
+                              "carrier": {
+                                "type": "string",
+                                "description": "Carrier that shipping the delivery"
+                              }
+                            },
+                            "description": "Tracking information for the delivery",
+                            "example": {
+                              "number": "101010101010101"
+                            }
+                          },
+                          "deliveryNote": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          },
+                          "salesOrder": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          },
+                          "shippingMethod": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          }
+                        },
+                        "description": "Data representation of a single delivery aka shipment"
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/deliveryNotes/{id}/shipments": {
+      "get": {
+        "tags": [
+          "Delivery Note"
+        ],
+        "operationId": "deliveryNote.shipments.list",
+        "summary": "[EARLY ACCESS] View delivery note shipments aka deliveries",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delivery list",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "deliveryNote",
+                          "tracking",
+                          "salesOrder",
+                          "shippingMethod"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "tracking": {
+                            "type": "object",
+                            "required": [
+                              "number"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "number": {
+                                "type": "string",
+                                "description": "The tracking number provided by the carrier."
+                              },
+                              "link": {
+                                "type": "string",
+                                "description": "Carrier tracking link"
+                              },
+                              "carrier": {
+                                "type": "string",
+                                "description": "Carrier that shipping the delivery"
+                              }
+                            },
+                            "description": "Tracking information for the delivery",
+                            "example": {
+                              "number": "101010101010101"
+                            }
+                          },
+                          "deliveryNote": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          },
+                          "salesOrder": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          },
+                          "shippingMethod": {
+                            "description": "Nullable reference to another resource",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "nullable": true,
+                            "required": [
+                              "id"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              }
+                            },
+                            "example": {
+                              "id": "1337"
+                            }
+                          }
+                        },
+                        "description": "Data representation of a single delivery aka shipment"
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
