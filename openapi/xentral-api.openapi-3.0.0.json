@@ -80,6 +80,10 @@
       "description": "Employees"
     },
     {
+      "name": "Exchange Rates",
+      "description": "Exchange rates provided by EXR Service."
+    },
+    {
       "name": "External Reference",
       "description": "External shop references that are linked to a product."
     },
@@ -106,6 +110,14 @@
     {
       "name": "Liability",
       "description": "Returns a collection with all liabilities."
+    },
+    {
+      "name": "Matrixproduct",
+      "description": "Manage options for products."
+    },
+    {
+      "name": "Mobile Picking Tote",
+      "description": "A picking tote resource."
     },
     {
       "name": "Oauth",
@@ -442,6 +454,7 @@
                   },
                   "billingAddress": {
                     "type": "object",
+                    "description": "Billing address of the customer.",
                     "additionalProperties": false,
                     "required": [
                       "name",
@@ -456,6 +469,12 @@
                     ],
                     "nullable": true,
                     "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      },
                       "name": {
                         "type": "string"
                       },
@@ -486,7 +505,23 @@
                       "country": {
                         "type": "string",
                         "pattern": "[A-Z]{2}"
+                      },
+                      "email": {
+                        "type": "string",
+                        "nullable": true
                       }
+                    },
+                    "example": {
+                      "id": "1",
+                      "name": "John Doe",
+                      "contactPerson": "",
+                      "department": "",
+                      "subdivision": "",
+                      "street": "Street 10",
+                      "additionalDetails": "",
+                      "city": "Berlin",
+                      "zipCode": "10101",
+                      "country": "DE"
                     }
                   },
                   "paymentMethodName": {
@@ -494,6 +529,7 @@
                   },
                   "paymentStatus": {
                     "type": "string",
+                    "description": "Status of the payment.",
                     "enum": [
                       "pending",
                       "paid",
@@ -501,8 +537,10 @@
                       "canceled",
                       "partialCancellation",
                       "badDebt",
-                      "debited"
-                    ]
+                      "debited",
+                      "unknown"
+                    ],
+                    "example": "pending"
                   },
                   "gln": {
                     "type": "string",
@@ -566,7 +604,8 @@
                         "quantity": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "double"
+                          "format": "double",
+                          "example": 2
                         },
                         "price": {
                           "description": "Money object with amount and currency",
@@ -580,7 +619,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -599,12 +639,14 @@
                         },
                         "vatCategory": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "reduced"
                         },
                         "taxRate": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "example": 38.45
                         },
                         "discounts": {
                           "x-description-missing": true,
@@ -615,8 +657,12 @@
                               "x-description-missing": true,
                               "type": "number",
                               "format": "float",
-                              "nullable": true
+                              "nullable": true,
+                              "example": 38.45
                             }
+                          },
+                          "example": {
+                            "totalPercent": 38.45
                           }
                         }
                       }
@@ -679,7 +725,7 @@
                   "documentNumber": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 20
+                    "maxLength": 35
                   }
                 }
               },
@@ -1141,12 +1187,14 @@
                           "number": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "2024-900000"
                           },
                           "date": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date"
+                            "format": "date",
+                            "example": "2024-05-29"
                           },
                           "status": {
                             "x-description-missing": true,
@@ -1157,7 +1205,8 @@
                               "created",
                               "closed",
                               "canceled"
-                            ]
+                            ],
+                            "example": "created"
                           },
                           "amount": {
                             "x-description-missing": true,
@@ -1175,6 +1224,10 @@
                               "currencyCode": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "amount": "142.78",
+                              "currencyCode": "EUR"
                             }
                           },
                           "invoice": {
@@ -1189,6 +1242,9 @@
                               "number": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "number": "2022-400085"
                             }
                           },
                           "address": {
@@ -1218,6 +1274,12 @@
                               "country": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "18",
+                              "name": "Richard E.",
+                              "customerNumber": "10011",
+                              "country": "DE"
                             }
                           },
                           "project": {
@@ -1243,6 +1305,11 @@
                               "abbreviation": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "5",
+                              "name": "Amazon FBM",
+                              "abbreviation": "FBM"
                             }
                           },
                           "payment": {
@@ -1261,6 +1328,10 @@
                               "status": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "method": "shopify_payments",
+                              "status": "offen"
                             }
                           },
                           "paymentTransaction": {
@@ -1282,6 +1353,10 @@
                               "paymentStatus": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "2",
+                              "paymentStatus": "recorded"
                             }
                           },
                           "updatedBy": {
@@ -1306,7 +1381,8 @@
                           "updatedAt": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2021-12-15T11:31:44+01:00"
                           },
                           "tags": {
                             "description": "A list of tags",
@@ -1456,17 +1532,20 @@
                         "number": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "9000000"
                         },
                         "date": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date"
+                          "format": "date",
+                          "example": "2021-11-08"
                         },
                         "createdAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2021-12-09T10:16:07+01:00"
                         },
                         "createdBy": {
                           "x-description-missing": true,
@@ -1480,13 +1559,17 @@
                             "name": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "name": "Administrator"
                           }
                         },
                         "sentAt": {
                           "x-description-missing": true,
                           "type": "string",
                           "format": "date-time",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "2021-12-09T10:19:18+01:00"
                         },
                         "sentBy": {
                           "x-description-missing": true,
@@ -1500,12 +1583,16 @@
                             "name": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "name": "Administrator"
                           }
                         },
                         "updatedAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2023-01-13T10:43:58+01:00"
                         },
                         "grossValue": {
                           "description": "Money object with amount and currency",
@@ -1519,7 +1606,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -1548,7 +1636,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -1567,7 +1656,8 @@
                         },
                         "costCenter": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "41000"
                         },
                         "status": {
                           "x-description-missing": true,
@@ -1578,7 +1668,8 @@
                             "created",
                             "closed",
                             "canceled"
-                          ]
+                          ],
+                          "example": "sent"
                         },
                         "project": {
                           "x-description-missing": true,
@@ -1594,6 +1685,10 @@
                             "name": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "id": "2",
+                            "name": "B2C"
                           }
                         },
                         "customer": {
@@ -1610,6 +1705,10 @@
                             "name": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "id": "1",
+                            "name": "John Doe"
                           }
                         },
                         "tags": {
@@ -1642,16 +1741,18 @@
                         "externalOrderReference": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "1005"
                         },
                         "devCustomer": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "dev"
                         },
                         "billingAddress": {
-                          "x-description-missing": true,
                           "type": "object",
+                          "description": "Billing address of the customer.",
                           "additionalProperties": false,
                           "required": [
                             "name",
@@ -1666,6 +1767,12 @@
                           ],
                           "nullable": true,
                           "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            },
                             "name": {
                               "type": "string"
                             },
@@ -1673,16 +1780,19 @@
                               "type": "string"
                             },
                             "department": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "subdivision": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "street": {
                               "type": "string"
                             },
                             "additionalDetails": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "city": {
                               "type": "string"
@@ -1693,16 +1803,33 @@
                             "country": {
                               "type": "string",
                               "pattern": "[A-Z]{2}"
+                            },
+                            "email": {
+                              "type": "string",
+                              "nullable": true
                             }
+                          },
+                          "example": {
+                            "id": "1",
+                            "name": "John Doe",
+                            "contactPerson": "",
+                            "department": "",
+                            "subdivision": "",
+                            "street": "Street 10",
+                            "additionalDetails": "",
+                            "city": "Berlin",
+                            "zipCode": "10101",
+                            "country": "DE"
                           }
                         },
                         "paymentMethodName": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "invoice"
                         },
                         "paymentStatus": {
-                          "x-description-missing": true,
                           "type": "string",
+                          "description": "Status of the payment.",
                           "enum": [
                             "pending",
                             "paid",
@@ -1712,16 +1839,19 @@
                             "badDebt",
                             "debited",
                             "unknown"
-                          ]
+                          ],
+                          "example": "pending"
                         },
                         "gln": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "12345"
                         },
                         "taxation": {
                           "x-description-missing": true,
-                          "type": "number"
+                          "type": "number",
+                          "example": 0
                         },
                         "positions": {
                           "type": "array",
@@ -1783,7 +1913,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -1815,6 +1946,78 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "id": "125",
+                        "number": "9000110",
+                        "date": "2022-02-03",
+                        "createdAt": "2022-02-03T10:18:40+01:00",
+                        "createdBy": {
+                          "name": "John Doe"
+                        },
+                        "sentAt": "2022-02-03T10:19:31+01:00",
+                        "sentBy": {
+                          "name": "John Doe"
+                        },
+                        "updatedAt": "2022-02-03T10:19:34+01:00",
+                        "grossValue": {
+                          "amount": "50.00",
+                          "currency": "EUR"
+                        },
+                        "netValue": {
+                          "amount": "42.02",
+                          "currency": "EUR"
+                        },
+                        "costCenter": "",
+                        "status": "sent",
+                        "tags": [],
+                        "project": {
+                          "id": "6",
+                          "name": "Shopware"
+                        },
+                        "customer": {
+                          "id": "3632",
+                          "name": "John Doe"
+                        },
+                        "externalOrderReference": "62720",
+                        "devCustomer": "",
+                        "billingAddress": {
+                          "id": "1",
+                          "name": "John Doe",
+                          "contactPerson": "",
+                          "department": "",
+                          "subdivision": "",
+                          "street": "Street 10",
+                          "additionalDetails": "",
+                          "city": "Berlin",
+                          "zipCode": "10101",
+                          "country": "DE"
+                        },
+                        "paymentMethodName": "invoice",
+                        "paymentStatus": "pending",
+                        "gln": "12345",
+                        "taxation": 0,
+                        "positions": [
+                          {
+                            "id": 418,
+                            "position": 1,
+                            "salesOrderPosition": {
+                              "id": "16216"
+                            },
+                            "createdAt": "2022-02-03T10:18:40+01:00",
+                            "productId": 1689,
+                            "productNumber": "FR5248977",
+                            "description": "Article 1",
+                            "quantity": 1,
+                            "price": {
+                              "amount": "47.05",
+                              "currency": "EUR"
+                            },
+                            "vatCategory": "normal",
+                            "taxRate": 0,
+                            "discount": 0
+                          }
+                        ]
                       }
                     }
                   }
@@ -2678,7 +2881,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -2726,7 +2930,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -2750,6 +2955,28 @@
                                 }
                               }
                             }
+                          },
+                          "example": {
+                            "invoices": [
+                              {
+                                "id": "1",
+                                "amount": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "date": "2023-08-13T14:45:36+02:00"
+                              }
+                            ],
+                            "creditNotes": [
+                              {
+                                "id": "1",
+                                "amount": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "date": "2023-08-13T14:45:36+02:00"
+                              }
+                            ]
                           }
                         },
                         "payments": {
@@ -2841,7 +3068,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -2867,6 +3095,31 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "documents": {
+                          "invoices": [
+                            {
+                              "id": "87",
+                              "amount": {
+                                "amount": "1483.63",
+                                "currency": "EUR"
+                              },
+                              "date": "2024-03-08T00:00:00+01:00"
+                            }
+                          ],
+                          "creditNotes": [
+                            {
+                              "id": "2",
+                              "amount": {
+                                "amount": "24.99",
+                                "currency": "EUR"
+                              },
+                              "date": "2024-06-17T00:00:00+02:00"
+                            }
+                          ]
+                        },
+                        "payments": []
                       }
                     }
                   }
@@ -3294,6 +3547,46 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "salesOrder": [
+                          {
+                            "id": "1011",
+                            "status": "completed",
+                            "number": "200735",
+                            "url": "https://example.xentral.biz?module=auftrag&action=pdf&id=1011",
+                            "date": "2022-01-23"
+                          }
+                        ],
+                        "deliveryNotes": [
+                          {
+                            "id": "729",
+                            "status": "sent",
+                            "number": "300704",
+                            "url": "https://example.xentral.biz?module=lieferschein&action=pdf&id=729",
+                            "date": "2022-01-24"
+                          }
+                        ],
+                        "invoices": [
+                          {
+                            "id": "125",
+                            "status": "canceled",
+                            "number": "1200712",
+                            "url": "https://example.xentral.biz?module=rechnung&action=pdf&id=125",
+                            "date": "2022-01-24"
+                          }
+                        ],
+                        "pdfArchives": [
+                          {
+                            "id": "8571",
+                            "name": "125_20220203_GS9000110.pdf",
+                            "createdBy": {
+                              "name": "John Doe"
+                            },
+                            "url": "https://example.xentral.biz?module=gutschrift&action=pdffromarchive&id=8571",
+                            "date": "2022-02-03 10:19:27"
+                          }
+                        ]
                       }
                     }
                   }
@@ -3557,7 +3850,8 @@
                     "quantity": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "double"
+                      "format": "double",
+                      "example": 2
                     },
                     "price": {
                       "description": "Money object with amount and currency",
@@ -3571,7 +3865,8 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float"
+                          "format": "float",
+                          "example": "24.99"
                         },
                         "currency": {
                           "type": "string",
@@ -3590,12 +3885,14 @@
                     },
                     "vatCategory": {
                       "x-description-missing": true,
-                      "type": "string"
+                      "type": "string",
+                      "example": "reduced"
                     },
                     "taxRate": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "float"
+                      "format": "float",
+                      "example": 38.45
                     },
                     "discounts": {
                       "x-description-missing": true,
@@ -3606,8 +3903,12 @@
                           "x-description-missing": true,
                           "type": "number",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "example": 38.45
                         }
+                      },
+                      "example": {
+                        "totalPercent": 38.45
                       }
                     }
                   }
@@ -3933,7 +4234,8 @@
                     "quantity": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "double"
+                      "format": "double",
+                      "example": 1
                     },
                     "price": {
                       "description": "Money object with amount and currency",
@@ -3947,7 +4249,8 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float"
+                          "format": "float",
+                          "example": "24.99"
                         },
                         "currency": {
                           "type": "string",
@@ -3966,12 +4269,14 @@
                     },
                     "vatCategory": {
                       "x-description-missing": true,
-                      "type": "string"
+                      "type": "string",
+                      "example": "normal"
                     },
                     "taxRate": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "float"
+                      "format": "float",
+                      "example": 19
                     },
                     "discounts": {
                       "x-description-missing": true,
@@ -3982,8 +4287,12 @@
                           "x-description-missing": true,
                           "type": "number",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "example": 15.5
                         }
+                      },
+                      "example": {
+                        "totalPercent": 15.5
                       }
                     }
                   }
@@ -8634,7 +8943,7 @@
                                       "normal",
                                       "exempt"
                                     ],
-                                    "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
+                                    "description": "VAT category. When editing/creating a position only one of `rate` or `vatCategory` must be used.",
                                     "example": "reduced"
                                   },
                                   "rate": {
@@ -8642,7 +8951,7 @@
                                     "format": "float",
                                     "example": 0.5,
                                     "nullable": true,
-                                    "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                                    "description": "VAT rate. When editing/creating a position only one of `rate` or `vatCategory` must be used."
                                   },
                                   "taxText": {
                                     "type": "string",
@@ -12010,14 +12319,17 @@
                   },
                   "externalOrderReference": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "example": "1005"
                   },
                   "devCustomer": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "example": "dev"
                   },
                   "billingAddress": {
                     "type": "object",
+                    "description": "Billing address of the customer.",
                     "additionalProperties": false,
                     "required": [
                       "name",
@@ -12032,6 +12344,12 @@
                     ],
                     "nullable": true,
                     "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      },
                       "name": {
                         "type": "string"
                       },
@@ -12062,7 +12380,23 @@
                       "country": {
                         "type": "string",
                         "pattern": "[A-Z]{2}"
+                      },
+                      "email": {
+                        "type": "string",
+                        "nullable": true
                       }
+                    },
+                    "example": {
+                      "id": "1",
+                      "name": "John Doe",
+                      "contactPerson": "",
+                      "department": "",
+                      "subdivision": "",
+                      "street": "Street 10",
+                      "additionalDetails": "",
+                      "city": "Berlin",
+                      "zipCode": "10101",
+                      "country": "DE"
                     }
                   },
                   "paymentTerms": {
@@ -12078,17 +12412,25 @@
                       "dueDate": {
                         "type": "string",
                         "format": "date-time",
-                        "nullable": true
+                        "nullable": true,
+                        "example": "2022-02-06T00:00:00+01:00"
                       },
                       "earlyPaymentDate": {
                         "type": "string",
                         "format": "date-time",
-                        "nullable": true
+                        "nullable": true,
+                        "example": "2022-01-17T00:00:00+01:00"
                       },
                       "earlyPaymentDiscount": {
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "example": 0.5
                       }
+                    },
+                    "example": {
+                      "earlyPaymentDiscount": 0.5,
+                      "earlyPaymentDate": "2022-01-17T00:00:00+01:00",
+                      "dueDate": "2022-02-06T00:00:00+01:00"
                     }
                   },
                   "paymentMethodName": {
@@ -12096,6 +12438,7 @@
                   },
                   "paymentStatus": {
                     "type": "string",
+                    "description": "Status of the payment.",
                     "enum": [
                       "pending",
                       "paid",
@@ -12103,8 +12446,10 @@
                       "canceled",
                       "partialCancellation",
                       "badDebt",
-                      "debited"
-                    ]
+                      "debited",
+                      "unknown"
+                    ],
+                    "example": "pending"
                   },
                   "gln": {
                     "type": "string",
@@ -12168,7 +12513,8 @@
                         "quantity": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "double"
+                          "format": "double",
+                          "example": 2
                         },
                         "price": {
                           "description": "Money object with amount and currency",
@@ -12182,7 +12528,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -12201,12 +12548,14 @@
                         },
                         "vatCategory": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "reduced"
                         },
                         "taxRate": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "example": 38.45
                         },
                         "discounts": {
                           "x-description-missing": true,
@@ -12217,8 +12566,12 @@
                               "x-description-missing": true,
                               "type": "number",
                               "format": "float",
-                              "nullable": true
+                              "nullable": true,
+                              "example": 38.45
                             }
+                          },
+                          "example": {
+                            "totalPercent": 38.45
                           }
                         }
                       }
@@ -12270,7 +12623,7 @@
                   "documentNumber": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 20
+                    "maxLength": 35
                   }
                 }
               },
@@ -12694,12 +13047,14 @@
                           "number": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "2022-400000"
                           },
                           "date": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2023-06-27T00:00:00+02:00"
                           },
                           "status": {
                             "x-description-missing": true,
@@ -12712,7 +13067,8 @@
                               "completed",
                               "partialCancellation",
                               "unknown"
-                            ]
+                            ],
+                            "example": "sent"
                           },
                           "address": {
                             "x-description-missing": true,
@@ -12733,6 +13089,11 @@
                               "customerNumber": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "name": "Maximilian S.",
+                              "customerNumber": "10002",
+                              "country": "DE"
                             }
                           },
                           "project": {
@@ -12758,6 +13119,11 @@
                               "abbreviation": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "4",
+                              "name": "Amazon FBA",
+                              "abbreviation": "FBA"
                             }
                           },
                           "payment": {
@@ -12799,7 +13165,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -12828,7 +13195,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -12844,6 +13212,18 @@
                                     "example": "PLN"
                                   }
                                 }
+                              }
+                            },
+                            "example": {
+                              "method": "Amazon pay",
+                              "status": "paid",
+                              "debit": {
+                                "amount": "24.99",
+                                "currency": "EUR"
+                              },
+                              "balance": {
+                                "amount": "0.00",
+                                "currency": "EUR"
                               }
                             }
                           },
@@ -12866,7 +13246,13 @@
                                   "type": "string"
                                 }
                               }
-                            }
+                            },
+                            "example": [
+                              {
+                                "key": "orderNumber",
+                                "value": "2231654"
+                              }
+                            ]
                           },
                           "tags": {
                             "description": "A list of tags",
@@ -12917,7 +13303,8 @@
                           "updatedAt": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2022-09-13T12:41:18+02:00"
                           }
                         }
                       }
@@ -13214,12 +13601,14 @@
                         "documentNumber": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "1200132"
                         },
                         "documentDate": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2022-01-07T00:00:00+01:00"
                         },
                         "log": {
                           "x-description-missing": true,
@@ -13235,7 +13624,8 @@
                           "properties": {
                             "createdAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "example": "2022-01-07T13:43:12+01:00"
                             },
                             "createdBy": {
                               "type": "object",
@@ -13248,12 +13638,16 @@
                                 "name": {
                                   "type": "string"
                                 }
+                              },
+                              "example": {
+                                "name": "John Doe"
                               }
                             },
                             "sentAt": {
                               "type": "string",
                               "format": "date-time",
-                              "nullable": true
+                              "nullable": true,
+                              "example": "2022-01-07T13:43:12+01:00"
                             },
                             "sentBy": {
                               "type": "object",
@@ -13266,27 +13660,45 @@
                                 "name": {
                                   "type": "string"
                                 }
+                              },
+                              "example": {
+                                "name": "John Doe"
                               }
                             },
                             "updatedAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "example": "2022-03-31T00:16:03+02:00"
                             }
+                          },
+                          "example": {
+                            "createdAt": "2022-01-07T13:43:12+01:00",
+                            "sentAt": null,
+                            "createdBy": {
+                              "name": "John Doe"
+                            },
+                            "sentBy": {
+                              "name": "John Doe"
+                            },
+                            "updatedAt": "2022-03-31T00:16:03+02:00"
                           }
                         },
                         "amountGross": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "example": 49.99
                         },
                         "amountNet": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "example": 42.01
                         },
                         "costCenter": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "3456"
                         },
                         "status": {
                           "x-description-missing": true,
@@ -13299,7 +13711,8 @@
                             "completed",
                             "partialCancellation",
                             "unknown"
-                          ]
+                          ],
+                          "example": "sent"
                         },
                         "project": {
                           "x-description-missing": true,
@@ -13324,6 +13737,11 @@
                             "abbreviation": {
                               "type": "string"
                             }
+                          },
+                          "example": {
+                            "id": "6",
+                            "name": "Shopware",
+                            "abbreviation": "B2C-SW"
                           }
                         },
                         "customer": {
@@ -13381,19 +13799,20 @@
                         "externalOrderReference": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "62720"
                         },
                         "devCustomer": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "dev"
                         },
                         "billingAddress": {
-                          "x-description-missing": true,
                           "type": "object",
+                          "description": "Billing address of the customer.",
                           "additionalProperties": false,
                           "required": [
-                            "id",
                             "name",
                             "contactPerson",
                             "department",
@@ -13419,16 +13838,19 @@
                               "type": "string"
                             },
                             "department": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "subdivision": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "street": {
                               "type": "string"
                             },
                             "additionalDetails": {
-                              "type": "string"
+                              "type": "string",
+                              "nullable": true
                             },
                             "city": {
                               "type": "string"
@@ -13442,9 +13864,20 @@
                             },
                             "email": {
                               "type": "string",
-                              "format": "email",
                               "nullable": true
                             }
+                          },
+                          "example": {
+                            "id": "1",
+                            "name": "John Doe",
+                            "contactPerson": "",
+                            "department": "",
+                            "subdivision": "",
+                            "street": "Street 10",
+                            "additionalDetails": "",
+                            "city": "Berlin",
+                            "zipCode": "10101",
+                            "country": "DE"
                           }
                         },
                         "paymentTerms": {
@@ -13472,15 +13905,21 @@
                               "type": "number",
                               "format": "float"
                             }
+                          },
+                          "example": {
+                            "earlyPaymentDiscount": 0.5,
+                            "earlyPaymentDate": "2022-01-17T00:00:00+01:00",
+                            "dueDate": "2022-02-06T00:00:00+01:00"
                           }
                         },
                         "paymentMethodName": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "paypal"
                         },
                         "paymentStatus": {
-                          "x-description-missing": true,
                           "type": "string",
+                          "description": "Status of the payment.",
                           "enum": [
                             "pending",
                             "paid",
@@ -13490,27 +13929,32 @@
                             "badDebt",
                             "debited",
                             "unknown"
-                          ]
+                          ],
+                          "example": "pending"
                         },
                         "dunning": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "zahlungserinnerung"
                         },
                         "dunningDate": {
                           "x-description-missing": true,
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "2022-08-10"
                         },
                         "gln": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "12345"
                         },
                         "taxation": {
                           "x-description-missing": true,
-                          "type": "number"
+                          "type": "number",
+                          "example": 0
                         },
                         "positions": {
                           "type": "array",
@@ -13555,7 +13999,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -13584,8 +14029,100 @@
                                 "format": "float",
                                 "nullable": true
                               }
+                            },
+                            "example": {
+                              "id": 1,
+                              "position": 1,
+                              "saleOrderPositionId": 3,
+                              "createdAt": "2022-08-10T10:14:26+02:00",
+                              "productId": 1,
+                              "productNumber": "100001",
+                              "description": "Kaffee ganze Bohne 1kg",
+                              "quantity": 1,
+                              "price": {
+                                "amount": "24.99",
+                                "currency": "EUR"
+                              },
+                              "vatCategory": "normal",
+                              "taxRate": 19,
+                              "discount": 0
                             }
                           }
+                        }
+                      },
+                      "example": {
+                        "id": "142",
+                        "documentNumber": "1200132",
+                        "documentDate": "2022-01-07T00:00:00+01:00",
+                        "log": {
+                          "createdAt": "2022-01-07T13:43:12+01:00",
+                          "sentAt": "2022-01-07T13:43:12+01:00",
+                          "createdBy": {
+                            "name": "John Doe"
+                          },
+                          "sentBy": {
+                            "name": "John Doe"
+                          },
+                          "updatedAt": "2022-03-31T00:16:03+02:00"
+                        },
+                        "amountGross": 49.99,
+                        "amountNet": 42.01,
+                        "costCenter": "3456",
+                        "status": "sent",
+                        "project": {
+                          "id": "6",
+                          "name": "Shopware",
+                          "abbreviation": "B2C-SW"
+                        },
+                        "customer": {
+                          "id": "3099",
+                          "name": "John Doe"
+                        },
+                        "externalOrderReference": "62720",
+                        "devCustomer": "50161",
+                        "billingAddress": {
+                          "id": "1",
+                          "name": "John Doe",
+                          "contactPerson": "",
+                          "department": "",
+                          "subdivision": "",
+                          "street": "Street 10",
+                          "additionalDetails": "",
+                          "city": "Berlin",
+                          "zipCode": "10101",
+                          "country": "DE",
+                          "email": "john.doe@email.de"
+                        },
+                        "paymentMethodName": "paypal",
+                        "paymentStatus": "pending",
+                        "dunning": "zahlungserinnerung",
+                        "dunningDate": null,
+                        "gln": "12345",
+                        "taxation": 0,
+                        "tags": [],
+                        "positions": [
+                          {
+                            "id": 421,
+                            "position": 1,
+                            "saleOrderPositionId": 13521,
+                            "createdAt": "2022-01-07T13:43:12+01:00",
+                            "productId": 864,
+                            "productNumber": "FR5232501",
+                            "description": "Example Product",
+                            "quantity": 1,
+                            "price": {
+                              "amount": "49.99",
+                              "currency": "EUR"
+                            },
+                            "vatCategory": "normal",
+                            "taxRate": 0,
+                            "discount": 0
+                          }
+                        ],
+                        "paymentTerms": {
+                          "earlyPaymentDiscount": 0,
+                          "earlyPaymentDate": "2022-01-17T00:00:00+01:00",
+                          "dueDate": "2022-02-06T00:00:00+01:00"
                         }
                       }
                     }
@@ -13608,6 +14145,9 @@
                           "example": "17",
                           "description": "Resource identifier."
                         }
+                      },
+                      "example": {
+                        "id": "3"
                       }
                     },
                     "extra": {
@@ -14366,7 +14906,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -14414,7 +14955,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -14438,6 +14980,28 @@
                                 }
                               }
                             }
+                          },
+                          "example": {
+                            "invoices": [
+                              {
+                                "id": "1",
+                                "amount": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "date": "2023-08-13T14:45:36+02:00"
+                              }
+                            ],
+                            "creditNotes": [
+                              {
+                                "id": "1",
+                                "amount": {
+                                  "amount": "13.37",
+                                  "currency": "EUR"
+                                },
+                                "date": "2023-08-13T14:45:36+02:00"
+                              }
+                            ]
                           }
                         },
                         "payments": {
@@ -14529,7 +15093,8 @@
                                       "amount": {
                                         "description": "A string representing the amount",
                                         "type": "string",
-                                        "format": "float"
+                                        "format": "float",
+                                        "example": "24.99"
                                       },
                                       "currency": {
                                         "type": "string",
@@ -14555,6 +15120,31 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "documents": {
+                          "invoices": [
+                            {
+                              "id": "87",
+                              "amount": {
+                                "amount": "1483.63",
+                                "currency": "EUR"
+                              },
+                              "date": "2024-03-08T00:00:00+01:00"
+                            }
+                          ],
+                          "creditNotes": [
+                            {
+                              "id": "2",
+                              "amount": {
+                                "amount": "24.99",
+                                "currency": "EUR"
+                              },
+                              "date": "2024-06-17T00:00:00+02:00"
+                            }
+                          ]
+                        },
+                        "payments": []
                       }
                     }
                   }
@@ -15017,6 +15607,55 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "salesOrder": [
+                          {
+                            "id": "1",
+                            "status": "completed",
+                            "documentNumber": "2022-200000",
+                            "documentUrl": "https://example.xentral.biz?module=auftrag&action=pdf&id=1",
+                            "documentDate": "2024-02-22"
+                          }
+                        ],
+                        "deliveryNotes": [
+                          {
+                            "id": "3",
+                            "status": "sent",
+                            "documentNumber": "2022-300002",
+                            "documentUrl": "https://example.xentral.biz?module=lieferschein&action=pdf&id=3",
+                            "documentDate": "2023-08-06"
+                          }
+                        ],
+                        "creditNotes": [
+                          {
+                            "id": "19",
+                            "status": "created",
+                            "documentNumber": "2022-300002",
+                            "documentUrl": "https://example.xentral.biz?module=rechnung&action=pdffromarchive&id=19",
+                            "documentDate": "2022-08-10"
+                          }
+                        ],
+                        "returns": [
+                          {
+                            "id": "19",
+                            "status": "created",
+                            "documentNumber": "2022-300002",
+                            "documentUrl": "https://example.xentral.biz?module=rechnung&action=pdffromarchive&id=19",
+                            "documentDate": "2022-08-10"
+                          }
+                        ],
+                        "pdfArchives": [
+                          {
+                            "id": "19",
+                            "documentName": "0be068caab8e89774948bbd719453e1b_3_20220810_RE2022-400002.pdf",
+                            "createdBy": {
+                              "name": "Administrator"
+                            },
+                            "documentUrl": "https://example.xentral.biz?module=rechnung&action=pdffromarchive&id=19",
+                            "documentDate": "2022-08-10 10:41:17"
+                          }
+                        ]
                       }
                     }
                   }
@@ -15280,7 +15919,8 @@
                     "quantity": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "double"
+                      "format": "double",
+                      "example": 2
                     },
                     "price": {
                       "description": "Money object with amount and currency",
@@ -15294,7 +15934,8 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float"
+                          "format": "float",
+                          "example": "24.99"
                         },
                         "currency": {
                           "type": "string",
@@ -15313,12 +15954,14 @@
                     },
                     "vatCategory": {
                       "x-description-missing": true,
-                      "type": "string"
+                      "type": "string",
+                      "example": "reduced"
                     },
                     "taxRate": {
                       "x-description-missing": true,
                       "type": "number",
-                      "format": "float"
+                      "format": "float",
+                      "example": 38.45
                     },
                     "discounts": {
                       "x-description-missing": true,
@@ -15329,8 +15972,12 @@
                           "x-description-missing": true,
                           "type": "number",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "example": 38.45
                         }
+                      },
+                      "example": {
+                        "totalPercent": 38.45
                       }
                     }
                   }
@@ -16505,7 +17152,8 @@
                           "amount": {
                             "description": "A string representing the amount",
                             "type": "string",
-                            "format": "float"
+                            "format": "float",
+                            "example": "24.99"
                           },
                           "currency": {
                             "type": "string",
@@ -16774,7 +17422,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -16932,7 +17581,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -18015,101 +18665,6 @@
                   ],
                   "properties": {
                     "data": {
-                      "example": {
-                        "id": "123456",
-                        "documentNumber": "LB-100001",
-                        "date": "2020-01-15",
-                        "createdAt": "2020-01-01 12:00:00+02:00",
-                        "createdBy": {
-                          "name": "John Doe"
-                        },
-                        "updatedAt": "2020-01-01 13:00:00+02:00",
-                        "supplierInvoice": "INV-12345",
-                        "receiptDate": "2020-01-01T12:00:00Z",
-                        "deliveryDate": "2020-01-01",
-                        "status": "PENDING",
-                        "supplier": {
-                          "id": "123456"
-                        },
-                        "supplierInvoiceNumber": "INV-12345",
-                        "financials": {
-                          "amountGross": {
-                            "amount": "100.0",
-                            "currency": "EUR"
-                          },
-                          "freightCharge": 10,
-                          "taxation": "VAT",
-                          "taxes": {
-                            "normalTax": {
-                              "rate": 19,
-                              "amount": 19
-                            },
-                            "reducedTax": {
-                              "rate": 7,
-                              "amount": 7
-                            },
-                            "customTax1": {
-                              "rate": 8.1,
-                              "amount": 50.5
-                            },
-                            "customTax2": {
-                              "rate": 10,
-                              "amount": 50.5
-                            }
-                          },
-                          "paymentTerms": {
-                            "dueDate": "2020-01-31",
-                            "earlyPaymentDate": "2020-01-15",
-                            "earlyPaymentDiscount": 2
-                          },
-                          "bookingText": "Liability booking text",
-                          "payment": {
-                            "methodName": "Bank transfer",
-                            "paidAmount": 100,
-                            "paidOnDate": "2020-01-01",
-                            "discountReceived": 2
-                          },
-                          "glAccount": "123456",
-                          "costCenter": "123456"
-                        },
-                        "purchaseOrder": {
-                          "id": "123456"
-                        },
-                        "assignedPurchaseOrders": [
-                          {
-                            "id": "123456",
-                            "number": "123456",
-                            "amountGross": 100,
-                            "amountNet": 100,
-                            "project": {
-                              "id": "123456"
-                            },
-                            "salesOrder": {
-                              "id": "123456"
-                            },
-                            "costCenter": "123456"
-                          }
-                        ],
-                        "project": {
-                          "id": "1"
-                        },
-                        "accounting": [
-                          {
-                            "glAccount": {
-                              "id": "123456"
-                            },
-                            "bookingText": "Liability booking text",
-                            "amount": {
-                              "amount": "100.0",
-                              "currency": "EUR"
-                            },
-                            "tax": {
-                              "rate": 19
-                            },
-                            "costCenter": "123456"
-                          }
-                        ]
-                      },
                       "x-description-missing": true,
                       "type": "object",
                       "additionalProperties": false,
@@ -18270,7 +18825,8 @@
                                 "amount": {
                                   "description": "A string representing the amount",
                                   "type": "string",
-                                  "format": "float"
+                                  "format": "float",
+                                  "example": "24.99"
                                 },
                                 "currency": {
                                   "type": "string",
@@ -18541,7 +19097,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -18650,7 +19207,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -18693,6 +19251,99 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "id": "123456",
+                        "documentNumber": "LB-100001",
+                        "date": "2020-01-15",
+                        "createdAt": "2020-01-01 12:00:00+02:00",
+                        "createdBy": {
+                          "name": "John Doe"
+                        },
+                        "updatedAt": "2020-01-01 13:00:00+02:00",
+                        "supplierInvoice": "INV-12345",
+                        "receiptDate": "2020-01-01T12:00:00Z",
+                        "deliveryDate": "2020-01-01",
+                        "status": "PENDING",
+                        "supplier": {
+                          "id": "123456"
+                        },
+                        "supplierInvoiceNumber": "INV-12345",
+                        "financials": {
+                          "amountGross": {
+                            "amount": "100.0",
+                            "currency": "EUR"
+                          },
+                          "freightCharge": 10,
+                          "taxation": "VAT",
+                          "taxes": {
+                            "normalTax": {
+                              "rate": 19,
+                              "amount": 19
+                            },
+                            "reducedTax": {
+                              "rate": 7,
+                              "amount": 7
+                            },
+                            "customTax1": {
+                              "rate": 8.1,
+                              "amount": 50.5
+                            },
+                            "customTax2": {
+                              "rate": 10,
+                              "amount": 50.5
+                            }
+                          },
+                          "paymentTerms": {
+                            "dueDate": "2020-01-31",
+                            "earlyPaymentDate": "2020-01-15",
+                            "earlyPaymentDiscount": 2
+                          },
+                          "bookingText": "Liability booking text",
+                          "payment": {
+                            "methodName": "Bank transfer",
+                            "paidAmount": 100,
+                            "paidOnDate": "2020-01-01",
+                            "discountReceived": 2
+                          },
+                          "glAccount": "123456",
+                          "costCenter": "123456"
+                        },
+                        "purchaseOrder": {
+                          "id": "123456"
+                        },
+                        "assignedPurchaseOrders": [
+                          {
+                            "id": "123456",
+                            "number": "123456",
+                            "amountGross": 100,
+                            "amountNet": 100,
+                            "project": {
+                              "id": "123456"
+                            },
+                            "salesOrder": {
+                              "id": "123456"
+                            },
+                            "costCenter": "123456"
+                          }
+                        ],
+                        "project": {
+                          "id": "1"
+                        },
+                        "accounting": [
+                          {
+                            "glAccount": "123456",
+                            "bookingText": "Liability booking text",
+                            "amount": {
+                              "amount": "100.0",
+                              "currency": "EUR"
+                            },
+                            "tax": {
+                              "rate": 19
+                            },
+                            "costCenter": "123456"
+                          }
+                        ]
                       }
                     }
                   }
@@ -19249,12 +19900,14 @@
                           "type": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": false
+                            "nullable": false,
+                            "example": "amazon"
                           },
                           "designation": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": false
+                            "nullable": false,
+                            "example": "Amazon"
                           },
                           "project": {
                             "x-description-missing": true,
@@ -19271,8 +19924,19 @@
                                 "example": "17",
                                 "description": "Resource identifier."
                               }
+                            },
+                            "example": {
+                              "id": "1"
                             }
                           }
+                        },
+                        "example": {
+                          "id": "6",
+                          "type": "amazon",
+                          "project": {
+                            "id": "1"
+                          },
+                          "designation": "Amazon"
                         }
                       }
                     },
@@ -20365,12 +21029,14 @@
                           "name": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "Kassierer SW"
                           },
                           "number": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "1001"
                           },
                           "project": {
                             "description": "Reference to another resource",
@@ -20394,8 +21060,18 @@
                           "permissionLevel": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "0"
                           }
+                        },
+                        "example": {
+                          "id": "1",
+                          "name": "Kassierer SW",
+                          "number": "1001",
+                          "project": {
+                            "id": "2"
+                          },
+                          "permissionLevel": "0"
                         }
                       }
                     },
@@ -20558,7 +21234,8 @@
                         "name": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": false
+                          "nullable": false,
+                          "example": "Kassierer SW"
                         },
                         "project": {
                           "description": "Reference to another resource",
@@ -20583,8 +21260,17 @@
                           "x-description-missing": true,
                           "type": "string",
                           "pattern": "\\d",
-                          "nullable": false
+                          "nullable": false,
+                          "example": "0"
                         }
+                      },
+                      "example": {
+                        "id": "1",
+                        "name": "Kassierer SW",
+                        "project": {
+                          "id": "2"
+                        },
+                        "permissionLevel": "0"
                       }
                     }
                   }
@@ -20823,13 +21509,19 @@
                         "openingBalance": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": false
+                          "nullable": false,
+                          "example": "1,236.61"
                         },
                         "targetAmount": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": false
+                          "nullable": false,
+                          "example": "1,236.61"
                         }
+                      },
+                      "example": {
+                        "openingBalance": "1,236.61",
+                        "targetAmount": "1,236.61"
                       }
                     }
                   }
@@ -21191,7 +21883,8 @@
                             "x-description-missing": true,
                             "type": "string",
                             "format": "date-time",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "2020-09-23T14:20:08+02:00"
                           },
                           "projectId": {
                             "type": "string",
@@ -21201,58 +21894,71 @@
                           },
                           "type": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "RE_Beleg"
                           },
                           "posFunction": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "TODO"
                           },
                           "doctype": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "rechnung"
                           },
                           "paymentType": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "eckarte"
                           },
                           "doctypeId": {
                             "x-description-missing": true,
-                            "type": "number"
+                            "type": "number",
+                            "example": 10
                           },
                           "documentNumber": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "400009"
                           },
                           "journalText": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "RE 400009 (POS)"
                           },
                           "revenueAccount": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "4400"
                           },
                           "currency": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "EUR"
                           },
                           "tax": {
                             "x-description-missing": true,
                             "type": "number",
-                            "format": "float"
+                            "format": "float",
+                            "example": 16
                           },
                           "amountGross": {
                             "x-description-missing": true,
                             "type": "number",
-                            "format": "float"
+                            "format": "float",
+                            "example": 99
                           },
                           "amountNet": {
                             "x-description-missing": true,
                             "type": "number",
-                            "format": "float"
+                            "format": "float",
+                            "example": 85.34
                           },
                           "cashRegisterId": {
                             "x-description-missing": true,
-                            "type": "number"
+                            "type": "number",
+                            "example": 5
                           },
                           "customerId": {
                             "type": "string",
@@ -21263,27 +21969,32 @@
                           "createdAt": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2020-09-23T20:22:08+02:00"
                           },
                           "createdBy": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "John Doe"
                           },
                           "businessTransactionType": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "TODO"
                           },
                           "qrString": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": null
                           },
                           "fiscalDocumentReference": {
                             "description": "This field represents an object with dynamic structure",
                             "type": "object",
                             "additionalProperties": true,
-                            "nullable": true
+                            "nullable": true,
+                            "example": {}
                           },
                           "salesOrder": {
                             "x-description-missing": true,
@@ -21302,13 +22013,48 @@
                                 "description": "Resource identifier."
                               },
                               "number": {
-                                "type": "string"
+                                "type": "string",
+                                "example": "200002"
                               },
                               "externalOrderNumber": {
-                                "type": "string"
+                                "type": "string",
+                                "example": "152"
                               }
+                            },
+                            "example": {
+                              "id": "5",
+                              "number": "200002",
+                              "externalOrderNumber": "152"
                             }
                           }
+                        },
+                        "example": {
+                          "id": "1",
+                          "date": "2020-09-23T14:20:08+02:00",
+                          "projectId": "6",
+                          "type": "RE_Beleg",
+                          "posFunction": "",
+                          "doctype": "rechnung",
+                          "paymentType": "eckarte",
+                          "doctypeId": 1,
+                          "documentNumber": "400000",
+                          "journalText": "RE 400000 (POS)",
+                          "revenueAccount": "4400",
+                          "currency": "EUR",
+                          "tax": 16,
+                          "amountGross": 98.99,
+                          "amountNet": 85.34,
+                          "cashRegisterId": 5,
+                          "customerId": "36",
+                          "createdAt": "2020-09-23T14:20:08+02:00",
+                          "createdBy": "John Doe",
+                          "businessTransactionType": "",
+                          "salesOrder": {
+                            "id": "4",
+                            "number": "200001",
+                            "externalOrderNumber": ""
+                          },
+                          "qrString": null
                         }
                       }
                     },
@@ -36999,7 +37745,8 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float"
+                                "format": "float",
+                                "example": "24.99"
                               },
                               "currency": {
                                 "type": "string",
@@ -37285,7 +38032,8 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float"
+                                "format": "float",
+                                "example": "24.99"
                               },
                               "currency": {
                                 "type": "string",
@@ -41556,7 +42304,7 @@
     "/api/products/{id}/options": {
       "get": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.listOptions",
         "summary": "View options of a product",
@@ -41756,7 +42504,7 @@
       },
       "post": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.createOption",
         "summary": "Creates new option for a product",
@@ -42009,7 +42757,7 @@
       },
       "patch": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.updateMultipleOptions",
         "summary": "Update multiple options of a product",
@@ -42254,7 +43002,7 @@
       },
       "delete": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.deleteMultipleOptions",
         "summary": "Deletes multiple options of a product",
@@ -42476,10 +43224,688 @@
         }
       }
     },
+    "/api/products/{productId}/options/{id}": {
+      "patch": {
+        "tags": [
+          "Matrixproduct"
+        ],
+        "operationId": "product.updateOption",
+        "summary": "Updates a single option of a matrix product.",
+        "description": "Updates a single option of a matrix product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID of the matrix product."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update a single option of a matrix product",
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "Update a single option": {
+                  "value": {
+                    "name": "Test Product Beverage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/products/{productId}/options/{optionId}/values/{id}": {
+      "get": {
+        "tags": [
+          "Matrixproduct"
+        ],
+        "operationId": "product.viewValue",
+        "summary": "View a single value from an option of a matrix product.",
+        "description": "Returns details of a single value from an option of a matrix product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID of the matrix product."
+          },
+          {
+            "in": "path",
+            "name": "optionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Option ID from the value it belongs to."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "x-description-missing": true,
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the value."
+                        },
+                        "sort": {
+                          "description": "This value sorts the resource",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Shows information about a single value from an option of a matrix product": {
+                    "value": {
+                      "data": {
+                        "id": "1",
+                        "name": "blue",
+                        "sort": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Matrixproduct"
+        ],
+        "operationId": "product.updateValue",
+        "summary": "Updates a single value from an option of a matrix product.",
+        "description": "Updates a single value from an option of a matrix product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID of the matrix product."
+          },
+          {
+            "in": "path",
+            "name": "optionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Option ID from the value it belongs to."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the value"
+                  },
+                  "sort": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Sorting order of the value"
+                  }
+                }
+              },
+              "examples": {
+                "Update Value of an option of a matrix product": {
+                  "value": {
+                    "name": "blue"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
       "delete": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.deleteValue",
         "summary": "Deletes a single value from an option of a matrix product.",
@@ -42705,9 +44131,87 @@
       }
     },
     "/api/products/{productId}/options/{id}/values": {
+      "get": {
+        "tags": [
+          "Matrixproduct"
+        ],
+        "operationId": "product.listValues",
+        "summary": "Lists all values from an option of a matrix product.",
+        "description": "Lists all values from an option of a matrix product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID of the matrix product."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "name": {
+                          "description": "The name of the resource",
+                          "type": "string"
+                        },
+                        "sort": {
+                          "description": "This values determines the order of the resource",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
       "delete": {
         "tags": [
-          "Product"
+          "Matrixproduct"
         ],
         "operationId": "product.deleteMultipleValues",
         "summary": "Deletes multiple values from an option of a matrix product.",
@@ -43040,6 +44544,257 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Matrixproduct"
+        ],
+        "operationId": "product.createMultipleValues",
+        "summary": "Creates multiple values for an option of a matrix product.",
+        "description": "Creates multiple values for an option of a matrix product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID of the matrix product."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the value"
+                    },
+                    "sort": {
+                      "type": "number",
+                      "default": 1,
+                      "description": "Sorting order of the value"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Create values for an option of a matrix product": {
+                  "value": [
+                    {
+                      "name": "blue"
+                    },
+                    {
+                      "name": "red"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
           },
           "429": {
             "description": "Too many API calls made."
@@ -52922,7 +54677,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -53619,7 +55375,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -54197,7 +55954,8 @@
                                 "amount": {
                                   "description": "A string representing the amount",
                                   "type": "string",
-                                  "format": "float"
+                                  "format": "float",
+                                  "example": "24.99"
                                 },
                                 "currency": {
                                   "type": "string",
@@ -54453,7 +56211,8 @@
                                   "amount": {
                                     "description": "A string representing the amount",
                                     "type": "string",
-                                    "format": "float"
+                                    "format": "float",
+                                    "example": "24.99"
                                   },
                                   "currency": {
                                     "type": "string",
@@ -55009,7 +56768,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -55847,7 +57607,8 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float"
+                        "format": "float",
+                        "example": "24.99"
                       },
                       "currency": {
                         "type": "string",
@@ -56538,7 +58299,8 @@
                               "amount": {
                                 "description": "A string representing the amount",
                                 "type": "string",
-                                "format": "float"
+                                "format": "float",
+                                "example": "24.99"
                               },
                               "currency": {
                                 "type": "string",
@@ -57133,7 +58895,8 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float"
+                          "format": "float",
+                          "example": "24.99"
                         },
                         "currency": {
                           "type": "string",
@@ -57670,7 +59433,8 @@
                             "amount": {
                               "description": "A string representing the amount",
                               "type": "string",
-                              "format": "float"
+                              "format": "float",
+                              "example": "24.99"
                             },
                             "currency": {
                               "type": "string",
@@ -62209,6 +63973,9 @@
                                   "gln": {
                                     "type": "string"
                                   },
+                                  "salutation": {
+                                    "type": "string"
+                                  },
                                   "email": {
                                     "type": "string",
                                     "format": "email"
@@ -62976,6 +64743,9 @@
                           "gln": {
                             "type": "string"
                           },
+                          "salutation": {
+                            "type": "string"
+                          },
                           "email": {
                             "type": "string",
                             "format": "email"
@@ -63300,144 +65070,6 @@
                             "example": {
                               "id": "1337"
                             }
-                          },
-                          "shippingCosts": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "shippingCostProduct",
-                                "quantity"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "pattern": "\\d+",
-                                  "example": "17",
-                                  "description": "Resource identifier."
-                                },
-                                "quantity": {
-                                  "type": "number",
-                                  "format": "double"
-                                },
-                                "comment": {
-                                  "type": "string"
-                                },
-                                "shippingCostProduct": {
-                                  "type": "object",
-                                  "additionalProperties": false,
-                                  "required": [
-                                    "id"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "pattern": "\\d+",
-                                      "example": "17",
-                                      "description": "Resource identifier."
-                                    },
-                                    "name": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
-                                    "freeFields": {
-                                      "type": "array",
-                                      "nullable": true,
-                                      "items": {
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "required": [
-                                          "id",
-                                          "value"
-                                        ],
-                                        "properties": {
-                                          "id": {
-                                            "type": "string",
-                                            "pattern": "\\d+",
-                                            "example": "17",
-                                            "description": "Resource identifier."
-                                          },
-                                          "value": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "number": {
-                                      "type": "string",
-                                      "nullable": true
-                                    }
-                                  }
-                                },
-                                "tax": {
-                                  "type": "object",
-                                  "required": [
-                                    "taxText"
-                                  ],
-                                  "properties": {
-                                    "effectiveVatRate": {
-                                      "type": "number",
-                                      "format": "float",
-                                      "description": "The final VAT on a position. Calculated based on other fields. Only supported on the view endpoint and is always returned"
-                                    },
-                                    "vatCategory": {
-                                      "type": "string",
-                                      "nullable": true,
-                                      "enum": [
-                                        "reduced",
-                                        "normal",
-                                        "exempt"
-                                      ],
-                                      "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
-                                      "example": "reduced"
-                                    },
-                                    "rate": {
-                                      "type": "number",
-                                      "format": "float",
-                                      "example": 0.5,
-                                      "nullable": true,
-                                      "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
-                                    },
-                                    "taxText": {
-                                      "type": "string",
-                                      "example": "Tax Text",
-                                      "nullable": true,
-                                      "description": "Tax Text"
-                                    }
-                                  }
-                                },
-                                "price": {
-                                  "type": "object",
-                                  "additionalProperties": false,
-                                  "properties": {
-                                    "amount": {
-                                      "type": "string",
-                                      "format": "float"
-                                    },
-                                    "currency": {
-                                      "type": "string",
-                                      "enum": [
-                                        "EUR",
-                                        "PLN",
-                                        "CHF",
-                                        "USD",
-                                        "GBP"
-                                      ]
-                                    }
-                                  }
-                                },
-                                "discount": {
-                                  "type": "number",
-                                  "format": "float"
-                                },
-                                "webId": {
-                                  "type": "string"
-                                }
-                              }
-                            }
                           }
                         }
                       }
@@ -63533,7 +65165,7 @@
                                 "normal",
                                 "exempt"
                               ],
-                              "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
+                              "description": "VAT category. When editing/creating a position only one of `rate` or `vatCategory` must be used.",
                               "example": "reduced"
                             },
                             "rate": {
@@ -63541,7 +65173,7 @@
                               "format": "float",
                               "example": 0.5,
                               "nullable": true,
-                              "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                              "description": "VAT rate. When editing/creating a position only one of `rate` or `vatCategory` must be used."
                             },
                             "taxText": {
                               "type": "string",
@@ -63662,7 +65294,7 @@
                                 "normal",
                                 "exempt"
                               ],
-                              "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
+                              "description": "VAT category. When editing/creating a position only one of `rate` or `vatCategory` must be used.",
                               "example": "reduced"
                             },
                             "rate": {
@@ -63670,7 +65302,7 @@
                               "format": "float",
                               "example": 0.5,
                               "nullable": true,
-                              "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                              "description": "VAT rate. When editing/creating a position only one of `rate` or `vatCategory` must be used."
                             },
                             "taxText": {
                               "type": "string",
@@ -64676,6 +66308,9 @@
                                   "type": "string"
                                 },
                                 "gln": {
+                                  "type": "string"
+                                },
+                                "salutation": {
                                   "type": "string"
                                 },
                                 "email": {
@@ -66930,7 +68565,8 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float"
+                        "format": "float",
+                        "example": "24.99"
                       },
                       "currency": {
                         "type": "string",
@@ -67721,7 +69357,8 @@
                         "amount": {
                           "description": "A string representing the amount",
                           "type": "string",
-                          "format": "float"
+                          "format": "float",
+                          "example": "24.99"
                         },
                         "currency": {
                           "type": "string",
@@ -68502,7 +70139,8 @@
                       "amount": {
                         "description": "A string representing the amount",
                         "type": "string",
-                        "format": "float"
+                        "format": "float",
+                        "example": "24.99"
                       },
                       "currency": {
                         "type": "string",
@@ -75324,6 +76962,19 @@
                             "nullable": true,
                             "example": false
                           }
+                        },
+                        "example": {
+                          "id": "12",
+                          "globalUserId": "f7b3b3b3-7b3b-4b3b-8b3b-3b3b3b3b3b3b",
+                          "username": "Bene",
+                          "createdAt": "2023-08-13T14:45:36+02:00",
+                          "description": "This is the user description.",
+                          "color": "ff0000",
+                          "isActive": true,
+                          "locale": "de_DE",
+                          "isAdmin": true,
+                          "email": "ceo@example.com",
+                          "emailVerifiedAt": "2023-08-14T14:45:36+02:00"
                         }
                       }
                     },
@@ -75523,6 +77174,19 @@
                           "nullable": true,
                           "example": false
                         }
+                      },
+                      "example": {
+                        "id": "12",
+                        "globalUserId": "f7b3b3b3-7b3b-4b3b-8b3b-3b3b3b3b3b3b",
+                        "username": "Bene",
+                        "createdAt": "2023-08-13T14:45:36+02:00",
+                        "description": "This is the user description.",
+                        "color": "ff0000",
+                        "isActive": true,
+                        "locale": "de_DE",
+                        "isAdmin": true,
+                        "email": "ceo@example.com",
+                        "emailVerifiedAt": "2023-08-14T14:45:36+02:00"
                       }
                     }
                   }
@@ -75562,39 +77226,47 @@
                         },
                         "username": {
                           "description": "The name of the user",
-                          "type": "string"
+                          "type": "string",
+                          "example": "Benedikt"
                         },
                         "createdAt": {
                           "description": "The date the user was created",
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2023-08-13T14:45:36+02:00"
                         },
                         "description": {
                           "x-description-ignore": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "This is the user description."
                         },
                         "color": {
                           "description": "An optional hex value without the #, representing the avatar color",
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "ff0000"
                         },
                         "isActive": {
                           "description": "A boolean value indicating if the user is active and can log in",
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "locale": {
                           "description": "A ISO-639-1 formatted string indicating the language the user will use",
-                          "type": "string"
+                          "type": "string",
+                          "example": "de_DE"
                         },
                         "isAdmin": {
                           "description": "A boolean value indicating if the user is an admin",
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "email": {
                           "x-description-ignore": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "joe@example.com"
                         },
                         "modules": {
                           "description": "List of modules with their permissions.",
@@ -75623,7 +77295,8 @@
                           "description": "The date where the user verified his email address",
                           "type": "string",
                           "format": "date-time",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "2023-08-14T14:45:36+02:00"
                         },
                         "mfa": {
                           "description": "Auth Platform MFA state",
@@ -75631,6 +77304,18 @@
                           "nullable": true,
                           "example": false
                         }
+                      },
+                      "example": {
+                        "id": "12",
+                        "globalUserId": "f7b3b3b3-7b3b-4b3b-8b3b-3b3b3b3b3b3b",
+                        "username": "Bene",
+                        "createdAt": "2023-08-13T14:45:36+02:00",
+                        "description": "This is the user description.",
+                        "color": "ff0000",
+                        "isActive": true,
+                        "locale": "de_DE",
+                        "isAdmin": true,
+                        "email": "joe@example.com"
                       }
                     }
                   }
@@ -76082,6 +77767,18 @@
                             }
                           }
                         }
+                      },
+                      "example": {
+                        "isAdmin": false,
+                        "modules": [
+                          {
+                            "name": "benutzer",
+                            "permissions": [
+                              "list",
+                              "edit"
+                            ]
+                          }
+                        ]
                       }
                     }
                   }
