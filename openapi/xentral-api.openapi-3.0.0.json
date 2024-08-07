@@ -19039,10 +19039,9 @@
                 "additionalProperties": false,
                 "properties": {
                   "salesOrder": {
-                    "description": "Nullable reference to another resource",
+                    "description": "Reference to another resource",
                     "type": "object",
                     "additionalProperties": false,
-                    "nullable": true,
                     "required": [
                       "id"
                     ],
