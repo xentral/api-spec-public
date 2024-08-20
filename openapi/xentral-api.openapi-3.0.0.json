@@ -7157,320 +7157,6 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Create a credit note object",
           "content": {
-            "application/vnd.xentral.default.v1-alpha+json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "customer"
-                ],
-                "properties": {
-                  "date": {
-                    "type": "string",
-                    "format": "date"
-                  },
-                  "costCenter": {
-                    "type": "string"
-                  },
-                  "project": {
-                    "description": "Nullable reference to another resource",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "nullable": true,
-                    "required": [
-                      "id"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "pattern": "\\d+",
-                        "example": "17",
-                        "description": "Resource identifier."
-                      }
-                    },
-                    "example": {
-                      "id": "1337"
-                    }
-                  },
-                  "customer": {
-                    "description": "Reference to another resource",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [
-                      "id"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "pattern": "\\d+",
-                        "example": "17",
-                        "description": "Resource identifier."
-                      }
-                    },
-                    "example": {
-                      "id": "1337"
-                    }
-                  },
-                  "tags": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "pattern": "\\d+",
-                      "example": "17",
-                      "description": "Resource identifier."
-                    }
-                  },
-                  "externalOrderReference": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "devCustomer": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "billingAddress": {
-                    "type": "object",
-                    "description": "Billing address of the customer.",
-                    "additionalProperties": false,
-                    "required": [
-                      "name",
-                      "contactPerson",
-                      "department",
-                      "subdivision",
-                      "street",
-                      "additionalDetails",
-                      "city",
-                      "zipCode",
-                      "country"
-                    ],
-                    "nullable": true,
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "pattern": "\\d+",
-                        "example": "17",
-                        "description": "Resource identifier."
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "contactPerson": {
-                        "type": "string"
-                      },
-                      "department": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "subdivision": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "street": {
-                        "type": "string"
-                      },
-                      "additionalDetails": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "city": {
-                        "type": "string"
-                      },
-                      "zipCode": {
-                        "type": "string"
-                      },
-                      "country": {
-                        "type": "string",
-                        "pattern": "[A-Z]{2}"
-                      },
-                      "email": {
-                        "type": "string",
-                        "nullable": true
-                      }
-                    },
-                    "example": {
-                      "id": "1",
-                      "name": "John Doe",
-                      "contactPerson": "",
-                      "department": "",
-                      "subdivision": "",
-                      "street": "Street 10",
-                      "additionalDetails": "",
-                      "city": "Berlin",
-                      "zipCode": "10101",
-                      "country": "DE"
-                    }
-                  },
-                  "paymentMethodName": {
-                    "type": "string"
-                  },
-                  "paymentStatus": {
-                    "type": "string",
-                    "description": "Status of the payment.",
-                    "enum": [
-                      "pending",
-                      "paid",
-                      "partlyPaid",
-                      "canceled",
-                      "partialCancellation",
-                      "badDebt",
-                      "debited",
-                      "unknown"
-                    ],
-                    "example": "pending"
-                  },
-                  "gln": {
-                    "type": "string",
-                    "nullable": true
-                  },
-                  "taxation": {
-                    "type": "number"
-                  },
-                  "positions": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "product",
-                        "quantity",
-                        "price",
-                        "vatCategory",
-                        "taxRate"
-                      ],
-                      "properties": {
-                        "salesOrderPosition": {
-                          "description": "Nullable reference to another resource",
-                          "type": "object",
-                          "additionalProperties": false,
-                          "nullable": true,
-                          "required": [
-                            "id"
-                          ],
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "pattern": "\\d+",
-                              "example": "17",
-                              "description": "Resource identifier."
-                            }
-                          },
-                          "example": {
-                            "id": "1337"
-                          }
-                        },
-                        "product": {
-                          "description": "Reference to another resource",
-                          "type": "object",
-                          "additionalProperties": false,
-                          "required": [
-                            "id"
-                          ],
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "pattern": "\\d+",
-                              "example": "17",
-                              "description": "Resource identifier."
-                            }
-                          },
-                          "example": {
-                            "id": "1337"
-                          }
-                        },
-                        "quantity": {
-                          "x-description-missing": true,
-                          "type": "number",
-                          "format": "double",
-                          "example": 2
-                        },
-                        "price": {
-                          "description": "Money object with amount and currency",
-                          "example": {
-                            "amount": "13.37",
-                            "currency": "EUR"
-                          },
-                          "type": "object",
-                          "additionalProperties": false,
-                          "properties": {
-                            "amount": {
-                              "description": "A string representing the amount",
-                              "type": "string",
-                              "format": "float",
-                              "example": "24.99"
-                            },
-                            "currency": {
-                              "type": "string",
-                              "pattern": "[A-Z]{3}",
-                              "enum": [
-                                "EUR",
-                                "PLN",
-                                "CHF",
-                                "USD",
-                                "GBP"
-                              ],
-                              "description": "Currency matches one of currency values as specified in ISO-4217.",
-                              "example": "PLN"
-                            }
-                          }
-                        },
-                        "vatCategory": {
-                          "x-description-missing": true,
-                          "type": "string",
-                          "example": "reduced"
-                        },
-                        "taxRate": {
-                          "x-description-missing": true,
-                          "type": "number",
-                          "format": "float",
-                          "example": 38.45
-                        },
-                        "discounts": {
-                          "x-description-missing": true,
-                          "type": "object",
-                          "additionalProperties": false,
-                          "properties": {
-                            "totalPercent": {
-                              "x-description-missing": true,
-                              "type": "number",
-                              "format": "float",
-                              "nullable": true,
-                              "example": 38.45
-                            }
-                          },
-                          "example": {
-                            "totalPercent": 38.45
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "create CreditNote payload": {
-                  "value": {
-                    "date": "2023-01-01",
-                    "customer": {
-                      "id": "1337"
-                    },
-                    "costCenter": "1024",
-                    "project": {
-                      "id": "42"
-                    },
-                    "tags": [
-                      "314"
-                    ],
-                    "externalOrderReference": "ref",
-                    "devCustomer": "dev",
-                    "billingAddress": null,
-                    "paymentMethodName": "name",
-                    "gln": null,
-                    "taxation": 7,
-                    "positions": []
-                  }
-                }
-              }
-            },
             "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
@@ -10078,67 +9764,6 @@
         }
       }
     },
-    "/api/creditNotesTags": {
-      "get": {
-        "tags": [
-          "Credit Note Tag"
-        ],
-        "operationId": "creditNoteTag.list",
-        "summary": "List Credit Notes tags",
-        "description": "Returns a collection with all credit notes tags.",
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully.",
-            "content": {
-              "application/vnd.xentral.default.v1+json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {
-                    "data": {
-                      "description": "A list of tags",
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                          "id": {
-                            "description": "The identifier of the tag",
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "example": "1337"
-                          },
-                          "name": {
-                            "description": "The name of the tag",
-                            "type": "string",
-                            "example": "Active"
-                          },
-                          "color": {
-                            "type": "string",
-                            "pattern": "[a-fA-F0-9]{6}",
-                            "example": "ff0000",
-                            "description": "Hexadecimal color value in 6-digit format without the leading # character."
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "406": {
-            "description": "Requested resource representation does not exist."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
-      }
-    },
     "/api/creditNotes/{id}/documents": {
       "get": {
         "tags": [
@@ -11510,6 +11135,67 @@
           },
           "415": {
             "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/creditNotesTags": {
+      "get": {
+        "tags": [
+          "Credit Note Tag"
+        ],
+        "operationId": "creditNoteTag.list",
+        "summary": "List Credit Notes tags",
+        "description": "Returns a collection with all credit notes tags.",
+        "responses": {
+          "200": {
+            "description": "Operation completed successfully.",
+            "content": {
+              "application/vnd.xentral.default.v1+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "description": "A list of tags",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "description": "The identifier of the tag",
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "1337"
+                          },
+                          "name": {
+                            "description": "The name of the tag",
+                            "type": "string",
+                            "example": "Active"
+                          },
+                          "color": {
+                            "type": "string",
+                            "pattern": "[a-fA-F0-9]{6}",
+                            "example": "ff0000",
+                            "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
           },
           "429": {
             "description": "Too many API calls made."
