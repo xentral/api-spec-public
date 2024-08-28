@@ -20509,7 +20509,7 @@
         ],
         "operationId": "invoice.delete",
         "summary": "[ALPHA] Delete single invoice",
-        "description": "Delete a single invoice",
+        "description": "Deletes a single invoice resource identified by its URI",
         "parameters": [
           {
             "in": "path",
@@ -20545,7 +20545,7 @@
         ],
         "operationId": "invoice.update",
         "summary": "[EARLY ACCESS] Update single invoice",
-        "description": "Update a single invoice",
+        "description": "[EARLY ACCESS] Update single invoice}",
         "parameters": [
           {
             "in": "path",
@@ -45296,9 +45296,6 @@
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "property"
-                  ],
                   "properties": {
                     "id": {
                       "type": "string",
@@ -45346,9 +45343,6 @@
                   "value": [
                     {
                       "id": "17",
-                      "property": {
-                        "id": "1301"
-                      },
                       "value": "green"
                     }
                   ]
