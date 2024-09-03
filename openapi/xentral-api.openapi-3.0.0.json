@@ -8291,7 +8291,7 @@
                         },
                         "paymentStatus": {
                           "type": "string",
-                          "description": "Status of the payment.",
+                          "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
                           "enum": [
                             "pending",
                             "paid",
@@ -20025,7 +20025,7 @@
                         },
                         "paymentStatus": {
                           "type": "string",
-                          "description": "Status of the payment.",
+                          "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
                           "enum": [
                             "pending",
                             "paid",
@@ -20039,17 +20039,105 @@
                           "example": "pending"
                         },
                         "dunning": {
-                          "x-description-missing": true,
+                          "description": "Deprecated: use `dunningSettings.level` field instead",
                           "type": "string",
                           "nullable": true,
                           "example": "zahlungserinnerung"
                         },
                         "dunningDate": {
-                          "x-description-missing": true,
+                          "description": "Deprecated: use `dunningSettings.date` field instead",
                           "type": "string",
                           "format": "date",
                           "nullable": true,
                           "example": "2022-08-10"
+                        },
+                        "dunningSettings": {
+                          "description": "Dunning setting for document",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "level",
+                            "date",
+                            "comment",
+                            "sent"
+                          ],
+                          "nullable": true,
+                          "properties": {
+                            "level": {
+                              "type": "string",
+                              "enum": [
+                                "noReminder",
+                                "paymentReminder",
+                                "reminder1",
+                                "reminder2",
+                                "reminder3",
+                                "debtCollection",
+                                "lossOfReceivables"
+                              ],
+                              "example": "paymentReminder"
+                            },
+                            "date": {
+                              "format": "date",
+                              "example": "2022-08-10"
+                            },
+                            "comment": {
+                              "format": "string",
+                              "example": "This is a comment"
+                            },
+                            "sent": {
+                              "type": "boolean",
+                              "format": "boolean",
+                              "example": true
+                            }
+                          }
+                        },
+                        "dunningManualSettings": {
+                          "description": "Expert mode: The payment settings can be set manually with this check mark. Note: This tick overrides the automatic calculation of the incoming payment. This means that the invoice is NOT included in the dunning process. If you use the incoming payment via the account statements, this checkmark should only be used for manual adjustments, because these settings are usually set automatically via the incoming payment.",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "paymentStatus",
+                            "paidAt",
+                            "actualAmount",
+                            "discountGiven"
+                          ],
+                          "nullable": true,
+                          "properties": {
+                            "paymentStatus": {
+                              "type": "string",
+                              "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
+                              "enum": [
+                                "pending",
+                                "paid",
+                                "partlyPaid",
+                                "canceled",
+                                "partialCancellation",
+                                "badDebt",
+                                "debited",
+                                "unknown"
+                              ],
+                              "example": "pending"
+                            },
+                            "paidAt": {
+                              "description": "Date of the payment",
+                              "type": "string",
+                              "format": "date",
+                              "nullable": true,
+                              "example": "2022-08-10"
+                            },
+                            "actualAmount": {
+                              "description": "Amount of the payment",
+                              "type": "number",
+                              "format": "float",
+                              "example": 22.33
+                            },
+                            "discountGiven": {
+                              "description": "Discount given for a payment",
+                              "type": "number",
+                              "format": "float",
+                              "example": 22.33
+                            }
+                          }
                         },
                         "gln": {
                           "x-description-missing": true,
@@ -20509,7 +20597,7 @@
         ],
         "operationId": "invoice.delete",
         "summary": "[ALPHA] Delete single invoice",
-        "description": "Deletes a single invoice resource identified by its URI",
+        "description": "Delete a single invoice",
         "parameters": [
           {
             "in": "path",
@@ -20545,7 +20633,7 @@
         ],
         "operationId": "invoice.update",
         "summary": "[EARLY ACCESS] Update single invoice",
-        "description": "[EARLY ACCESS] Update single invoice}",
+        "description": "Update a single invoice",
         "parameters": [
           {
             "in": "path",
@@ -20711,6 +20799,94 @@
                   "taxation": {
                     "type": "string",
                     "pattern": "\\d+"
+                  },
+                  "dunningSettings": {
+                    "description": "Dunning setting for document",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "level",
+                      "date",
+                      "comment",
+                      "sent"
+                    ],
+                    "nullable": true,
+                    "properties": {
+                      "level": {
+                        "type": "string",
+                        "enum": [
+                          "noReminder",
+                          "paymentReminder",
+                          "reminder1",
+                          "reminder2",
+                          "reminder3",
+                          "debtCollection",
+                          "lossOfReceivables"
+                        ],
+                        "example": "paymentReminder"
+                      },
+                      "date": {
+                        "format": "date",
+                        "example": "2022-08-10"
+                      },
+                      "comment": {
+                        "format": "string",
+                        "example": "This is a comment"
+                      },
+                      "sent": {
+                        "type": "boolean",
+                        "format": "boolean",
+                        "example": true
+                      }
+                    }
+                  },
+                  "dunningManualSettings": {
+                    "description": "Expert mode: The payment settings can be set manually with this check mark. Note: This tick overrides the automatic calculation of the incoming payment. This means that the invoice is NOT included in the dunning process. If you use the incoming payment via the account statements, this checkmark should only be used for manual adjustments, because these settings are usually set automatically via the incoming payment.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "paymentStatus",
+                      "paidAt",
+                      "actualAmount",
+                      "discountGiven"
+                    ],
+                    "nullable": true,
+                    "properties": {
+                      "paymentStatus": {
+                        "type": "string",
+                        "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
+                        "enum": [
+                          "pending",
+                          "paid",
+                          "partlyPaid",
+                          "canceled",
+                          "partialCancellation",
+                          "badDebt",
+                          "debited",
+                          "unknown"
+                        ],
+                        "example": "pending"
+                      },
+                      "paidAt": {
+                        "description": "Date of the payment",
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true,
+                        "example": "2022-08-10"
+                      },
+                      "actualAmount": {
+                        "description": "Amount of the payment",
+                        "type": "number",
+                        "format": "float",
+                        "example": 22.33
+                      },
+                      "discountGiven": {
+                        "description": "Discount given for a payment",
+                        "type": "number",
+                        "format": "float",
+                        "example": 22.33
+                      }
+                    }
                   }
                 }
               },
@@ -20747,7 +20923,19 @@
                     },
                     "paymentMethodName": "invoice",
                     "gln": null,
-                    "taxation": "0"
+                    "taxation": "0",
+                    "dunningSettings": {
+                      "level": "paymentReminder",
+                      "date": "2022-08-10",
+                      "comment": "This is a comment",
+                      "sent": true
+                    },
+                    "dunningManualSettings": {
+                      "paymentStatus": "pending",
+                      "paidAt": "2022-08-10",
+                      "actualAmount": 10.12,
+                      "discountGiven": 1.12
+                    }
                   }
                 }
               }
@@ -45296,6 +45484,9 @@
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
+                  "required": [
+                    "property"
+                  ],
                   "properties": {
                     "id": {
                       "type": "string",
@@ -45343,6 +45534,9 @@
                   "value": [
                     {
                       "id": "17",
+                      "property": {
+                        "id": "1301"
+                      },
                       "value": "green"
                     }
                   ]
