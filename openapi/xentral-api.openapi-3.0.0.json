@@ -8291,7 +8291,7 @@
                         },
                         "paymentStatus": {
                           "type": "string",
-                          "description": "Status of the payment.",
+                          "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
                           "enum": [
                             "pending",
                             "paid",
@@ -13595,6 +13595,32 @@
                             "example": {
                               "id": "1337"
                             }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -13805,6 +13831,32 @@
                           "example": {
                             "id": "1337"
                           }
+                        },
+                        "label": {
+                          "type": "object",
+                          "nullable": true,
+                          "required": [
+                            "fileType",
+                            "fileContent"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "fileType": {
+                              "type": "string",
+                              "description": "Label's file type",
+                              "example": "image/gif"
+                            },
+                            "fileContent": {
+                              "type": "string",
+                              "description": "Base 64 encoded label",
+                              "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
+                          },
+                          "description": "Shipping label for the delivery",
+                          "example": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          }
                         }
                       },
                       "description": "Data representation of a single delivery aka shipment"
@@ -13968,6 +14020,32 @@
                           },
                           "example": {
                             "id": "1337"
+                          }
+                        },
+                        "label": {
+                          "type": "object",
+                          "nullable": true,
+                          "required": [
+                            "fileType",
+                            "fileContent"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "fileType": {
+                              "type": "string",
+                              "description": "Label's file type",
+                              "example": "image/gif"
+                            },
+                            "fileContent": {
+                              "type": "string",
+                              "description": "Base 64 encoded label",
+                              "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
+                          },
+                          "description": "Shipping label for the delivery",
+                          "example": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                           }
                         }
                       },
@@ -15939,6 +16017,32 @@
                             "example": {
                               "id": "1337"
                             }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -16319,6 +16423,32 @@
                             },
                             "example": {
                               "id": "1337"
+                            }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                             }
                           }
                         },
@@ -19022,7 +19152,8 @@
                       "currency",
                       "shippingMethod",
                       "amountNet",
-                      "salesOrder"
+                      "salesOrder",
+                      "dunningLevel"
                     ],
                     "example": "date"
                   },
@@ -19114,7 +19245,8 @@
                       "balance",
                       "status",
                       "shippingMethod",
-                      "amountNet"
+                      "amountNet",
+                      "dunningDate"
                     ]
                   },
                   "dir": {
@@ -19384,6 +19516,46 @@
                                   "example": "ff0000",
                                   "description": "Hexadecimal color value in 6-digit format without the leading # character."
                                 }
+                              }
+                            }
+                          },
+                          "dunningSettings": {
+                            "description": "Dunning setting for document",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "level",
+                              "date",
+                              "comment",
+                              "sent"
+                            ],
+                            "nullable": false,
+                            "properties": {
+                              "level": {
+                                "type": "string",
+                                "enum": [
+                                  "noReminder",
+                                  "paymentReminder",
+                                  "reminder1",
+                                  "reminder2",
+                                  "reminder3",
+                                  "debtCollection",
+                                  "lossOfReceivables"
+                                ],
+                                "example": "paymentReminder"
+                              },
+                              "date": {
+                                "format": "date",
+                                "example": "2022-08-10"
+                              },
+                              "comment": {
+                                "format": "string",
+                                "example": "This is a comment"
+                              },
+                              "sent": {
+                                "type": "boolean",
+                                "format": "boolean",
+                                "example": true
                               }
                             }
                           },
@@ -20025,7 +20197,7 @@
                         },
                         "paymentStatus": {
                           "type": "string",
-                          "description": "Status of the payment.",
+                          "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
                           "enum": [
                             "pending",
                             "paid",
@@ -20039,17 +20211,105 @@
                           "example": "pending"
                         },
                         "dunning": {
-                          "x-description-missing": true,
+                          "description": "Deprecated: use `dunningSettings.level` field instead",
                           "type": "string",
                           "nullable": true,
                           "example": "zahlungserinnerung"
                         },
                         "dunningDate": {
-                          "x-description-missing": true,
+                          "description": "Deprecated: use `dunningSettings.date` field instead",
                           "type": "string",
                           "format": "date",
                           "nullable": true,
                           "example": "2022-08-10"
+                        },
+                        "dunningSettings": {
+                          "description": "Dunning setting for document",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "level",
+                            "date",
+                            "comment",
+                            "sent"
+                          ],
+                          "nullable": true,
+                          "properties": {
+                            "level": {
+                              "type": "string",
+                              "enum": [
+                                "noReminder",
+                                "paymentReminder",
+                                "reminder1",
+                                "reminder2",
+                                "reminder3",
+                                "debtCollection",
+                                "lossOfReceivables"
+                              ],
+                              "example": "paymentReminder"
+                            },
+                            "date": {
+                              "format": "date",
+                              "example": "2022-08-10"
+                            },
+                            "comment": {
+                              "format": "string",
+                              "example": "This is a comment"
+                            },
+                            "sent": {
+                              "type": "boolean",
+                              "format": "boolean",
+                              "example": true
+                            }
+                          }
+                        },
+                        "dunningManualSettings": {
+                          "description": "Expert mode: The payment settings can be set manually with this check mark. Note: This tick overrides the automatic calculation of the incoming payment. This means that the invoice is NOT included in the dunning process. If you use the incoming payment via the account statements, this checkmark should only be used for manual adjustments, because these settings are usually set automatically via the incoming payment.",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "paymentStatus",
+                            "paidAt",
+                            "actualAmount",
+                            "discountGiven"
+                          ],
+                          "nullable": true,
+                          "properties": {
+                            "paymentStatus": {
+                              "type": "string",
+                              "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
+                              "enum": [
+                                "pending",
+                                "paid",
+                                "partlyPaid",
+                                "canceled",
+                                "partialCancellation",
+                                "badDebt",
+                                "debited",
+                                "unknown"
+                              ],
+                              "example": "pending"
+                            },
+                            "paidAt": {
+                              "description": "Date of the payment",
+                              "type": "string",
+                              "format": "date",
+                              "nullable": true,
+                              "example": "2022-08-10"
+                            },
+                            "actualAmount": {
+                              "description": "Amount of the payment",
+                              "type": "number",
+                              "format": "float",
+                              "example": 22.33
+                            },
+                            "discountGiven": {
+                              "description": "Discount given for a payment",
+                              "type": "number",
+                              "format": "float",
+                              "example": 22.33
+                            }
+                          }
                         },
                         "gln": {
                           "x-description-missing": true,
@@ -20567,18 +20827,6 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "date",
-                  "costCenter",
-                  "project",
-                  "customer",
-                  "tags",
-                  "devCustomer",
-                  "billingAddress",
-                  "paymentMethodName",
-                  "gln",
-                  "taxation"
-                ],
                 "properties": {
                   "date": {
                     "type": "string",
@@ -20608,9 +20856,10 @@
                     }
                   },
                   "customer": {
-                    "description": "Reference to another resource",
+                    "description": "Nullable reference to another resource",
                     "type": "object",
                     "additionalProperties": false,
+                    "nullable": true,
                     "required": [
                       "id"
                     ],
@@ -20711,6 +20960,94 @@
                   "taxation": {
                     "type": "string",
                     "pattern": "\\d+"
+                  },
+                  "dunningSettings": {
+                    "description": "Dunning setting for document",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "level",
+                      "date",
+                      "comment",
+                      "sent"
+                    ],
+                    "nullable": true,
+                    "properties": {
+                      "level": {
+                        "type": "string",
+                        "enum": [
+                          "noReminder",
+                          "paymentReminder",
+                          "reminder1",
+                          "reminder2",
+                          "reminder3",
+                          "debtCollection",
+                          "lossOfReceivables"
+                        ],
+                        "example": "paymentReminder"
+                      },
+                      "date": {
+                        "format": "date",
+                        "example": "2022-08-10"
+                      },
+                      "comment": {
+                        "format": "string",
+                        "example": "This is a comment"
+                      },
+                      "sent": {
+                        "type": "boolean",
+                        "format": "boolean",
+                        "example": true
+                      }
+                    }
+                  },
+                  "dunningManualSettings": {
+                    "description": "Expert mode: The payment settings can be set manually with this check mark. Note: This tick overrides the automatic calculation of the incoming payment. This means that the invoice is NOT included in the dunning process. If you use the incoming payment via the account statements, this checkmark should only be used for manual adjustments, because these settings are usually set automatically via the incoming payment.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "paymentStatus",
+                      "paidAt",
+                      "actualAmount",
+                      "discountGiven"
+                    ],
+                    "nullable": true,
+                    "properties": {
+                      "paymentStatus": {
+                        "type": "string",
+                        "description": "Status of the payment. Value `unknown` is displayed when a status from database cannot be identified. Value `unknown` cannot be used when creating or updating statuses (POST or PATCH endpoints)",
+                        "enum": [
+                          "pending",
+                          "paid",
+                          "partlyPaid",
+                          "canceled",
+                          "partialCancellation",
+                          "badDebt",
+                          "debited",
+                          "unknown"
+                        ],
+                        "example": "pending"
+                      },
+                      "paidAt": {
+                        "description": "Date of the payment",
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true,
+                        "example": "2022-08-10"
+                      },
+                      "actualAmount": {
+                        "description": "Amount of the payment",
+                        "type": "number",
+                        "format": "float",
+                        "example": 22.33
+                      },
+                      "discountGiven": {
+                        "description": "Discount given for a payment",
+                        "type": "number",
+                        "format": "float",
+                        "example": 22.33
+                      }
+                    }
                   }
                 }
               },
@@ -20747,7 +21084,19 @@
                     },
                     "paymentMethodName": "invoice",
                     "gln": null,
-                    "taxation": "0"
+                    "taxation": "0",
+                    "dunningSettings": {
+                      "level": "paymentReminder",
+                      "date": "2022-08-10",
+                      "comment": "This is a comment",
+                      "sent": true
+                    },
+                    "dunningManualSettings": {
+                      "paymentStatus": "pending",
+                      "paidAt": "2022-08-10",
+                      "actualAmount": 10.12,
+                      "discountGiven": 1.12
+                    }
                   }
                 }
               }
@@ -70428,8 +70777,8 @@
               }
             }
           },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
+          "406": {
+            "description": "Requested resource representation does not exist."
           }
         }
       }
