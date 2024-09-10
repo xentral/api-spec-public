@@ -1078,7 +1078,8 @@
 </code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">shipment.labelCreationSuccessful</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a shipment label creation successful</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-shipment.labelCreationSuccessful-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-shipment.labelCreationSuccessful-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a shipment label creation successful</p>
 </div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">shipmentId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the shipment</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">deliveryNoteId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the deliver note</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">deliveryNoteId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the corresponding delivery note</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the corresponding sales order</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">carrier</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>carrier</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">trackingNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>tracking number</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">trackingUrl</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>tracking url</p>
@@ -1086,6 +1087,7 @@
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"shipmentId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"deliveryNoteId"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"carrier"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"trackingNumber"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"trackingUrl"</span>: <span class="hljs-string">"string"</span>,
@@ -1229,6 +1231,33 @@
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"ticketId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
+}
+</code></pre>
+</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">product.mediaCreated</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new product media</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-product.mediaCreated-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-product.mediaCreated-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about new product media</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the product media</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">product</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"product"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
+  }
+}
+</code></pre>
+</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">product.mediaUpdated</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about updated product media</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-product.mediaUpdated-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-product.mediaUpdated-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about updated product media</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the product media</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">product</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"product"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
+  }
+}
+</code></pre>
+</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">product.mediaDeleted</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about deleted product media</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-product.mediaDeleted-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-product.mediaDeleted-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about deleted product media</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the product media</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">product</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"product"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
+  }
 }
 </code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li></ul></section></div><div class="panel--right absolute top-0 right-0 h-full bg-gray-800"></div></div></div></section></div>
@@ -5154,7 +5183,14 @@
               },
               "deliveryNoteId": {
                 "type": "integer",
-                "description": "Unique identifier for the deliver note"
+                "description": "Unique identifier for the corresponding delivery note"
+              },
+              "salesOrderId": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Unique identifier for the corresponding sales order"
               },
               "carrier": {
                 "type": "string",
@@ -5706,6 +5742,102 @@
             ],
             "additionalProperties": false,
             "x-parser-schema-id": "<anonymous-schema-131>"
+          }
+        }
+      }
+    },
+    "product.mediaCreated": {
+      "publish": {
+        "summary": "Inform about a new product media",
+        "message": {
+          "name": "ProductMediaCreated",
+          "payload": {
+            "title": "Product Media Created",
+            "description": "Inform about new product media",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Unique identifier for the product media"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "product"
+            ],
+            "additionalProperties": false,
+            "x-parser-schema-id": "<anonymous-schema-132>"
+          }
+        }
+      }
+    },
+    "product.mediaUpdated": {
+      "publish": {
+        "summary": "Inform about updated product media",
+        "message": {
+          "name": "ProductMediaUpdated",
+          "payload": {
+            "title": "Product Media Updated",
+            "description": "Inform about updated product media",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Unique identifier for the product media"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "product"
+            ],
+            "additionalProperties": false,
+            "x-parser-schema-id": "<anonymous-schema-133>"
+          }
+        }
+      }
+    },
+    "product.mediaDeleted": {
+      "publish": {
+        "summary": "Inform about deleted product media",
+        "message": {
+          "name": "ProductMediaDeleted",
+          "payload": {
+            "title": "Product Media Deleted",
+            "description": "Inform about deleted product media",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Unique identifier for the product media"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "required": [
+              "id",
+              "product"
+            ],
+            "additionalProperties": false,
+            "x-parser-schema-id": "<anonymous-schema-134>"
           }
         }
       }
