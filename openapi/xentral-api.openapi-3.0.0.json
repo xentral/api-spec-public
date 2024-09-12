@@ -13595,6 +13595,32 @@
                             "example": {
                               "id": "1337"
                             }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -13805,6 +13831,32 @@
                           "example": {
                             "id": "1337"
                           }
+                        },
+                        "label": {
+                          "type": "object",
+                          "nullable": true,
+                          "required": [
+                            "fileType",
+                            "fileContent"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "fileType": {
+                              "type": "string",
+                              "description": "Label's file type",
+                              "example": "image/gif"
+                            },
+                            "fileContent": {
+                              "type": "string",
+                              "description": "Base 64 encoded label",
+                              "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
+                          },
+                          "description": "Shipping label for the delivery",
+                          "example": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          }
                         }
                       },
                       "description": "Data representation of a single delivery aka shipment"
@@ -13968,6 +14020,32 @@
                           },
                           "example": {
                             "id": "1337"
+                          }
+                        },
+                        "label": {
+                          "type": "object",
+                          "nullable": true,
+                          "required": [
+                            "fileType",
+                            "fileContent"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "fileType": {
+                              "type": "string",
+                              "description": "Label's file type",
+                              "example": "image/gif"
+                            },
+                            "fileContent": {
+                              "type": "string",
+                              "description": "Base 64 encoded label",
+                              "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
+                          },
+                          "description": "Shipping label for the delivery",
+                          "example": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                           }
                         }
                       },
@@ -15939,6 +16017,32 @@
                             "example": {
                               "id": "1337"
                             }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                            }
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -16319,6 +16423,32 @@
                             },
                             "example": {
                               "id": "1337"
+                            }
+                          },
+                          "label": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "fileType",
+                              "fileContent"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "fileType": {
+                                "type": "string",
+                                "description": "Label's file type",
+                                "example": "image/gif"
+                              },
+                              "fileContent": {
+                                "type": "string",
+                                "description": "Base 64 encoded label",
+                                "example": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                              }
+                            },
+                            "description": "Shipping label for the delivery",
+                            "example": {
+                              "fileType": "image/gif",
+                              "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                             }
                           }
                         },
@@ -19022,7 +19152,8 @@
                       "currency",
                       "shippingMethod",
                       "amountNet",
-                      "salesOrder"
+                      "salesOrder",
+                      "dunningLevel"
                     ],
                     "example": "date"
                   },
@@ -19114,7 +19245,8 @@
                       "balance",
                       "status",
                       "shippingMethod",
-                      "amountNet"
+                      "amountNet",
+                      "dunningDate"
                     ]
                   },
                   "dir": {
@@ -19384,6 +19516,46 @@
                                   "example": "ff0000",
                                   "description": "Hexadecimal color value in 6-digit format without the leading # character."
                                 }
+                              }
+                            }
+                          },
+                          "dunningSettings": {
+                            "description": "Dunning setting for document",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "level",
+                              "date",
+                              "comment",
+                              "sent"
+                            ],
+                            "nullable": false,
+                            "properties": {
+                              "level": {
+                                "type": "string",
+                                "enum": [
+                                  "noReminder",
+                                  "paymentReminder",
+                                  "reminder1",
+                                  "reminder2",
+                                  "reminder3",
+                                  "debtCollection",
+                                  "lossOfReceivables"
+                                ],
+                                "example": "paymentReminder"
+                              },
+                              "date": {
+                                "format": "date",
+                                "example": "2022-08-10"
+                              },
+                              "comment": {
+                                "format": "string",
+                                "example": "This is a comment"
+                              },
+                              "sent": {
+                                "type": "boolean",
+                                "format": "boolean",
+                                "example": true
                               }
                             }
                           },
@@ -20655,18 +20827,6 @@
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
-                "required": [
-                  "date",
-                  "costCenter",
-                  "project",
-                  "customer",
-                  "tags",
-                  "devCustomer",
-                  "billingAddress",
-                  "paymentMethodName",
-                  "gln",
-                  "taxation"
-                ],
                 "properties": {
                   "date": {
                     "type": "string",
@@ -20696,9 +20856,10 @@
                     }
                   },
                   "customer": {
-                    "description": "Reference to another resource",
+                    "description": "Nullable reference to another resource",
                     "type": "object",
                     "additionalProperties": false,
+                    "nullable": true,
                     "required": [
                       "id"
                     ],
@@ -70616,8 +70777,8 @@
               }
             }
           },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
+          "406": {
+            "description": "Requested resource representation does not exist."
           }
         }
       }
