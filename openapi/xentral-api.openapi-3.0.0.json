@@ -17185,24 +17185,33 @@
                           "name": {
                             "x-description-missing": true,
                             "type": "string",
-                            "minLength": 1
+                            "minLength": 1,
+                            "example": "Shopify"
                           },
                           "number": {
                             "x-description-missing": true,
                             "type": "string",
-                            "minLength": 1
+                            "minLength": 1,
+                            "example": "1234567"
                           },
                           "isActive": {
                             "x-description-missing": true,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true
                           },
                           "isScannable": {
                             "x-description-missing": true,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true
                           },
                           "target": {
                             "x-description-missing": true,
                             "type": "object",
+                            "example": {
+                              "id": "3543",
+                              "name": "Shopware",
+                              "isActive": true
+                            },
                             "additionalProperties": false,
                             "properties": {
                               "id": {
@@ -17840,11 +17849,13 @@
                     },
                     "name": {
                       "x-description-missing": true,
-                      "type": "string"
+                      "type": "string",
+                      "example": "Shopify"
                     },
                     "number": {
                       "x-description-missing": true,
-                      "type": "string"
+                      "type": "string",
+                      "example": "1234567"
                     },
                     "isActive": {
                       "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
@@ -18364,13 +18375,15 @@
                             "description": "Resource identifier."
                           },
                           "name": {
-                            "x-description-missing": true,
+                            "description": "The name of the external reference target",
                             "type": "string",
-                            "minLength": 1
+                            "minLength": 1,
+                            "example": "Shopware"
                           },
                           "isActive": {
-                            "x-description-missing": true,
-                            "type": "boolean"
+                            "description": "A flag to determine whether an external reference target is active",
+                            "type": "boolean",
+                            "example": true
                           }
                         }
                       }
@@ -51684,7 +51697,8 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the product category"
+                            "description": "Name of the product category",
+                            "example": "Clothing"
                           },
                           "parent": {
                             "description": "An optional object with id and name",
@@ -51791,7 +51805,8 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the product category"
+                            "description": "Name of the product category",
+                            "example": "Clothing"
                           },
                           "parent": {
                             "description": "An optional object with id and name",
@@ -52411,6 +52426,11 @@
                     "data": {
                       "x-description-missing": true,
                       "type": "object",
+                      "example": {
+                        "id": "3",
+                        "name": "Clothing",
+                        "parent": null
+                      },
                       "additionalProperties": false,
                       "properties": {
                         "id": {
@@ -52421,7 +52441,8 @@
                         },
                         "name": {
                           "type": "string",
-                          "description": "Name of the product category"
+                          "description": "Name of the product category",
+                          "example": "Clothing"
                         },
                         "parent": {
                           "description": "An optional object with id and name",
@@ -53061,6 +53082,10 @@
                       "type": "array",
                       "items": {
                         "x-description-missing": true,
+                        "example": {
+                          "id": "1",
+                          "name": "Net Weight"
+                        },
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
@@ -53077,7 +53102,8 @@
                           "name": {
                             "type": "string",
                             "nullable": true,
-                            "description": "Name of the product free field"
+                            "description": "Name of the product free field",
+                            "example": "Net Weight"
                           }
                         }
                       }
@@ -53238,7 +53264,8 @@
                     },
                     "name": {
                       "type": "string",
-                      "description": "Name of the product free field"
+                      "description": "Name of the product free field",
+                      "example": "Net Weight"
                     }
                   }
                 }
@@ -53486,6 +53513,10 @@
                   "properties": {
                     "data": {
                       "x-description-missing": true,
+                      "example": {
+                        "id": "1",
+                        "name": "Net Weight"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "required": [
@@ -53502,7 +53533,8 @@
                         "name": {
                           "type": "string",
                           "nullable": true,
-                          "description": "Name of the product free field"
+                          "description": "Name of the product free field",
+                          "example": "Net Weight"
                         }
                       }
                     }
@@ -54101,14 +54133,16 @@
                       }
                     },
                     "title": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "example": "Vitra Eames Plastic Chair",
+                      "description": "The title of the media"
                     },
                     "description": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "example": "Front picture of the Vitra Eames Plastic Chair",
+                      "description": "The description of the media"
                     },
                     "keyword": {
                       "x-description-missing": true,
@@ -54118,12 +54152,14 @@
                         "printImage",
                         "labelImage",
                         "otherImage"
-                      ]
+                      ],
+                      "example": "defaultImage"
                     },
                     "sort": {
                       "x-description-missing": true,
                       "type": "integer",
-                      "nullable": true
+                      "nullable": true,
+                      "example": 1
                     }
                   }
                 }
@@ -54654,14 +54690,16 @@
                             }
                           },
                           "title": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "The title of the media",
+                            "example": "Vitra Eames Plastic Chair"
                           },
                           "description": {
-                            "x-description-missing": true,
+                            "description": "The description of the media",
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "Front picture of the Vitra Eames Plastic Chair"
                           },
                           "keyword": {
                             "x-description-missing": true,
@@ -54674,14 +54712,25 @@
                               "otherImage",
                               "dataSheet",
                               "certificateAttachment"
-                            ]
+                            ],
+                            "example": "defaultImage"
                           },
                           "sort": {
                             "x-description-missing": true,
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 1
                           },
                           "currentVersion": {
                             "x-description-missing": true,
+                            "example": {
+                              "id": "17",
+                              "version": 3,
+                              "url": "/api/productMedia/5/versions/3",
+                              "remark": "Initial Version",
+                              "filename": "test.png",
+                              "size": 12345,
+                              "updatedAt": "2024-02-16T14:32:41+02:00"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
@@ -54693,36 +54742,43 @@
                               },
                               "version": {
                                 "x-description-missing": true,
-                                "type": "integer"
+                                "type": "integer",
+                                "example": 3
                               },
                               "url": {
                                 "x-description-missing": true,
-                                "type": "string"
+                                "type": "string",
+                                "example": "/api/productMedia/5/versions/3"
                               },
                               "remark": {
                                 "x-description-missing": true,
                                 "type": "string",
-                                "nullable": true
+                                "nullable": true,
+                                "example": "Initial Version"
                               },
                               "filename": {
                                 "x-description-missing": true,
-                                "type": "string"
+                                "type": "string",
+                                "example": "test.png"
                               },
                               "size": {
-                                "x-description-missing": true,
-                                "type": "integer"
+                                "description": "The size of the image in bytes",
+                                "type": "integer",
+                                "example": 12345
                               },
                               "updatedAt": {
-                                "x-description-missing": true,
                                 "type": "string",
-                                "format": "date-time"
+                                "format": "date-time",
+                                "example": "2024-02-16T14:32:41+02:00",
+                                "description": "The date and time when the version was last updated."
                               }
                             }
                           },
                           "updatedAt": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2024-02-16T14:32:41+02:00",
+                            "description": "The date and time when the media was last updated."
                           }
                         }
                       }
@@ -55046,6 +55102,37 @@
                   "properties": {
                     "data": {
                       "x-description-missing": true,
+                      "example": {
+                        "id": "5",
+                        "product": {
+                          "id": "1"
+                        },
+                        "title": "Vitra Eames Plastic Chair",
+                        "description": "Front picture of the Vitra Eames Plastic Chair",
+                        "keyword": "defaultImage",
+                        "sort": 1,
+                        "versions": [
+                          {
+                            "id": "17",
+                            "version": 3,
+                            "url": "/api/productMedia/5/versions/3",
+                            "remark": "Initial Version",
+                            "filename": "test.png",
+                            "size": 12345,
+                            "updatedAt": "2024-02-16T14:32:41+02:00"
+                          }
+                        ],
+                        "currentVersion": {
+                          "id": "17",
+                          "version": 3,
+                          "url": "/api/productMedia/5/versions/3",
+                          "remark": "Initial Version",
+                          "filename": "test.png",
+                          "size": 12345,
+                          "updatedAt": "2024-02-16T14:32:41+02:00"
+                        },
+                        "updatedAt": "2024-02-16T14:32:41+02:00"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
@@ -55077,12 +55164,14 @@
                         "title": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "Vitra Eames Plastic Chair"
                         },
                         "description": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "Front picture of the Vitra Eames Plastic Chair"
                         },
                         "keyword": {
                           "x-description-missing": true,
@@ -55095,16 +55184,27 @@
                             "otherImage",
                             "dataSheet",
                             "certificateAttachment"
-                          ]
+                          ],
+                          "example": "defaultImage"
                         },
                         "sort": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 1
                         },
                         "versions": {
                           "type": "array",
                           "items": {
                             "x-description-missing": true,
+                            "example": {
+                              "id": "17",
+                              "version": 3,
+                              "url": "/api/productMedia/5/versions/3",
+                              "remark": "Initial Version",
+                              "filename": "test.png",
+                              "size": 12345,
+                              "updatedAt": "2024-02-16T14:32:41+02:00"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
@@ -55116,35 +55216,50 @@
                               },
                               "version": {
                                 "x-description-missing": true,
-                                "type": "integer"
+                                "type": "integer",
+                                "example": 3
                               },
                               "url": {
                                 "x-description-missing": true,
-                                "type": "string"
+                                "type": "string",
+                                "example": "/api/productMedia/5/versions/3"
                               },
                               "remark": {
                                 "x-description-missing": true,
                                 "type": "string",
-                                "nullable": true
+                                "nullable": true,
+                                "example": "Initial Version"
                               },
                               "filename": {
                                 "x-description-missing": true,
-                                "type": "string"
+                                "type": "string",
+                                "example": "test.png"
                               },
                               "size": {
-                                "x-description-missing": true,
-                                "type": "integer"
+                                "description": "The size of the image in bytes",
+                                "type": "integer",
+                                "example": 12345
                               },
                               "updatedAt": {
-                                "x-description-missing": true,
                                 "type": "string",
-                                "format": "date-time"
+                                "format": "date-time",
+                                "example": "2024-02-16T14:32:41+02:00",
+                                "description": "The date and time when the version was last updated."
                               }
                             }
                           }
                         },
                         "currentVersion": {
                           "x-description-missing": true,
+                          "example": {
+                            "id": "17",
+                            "version": 3,
+                            "url": "/api/productMedia/5/versions/3",
+                            "remark": "Initial Version",
+                            "filename": "test.png",
+                            "size": 12345,
+                            "updatedAt": "2024-02-16T14:32:41+02:00"
+                          },
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
@@ -55156,36 +55271,43 @@
                             },
                             "version": {
                               "x-description-missing": true,
-                              "type": "integer"
+                              "type": "integer",
+                              "example": 3
                             },
                             "url": {
                               "x-description-missing": true,
-                              "type": "string"
+                              "type": "string",
+                              "example": "/api/productMedia/5/versions/3"
                             },
                             "remark": {
                               "x-description-missing": true,
                               "type": "string",
-                              "nullable": true
+                              "nullable": true,
+                              "example": "Initial Version"
                             },
                             "filename": {
                               "x-description-missing": true,
-                              "type": "string"
+                              "type": "string",
+                              "example": "test.png"
                             },
                             "size": {
-                              "x-description-missing": true,
-                              "type": "integer"
+                              "description": "The size of the image in bytes",
+                              "type": "integer",
+                              "example": 12345
                             },
                             "updatedAt": {
-                              "x-description-missing": true,
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "example": "2024-02-16T14:32:41+02:00",
+                              "description": "The date and time when the version was last updated."
                             }
                           }
                         },
                         "updatedAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2024-02-16T14:32:41+02:00"
                         }
                       }
                     },
@@ -55771,6 +55893,15 @@
                   "properties": {
                     "data": {
                       "x-description-missing": true,
+                      "example": {
+                        "id": "17",
+                        "version": 3,
+                        "url": "/api/productMedia/5/versions/3",
+                        "remark": "Initial Version",
+                        "filename": "test.png",
+                        "size": 12345,
+                        "updatedAt": "2024-02-16T14:32:41+02:00"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
@@ -55782,29 +55913,35 @@
                         },
                         "version": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 3
                         },
                         "url": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "/api/productMedia/5/versions/3"
                         },
                         "remark": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "Initial Version"
                         },
                         "filename": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "test.png"
                         },
                         "size": {
-                          "x-description-missing": true,
-                          "type": "integer"
+                          "description": "The size of the image in bytes",
+                          "type": "integer",
+                          "example": 12345
                         },
                         "updatedAt": {
-                          "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2024-02-16T14:32:41+02:00",
+                          "description": "The date and time when the version was last updated."
                         }
                       }
                     },
@@ -56539,7 +56676,8 @@
                     "name": {
                       "type": "string",
                       "minLength": 1,
-                      "description": "Name of the product property."
+                      "description": "Name of the product property.",
+                      "example": "Color"
                     },
                     "project": {
                       "description": "Reference to another resource",
@@ -56806,7 +56944,8 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Name of the product property."
+                            "description": "Name of the product property.",
+                            "example": "Color"
                           },
                           "project": {
                             "description": "Reference to another resource",
@@ -56884,9 +57023,10 @@
                       "description": "Resource identifier."
                     },
                     "name": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "minLength": 1
+                      "minLength": 1,
+                      "description": "Name of the product property.",
+                      "example": "Color"
                     }
                   }
                 }
@@ -58163,7 +58303,8 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Shows the name of the merchandise group."
+                            "description": "Shows the name of the merchandise group.",
+                            "example": "Merchandise"
                           },
                           "project": {
                             "description": "An optional object with id and name",
@@ -58192,71 +58333,125 @@
                           },
                           "lastUsedProductNumber": {
                             "type": "string",
-                            "description": "Shows the last used product number used by the merchandise group."
+                            "description": "Shows the last used product number used by the merchandise group.",
+                            "example": "1000"
                           },
                           "useMainProductNumberRange": {
                             "type": "boolean",
-                            "description": "Shows if the product number is taken from the main product number range or not."
+                            "description": "Shows if the product number is taken from the main product number range or not.",
+                            "example": true
                           },
                           "revenue": {
-                            "x-description-missing": true,
+                            "description": "How products in this merchandise group are contributing to revenues on your chart of accounts.",
+                            "example": {
+                              "domesticStandard": "19",
+                              "domesticReduced": "7",
+                              "domesticFree": "0",
+                              "intraCommunityEu": "0",
+                              "intraCommunityEuTaxText": "VAT free intra-community supply",
+                              "euStandard": "0",
+                              "euReduced": "0",
+                              "export": "0",
+                              "exportTaxText": "VAT free export"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "domesticStandard": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic standard tax rate of the Merchandise Group.",
+                                "example": "19"
                               },
                               "domesticReduced": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic reduced tax rate of the Merchandise Group.",
+                                "example": "7"
                               },
                               "domesticFree": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic free (tax free) tax rate of the Merchandise Group.",
+                                "example": "0"
                               },
                               "intraCommunityEu": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the intra-community EU tax rate of the Merchandise Group.",
+                                "example": "21"
                               },
                               "intraCommunityEuTaxText": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "A description for the intra-community EU tax rate of the Merchandise Group.",
+                                "example": "Tax rate in the european union"
                               },
                               "euStandard": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the EU standard tax rate of the Merchandise Group.",
+                                "example": "19"
                               },
                               "euReduced": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the EU reduced tax rate of the Merchandise Group.",
+                                "example": "7"
                               },
                               "export": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the export tax rate of the Merchandise Group.",
+                                "example": "21"
                               },
                               "exportTaxText": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "A description for the export tax rate of the Merchandise Group.",
+                                "example": "Sales tax applied for export products"
                               }
                             }
                           },
                           "expenses": {
-                            "x-description-missing": true,
+                            "description": "How products in this merchandise group are contributing to expenses on your chart of accounts.",
+                            "example": {
+                              "domesticStandard": "19",
+                              "domesticReduced": "7",
+                              "domesticFree": "0",
+                              "intraCommunityEu": "0",
+                              "euStandard": "0",
+                              "euReduced": "0",
+                              "import": "0"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "domesticStandard": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic standard tax rate of the Merchandise Group.",
+                                "example": "19"
                               },
                               "domesticReduced": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic reduced tax rate of the Merchandise Group.",
+                                "example": "7"
                               },
                               "domesticFree": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the domestic free (tax free) tax rate of the Merchandise Group.",
+                                "example": "0"
                               },
                               "intraCommunityEu": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the intra-community EU tax rate of the Merchandise Group.",
+                                "example": "21"
                               },
                               "euStandard": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the EU standard tax rate of the Merchandise Group.",
+                                "example": "19"
                               },
                               "euReduced": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the EU reduced tax rate of the Merchandise Group.",
+                                "example": "7"
                               },
                               "import": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Shows the import tax rate of the Merchandise Group.",
+                                "example": "21"
                               }
                             }
                           }
@@ -58828,6 +59023,33 @@
                   "properties": {
                     "data": {
                       "x-description-missing": true,
+                      "example": {
+                        "id": "1",
+                        "name": "Handelsware (100000)",
+                        "project": null,
+                        "lastUsedProductNumber": "100000",
+                        "useMainProductNumberRange": false,
+                        "revenue": {
+                          "domesticStandard": "21",
+                          "domesticReduced": "7",
+                          "domesticFree": "0",
+                          "intraCommunityEu": "21",
+                          "intraCommunityEuTaxText": "Tax rate in the european union",
+                          "euStandard": "21",
+                          "euReduced": "7",
+                          "export": "21",
+                          "exportTaxText": "Sales tax applied for export products"
+                        },
+                        "expenses": {
+                          "domesticStandard": "21",
+                          "domesticReduced": "7",
+                          "domesticFree": "0",
+                          "intraCommunityEu": "21",
+                          "euStandard": "21",
+                          "euReduced": "7",
+                          "import": "21"
+                        }
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
@@ -58839,7 +59061,8 @@
                         },
                         "name": {
                           "type": "string",
-                          "description": "Shows the name of the merchandise group."
+                          "description": "Shows the name of the merchandise group.",
+                          "example": "Merchandise"
                         },
                         "project": {
                           "description": "An optional object with id and name",
@@ -58868,14 +59091,27 @@
                         },
                         "lastUsedProductNumber": {
                           "type": "string",
-                          "description": "Shows the last used product number by the merchandise group."
+                          "description": "Shows the last used product number by the merchandise group.",
+                          "example": "1000"
                         },
                         "useMainProductNumberRange": {
                           "type": "boolean",
-                          "description": "Shows if the product number is taken from the main product number range or not."
+                          "description": "Shows if the product number is taken from the main product number range or not.",
+                          "example": true
                         },
                         "revenue": {
-                          "x-description-missing": true,
+                          "description": "How products in this merchandise group are contributing to revenues on your chart of accounts.",
+                          "example": {
+                            "domesticStandard": "19",
+                            "domesticReduced": "7",
+                            "domesticFree": "0",
+                            "intraCommunityEu": "0",
+                            "intraCommunityEuTaxText": "VAT free intra-community supply",
+                            "euStandard": "0",
+                            "euReduced": "0",
+                            "export": "0",
+                            "exportTaxText": "VAT free export"
+                          },
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
@@ -58909,7 +59145,16 @@
                           }
                         },
                         "expenses": {
-                          "x-description-missing": true,
+                          "description": "How products in this merchandise group are contributing to expenses on your chart of accounts.",
+                          "example": {
+                            "domesticStandard": "19",
+                            "domesticReduced": "7",
+                            "domesticFree": "0",
+                            "intraCommunityEu": "0",
+                            "euStandard": "0",
+                            "euReduced": "0",
+                            "import": "0"
+                          },
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
@@ -64214,6 +64459,9 @@
                       }
                     },
                     "description": "Reference to a supplier for this price",
+                    "example": {
+                      "id": "194"
+                    },
                     "nullable": true
                   },
                   "isStandardSupplier": {
@@ -64245,30 +64493,43 @@
                   },
                   "supplierDesignation": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "The designation of the supplier",
+                    "example": "Xentral"
                   },
                   "supplierItemNumber": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Supplier item number",
+                    "example": "4992042-20"
                   },
                   "fromQuantity": {
                     "type": "number",
-                    "format": "float"
+                    "format": "float",
+                    "description": "Minimum quantity for this price",
+                    "example": 1
                   },
                   "packageAmount": {
                     "type": "number",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Amount of items in a package",
+                    "example": 10
                   },
                   "price": {
-                    "x-description-missing": true,
+                    "description": "Price of the product",
+                    "example": {
+                      "amount": 7.3,
+                      "currency": "EUR"
+                    },
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "amount": {
                         "x-description-missing": true,
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "example": 7.3
                       },
                       "currency": {
                         "x-description-missing": true,
@@ -64279,19 +64540,24 @@
                           "CHF",
                           "USD",
                           "GBP"
-                        ]
+                        ],
+                        "example": "EUR"
                       }
                     }
                   },
                   "validFrom": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date from which the price is valid",
+                    "example": "2023-12-01"
                   },
                   "expiresAt": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date until which the price is valid",
+                    "example": "2024-12-12"
                   }
                 }
               },
@@ -64365,6 +64631,9 @@
                       }
                     },
                     "description": "Reference to a supplier for this price",
+                    "example": {
+                      "id": "194"
+                    },
                     "nullable": true
                   },
                   "isStandardSupplier": {
@@ -64396,20 +64665,28 @@
                   },
                   "supplierDesignation": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "The designation of the supplier",
+                    "example": "Xentral"
                   },
                   "supplierItemNumber": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Supplier item number",
+                    "example": "4992042-20"
                   },
                   "fromQuantity": {
                     "type": "number",
-                    "format": "float"
+                    "format": "float",
+                    "description": "Minimum quantity for this price",
+                    "example": 1
                   },
                   "packageAmount": {
                     "type": "number",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Amount of items in a package",
+                    "example": 10
                   },
                   "price": {
                     "description": "Money object with amount and currency",
@@ -64444,12 +64721,16 @@
                   "validFrom": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date from which the price is valid",
+                    "example": "2023-12-01"
                   },
                   "expiresAt": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date until which the price is valid",
+                    "example": "2024-12-12"
                   }
                 }
               },
@@ -64812,6 +65093,25 @@
                         "x-description-missing": true,
                         "type": "object",
                         "additionalProperties": false,
+                        "example": {
+                          "id": "1",
+                          "product": {
+                            "id": "5"
+                          },
+                          "supplier": {
+                            "id": "7"
+                          },
+                          "isStandardSupplier": false,
+                          "supplierDesignation": "123456",
+                          "fromQuantity": 1,
+                          "packageAmount": 1,
+                          "price": {
+                            "amount": 12.92,
+                            "currency": "EUR"
+                          },
+                          "validFrom": null,
+                          "expiresAt": "2024-12-12"
+                        },
                         "properties": {
                           "id": {
                             "type": "string",
@@ -64853,42 +65153,55 @@
                               }
                             },
                             "description": "Reference to a supplier for this price",
+                            "example": {
+                              "id": "194"
+                            },
                             "nullable": true
                           },
                           "isStandardSupplier": {
-                            "x-description-missing": true,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true,
+                            "description": "Sets the supplier to be the standard supplier for this product"
                           },
                           "supplierDesignation": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "The designation of the supplier",
+                            "example": "Xentral"
                           },
                           "supplierItemNumber": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Supplier item number",
+                            "example": "4992042-20"
                           },
                           "fromQuantity": {
-                            "x-description-missing": true,
-                            "type": "number",
-                            "format": "float"
-                          },
-                          "packageAmount": {
-                            "x-description-missing": true,
                             "type": "number",
                             "format": "float",
-                            "nullable": true
+                            "description": "Minimum quantity for this price",
+                            "example": 1
+                          },
+                          "packageAmount": {
+                            "type": "number",
+                            "format": "float",
+                            "nullable": true,
+                            "description": "Amount of items in a package",
+                            "example": 10
                           },
                           "price": {
-                            "x-description-missing": true,
+                            "description": "Price of the product",
+                            "example": {
+                              "amount": 7.3,
+                              "currency": "EUR"
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "properties": {
                               "amount": {
                                 "x-description-missing": true,
                                 "type": "number",
-                                "format": "float"
+                                "format": "float",
+                                "example": 7.3
                               },
                               "currency": {
                                 "x-description-missing": true,
@@ -64899,21 +65212,24 @@
                                   "CHF",
                                   "USD",
                                   "GBP"
-                                ]
+                                ],
+                                "example": "EUR"
                               }
                             }
                           },
                           "validFrom": {
-                            "x-description-missing": true,
                             "type": "string",
                             "format": "date",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Date from which the price is valid",
+                            "example": "2023-12-01"
                           },
                           "expiresAt": {
-                            "x-description-missing": true,
                             "type": "string",
                             "format": "date",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Date until which the price is valid",
+                            "example": "2024-12-12"
                           }
                         }
                       }
@@ -65035,6 +65351,25 @@
                         "x-description-missing": true,
                         "type": "object",
                         "additionalProperties": false,
+                        "example": {
+                          "id": "1",
+                          "product": {
+                            "id": "5"
+                          },
+                          "supplier": {
+                            "id": "7"
+                          },
+                          "isStandardSupplier": false,
+                          "supplierDesignation": "123456",
+                          "fromQuantity": 1,
+                          "packageAmount": 1,
+                          "price": {
+                            "amount": "12.92",
+                            "currency": "EUR"
+                          },
+                          "validFrom": null,
+                          "expiresAt": "2024-12-12"
+                        },
                         "properties": {
                           "id": {
                             "type": "string",
@@ -65076,32 +65411,40 @@
                               }
                             },
                             "description": "Reference to a supplier for this price",
+                            "example": {
+                              "id": "194"
+                            },
                             "nullable": true
                           },
                           "isStandardSupplier": {
                             "x-description-missing": true,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true
                           },
                           "supplierDesignation": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "The designation of the supplier",
+                            "example": "Xentral"
                           },
                           "supplierItemNumber": {
-                            "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Supplier item number",
+                            "example": "4992042-20"
                           },
                           "fromQuantity": {
-                            "x-description-missing": true,
-                            "type": "number",
-                            "format": "float"
-                          },
-                          "packageAmount": {
-                            "x-description-missing": true,
                             "type": "number",
                             "format": "float",
-                            "nullable": true
+                            "description": "Minimum quantity for this price",
+                            "example": 1
+                          },
+                          "packageAmount": {
+                            "type": "number",
+                            "format": "float",
+                            "nullable": true,
+                            "description": "Amount of items in a package",
+                            "example": 10
                           },
                           "price": {
                             "description": "Money object with amount and currency",
@@ -65134,16 +65477,18 @@
                             }
                           },
                           "validFrom": {
-                            "x-description-missing": true,
                             "type": "string",
                             "format": "date",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Date from which the price is valid",
+                            "example": "2023-12-01"
                           },
                           "expiresAt": {
-                            "x-description-missing": true,
                             "type": "string",
                             "format": "date",
-                            "nullable": true
+                            "nullable": true,
+                            "description": "Date until which the price is valid",
+                            "example": "2024-12-12"
                           }
                         }
                       }
@@ -65490,6 +65835,9 @@
                         }
                       },
                       "description": "Reference to a supplier for this price",
+                      "example": {
+                        "id": "194"
+                      },
                       "nullable": true
                     },
                     "isStandardSupplier": {
@@ -65520,35 +65868,44 @@
                       ]
                     },
                     "supplierDesignation": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "The designation of the supplier",
+                      "example": "Xentral"
                     },
                     "supplierItemNumber": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Supplier item number",
+                      "example": "4992042-20"
                     },
                     "fromQuantity": {
-                      "x-description-missing": true,
-                      "type": "number",
-                      "format": "float"
-                    },
-                    "packageAmount": {
-                      "x-description-missing": true,
                       "type": "number",
                       "format": "float",
-                      "nullable": true
+                      "description": "Minimum quantity for this price",
+                      "example": 1
+                    },
+                    "packageAmount": {
+                      "type": "number",
+                      "format": "float",
+                      "nullable": true,
+                      "description": "Amount of items in a package",
+                      "example": 10
                     },
                     "price": {
-                      "x-description-missing": true,
+                      "description": "Price of the product",
+                      "example": {
+                        "amount": 7.3,
+                        "currency": "EUR"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
                         "amount": {
                           "x-description-missing": true,
                           "type": "number",
-                          "format": "float"
+                          "format": "float",
+                          "example": 7.3
                         },
                         "currency": {
                           "x-description-missing": true,
@@ -65559,21 +65916,24 @@
                             "CHF",
                             "USD",
                             "GBP"
-                          ]
+                          ],
+                          "example": "EUR"
                         }
                       }
                     },
                     "validFrom": {
-                      "x-description-missing": true,
                       "type": "string",
                       "format": "date",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Date from which the price is valid",
+                      "example": "2023-12-01"
                     },
                     "expiresAt": {
-                      "x-description-missing": true,
                       "type": "string",
                       "format": "date",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Date until which the price is valid",
+                      "example": "2024-12-12"
                     }
                   }
                 }
@@ -65649,6 +66009,9 @@
                         }
                       },
                       "description": "Reference to a supplier for this price",
+                      "example": {
+                        "id": "194"
+                      },
                       "nullable": true
                     },
                     "isStandardSupplier": {
@@ -65679,25 +66042,29 @@
                       ]
                     },
                     "supplierDesignation": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "The designation of the supplier",
+                      "example": "Xentral"
                     },
                     "supplierItemNumber": {
-                      "x-description-missing": true,
                       "type": "string",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Supplier item number",
+                      "example": "4992042-20"
                     },
                     "fromQuantity": {
-                      "x-description-missing": true,
-                      "type": "number",
-                      "format": "float"
-                    },
-                    "packageAmount": {
-                      "x-description-missing": true,
                       "type": "number",
                       "format": "float",
-                      "nullable": true
+                      "description": "Minimum quantity for this price",
+                      "example": 1
+                    },
+                    "packageAmount": {
+                      "type": "number",
+                      "format": "float",
+                      "nullable": true,
+                      "description": "Amount of items in a package",
+                      "example": 10
                     },
                     "price": {
                       "description": "Money object with amount and currency",
@@ -65730,16 +66097,18 @@
                       }
                     },
                     "validFrom": {
-                      "x-description-missing": true,
                       "type": "string",
                       "format": "date",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Date from which the price is valid",
+                      "example": "2023-12-01"
                     },
                     "expiresAt": {
-                      "x-description-missing": true,
                       "type": "string",
                       "format": "date",
-                      "nullable": true
+                      "nullable": true,
+                      "description": "Date until which the price is valid",
+                      "example": "2024-12-12"
                     }
                   }
                 }
@@ -65978,6 +66347,25 @@
                       "x-description-missing": true,
                       "type": "object",
                       "additionalProperties": false,
+                      "example": {
+                        "id": "1",
+                        "product": {
+                          "id": "5"
+                        },
+                        "supplier": {
+                          "id": "7"
+                        },
+                        "isStandardSupplier": false,
+                        "supplierDesignation": "123456",
+                        "fromQuantity": 1,
+                        "packageAmount": 1,
+                        "price": {
+                          "amount": 12.92,
+                          "currency": "EUR"
+                        },
+                        "validFrom": null,
+                        "expiresAt": "2024-12-12"
+                      },
                       "properties": {
                         "id": {
                           "type": "string",
@@ -66019,42 +66407,55 @@
                             }
                           },
                           "description": "Reference to a supplier for this price",
+                          "example": {
+                            "id": "194"
+                          },
                           "nullable": true
                         },
                         "isStandardSupplier": {
-                          "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Sets the supplier to be the standard supplier for this product"
                         },
                         "supplierDesignation": {
-                          "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "The designation of the supplier",
+                          "example": "Xentral"
                         },
                         "supplierItemNumber": {
-                          "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Supplier item number",
+                          "example": "4992042-20"
                         },
                         "fromQuantity": {
-                          "x-description-missing": true,
-                          "type": "number",
-                          "format": "float"
-                        },
-                        "packageAmount": {
-                          "x-description-missing": true,
                           "type": "number",
                           "format": "float",
-                          "nullable": true
+                          "description": "Minimum quantity for this price",
+                          "example": 1
+                        },
+                        "packageAmount": {
+                          "type": "number",
+                          "format": "float",
+                          "nullable": true,
+                          "description": "Amount of items in a package",
+                          "example": 10
                         },
                         "price": {
-                          "x-description-missing": true,
+                          "description": "Price of the product",
+                          "example": {
+                            "amount": 7.3,
+                            "currency": "EUR"
+                          },
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "amount": {
                               "x-description-missing": true,
                               "type": "number",
-                              "format": "float"
+                              "format": "float",
+                              "example": 7.3
                             },
                             "currency": {
                               "x-description-missing": true,
@@ -66065,21 +66466,24 @@
                                 "CHF",
                                 "USD",
                                 "GBP"
-                              ]
+                              ],
+                              "example": "EUR"
                             }
                           }
                         },
                         "validFrom": {
-                          "x-description-missing": true,
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Date from which the price is valid",
+                          "example": "2023-12-01"
                         },
                         "expiresAt": {
-                          "x-description-missing": true,
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Date until which the price is valid",
+                          "example": "2024-12-12"
                         }
                       }
                     },
@@ -66169,6 +66573,25 @@
                       "x-description-missing": true,
                       "type": "object",
                       "additionalProperties": false,
+                      "example": {
+                        "id": "1",
+                        "product": {
+                          "id": "5"
+                        },
+                        "supplier": {
+                          "id": "7"
+                        },
+                        "isStandardSupplier": false,
+                        "supplierDesignation": "123456",
+                        "fromQuantity": 1,
+                        "packageAmount": 1,
+                        "price": {
+                          "amount": "12.92",
+                          "currency": "EUR"
+                        },
+                        "validFrom": null,
+                        "expiresAt": "2024-12-12"
+                      },
                       "properties": {
                         "id": {
                           "type": "string",
@@ -66210,32 +66633,40 @@
                             }
                           },
                           "description": "Reference to a supplier for this price",
+                          "example": {
+                            "id": "194"
+                          },
                           "nullable": true
                         },
                         "isStandardSupplier": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "supplierDesignation": {
-                          "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "The designation of the supplier",
+                          "example": "Xentral"
                         },
                         "supplierItemNumber": {
-                          "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Supplier item number",
+                          "example": "4992042-20"
                         },
                         "fromQuantity": {
-                          "x-description-missing": true,
-                          "type": "number",
-                          "format": "float"
-                        },
-                        "packageAmount": {
-                          "x-description-missing": true,
                           "type": "number",
                           "format": "float",
-                          "nullable": true
+                          "description": "Minimum quantity for this price",
+                          "example": 1
+                        },
+                        "packageAmount": {
+                          "type": "number",
+                          "format": "float",
+                          "nullable": true,
+                          "description": "Amount of items in a package",
+                          "example": 10
                         },
                         "price": {
                           "description": "Money object with amount and currency",
@@ -66268,16 +66699,18 @@
                           }
                         },
                         "validFrom": {
-                          "x-description-missing": true,
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Date from which the price is valid",
+                          "example": "2023-12-01"
                         },
                         "expiresAt": {
-                          "x-description-missing": true,
                           "type": "string",
                           "format": "date",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "Date until which the price is valid",
+                          "example": "2024-12-12"
                         }
                       }
                     },
@@ -66597,6 +67030,9 @@
                       }
                     },
                     "description": "Reference to a supplier for this price",
+                    "example": {
+                      "id": "194"
+                    },
                     "nullable": true
                   },
                   "isStandardSupplier": {
@@ -66628,30 +67064,43 @@
                   },
                   "supplierDesignation": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "The designation of the supplier",
+                    "example": "Xentral"
                   },
                   "supplierItemNumber": {
                     "type": "string",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Supplier item number",
+                    "example": "4992042-20"
                   },
                   "fromQuantity": {
                     "type": "number",
-                    "format": "float"
+                    "format": "float",
+                    "description": "Minimum quantity for this price",
+                    "example": 1
                   },
                   "packageAmount": {
                     "type": "number",
                     "format": "float",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Amount of items in a package",
+                    "example": 10
                   },
                   "price": {
-                    "x-description-missing": true,
+                    "description": "Price of the product",
+                    "example": {
+                      "amount": 7.3,
+                      "currency": "EUR"
+                    },
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                       "amount": {
                         "x-description-missing": true,
                         "type": "number",
-                        "format": "float"
+                        "format": "float",
+                        "example": 7.3
                       },
                       "currency": {
                         "x-description-missing": true,
@@ -66662,19 +67111,24 @@
                           "CHF",
                           "USD",
                           "GBP"
-                        ]
+                        ],
+                        "example": "EUR"
                       }
                     }
                   },
                   "validFrom": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date from which the price is valid",
+                    "example": "2023-12-01"
                   },
                   "expiresAt": {
                     "type": "string",
                     "format": "date",
-                    "nullable": true
+                    "nullable": true,
+                    "description": "Date until which the price is valid",
+                    "example": "2024-12-12"
                   }
                 }
               },
@@ -76137,6 +76591,28 @@
                       "type": "array",
                       "items": {
                         "x-description-missing": true,
+                        "example": {
+                          "id": "1",
+                          "product": {
+                            "id": "12"
+                          },
+                          "customer": null,
+                          "customerGroup": null,
+                          "amount": 1,
+                          "packageAmount": null,
+                          "price": {
+                            "amount": "62.00000000",
+                            "currency": "EUR",
+                            "amountGross": "73.78000000",
+                            "taxRate": {
+                              "rate": "19.00",
+                              "type": "normal",
+                              "source": "project tax rate"
+                            }
+                          },
+                          "validFrom": null,
+                          "expiresAt": null
+                        },
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
@@ -76797,6 +77273,28 @@
                   "properties": {
                     "data": {
                       "x-description-missing": true,
+                      "example": {
+                        "id": "1",
+                        "product": {
+                          "id": "12"
+                        },
+                        "customer": null,
+                        "customerGroup": null,
+                        "amount": 1,
+                        "packageAmount": null,
+                        "price": {
+                          "amount": "62.00000000",
+                          "currency": "EUR",
+                          "amountGross": "73.78000000",
+                          "taxRate": {
+                            "rate": "19.00",
+                            "type": "normal",
+                            "source": "project tax rate"
+                          }
+                        },
+                        "validFrom": null,
+                        "expiresAt": null
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
