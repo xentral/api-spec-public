@@ -13427,6 +13427,710 @@
         }
       }
     },
+    "/api/v1/customers": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "customer.list.v1",
+        "summary": "List customer",
+        "description": "Lists an existing customer",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "enum": [
+                          "search",
+                          "id",
+                          "name",
+                          "number",
+                          "country",
+                          "zip",
+                          "city",
+                          "project",
+                          "projectName",
+                          "phone",
+                          "fax",
+                          "mobile",
+                          "email",
+                          "addressNote",
+                          "department",
+                          "subdivision",
+                          "vatNumber",
+                          "taxNumber",
+                          "gln",
+                          "tag",
+                          "tagName",
+                          "street"
+                        ]
+                      },
+                      "op": {
+                        "type": "string",
+                        "enum": [
+                          "equals",
+                          "notEquals",
+                          "in",
+                          "notIn",
+                          "exactlyIn",
+                          "allIn",
+                          "allNotIn",
+                          "contains",
+                          "notContains",
+                          "startsWith",
+                          "endsWith",
+                          "greaterThan",
+                          "lessThan"
+                        ]
+                      },
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "nextCursor": {
+                  "type": "string",
+                  "description": "nextCursor should be base64 encoded string returned from api"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "name",
+                      "number",
+                      "country",
+                      "zip",
+                      "city",
+                      "project",
+                      "projectName",
+                      "telephone",
+                      "fax",
+                      "mobile",
+                      "email",
+                      "addressNote",
+                      "department",
+                      "subdivision",
+                      "vatNumber",
+                      "taxNumber",
+                      "gln"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer list.",
+            "content": {
+              "application/vnd.xentral.default.v1+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "type",
+                          "general"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "type": {
+                            "x-description-missing": true,
+                            "type": "string",
+                            "example": "company"
+                          },
+                          "project": {
+                            "description": "An optional object with id and name",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "nullable": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "example": {
+                              "id": "1337",
+                              "name": "Diamond"
+                            }
+                          },
+                          "general": {
+                            "x-description-missing": true,
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "name",
+                              "address"
+                            ],
+                            "properties": {
+                              "number": {
+                                "type": "string"
+                              },
+                              "fax": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "mobile": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "department": {
+                                "type": "string"
+                              },
+                              "subdivision": {
+                                "type": "string"
+                              },
+                              "vatNumber": {
+                                "type": "string"
+                              },
+                              "taxNumber": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "gln": {
+                                "type": "string"
+                              },
+                              "employeeNumber": {
+                                "type": "string"
+                              },
+                              "honorific": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "birthday": {
+                                "type": "string",
+                                "nullable": true,
+                                "format": "date"
+                              },
+                              "tags": {
+                                "description": "A list of tags",
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "id": {
+                                      "description": "The identifier of the tag",
+                                      "type": "string",
+                                      "pattern": "\\d+",
+                                      "example": "1337"
+                                    },
+                                    "name": {
+                                      "description": "The name of the tag",
+                                      "type": "string",
+                                      "example": "Active"
+                                    },
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "[a-fA-F0-9]{6}",
+                                      "example": "ff0000",
+                                      "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                                    }
+                                  }
+                                }
+                              },
+                              "customerNumber": {
+                                "type": "string"
+                              },
+                              "phone": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "street",
+                                  "zip",
+                                  "city",
+                                  "state",
+                                  "country",
+                                  "note"
+                                ],
+                                "properties": {
+                                  "street": {
+                                    "type": "string"
+                                  },
+                                  "zip": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  },
+                                  "state": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "note": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "example": {
+                              "number": "1201",
+                              "fax": "123456",
+                              "mobile": "123456",
+                              "department": "IT",
+                              "subdivision": "Development",
+                              "vatNumber": "DE123456789",
+                              "taxNumber": "123456",
+                              "gln": "123456",
+                              "employeeNumber": "123456",
+                              "honorific": "Herr",
+                              "title": "Dr.",
+                              "name": "Tom Schneider",
+                              "birthday": "1980-04-30",
+                              "tags": [
+                                {
+                                  "id": "1101",
+                                  "name": "Tag#1",
+                                  "color": "FF0000"
+                                },
+                                {
+                                  "id": "1102",
+                                  "name": "Tag#2",
+                                  "color": "0000FF"
+                                }
+                              ],
+                              "customerNumber": "123456",
+                              "phone": "123456",
+                              "email": "max@musterman.com",
+                              "address": {
+                                "note": "Erster Stock",
+                                "street": "Musterstrasse 20",
+                                "zip": "12345",
+                                "city": "Musterstadt",
+                                "state": "Bayern",
+                                "country": "Deutschland"
+                              }
+                            }
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "description": "Either ID or name and key."
+                                },
+                                "key": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "color": {
+                                  "type": "string",
+                                  "pattern": "[a-fA-F0-9]{6}",
+                                  "example": "ff0000",
+                                  "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                                }
+                              }
+                            }
+                          },
+                          "freeFields": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "cursor"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "cursor": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "nextCursor",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "nextCursor": {
+                              "description": "Cursoer to use for next page request",
+                              "type": "string",
+                              "example": "NDI="
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "nextCursor": "MTA=",
+                            "size": 10
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/vnd.xentral.default.v1+csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "tags": [
@@ -14444,6 +15148,481 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          }
+        }
+      }
+    },
+    "/api/customers/{id}/contactPerson/{contactPersonId}": {
+      "patch": {
+        "tags": [
+          "Customer - Contact Person"
+        ],
+        "operationId": "customer.contactPerson.update",
+        "summary": "Update contact person related to specific customer",
+        "description": "Updates new contact person for given customer.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "name": "contactPersonId",
+            "in": "path",
+            "description": "Contact Person ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update customer contact person object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "company",
+                      "mr",
+                      "mrs",
+                      "other"
+                    ],
+                    "nullable": false,
+                    "example": "mr",
+                    "description": "Type of contact used later for salutations"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "nullable": false,
+                    "example": "Firstname Surname",
+                    "description": "Full name of the contact person"
+                  },
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "Prof. Dr.",
+                    "description": "Additional information used for salutations"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "format": "date",
+                    "nullable": true,
+                    "example": "2001-01-14"
+                  },
+                  "birthdayShowInCalendar": {
+                    "type": "boolean",
+                    "nullable": false,
+                    "example": true,
+                    "description": "Decides wether or not to show in birthday calendar"
+                  },
+                  "sendBirthdayCard": {
+                    "type": "boolean",
+                    "nullable": false,
+                    "example": true,
+                    "description": "Decides wether or not to send birthday card via serial letter module"
+                  },
+                  "marketingBan": {
+                    "type": "boolean",
+                    "nullable": false,
+                    "example": true,
+                    "description": "Decides wether or not to send serial letters to this contact"
+                  },
+                  "department": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "HR department",
+                    "description": "Department of contact if necessary and available"
+                  },
+                  "subDepartment": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "Sub department",
+                    "description": "Sub-Department of contact if necessary and available"
+                  },
+                  "position": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "",
+                    "description": "Position or responsibility"
+                  },
+                  "address": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "street": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "2176 example street",
+                        "description": "Street + number of contact address"
+                      },
+                      "additionalStreet": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "6th floor",
+                        "description": "Address suffix"
+                      },
+                      "zip": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "12345",
+                        "description": "ZIP code of contact address"
+                      },
+                      "city": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "city",
+                        "description": "City of contact address"
+                      },
+                      "state": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Ohio",
+                        "description": "Federal state / district of contact address"
+                      },
+                      "country": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "DE",
+                        "description": "ISO 3166-1 (Alpha 2) Code of contact address country"
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "phone": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "+49 330 12345667",
+                        "description": "Phone number of contact address"
+                      },
+                      "fax": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "+49 330 7654321",
+                        "description": "Fax number of contact address"
+                      },
+                      "mobile": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "+49 172 7654321",
+                        "description": "Mobile number of contact address"
+                      },
+                      "salutation": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Dear Dr. Smith, Friend and Supporter",
+                        "description": "Specifies dedicated salutation"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "nullable": true,
+                        "example": "contact-person@address-location.tld",
+                        "description": "E-mail address"
+                      }
+                    }
+                  },
+                  "groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "\\d+",
+                      "example": "17",
+                      "description": "Resource identifier."
+                    },
+                    "description": "List of groups this contact person is belong to",
+                    "example": [
+                      "17",
+                      "22"
+                    ]
+                  },
+                  "comment": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "This is a internal comment",
+                    "description": "Internal comment for this contact"
+                  },
+                  "others": {
+                    "type": "string",
+                    "nullable": true,
+                    "example": "",
+                    "description": "Every other information you deem relevant"
+                  }
+                }
+              },
+              "examples": {
+                "full": {
+                  "value": {
+                    "type": "mrs",
+                    "name": "Kathleen Minority",
+                    "title": "Prof. Dr. Dr.",
+                    "birthday": "2001-02-02",
+                    "birthdayShowInCalendar": false,
+                    "sendBirthdayCard": true,
+                    "marketingBan": false,
+                    "department": "Finance",
+                    "subDepartment": "Controlling",
+                    "position": "Head of Controlling",
+                    "address": {
+                      "street": "11W 53rd St",
+                      "additionalStreet": "6. Floor",
+                      "zip": "10019",
+                      "city": "New York",
+                      "state": "NY",
+                      "country": "US"
+                    },
+                    "contact": {
+                      "phone": "+1 917 55512345",
+                      "fax": "+1 917 55512345-1",
+                      "mobile": "+1 800 55554321",
+                      "salutation": "Dear Mrs. Minority, my most value customer",
+                      "email": "k.m@ny.tld"
+                    },
+                    "groups": [
+                      "1",
+                      "23",
+                      "34"
+                    ],
+                    "comment": "This is a internal comment for employees eyes only",
+                    "others": "some other things necessary to write down blong to this contact ..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
           },
           "400": {
             "description": "IETF RFC 7807 Problem API compliant response",
@@ -20553,14 +21732,11 @@
         "summary": "Create invoice",
         "description": "Creates a invoice",
         "requestBody": {
-          "description": "Create an invoice object",
+          "description": "Create an invoice object from a sales order or an empty invoice",
           "content": {
             "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "salesOrder"
-                ],
                 "additionalProperties": false,
                 "properties": {
                   "salesOrder": {
@@ -20583,6 +21759,7 @@
                     }
                   },
                   "documentNumber": {
+                    "description": "The `Invoice Number` that will be assigned to the invoice. It can be used when creating an invoice from sales order",
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 35
@@ -20604,6 +21781,9 @@
                     },
                     "documentNumber": "415263"
                   }
+                },
+                "Create `empty` invoice": {
+                  "value": {}
                 }
               }
             }
