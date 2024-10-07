@@ -15838,6 +15838,62 @@
             "description": "Resource representation send in the request is not supported."
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Customer - Contact Person"
+        ],
+        "operationId": "customer.contactPerson.delete",
+        "summary": "Delete contact person related to specific customer",
+        "description": "Deletes a contact person for given customer.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The unique identifier of the customer",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "in": "path",
+            "name": "contactPersonId",
+            "required": true,
+            "description": "The unique identifier of the contact person",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          }
+        }
       }
     },
     "/api/customersTags": {
@@ -30947,6 +31003,70 @@
             "description": "Operation completed successfully.",
             "content": {
               "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "x-description-missing": true,
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "name": {
+                          "x-description-missing": true,
+                          "type": "string",
+                          "nullable": false,
+                          "example": "Kassierer SW"
+                        },
+                        "project": {
+                          "description": "Reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "permissionLevel": {
+                          "x-description-missing": true,
+                          "type": "string",
+                          "pattern": "\\d",
+                          "nullable": false,
+                          "example": "0"
+                        }
+                      },
+                      "example": {
+                        "id": "1",
+                        "name": "Kassierer SW",
+                        "project": {
+                          "id": "2"
+                        },
+                        "permissionLevel": "0"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
