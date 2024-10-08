@@ -15365,7 +15365,7 @@
         }
       }
     },
-    "/api/customers/{id}/contactPerson/{contactPersonId}": {
+    "/api/customers/{customerId}/contactPerson/{contactPersonId}": {
       "patch": {
         "tags": [
           "Customer - Contact Person"
@@ -15376,9 +15376,9 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "customerId",
             "required": true,
-            "description": "The resource's identifier.",
+            "description": "The customer's identifier.",
             "schema": {
               "type": "string",
               "pattern": "\\d+",
@@ -15849,7 +15849,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "customerId",
             "required": true,
             "description": "The unique identifier of the customer",
             "schema": {
@@ -15892,6 +15892,526 @@
           },
           "404": {
             "description": "Resource was not found or not enough access privileges"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customer - Contact Person"
+        ],
+        "operationId": "customer.contactPerson.get",
+        "summary": "Get customer contact person by ID",
+        "description": "Gets a single contact person of given customer by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "description": "The customer's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          },
+          {
+            "in": "path",
+            "name": "contactPersonId",
+            "required": true,
+            "description": "The contact person's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contact person object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "Contact person object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "customer": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "description": "The customer this contact person is assigned to.",
+                          "example": {
+                            "id": "1234"
+                          },
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "nullable": false,
+                          "example": "Firstname Surname",
+                          "description": "Full name of the contact person"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "company",
+                            "mr",
+                            "mrs",
+                            "other"
+                          ],
+                          "nullable": true,
+                          "example": "mr",
+                          "description": "Type of contact used for salutations and processes"
+                        },
+                        "title": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "Prof. Dr.",
+                          "description": "Additional information used for salutations"
+                        },
+                        "birthday": {
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true,
+                          "example": "2001-01-14",
+                          "description": "Birthday of contact person"
+                        },
+                        "birthdayShowInCalendar": {
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Decides whether or not to show in birthday calendar"
+                        },
+                        "sendBirthdayCard": {
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Decides whether or not to send birthday card via serial letter module"
+                        },
+                        "marketingBan": {
+                          "type": "boolean",
+                          "example": true,
+                          "description": "Decides whether or not to send serial letters to this contact"
+                        },
+                        "department": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "HR department",
+                          "description": "Department of contact if necessary and available"
+                        },
+                        "subDepartment": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "Sub department",
+                          "description": "Sub-Department of contact if necessary and available"
+                        },
+                        "position": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "head of purchasing",
+                          "description": "Position or responsibility"
+                        },
+                        "address": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Address information of the contact person",
+                          "example": {
+                            "street": "Example st. 13",
+                            "additionalStreet": "6th floor",
+                            "zip": "12345",
+                            "city": "city",
+                            "state": "Bayern",
+                            "country": "Deutschland"
+                          },
+                          "properties": {
+                            "street": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "2176 example street",
+                              "description": "Street + number of contact address"
+                            },
+                            "additionalStreet": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "6th floor",
+                              "description": "Address suffix"
+                            },
+                            "zip": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "12345",
+                              "description": "ZIP code of contact address"
+                            },
+                            "city": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "city",
+                              "description": "City of contact address"
+                            },
+                            "state": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "Ohio",
+                              "description": "Federal state / district of contact address"
+                            },
+                            "country": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "DE",
+                              "description": "ISO 3166-1 (Alpha 2) Code of contact address country"
+                            }
+                          }
+                        },
+                        "contact": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contact information of the contact person",
+                          "example": {
+                            "phone": "+49 555 12345667",
+                            "fax": "+49 555 7654321",
+                            "mobile": "+49 555 7654321",
+                            "salutation": "Dear Dr. Smith, Friend and Supporter",
+                            "email": "email@test.com"
+                          },
+                          "properties": {
+                            "phone": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "+49 330 12345667",
+                              "description": "Phone number of contact address"
+                            },
+                            "fax": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "+49 330 7654321",
+                              "description": "Fax number of contact address"
+                            },
+                            "mobile": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "+49 172 7654321",
+                              "description": "Mobile number of contact address"
+                            },
+                            "salutation": {
+                              "type": "string",
+                              "nullable": true,
+                              "example": "Dear Dr. Smith, Friend and Supporter",
+                              "description": "Specifies dedicated salutation"
+                            },
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "nullable": true,
+                              "example": "contact-person@address-location.tld",
+                              "description": "E-mail address"
+                            }
+                          }
+                        },
+                        "groups": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "description": "List of groups this contact person is belong to",
+                          "example": [
+                            "17",
+                            "22"
+                          ]
+                        },
+                        "comment": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "This is a internal comment",
+                          "description": "Internal comment for this contact"
+                        },
+                        "others": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "",
+                          "description": "Every other information you deem relevant"
+                        }
+                      },
+                      "example": {
+                        "id": "12345",
+                        "customer": {
+                          "id": "1234"
+                        },
+                        "name": "Anna Buysalot",
+                        "type": "mrs",
+                        "title": "Dr.",
+                        "birthday": "2001-01-14",
+                        "birthdayShowInCalendar": true,
+                        "sendBirthdayCard": true,
+                        "marketingBan": false,
+                        "department": "Purchasing",
+                        "subDepartment": "Raw materials",
+                        "position": "head of purchasing",
+                        "address": {
+                          "street": "Example st. 13",
+                          "additionalStreet": "6th floor",
+                          "zip": "12345",
+                          "city": "city",
+                          "state": "Bayern",
+                          "country": "Deutschland"
+                        },
+                        "contact": {
+                          "phone": "+49 330 12345667",
+                          "fax": "+49 330 7654321",
+                          "mobile": "+49 172 7654321",
+                          "salutation": "Dear Dr. Smith, Friend and Supporter",
+                          "email": "a.buysalot@test.com"
+                        },
+                        "groups": [
+                          "17",
+                          "22"
+                        ],
+                        "comment": "Tends to buy at a discount of at least 10%",
+                        "others": "Additional information [...]"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
           }
         }
       }
