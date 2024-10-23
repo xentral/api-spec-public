@@ -260,6 +260,10 @@
       "description": "SalesChannel are the configured Shops/Marketplaces."
     },
     {
+      "name": "Sales Channels Product Settings",
+      "description": "Sales Channel Settings inside a product."
+    },
+    {
       "name": "Sales Price",
       "description": "SalesPrices determine the prices used in sales to customers."
     },
@@ -6872,7 +6876,7 @@
         },
         "parameters": [
           {
-            "name": "filter",
+            "name": "preview",
             "in": "query",
             "style": "deepObject",
             "schema": {
@@ -6880,9 +6884,10 @@
               "additionalProperties": false,
               "properties": {
                 "preview": {
-                  "type": "string",
-                  "example": "false",
-                  "description": "If true, only a limited amount of records will be returned, but the request does not cost any credits."
+                  "type": "boolean",
+                  "example": false,
+                  "default": false,
+                  "description": "If true, only a limited amount of records will be returned, but the request does not cost any credits. If true, all results are returned up to a max number of 500 rows."
                 }
               }
             }
@@ -21017,12 +21022,14 @@
                             "description": "Resource identifier."
                           },
                           "number": {
-                            "x-description-missing": true,
-                            "type": "string"
+                            "description": "Employee Number",
+                            "type": "string",
+                            "example": "342442"
                           },
                           "name": {
-                            "x-description-missing": true,
-                            "type": "string"
+                            "description": "Employee Name",
+                            "type": "string",
+                            "example": "John"
                           }
                         }
                       }
@@ -40901,6 +40908,200 @@
                                     ]
                                   }
                                 ]
+                              },
+                              "suggestedStockQuantity": {
+                                "type": "string",
+                                "description": "Shows the suggested stock quantity for all sales channel."
+                              },
+                              "deliveryTime": {
+                                "type": "string",
+                                "description": "Shows the delivery time for all sales channels."
+                              },
+                              "createNewProductDuringImport": {
+                                "type": "boolean",
+                                "description": "Shows if a new product is generated during the sales order import from all sales channels."
+                              },
+                              "channels": {
+                                "type": "array",
+                                "nullable": true,
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "pattern": "\\d+",
+                                      "example": "17",
+                                      "description": "Resource identifier."
+                                    },
+                                    "salesChannel": {
+                                      "description": "Reference to another resource",
+                                      "type": "object",
+                                      "additionalProperties": false,
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "pattern": "\\d+",
+                                          "example": "17",
+                                          "description": "Resource identifier."
+                                        }
+                                      },
+                                      "example": {
+                                        "id": "1337"
+                                      }
+                                    },
+                                    "isActive": {
+                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "example": "'true'",
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "enum": [
+                                            0,
+                                            1
+                                          ]
+                                        },
+                                        {
+                                          "type": "string",
+                                          "enum": [
+                                            "true",
+                                            "false",
+                                            "True",
+                                            "False",
+                                            "TRUE",
+                                            "FALSE"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "useIndividualSalesChannelSettings": {
+                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "example": "'true'",
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "enum": [
+                                            0,
+                                            1
+                                          ]
+                                        },
+                                        {
+                                          "type": "string",
+                                          "enum": [
+                                            "true",
+                                            "false",
+                                            "True",
+                                            "False",
+                                            "TRUE",
+                                            "FALSE"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "isStockNumberSyncActive": {
+                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "example": "'true'",
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "enum": [
+                                            0,
+                                            1
+                                          ]
+                                        },
+                                        {
+                                          "type": "string",
+                                          "enum": [
+                                            "true",
+                                            "false",
+                                            "True",
+                                            "False",
+                                            "TRUE",
+                                            "FALSE"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "isRemainingQuantity": {
+                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "example": "'true'",
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "enum": [
+                                            0,
+                                            1
+                                          ]
+                                        },
+                                        {
+                                          "type": "string",
+                                          "enum": [
+                                            "true",
+                                            "false",
+                                            "True",
+                                            "False",
+                                            "TRUE",
+                                            "FALSE"
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    "suggestedRetailPrice": {
+                                      "type": "string",
+                                      "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
+                                    },
+                                    "suggestedStockQuantity": {
+                                      "type": "string",
+                                      "description": "Sets the suggested stock quantity for the sales channel."
+                                    },
+                                    "deliveryTime": {
+                                      "type": "string",
+                                      "description": "Shows the delivery time."
+                                    },
+                                    "createNewProductDuringImport": {
+                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "example": "'true'",
+                                      "oneOf": [
+                                        {
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "type": "number",
+                                          "enum": [
+                                            0,
+                                            1
+                                          ]
+                                        },
+                                        {
+                                          "type": "string",
+                                          "enum": [
+                                            "true",
+                                            "false",
+                                            "True",
+                                            "False",
+                                            "TRUE",
+                                            "FALSE"
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
                               }
                             },
                             "example": {
@@ -46885,6 +47086,200 @@
                                   ]
                                 }
                               ]
+                            },
+                            "suggestedStockQuantity": {
+                              "type": "string",
+                              "description": "Sets the suggested stock quantity for all sales channels."
+                            },
+                            "deliveryTime": {
+                              "type": "string",
+                              "description": "Shows the delivery time for all sales channels."
+                            },
+                            "createNewProductDuringImport": {
+                              "type": "boolean",
+                              "description": "Shows if a new product is generated during the sales order import from all sales channels."
+                            },
+                            "channels": {
+                              "type": "array",
+                              "nullable": true,
+                              "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "pattern": "\\d+",
+                                    "example": "17",
+                                    "description": "Resource identifier."
+                                  },
+                                  "salesChannel": {
+                                    "description": "Reference to another resource",
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "required": [
+                                      "id"
+                                    ],
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "pattern": "\\d+",
+                                        "example": "17",
+                                        "description": "Resource identifier."
+                                      }
+                                    },
+                                    "example": {
+                                      "id": "1337"
+                                    }
+                                  },
+                                  "isActive": {
+                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "example": "'true'",
+                                    "oneOf": [
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "enum": [
+                                          0,
+                                          1
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "true",
+                                          "false",
+                                          "True",
+                                          "False",
+                                          "TRUE",
+                                          "FALSE"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "useIndividualSalesChannelSettings": {
+                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "example": "'true'",
+                                    "oneOf": [
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "enum": [
+                                          0,
+                                          1
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "true",
+                                          "false",
+                                          "True",
+                                          "False",
+                                          "TRUE",
+                                          "FALSE"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "isStockNumberSyncActive": {
+                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "example": "'true'",
+                                    "oneOf": [
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "enum": [
+                                          0,
+                                          1
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "true",
+                                          "false",
+                                          "True",
+                                          "False",
+                                          "TRUE",
+                                          "FALSE"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "isRemainingQuantity": {
+                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "example": "'true'",
+                                    "oneOf": [
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "enum": [
+                                          0,
+                                          1
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "true",
+                                          "false",
+                                          "True",
+                                          "False",
+                                          "TRUE",
+                                          "FALSE"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  "suggestedRetailPrice": {
+                                    "type": "string",
+                                    "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
+                                  },
+                                  "suggestedStockQuantity": {
+                                    "type": "string",
+                                    "description": "Sets the suggested stock quantity for the sales channel."
+                                  },
+                                  "deliveryTime": {
+                                    "type": "string",
+                                    "description": "Shows the delivery time."
+                                  },
+                                  "createNewProductDuringImport": {
+                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "example": "'true'",
+                                    "oneOf": [
+                                      {
+                                        "type": "boolean"
+                                      },
+                                      {
+                                        "type": "number",
+                                        "enum": [
+                                          0,
+                                          1
+                                        ]
+                                      },
+                                      {
+                                        "type": "string",
+                                        "enum": [
+                                          "true",
+                                          "false",
+                                          "True",
+                                          "False",
+                                          "TRUE",
+                                          "FALSE"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
                             }
                           },
                           "example": {
@@ -56594,6 +56989,1053 @@
           },
           "415": {
             "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/products/{id}/salesChannels": {
+      "post": {
+        "tags": [
+          "Sales Channels Product Settings"
+        ],
+        "operationId": "product.createSalesChannels",
+        "summary": "Creates sales channel settings for a single product.",
+        "description": "Creates sales channel settings for a single product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "salesChannel": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "example": {
+                      "id": "1337"
+                    }
+                  },
+                  "isActive": {
+                    "type": "boolean",
+                    "description": "Determines if the sales channel connection is active."
+                  },
+                  "useIndividualSalesChannelSettings": {
+                    "type": "boolean",
+                    "description": "Determines if the individual sales channel settings should be used instead of the general sales channel settings."
+                  },
+                  "isStockNumberSyncActive": {
+                    "type": "boolean",
+                    "description": "Determines if the stock number synchronization to the sales channel is active."
+                  },
+                  "isRemainingQuantity": {
+                    "type": "boolean",
+                    "description": "Determines if only the remaining quantity of the product is left."
+                  },
+                  "suggestedRetailPrice": {
+                    "type": "string",
+                    "description": "Sets the suggested retail price for the sales channel."
+                  },
+                  "suggestedStockQuantity": {
+                    "type": "string",
+                    "description": "Sets the suggested stock quantity for the sales channel."
+                  },
+                  "deliveryTime": {
+                    "type": "string",
+                    "description": "Sets the delivery time."
+                  },
+                  "createNewProductDuringImport": {
+                    "type": "boolean",
+                    "description": "Determines if a new product should be created during the sales order import from a sales channel."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/products/{productId}/salesChannels/{id}": {
+      "delete": {
+        "tags": [
+          "Sales Channels Product Settings"
+        ],
+        "operationId": "product.deleteSalesChannels",
+        "summary": "Deletes sales channel settings for a single product.",
+        "description": "Deletes sales channel settings for a single product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sales Channels Product Settings"
+        ],
+        "operationId": "product.updateSalesChannels",
+        "summary": "Updates sales channel settings for a single product.",
+        "description": "Updates sales channel settings for a single product.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            },
+            "description": "Product ID."
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1-beta+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "salesChannel": {
+                    "description": "Reference to another resource",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "example": {
+                      "id": "1337"
+                    }
+                  },
+                  "isActive": {
+                    "type": "boolean",
+                    "description": "Determines if the sales channel connection is active."
+                  },
+                  "useIndividualSalesChannelSettings": {
+                    "type": "boolean",
+                    "description": "Determines if the individual sales channel settings should be used instead of the general sales channel settings."
+                  },
+                  "isStockNumberSyncActive": {
+                    "type": "boolean",
+                    "description": "Determines if the stock number synchronization to the sales channel is active."
+                  },
+                  "isRemainingQuantity": {
+                    "type": "boolean",
+                    "description": "Determines if only the remaining quantity of the product is left."
+                  },
+                  "suggestedRetailPrice": {
+                    "type": "string",
+                    "description": "Sets the suggested retail price for the sales channel."
+                  },
+                  "suggestedStockQuantity": {
+                    "type": "string",
+                    "description": "Sets the suggested stock quantity for the sales channel."
+                  },
+                  "deliveryTime": {
+                    "type": "string",
+                    "description": "Sets the delivery time."
+                  },
+                  "createNewProductDuringImport": {
+                    "type": "boolean",
+                    "description": "Determines if a new product should be created during the sales order import from a sales channel."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           },
           "429": {
             "description": "Too many API calls made."
@@ -67432,44 +68874,52 @@
                           },
                           "documentNumber": {
                             "type": "string",
-                            "description": "documentNumber"
+                            "description": "documentNumber",
+                            "example": "DOC-123456"
                           },
                           "bodyOutroduction": {
                             "type": "string",
-                            "description": "BodyOutroduction of the production"
+                            "description": "BodyOutroduction of the production",
+                            "example": "This is the conclusion section of the production document."
                           },
                           "date": {
                             "type": "string",
                             "format": "date",
-                            "description": "Date of the production"
+                            "description": "Production Date",
+                            "example": "2024-09-18"
                           },
                           "dateDelivery": {
                             "type": "string",
                             "format": "date",
                             "nullable": true,
-                            "description": "Date Delivery of the production"
+                            "description": "Production Delivery Date",
+                            "example": "2024-09-25"
                           },
                           "dateProvision": {
                             "type": "string",
                             "format": "date",
                             "nullable": true,
-                            "description": "Date Provision of the production"
+                            "description": "Provision Date",
+                            "example": "2024-09-20"
                           },
                           "dateProduction": {
                             "type": "string",
                             "format": "date",
                             "nullable": true,
-                            "description": "Date Production of the production"
+                            "description": "Production Date",
+                            "example": "2024-09-21"
                           },
                           "dateProductionEnd": {
                             "type": "string",
                             "format": "date",
                             "nullable": true,
-                            "description": "Date Production End of the production"
+                            "description": "Production End Date",
+                            "example": "2024-09-22"
                           },
                           "status": {
                             "type": "string",
-                            "description": "Status of the production"
+                            "description": "Production Status",
+                            "example": "In Progress"
                           },
                           "customer": {
                             "type": "object",
@@ -67482,7 +68932,10 @@
                               }
                             },
                             "nullable": true,
-                            "description": "Customer of the production"
+                            "description": "Customer of the production",
+                            "example": {
+                              "id": "17"
+                            }
                           },
                           "project": {
                             "type": "object",
@@ -67495,7 +68948,10 @@
                               }
                             },
                             "nullable": true,
-                            "description": "Project of the production"
+                            "description": "Project of the production",
+                            "example": {
+                              "id": "17"
+                            }
                           },
                           "salesOrder": {
                             "type": "object",
@@ -67508,11 +68964,15 @@
                               }
                             },
                             "nullable": true,
-                            "description": "Sales Order of the production"
+                            "description": "Sales Order of the production",
+                            "example": {
+                              "id": "17"
+                            }
                           },
                           "internalDesignation": {
                             "type": "string",
-                            "description": "Internal Designation of the production"
+                            "description": "Internal Designation of the production",
+                            "example": "Batch A-123"
                           },
                           "preferredWarehouse": {
                             "type": "object",
@@ -67525,92 +68985,168 @@
                               }
                             },
                             "nullable": true,
-                            "description": "Preferred Warehouse of the production"
+                            "description": "Preferred Warehouse of the production",
+                            "example": {
+                              "id": "17"
+                            }
                           },
                           "reservationType": {
                             "type": "string",
-                            "description": "Reservation Type of the production"
+                            "description": "Reservation Type of the production",
+                            "example": "Standard"
                           },
                           "retrievalType": {
                             "type": "string",
-                            "description": "Retrieval Type of the production"
+                            "description": "Retrieval Type of the production",
+                            "example": "Automated"
                           },
                           "explodeSublists": {
                             "type": "boolean",
-                            "description": "Explode Sublists of the production"
+                            "description": "Explode Sublists of the production",
+                            "example": true
                           },
                           "functionalTest": {
                             "type": "boolean",
-                            "description": "Functional Test of the production"
+                            "description": "Functional Test of the production",
+                            "example": true
                           },
                           "displayWorkingStepTexts": {
                             "type": "boolean",
-                            "description": "Display Working Step Texts of the production"
+                            "description": "Display Working Step Texts of the production",
+                            "example": true
                           },
                           "createSerialNumbers": {
                             "type": "boolean",
-                            "description": "Create Serial Numbers of the production"
+                            "description": "Create Serial Numbers of the production",
+                            "example": true
                           },
                           "captureComponentSerialnumbers": {
                             "type": "boolean",
-                            "description": "Capture Component Serialnumbers of the production"
+                            "description": "Capture Component Serialnumbers of the production",
+                            "example": true
                           },
                           "internalComment": {
                             "type": "string",
-                            "description": "Internal Comment of the production"
+                            "description": "Internal Comment of the production",
+                            "example": "Process is completed"
                           },
                           "completed": {
                             "type": "boolean",
-                            "description": "Completed of the production"
+                            "description": "Completed of the production",
+                            "example": true
                           },
                           "finalRemark": {
                             "type": "string",
-                            "description": "Final Remark of the production"
+                            "description": "Final Remark of the production",
+                            "example": "Production is done"
                           },
                           "customerCheckOk": {
                             "type": "boolean",
-                            "description": "Customer Check Ok of the production"
+                            "description": "Customer Check Ok of the production",
+                            "example": true
                           },
                           "depletingOk": {
                             "type": "boolean",
-                            "description": "Depleting Ok of the production"
+                            "description": "Depleting Ok of the production",
+                            "example": true
                           },
                           "partialProductionNumber": {
                             "type": "integer",
-                            "description": "Partial Production Number of the production"
+                            "description": "Partial Production Number of the production",
+                            "example": 121
                           },
                           "partialProductionOf": {
                             "type": "integer",
-                            "description": "Partial Production of the production"
+                            "description": "Partial Production of the production",
+                            "example": 1
                           },
                           "stockingOk": {
                             "type": "boolean",
-                            "description": "Stocking Ok of the production"
+                            "description": "Stocking Ok of the production",
+                            "example": true
                           },
                           "stockOk": {
                             "type": "boolean",
-                            "description": "Stock Ok of the production"
+                            "description": "Stock Ok of the production",
+                            "example": true
                           },
                           "log": {
                             "type": "object",
                             "properties": {
                               "createdAt": {
                                 "type": "string",
-                                "format": "date"
+                                "format": "date",
+                                "example": "2024-09-18"
                               },
                               "createdBy": {
                                 "type": "object",
                                 "properties": {
                                   "id": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "example": "USR123456"
                                   },
                                   "name": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "example": "John Doe"
                                   }
                                 }
                               }
                             },
+                            "example": {
+                              "createdAt": "2024-09-18",
+                              "createdBy": {
+                                "id": "USR123456",
+                                "name": "John Doe"
+                              }
+                            },
                             "description": "log of the production"
+                          }
+                        },
+                        "example": {
+                          "id": "17",
+                          "documentNumber": "DOC-123456",
+                          "bodyOutroduction": "This is the conclusion section of the production document.",
+                          "date": "2024-09-18",
+                          "dateDelivery": "2024-09-25",
+                          "dateProvision": "2024-09-20",
+                          "dateProduction": "2024-09-21",
+                          "dateProductionEnd": "2024-09-22",
+                          "status": "In Progress",
+                          "customer": {
+                            "id": "17"
+                          },
+                          "project": {
+                            "id": "17"
+                          },
+                          "salesOrder": {
+                            "id": "17"
+                          },
+                          "internalDesignation": "Batch A-123",
+                          "preferredWarehouse": {
+                            "id": "17"
+                          },
+                          "reservationType": "Standard",
+                          "retrievalType": "Automated",
+                          "explodeSublists": true,
+                          "functionalTest": true,
+                          "displayWorkingStepTexts": true,
+                          "createSerialNumbers": true,
+                          "captureComponentSerialnumbers": true,
+                          "internalComment": "Process is completed",
+                          "completed": true,
+                          "finalRemark": "Production is done",
+                          "customerCheckOk": true,
+                          "depletingOk": true,
+                          "partialProductionNumber": 121,
+                          "partialProductionOf": 1,
+                          "stockingOk": true,
+                          "stockOk": true,
+                          "log": {
+                            "createdAt": "2024-09-18",
+                            "createdBy": {
+                              "id": "USR123456",
+                              "name": "John Doe"
+                            }
                           }
                         }
                       }
@@ -68060,44 +69596,52 @@
                         },
                         "documentNumber": {
                           "type": "string",
-                          "description": "documentNumber"
+                          "description": "documentNumber",
+                          "example": "DOC-123456"
                         },
                         "bodyOutroduction": {
                           "type": "string",
-                          "description": "BodyOutroduction of the production"
+                          "description": "BodyOutroduction of the production",
+                          "example": "This is the conclusion section of the production document."
                         },
                         "date": {
                           "type": "string",
                           "format": "date",
-                          "description": "Date of the production"
+                          "description": "Production Date",
+                          "example": "2024-09-18"
                         },
                         "dateDelivery": {
                           "type": "string",
                           "format": "date",
                           "nullable": true,
-                          "description": "Date Delivery of the production"
+                          "description": "Production Delivery Date",
+                          "example": "2024-09-25"
                         },
                         "dateProvision": {
                           "type": "string",
                           "format": "date",
                           "nullable": true,
-                          "description": "Date Provision of the production"
+                          "description": "Provision Date",
+                          "example": "2024-09-20"
                         },
                         "dateProduction": {
                           "type": "string",
                           "format": "date",
                           "nullable": true,
-                          "description": "Date Production of the production"
+                          "description": "Production Date",
+                          "example": "2024-09-21"
                         },
                         "dateProductionEnd": {
                           "type": "string",
                           "format": "date",
                           "nullable": true,
-                          "description": "Date Production End of the production"
+                          "description": "Production End Date",
+                          "example": "2024-09-22"
                         },
                         "status": {
                           "type": "string",
-                          "description": "Status of the production"
+                          "description": "Production Status",
+                          "example": "In Progress"
                         },
                         "customer": {
                           "type": "object",
@@ -68110,7 +69654,10 @@
                             }
                           },
                           "nullable": true,
-                          "description": "Customer of the production"
+                          "description": "Customer of the production",
+                          "example": {
+                            "id": "17"
+                          }
                         },
                         "project": {
                           "type": "object",
@@ -68123,7 +69670,10 @@
                             }
                           },
                           "nullable": true,
-                          "description": "Project of the production"
+                          "description": "Project of the production",
+                          "example": {
+                            "id": "17"
+                          }
                         },
                         "salesOrder": {
                           "type": "object",
@@ -68136,11 +69686,15 @@
                             }
                           },
                           "nullable": true,
-                          "description": "Sales Order of the production"
+                          "description": "Sales Order of the production",
+                          "example": {
+                            "id": "17"
+                          }
                         },
                         "internalDesignation": {
                           "type": "string",
-                          "description": "Internal Designation of the production"
+                          "description": "Internal Designation of the production",
+                          "example": "Batch A-123"
                         },
                         "preferredWarehouse": {
                           "type": "object",
@@ -68153,92 +69707,168 @@
                             }
                           },
                           "nullable": true,
-                          "description": "Preferred Warehouse of the production"
+                          "description": "Preferred Warehouse of the production",
+                          "example": {
+                            "id": "17"
+                          }
                         },
                         "reservationType": {
                           "type": "string",
-                          "description": "Reservation Type of the production"
+                          "description": "Reservation Type of the production",
+                          "example": "Standard"
                         },
                         "retrievalType": {
                           "type": "string",
-                          "description": "Retrieval Type of the production"
+                          "description": "Retrieval Type of the production",
+                          "example": "Automated"
                         },
                         "explodeSublists": {
                           "type": "boolean",
-                          "description": "Explode Sublists of the production"
+                          "description": "Explode Sublists of the production",
+                          "example": true
                         },
                         "functionalTest": {
                           "type": "boolean",
-                          "description": "Functional Test of the production"
+                          "description": "Functional Test of the production",
+                          "example": true
                         },
                         "displayWorkingStepTexts": {
                           "type": "boolean",
-                          "description": "Display Working Step Texts of the production"
+                          "description": "Display Working Step Texts of the production",
+                          "example": true
                         },
                         "createSerialNumbers": {
                           "type": "boolean",
-                          "description": "Create Serial Numbers of the production"
+                          "description": "Create Serial Numbers of the production",
+                          "example": true
                         },
                         "captureComponentSerialnumbers": {
                           "type": "boolean",
-                          "description": "Capture Component Serialnumbers of the production"
+                          "description": "Capture Component Serialnumbers of the production",
+                          "example": true
                         },
                         "internalComment": {
                           "type": "string",
-                          "description": "Internal Comment of the production"
+                          "description": "Internal Comment of the production",
+                          "example": "Process is completed"
                         },
                         "completed": {
                           "type": "boolean",
-                          "description": "Completed of the production"
+                          "description": "Completed of the production",
+                          "example": true
                         },
                         "finalRemark": {
                           "type": "string",
-                          "description": "Final Remark of the production"
+                          "description": "Final Remark of the production",
+                          "example": "Production is done"
                         },
                         "customerCheckOk": {
                           "type": "boolean",
-                          "description": "Customer Check Ok of the production"
+                          "description": "Customer Check Ok of the production",
+                          "example": true
                         },
                         "depletingOk": {
                           "type": "boolean",
-                          "description": "Depleting Ok of the production"
+                          "description": "Depleting Ok of the production",
+                          "example": true
                         },
                         "partialProductionNumber": {
                           "type": "integer",
-                          "description": "Partial Production Number of the production"
+                          "description": "Partial Production Number of the production",
+                          "example": 121
                         },
                         "partialProductionOf": {
                           "type": "integer",
-                          "description": "Partial Production of the production"
+                          "description": "Partial Production of the production",
+                          "example": 1
                         },
                         "stockingOk": {
                           "type": "boolean",
-                          "description": "Stocking Ok of the production"
+                          "description": "Stocking Ok of the production",
+                          "example": true
                         },
                         "stockOk": {
                           "type": "boolean",
-                          "description": "Stock Ok of the production"
+                          "description": "Stock Ok of the production",
+                          "example": true
                         },
                         "log": {
                           "type": "object",
                           "properties": {
                             "createdAt": {
                               "type": "string",
-                              "format": "date"
+                              "format": "date",
+                              "example": "2024-09-18"
                             },
                             "createdBy": {
                               "type": "object",
                               "properties": {
                                 "id": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "example": "USR123456"
                                 },
                                 "name": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "example": "John Doe"
                                 }
                               }
                             }
                           },
+                          "example": {
+                            "createdAt": "2024-09-18",
+                            "createdBy": {
+                              "id": "USR123456",
+                              "name": "John Doe"
+                            }
+                          },
                           "description": "log of the production"
+                        }
+                      },
+                      "example": {
+                        "id": "17",
+                        "documentNumber": "DOC-123456",
+                        "bodyOutroduction": "This is the conclusion section of the production document.",
+                        "date": "2024-09-18",
+                        "dateDelivery": "2024-09-25",
+                        "dateProvision": "2024-09-20",
+                        "dateProduction": "2024-09-21",
+                        "dateProductionEnd": "2024-09-22",
+                        "status": "In Progress",
+                        "customer": {
+                          "id": "17"
+                        },
+                        "project": {
+                          "id": "17"
+                        },
+                        "salesOrder": {
+                          "id": "17"
+                        },
+                        "internalDesignation": "Batch A-123",
+                        "preferredWarehouse": {
+                          "id": "17"
+                        },
+                        "reservationType": "Standard",
+                        "retrievalType": "Automated",
+                        "explodeSublists": true,
+                        "functionalTest": true,
+                        "displayWorkingStepTexts": true,
+                        "createSerialNumbers": true,
+                        "captureComponentSerialnumbers": true,
+                        "internalComment": "Process is completed",
+                        "completed": true,
+                        "finalRemark": "Production is done",
+                        "customerCheckOk": true,
+                        "depletingOk": true,
+                        "partialProductionNumber": 121,
+                        "partialProductionOf": 1,
+                        "stockingOk": true,
+                        "stockOk": true,
+                        "log": {
+                          "createdAt": "2024-09-18",
+                          "createdBy": {
+                            "id": "USR123456",
+                            "name": "John Doe"
+                          }
                         }
                       }
                     }
@@ -75713,29 +77343,35 @@
                           },
                           "name": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "Berlin Project"
                           },
                           "keyName": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "BER_PROJ_001"
                           },
                           "description": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "A project based in Berlin focusing on software development and integration."
                           },
                           "currency": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "EUR"
                           },
                           "normalTaxRate": {
                             "x-description-missing": true,
                             "type": "number",
-                            "format": "float"
+                            "format": "float",
+                            "example": 13.3
                           },
                           "reducedTaxRate": {
                             "x-description-missing": true,
                             "type": "number",
-                            "format": "float"
+                            "format": "float",
+                            "example": 13.3
                           },
                           "storageProcess": {
                             "x-description-missing": true,
@@ -75744,7 +77380,8 @@
                               "none",
                               "order",
                               "orderPointOfSale"
-                            ]
+                            ],
+                            "example": "order"
                           },
                           "pickingProcess": {
                             "x-description-missing": true,
@@ -75756,7 +77393,8 @@
                               "shipmentNoteWarehouse",
                               "shipmentNoteWarehouseScan",
                               "twoLevel"
-                            ]
+                            ],
+                            "example": "invoiceMail"
                           }
                         }
                       }
@@ -75897,250 +77535,374 @@
                       "properties": {
                         "storageProcess": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Automated Storage"
                         },
                         "adapterBoxId": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "warehouse": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "priceGroup": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "cashRegister": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "defaultCustomer": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "allowAllCustomers": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "allowOnlyProjectItems": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "sumItems": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "discountItems": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 1
                         },
                         "createDeliveryNote": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "label1": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Shipping Label"
                         },
                         "label2": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Return Label"
                         },
                         "applyItemDescriptionToReceipts": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "displayNet": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "allowMultipleOrdersPerCashier": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "journalPdfDetailedView": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "hideIndividualBookings": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "monthlyReportsWithoutIndividualDays": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "hideCountingLog": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "hideSignatureBlock": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentBar": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentBarPaid": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentEc": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentEcPaid": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentCreditCard": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentCreditCardPaid": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentTransfer": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonPaymentTransferPaid": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonInvoice": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonReceipt": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonDiscountPercent": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonDiscountEuro": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonWithdrawal": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonDeposit": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonTipping": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonTippingCredit": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonOpenDrawer": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonLoadReceipts": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "buttonCancellation": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "cashierAutologout": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "cashierAutologoutAfterPaymenet": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "extendedAddressFields": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "compulsorySelectionPaymentMethod": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "preselectionOfSalutation": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Mr."
                         },
                         "printerReceiptAfterCompletion": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Print receipt after transaction completion"
                         },
                         "printerId": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerNumberOfDeliveryNotes": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerNumberOfInvoices": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerNumberOfCreditNotes": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerNumberOfDeliveryNoteDuplicates": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerPrintReceiptWithInvoice": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "printerPrintQr": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "printerReceiptActive": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "printerReceiptCount": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 5
                         },
                         "printerReceiptLine1": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Thank you for your purchase!"
                         },
                         "printerReceiptLine2": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Please come again."
                         },
                         "printerReceiptLine3": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Please come again."
                         },
                         "printerReceiptFreeField": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "printerReceiptQr": {
                           "x-description-missing": true,
-                          "type": "boolean"
+                          "type": "boolean",
+                          "example": true
                         },
                         "ownVatId": {
                           "x-description-missing": true,
                           "type": "string",
                           "format": "float",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "VAT12345678"
                         }
+                      },
+                      "example": {
+                        "storageProcess": "Automated Storage",
+                        "adapterBoxId": 5,
+                        "warehouse": 5,
+                        "priceGroup": 5,
+                        "cashRegister": 5,
+                        "defaultCustomer": 5,
+                        "allowAllCustomers": true,
+                        "allowOnlyProjectItems": true,
+                        "sumItems": true,
+                        "discountItems": 1,
+                        "createDeliveryNote": true,
+                        "label1": "Shipping Label",
+                        "label2": "Return Label",
+                        "applyItemDescriptionToReceipts": true,
+                        "displayNet": true,
+                        "allowMultipleOrdersPerCashier": true,
+                        "journalPdfDetailedView": true,
+                        "hideIndividualBookings": true,
+                        "monthlyReportsWithoutIndividualDays": true,
+                        "hideCountingLog": true,
+                        "hideSignatureBlock": true,
+                        "buttonPaymentBar": true,
+                        "buttonPaymentBarPaid": true,
+                        "buttonPaymentEc": true,
+                        "buttonPaymentEcPaid": true,
+                        "buttonPaymentCreditCard": true,
+                        "buttonPaymentCreditCardPaid": true,
+                        "buttonPaymentTransfer": true,
+                        "buttonPaymentTransferPaid": true,
+                        "buttonInvoice": true,
+                        "buttonReceipt": true,
+                        "buttonDiscountPercent": true,
+                        "buttonDiscountEuro": true,
+                        "buttonWithdrawal": true,
+                        "buttonDeposit": true,
+                        "buttonTipping": true,
+                        "buttonTippingCredit": true,
+                        "buttonOpenDrawer": true,
+                        "buttonLoadReceipts": true,
+                        "buttonCancellation": true,
+                        "cashierAutologout": 5,
+                        "cashierAutologoutAfterPaymenet": 5,
+                        "extendedAddressFields": true,
+                        "compulsorySelectionPaymentMethod": true,
+                        "preselectionOfSalutation": "Mr.",
+                        "printerReceiptAfterCompletion": "Print receipt after transaction completion",
+                        "printerId": 5,
+                        "printerNumberOfDeliveryNotes": 5,
+                        "printerNumberOfInvoices": 5,
+                        "printerNumberOfCreditNotes": 5,
+                        "printerNumberOfDeliveryNoteDuplicates": 5,
+                        "printerPrintReceiptWithInvoice": true,
+                        "printerPrintQr": true,
+                        "printerReceiptActive": true,
+                        "printerReceiptCount": 5,
+                        "printerReceiptLine1": "Thank you for your purchase!",
+                        "printerReceiptLine2": "Please come again.",
+                        "printerReceiptLine3": "Please come again.",
+                        "printerReceiptFreeField": true,
+                        "printerReceiptQr": true,
+                        "ownVatId": "VAT12345678"
                       }
                     }
                   }
@@ -78255,30 +80017,36 @@
                           },
                           "entity": {
                             "x-description-missing": true,
-                            "type": "string"
+                            "type": "string",
+                            "example": "Return entity"
                           },
                           "entityId": {
                             "x-description-missing": true,
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 1
                           },
                           "title": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "Return title"
                           },
                           "description": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "List of return document"
                           },
                           "keyword": {
                             "x-description-missing": true,
                             "type": "string",
-                            "nullable": true
+                            "nullable": true,
+                            "example": "attachment"
                           },
                           "sort": {
                             "x-description-missing": true,
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 1
                           },
                           "currentVersion": {
                             "x-description-missing": true,
@@ -78341,7 +80109,8 @@
                           "updatedAt": {
                             "x-description-missing": true,
                             "type": "string",
-                            "format": "date-time"
+                            "format": "date-time",
+                            "example": "2024-09-18T14:30:00Z"
                           }
                         }
                       }
@@ -78499,30 +80268,36 @@
                         },
                         "entity": {
                           "x-description-missing": true,
-                          "type": "string"
+                          "type": "string",
+                          "example": "Return entity"
                         },
                         "entityId": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 12
                         },
                         "title": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "Return title"
                         },
                         "description": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "List of return document"
                         },
                         "keyword": {
                           "x-description-missing": true,
                           "type": "string",
-                          "nullable": true
+                          "nullable": true,
+                          "example": "attachment"
                         },
                         "sort": {
                           "x-description-missing": true,
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 1
                         },
                         "versions": {
                           "type": "array",
@@ -78646,8 +80421,43 @@
                         "updatedAt": {
                           "x-description-missing": true,
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2024-09-18T14:30:00Z"
                         }
+                      },
+                      "example": {
+                        "id": "17",
+                        "entity": "Return entity",
+                        "entityId": 12,
+                        "title": "Return title",
+                        "description": "List of return document",
+                        "keyword": "attachment",
+                        "sort": 1,
+                        "versions": [
+                          {
+                            "id": "abc123",
+                            "version": 1,
+                            "remark": "Initial version of the document.",
+                            "filename": "document_v1.pdf",
+                            "size": {
+                              "value": 210,
+                              "unit": "byte"
+                            },
+                            "updatedAt": "2024-09-18T14:30:00Z"
+                          }
+                        ],
+                        "currentVersion": {
+                          "id": "abc123",
+                          "version": 1,
+                          "remark": "Initial version of the document.",
+                          "filename": "document_v1.pdf",
+                          "size": {
+                            "value": 210,
+                            "unit": "byte"
+                          },
+                          "updatedAt": "2024-09-18T14:30:00Z"
+                        },
+                        "updatedAt": "2024-09-18T14:30:00Z"
                       }
                     }
                   }
@@ -78967,7 +80777,8 @@
                 "properties": {
                   "date": {
                     "type": "string",
-                    "format": "date"
+                    "format": "date",
+                    "example": "2024-09-18"
                   },
                   "positions": {
                     "type": "array",
@@ -78989,7 +80800,8 @@
                         },
                         "quantity": {
                           "type": "number",
-                          "format": "double"
+                          "format": "double",
+                          "example": 10.5
                         },
                         "returnPosition": {
                           "type": "object",
@@ -79011,7 +80823,8 @@
                             "properties": {
                               "quantity": {
                                 "type": "number",
-                                "format": "double"
+                                "format": "double",
+                                "example": 5
                               },
                               "warehouse": {
                                 "type": "object",
@@ -79043,14 +80856,17 @@
                                 "properties": {
                                   "quantity": {
                                     "type": "number",
-                                    "format": "double"
+                                    "format": "double",
+                                    "example": 2.5
                                   },
                                   "batch": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "example": "Batch-123"
                                   },
                                   "bestBeforeDate": {
                                     "type": "string",
-                                    "format": "date"
+                                    "format": "date",
+                                    "example": "2025-01-01"
                                   },
                                   "serialNumbers": {
                                     "type": "array",
@@ -79059,7 +80875,8 @@
                                       "additionalProperties": false,
                                       "properties": {
                                         "number": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "example": "SN-123456789"
                                         }
                                       }
                                     }
@@ -96428,6 +98245,256 @@
           },
           "406": {
             "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
+    "/api/users/{id}/resetPassword/request": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "user.reset-password",
+        "summary": "Request reset password email",
+        "description": "Request reset password email",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/vnd.xentral.default.v1+json": {}
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
           },
           "429": {
             "description": "Too many API calls made."
