@@ -14026,6 +14026,13 @@
                             "size": 10
                           }
                         }
+                      },
+                      "example": {
+                        "totalCount": 100,
+                        "cursor": {
+                          "nextCursor": "MTA=",
+                          "size": 10
+                        }
                       }
                     }
                   }
@@ -17612,6 +17619,27 @@
                             }
                           }
                         },
+                        "example": {
+                          "id": "DEL-12345",
+                          "tracking": {
+                            "number": "101010101010101",
+                            "link": "https://carrier.example.com/track/101010101010101",
+                            "carrier": "DHL"
+                          },
+                          "deliveryNote": {
+                            "id": "DN-54321"
+                          },
+                          "salesOrder": {
+                            "id": "SO-98765"
+                          },
+                          "shippingMethod": {
+                            "id": "SM-12345"
+                          },
+                          "label": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          }
+                        },
                         "description": "Data representation of a single delivery aka shipment"
                       }
                     },
@@ -17848,6 +17876,27 @@
                           }
                         }
                       },
+                      "example": {
+                        "id": "DEL-12345",
+                        "tracking": {
+                          "number": "101010101010101",
+                          "link": "https://carrier.example.com/track/101010101010101",
+                          "carrier": "DHL"
+                        },
+                        "deliveryNote": {
+                          "id": "DN-54321"
+                        },
+                        "salesOrder": {
+                          "id": "SO-98765"
+                        },
+                        "shippingMethod": {
+                          "id": "SM-12345"
+                        },
+                        "label": {
+                          "fileType": "image/gif",
+                          "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                        }
+                      },
                       "description": "Data representation of a single delivery aka shipment"
                     }
                   }
@@ -18036,6 +18085,27 @@
                             "fileType": "image/gif",
                             "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                           }
+                        }
+                      },
+                      "example": {
+                        "id": "DEL-12345",
+                        "tracking": {
+                          "number": "101010101010101",
+                          "link": "https://carrier.example.com/track/101010101010101",
+                          "carrier": "DHL"
+                        },
+                        "deliveryNote": {
+                          "id": "DN-54321"
+                        },
+                        "salesOrder": {
+                          "id": "SO-98765"
+                        },
+                        "shippingMethod": {
+                          "id": "SM-12345"
+                        },
+                        "label": {
+                          "fileType": "image/gif",
+                          "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                         }
                       },
                       "description": "Data representation of a single delivery aka shipment"
@@ -19094,6 +19164,13 @@
                                 }
                               }
                             }
+                          },
+                          "example": {
+                            "createdAt": "2023-12-01 00:00:00",
+                            "createdBy": {
+                              "id": "1",
+                              "name": "User 1"
+                            }
                           }
                         },
                         "delivery": {
@@ -19899,6 +19976,7 @@
           "Delivery Note"
         ],
         "operationId": "deliveryNote.deliveries.list",
+        "description": "Details of delivery note",
         "summary": "[EARLY ACCESS] View delivery note deliveries aka shipments",
         "parameters": [
           {
@@ -20056,6 +20134,27 @@
                               "fileType": "image/gif",
                               "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                             }
+                          }
+                        },
+                        "example": {
+                          "id": "DEL-12345",
+                          "tracking": {
+                            "number": "101010101010101",
+                            "link": "https://carrier.example.com/track/101010101010101",
+                            "carrier": "DHL"
+                          },
+                          "deliveryNote": {
+                            "id": "DN-54321"
+                          },
+                          "salesOrder": {
+                            "id": "SO-98765"
+                          },
+                          "shippingMethod": {
+                            "id": "SM-12345"
+                          },
+                          "label": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -20336,6 +20435,7 @@
           "Delivery Note"
         ],
         "operationId": "deliveryNote.shipments.list",
+        "description": "Details of delivery note shipments",
         "summary": "[EARLY ACCESS] View delivery note shipments aka deliveries",
         "parameters": [
           {
@@ -20493,6 +20593,27 @@
                               "fileType": "image/gif",
                               "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                             }
+                          }
+                        },
+                        "example": {
+                          "id": "DEL-12345",
+                          "tracking": {
+                            "number": "101010101010101",
+                            "link": "https://carrier.example.com/track/101010101010101",
+                            "carrier": "DHL"
+                          },
+                          "deliveryNote": {
+                            "id": "DN-54321"
+                          },
+                          "salesOrder": {
+                            "id": "SO-98765"
+                          },
+                          "shippingMethod": {
+                            "id": "SM-12345"
+                          },
+                          "label": {
+                            "fileType": "image/gif",
+                            "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                           }
                         },
                         "description": "Data representation of a single delivery aka shipment"
@@ -21244,7 +21365,7 @@
         }
       }
     },
-    "/api/products/{id}/externalReferences": {
+    "/api/v1/products/{id}/externalReferences": {
       "get": {
         "tags": [
           "External Reference"
@@ -21270,7 +21391,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -21648,7 +21769,7 @@
         "requestBody": {
           "description": "ExternalReference create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -21996,7 +22117,7 @@
         "requestBody": {
           "description": "ExternalReference update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -22341,7 +22462,7 @@
         "requestBody": {
           "description": "ExternalReference delete multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -22570,7 +22691,7 @@
         }
       }
     },
-    "/api/externalReferenceTargets": {
+    "/api/v1/externalReferenceTargets": {
       "get": {
         "tags": [
           "External Reference Target"
@@ -22582,7 +22703,7 @@
           "200": {
             "description": "ExternalReferenceTarget list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -34366,7 +34487,7 @@
         }
       }
     },
-    "/api/products": {
+    "/api/v1/products": {
       "post": {
         "tags": [
           "Product"
@@ -34378,7 +34499,7 @@
         "requestBody": {
           "description": "Product create request payload",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -35358,7 +35479,7 @@
                 }
               }
             },
-            "application/vnd.xentral.upsert.v1-beta+json": {
+            "application/vnd.xentral.upsert+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -38854,7 +38975,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -41599,12 +41720,12 @@
                   }
                 }
               },
-              "application/vnd.xentral.default.v1+csv": {
+              "text/csv": {
                 "schema": {
                   "type": "string"
                 }
               },
-              "application/vnd.xentral.minimal.v1+json": {
+              "application/vnd.xentral.minimal+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -42798,7 +42919,7 @@
         "requestBody": {
           "description": "Product update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -45028,7 +45149,7 @@
         "requestBody": {
           "description": "Product delete multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -45060,7 +45181,7 @@
                 }
               }
             },
-            "application/vnd.xentral.force.v1+json": {
+            "application/vnd.xentral.force+json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -45397,7 +45518,7 @@
         }
       }
     },
-    "/api/products/{id}": {
+    "/api/v1/products/{id}": {
       "get": {
         "tags": [
           "Product"
@@ -45423,7 +45544,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -46227,6 +46348,124 @@
                           "description": "Timestamp of when the product was updated.",
                           "example": "2024-09-19T12:34:56Z"
                         }
+                      },
+                      "example": {
+                        "id": "1",
+                        "uuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                        "project": {
+                          "id": "1",
+                          "name": "Project1"
+                        },
+                        "category": null,
+                        "standardSupplier": null,
+                        "name": "Shirt",
+                        "description": "This is a shirt.",
+                        "ean": "123456789",
+                        "stockCount": 0,
+                        "number": "133456",
+                        "thumbnailUrl": "http://localhost/index.php?module=artikel&action=thumbnail&id=1&bildvorschau=16_100_100",
+                        "thumbnailId": "16",
+                        "customsTariffNumber": "39JOE85W",
+                        "countryOfOrigin": null,
+                        "tags": [],
+                        "shortDescription": null,
+                        "internalComment": "",
+                        "minimumOrderQuantity": 0,
+                        "minimumStorageQuantity": 0,
+                        "isMatrixProduct": false,
+                        "hasBatches": false,
+                        "serialNumbersMode": "disabled",
+                        "hasBestBeforeDate": false,
+                        "allowPurchaseFromAllSuppliers": false,
+                        "isStockTakingDisabled": false,
+                        "ageRating": null,
+                        "hasBillOfMaterials": false,
+                        "isProductionProduct": false,
+                        "isExternallyProduced": false,
+                        "isCustomProduct": false,
+                        "isAssembledJustInTime": false,
+                        "hidePriceOnDocuments": false,
+                        "hideJustInTimeItemsOnDocuments": false,
+                        "markAsSoldOut": false,
+                        "markAsInactive": false,
+                        "isDeleted": false,
+                        "isDisabled": false,
+                        "disabledReason": null,
+                        "unit": {
+                          "name": ""
+                        },
+                        "measurements": {
+                          "width": {
+                            "value": 0,
+                            "unit": "cm"
+                          },
+                          "height": {
+                            "value": 0,
+                            "unit": "cm"
+                          },
+                          "length": {
+                            "value": 0,
+                            "unit": "cm"
+                          },
+                          "weight": {
+                            "value": 0,
+                            "unit": "kg"
+                          },
+                          "netWeight": {
+                            "value": 0,
+                            "unit": "kg"
+                          }
+                        },
+                        "manufacturer": {
+                          "name": "Manufacturer A",
+                          "number": "MAN-123456",
+                          "url": null
+                        },
+                        "isStockItem": false,
+                        "salesTax": "standard",
+                        "shopPriceDisplay": "5.20",
+                        "isRemainingQuantity": false,
+                        "regionOfOrigin": "",
+                        "isShippingCostsProduct": false,
+                        "discount": {
+                          "isDiscountProduct": false,
+                          "discountPercentage": 0
+                        },
+                        "stockTaking": {
+                          "hasStockTakingValue": false,
+                          "stockTakingValue": 0
+                        },
+                        "calculatedPurchasePrice": {
+                          "hasCalculatedPurchasePrice": false,
+                          "price": {
+                            "amount": "0.0000",
+                            "currency": "EUR"
+                          }
+                        },
+                        "options": [],
+                        "selectedOptions": [],
+                        "variants": [],
+                        "freeFields": [
+                          {
+                            "id": "2",
+                            "name": "ff_2",
+                            "value": "ff2"
+                          },
+                          {
+                            "id": "29",
+                            "name": "ff_29",
+                            "value": "ff29"
+                          },
+                          {
+                            "id": "35",
+                            "name": null,
+                            "value": "ff35"
+                          }
+                        ],
+                        "updatedAt": "2024-09-19T12:34:56Z",
+                        "isVariant": false,
+                        "variantOf": null,
+                        "mainVariant": null
                       }
                     }
                   }
@@ -46849,6 +47088,11 @@
                               "nullable": true,
                               "description": "URI of the manufacturer."
                             }
+                          },
+                          "example": {
+                            "name": "Test Corp",
+                            "number": "AC12345",
+                            "link": "https://www.testcorp.com"
                           }
                         },
                         "isStockItem": {
@@ -46885,6 +47129,10 @@
                               "format": "float",
                               "description": "Shows the discount value if the product is a discount. For more information have a look into our handbook."
                             }
+                          },
+                          "example": {
+                            "isDiscountProduct": true,
+                            "discountPercentage": 15.15
                           }
                         },
                         "stockTaking": {
@@ -46901,6 +47149,10 @@
                               "format": "float",
                               "description": "Shows the stock taking value for stock taking."
                             }
+                          },
+                          "example": {
+                            "hasStockTakingValue": true,
+                            "stockTakingValue": 100.75
                           }
                         },
                         "calculatedPurchasePrice": {
@@ -47498,6 +47750,137 @@
                           "description": "Timestamp of when the product was updated.",
                           "example": "2024-09-19T12:34:56Z"
                         }
+                      },
+                      "example": {
+                        "id": "1",
+                        "uuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                        "project": {
+                          "id": "1",
+                          "name": "Project1"
+                        },
+                        "merchandiseGroup": null,
+                        "name": "Sample Product",
+                        "standardSupplier": null,
+                        "description": "This is a high-quality product designed for everyday use.",
+                        "ean": "1234567890123",
+                        "stockCount": 150,
+                        "number": "SKU123456",
+                        "thumbnailUrl": "https://www.example.com/images/thumbnail.jpg",
+                        "thumbnailId": "thumb-001",
+                        "customsTariffNumber": "1234.56.78",
+                        "countryOfOrigin": "DE",
+                        "tags": [],
+                        "shortDescription": "A compact and efficient product for everyday use.",
+                        "internalComment": "Handle with care.",
+                        "minimumStorageQuantity": 50,
+                        "minimumOrderQuantity": 10,
+                        "isMatrixProduct": true,
+                        "hasBatches": false,
+                        "serialNumbersMode": "mandatory",
+                        "hasBestBeforeDate": true,
+                        "allowPurchaseFromAllSuppliers": false,
+                        "isStockTakingDisabled": false,
+                        "ageRating": "12+",
+                        "hasBillOfMaterials": true,
+                        "isProductionProduct": true,
+                        "isExternallyProduced": false,
+                        "isCustomProduct": true,
+                        "isAssembledJustInTime": false,
+                        "hideJustInTimeItemsOnDocuments": true,
+                        "isDisabled": false,
+                        "disabledReason": "Product is under review.",
+                        "isDeleted": false,
+                        "regionOfOrigin": "London, UK",
+                        "unit": {
+                          "name": "Kilogram"
+                        },
+                        "measurements": {
+                          "width": {
+                            "value": 20,
+                            "unit": "cm"
+                          },
+                          "height": {
+                            "value": 10,
+                            "unit": "cm"
+                          },
+                          "length": {
+                            "value": 30,
+                            "unit": "cm"
+                          },
+                          "weight": {
+                            "value": 2,
+                            "unit": "kg"
+                          },
+                          "netWeight": {
+                            "value": 1.5,
+                            "unit": "kg"
+                          }
+                        },
+                        "manufacturer": {
+                          "name": "Test Corp",
+                          "number": "AC12345",
+                          "link": "https://www.testcorp.com"
+                        },
+                        "isStockItem": true,
+                        "salesTax": "reduced",
+                        "isShippingCostsProduct": false,
+                        "discount": {
+                          "isDiscountProduct": true,
+                          "discountPercentage": 15.15
+                        },
+                        "stockTaking": {
+                          "hasStockTakingValue": true,
+                          "stockTakingValue": 100.75
+                        },
+                        "calculatedPurchasePrice": {
+                          "hasCalculatedPurchasePrice": false,
+                          "price": {
+                            "amount": "13.37",
+                            "currency": "EUR"
+                          }
+                        },
+                        "salesChannel": {
+                          "description": "A high-quality product.",
+                          "meta": {
+                            "title": "Sample Product Title",
+                            "description": "This product is designed for everyday use.",
+                            "keywords": "product, products"
+                          },
+                          "isStockNumberSyncActive": true,
+                          "isSoldOut": false,
+                          "isRemainingQuantity": true,
+                          "suggestedRetailPrice": "19.99",
+                          "isVisible": true
+                        },
+                        "options": [],
+                        "selectedOptions": [],
+                        "variants": [],
+                        "mainVariant": null,
+                        "freeFields": [
+                          {
+                            "id": "2",
+                            "name": "ff_2",
+                            "value": "ff2"
+                          },
+                          {
+                            "id": "29",
+                            "name": "ff_29",
+                            "value": "ff29"
+                          },
+                          {
+                            "id": "35",
+                            "name": null,
+                            "value": "ff35"
+                          }
+                        ],
+                        "updatedAt": "2024-09-19T12:34:56Z",
+                        "isVariant": true,
+                        "variantOf": null,
+                        "categories": [
+                          {
+                            "id": "1"
+                          }
+                        ]
                       }
                     }
                   }
@@ -47655,7 +48038,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.minimal.v1+json": {
+              "application/vnd.xentral.minimal+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -47698,6 +48081,14 @@
                           "description": "Timestamp of when the product was updated.",
                           "example": "2024-09-23T14:30:00Z"
                         }
+                      },
+                      "example": {
+                        "id": "2",
+                        "uuid": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+                        "name": "Wireless Headphones",
+                        "number": "WH-2024-XYZ",
+                        "isVariant": true,
+                        "updatedAt": "2024-09-23T14:30:00Z"
                       }
                     }
                   }
@@ -47958,7 +48349,7 @@
         "requestBody": {
           "description": "Product update request payload",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -50242,7 +50633,7 @@
         "description": "Deletes a single product",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1": {
+            "*/*": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -50251,7 +50642,7 @@
                 "nullable": true
               }
             },
-            "application/vnd.xentral.force.v1": {
+            "application/vnd.xentral.force": {
               "schema": {
                 "type": "string",
                 "enum": [
@@ -50389,7 +50780,7 @@
         }
       }
     },
-    "/api/products/{id}/media": {
+    "/api/v1/products/{id}/media": {
       "get": {
         "tags": [
           "Product"
@@ -50441,7 +50832,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -50674,7 +51065,7 @@
         }
       }
     },
-    "/api/products/{id}/purchasePrices": {
+    "/api/v1/products/{id}/purchasePrices": {
       "get": {
         "tags": [
           "Product"
@@ -50756,7 +51147,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -50921,7 +51312,7 @@
         }
       }
     },
-    "/api/products/{id}/salesPrices": {
+    "/api/v1/products/{id}/salesPrices": {
       "get": {
         "tags": [
           "Product"
@@ -51003,7 +51394,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -51232,7 +51623,7 @@
         }
       }
     },
-    "/api/products/{id}/purchaseOrdersPositions": {
+    "/api/v1/products/{id}/purchaseOrdersPositions": {
       "get": {
         "tags": [
           "Product"
@@ -51317,7 +51708,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -51412,6 +51803,15 @@
                                   "id": "1337",
                                   "name": "Diamond"
                                 }
+                              }
+                            },
+                            "example": {
+                              "id": "PO123456",
+                              "number": "ORD-2024-001",
+                              "deliveryDate": "2024-10-15",
+                              "supplier": {
+                                "id": "SUP123",
+                                "name": "Test Supplies Inc."
                               }
                             }
                           }
@@ -51544,7 +51944,7 @@
         }
       }
     },
-    "/api/products/{id}/salesOrdersPositions": {
+    "/api/v1/products/{id}/salesOrdersPositions": {
       "get": {
         "tags": [
           "Product"
@@ -51628,7 +52028,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -51836,7 +52236,7 @@
         }
       }
     },
-    "/api/products/{id}/productionsPositions": {
+    "/api/v1/products/{id}/productionsPositions": {
       "get": {
         "tags": [
           "Product"
@@ -51915,7 +52315,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -51949,6 +52349,9 @@
                                 "example": "17",
                                 "description": "Resource identifier."
                               }
+                            },
+                            "example": {
+                              "id": "12345"
                             }
                           },
                           "production": {
@@ -51982,6 +52385,15 @@
                                     "type": "string"
                                   }
                                 }
+                              }
+                            },
+                            "example": {
+                              "id": "12345",
+                              "number": "PROD-001",
+                              "status": "pending",
+                              "customer": {
+                                "id": "67890",
+                                "name": "John Doe"
                               }
                             }
                           }
@@ -52066,7 +52478,7 @@
         }
       }
     },
-    "/api/products/{id}/properties": {
+    "/api/v1/products/{id}/properties": {
       "get": {
         "tags": [
           "Product"
@@ -52147,7 +52559,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -52296,7 +52708,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -52569,7 +52981,7 @@
         }
       }
     },
-    "/api/products/{id}/reservations": {
+    "/api/v1/products/{id}/reservations": {
       "get": {
         "tags": [
           "Product"
@@ -52650,7 +53062,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -52692,6 +53104,10 @@
                               "reference": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "12345",
+                              "reference": "REF-67890"
                             }
                           },
                           "customer": {
@@ -52711,6 +53127,11 @@
                               "number": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "12345",
+                              "name": "John Doe",
+                              "number": "CUST-001"
                             }
                           }
                         }
@@ -52792,7 +53213,7 @@
         }
       }
     },
-    "/api/products/{id}/parts": {
+    "/api/v1/products/{id}/parts": {
       "get": {
         "tags": [
           "Product"
@@ -52872,7 +53293,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -52912,6 +53333,11 @@
                               "number": {
                                 "type": "string"
                               }
+                            },
+                            "example": {
+                              "id": "1",
+                              "name": "Product Name",
+                              "number": "SKU123456"
                             }
                           }
                         }
@@ -53010,7 +53436,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -53317,7 +53743,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -53333,7 +53759,8 @@
                     "amount": {
                       "type": "number",
                       "format": "float",
-                      "description": "Sets the amount for how many times the product is included"
+                      "description": "Sets the amount for how many times the product is included",
+                      "example": 100
                     }
                   }
                 }
@@ -53576,7 +54003,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -53801,7 +54228,7 @@
         }
       }
     },
-    "/api/products/{id}/storageLocations": {
+    "/api/v1/products/{id}/storageLocations": {
       "get": {
         "tags": [
           "Product"
@@ -53881,7 +54308,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -54013,7 +54440,7 @@
         }
       }
     },
-    "/api/products/{id}/crossSelling": {
+    "/api/v1/products/{id}/crossSelling": {
       "get": {
         "tags": [
           "Product"
@@ -54096,7 +54523,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -54500,7 +54927,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -54960,7 +55387,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -55381,7 +55808,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -55709,7 +56136,7 @@
         }
       }
     },
-    "/api/products/{id}/options": {
+    "/api/v1/products/{id}/options": {
       "get": {
         "tags": [
           "Matrixproduct"
@@ -55789,7 +56216,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -55936,7 +56363,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -56219,7 +56646,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -56496,7 +56923,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -56727,7 +57154,7 @@
         }
       }
     },
-    "/api/products/{productId}/options/{id}": {
+    "/api/v1/products/{productId}/options/{id}": {
       "patch": {
         "tags": [
           "Matrixproduct"
@@ -56764,7 +57191,7 @@
         "requestBody": {
           "description": "Update a single option of a matrix product",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -56996,7 +57423,7 @@
         }
       }
     },
-    "/api/products/{id}/salesChannels": {
+    "/api/v1/products/{id}/salesChannels": {
       "post": {
         "tags": [
           "Sales Channels Product Settings"
@@ -57020,7 +57447,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -57075,6 +57502,23 @@
                   "createNewProductDuringImport": {
                     "type": "boolean",
                     "description": "Determines if a new product should be created during the sales order import from a sales channel."
+                  }
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "salesChannel": {
+                      "id": "1"
+                    },
+                    "isActive": true,
+                    "useIndividualSalesChannelSettings": false,
+                    "isStockNumberSyncActive": true,
+                    "isRemainingQuantity": false,
+                    "suggestedRetailPrice": "29.99",
+                    "suggestedStockQuantity": "100",
+                    "deliveryTime": "3-5 business days",
+                    "createNewProductDuringImport": true
                   }
                 }
               }
@@ -57313,7 +57757,7 @@
         }
       }
     },
-    "/api/products/{productId}/salesChannels/{id}": {
+    "/api/v1/products/{productId}/salesChannels/{id}": {
       "delete": {
         "tags": [
           "Sales Channels Product Settings"
@@ -57687,7 +58131,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -57742,6 +58186,23 @@
                   "createNewProductDuringImport": {
                     "type": "boolean",
                     "description": "Determines if a new product should be created during the sales order import from a sales channel."
+                  }
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "salesChannel": {
+                      "id": "12"
+                    },
+                    "isActive": true,
+                    "useIndividualSalesChannelSettings": true,
+                    "isStockNumberSyncActive": true,
+                    "isRemainingQuantity": false,
+                    "suggestedRetailPrice": "99.99",
+                    "suggestedStockQuantity": "500",
+                    "deliveryTime": "3-5 business days",
+                    "createNewProductDuringImport": false
                   }
                 }
               }
@@ -58043,7 +58504,7 @@
         }
       }
     },
-    "/api/products/{productId}/options/{optionId}/values/{id}": {
+    "/api/v1/products/{productId}/options/{optionId}/values/{id}": {
       "get": {
         "tags": [
           "Matrixproduct"
@@ -58093,7 +58554,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -58200,7 +58661,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -58777,7 +59238,7 @@
         }
       }
     },
-    "/api/products/{productId}/options/{id}/values": {
+    "/api/v1/products/{productId}/options/{id}/values": {
       "get": {
         "tags": [
           "Matrixproduct"
@@ -58815,7 +59276,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -58893,7 +59354,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -59264,7 +59725,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -59513,7 +59974,7 @@
         }
       }
     },
-    "/api/products/{id}/actions/createVariants": {
+    "/api/v1/products/{id}/actions/createVariants": {
       "post": {
         "tags": [
           "Product"
@@ -59537,7 +59998,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -59933,7 +60394,7 @@
         }
       }
     },
-    "/api/productsCategories": {
+    "/api/v1/productsCategories": {
       "get": {
         "tags": [
           "Product Category"
@@ -59945,7 +60406,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -60053,7 +60514,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.hierarchy.v1+json": {
+              "application/vnd.xentral.hierarchy+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -60332,7 +60793,7 @@
         "requestBody": {
           "description": "Product category create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -60689,7 +61150,7 @@
         }
       }
     },
-    "/api/productsCategories/{id}": {
+    "/api/v1/productsCategories/{id}": {
       "get": {
         "tags": [
           "Product Category"
@@ -60715,7 +61176,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -60819,7 +61280,7 @@
         "requestBody": {
           "description": "Product category update request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -61275,7 +61736,7 @@
         }
       }
     },
-    "/api/productsFreeFields": {
+    "/api/v1/productsFreeFields": {
       "get": {
         "tags": [
           "Product Free Field"
@@ -61400,7 +61861,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -61575,7 +62036,7 @@
         "requestBody": {
           "description": "Product free field update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -61837,7 +62298,7 @@
         }
       }
     },
-    "/api/productsFreeFields/{id}": {
+    "/api/v1/productsFreeFields/{id}": {
       "get": {
         "tags": [
           "Product Free Field"
@@ -61863,7 +62324,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -61959,7 +62420,7 @@
         "requestBody": {
           "description": "Product free field update request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -62203,7 +62664,7 @@
         }
       }
     },
-    "/api/productMedia": {
+    "/api/v1/productMedia": {
       "post": {
         "tags": [
           "Product Media"
@@ -62214,7 +62675,7 @@
         "requestBody": {
           "description": "Product media create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -62516,7 +62977,7 @@
         "requestBody": {
           "description": "Product media update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -62821,7 +63282,7 @@
         "requestBody": {
           "description": "Product media delete multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -63130,7 +63591,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -63576,7 +64037,7 @@
         }
       }
     },
-    "/api/productMedia/{id}": {
+    "/api/v1/productMedia/{id}": {
       "get": {
         "tags": [
           "Product Media"
@@ -63602,7 +64063,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -64131,7 +64592,7 @@
         }
       }
     },
-    "/api/productMedia/{id}/versions": {
+    "/api/v1/productMedia/{id}/versions": {
       "post": {
         "tags": [
           "Product Media"
@@ -64142,7 +64603,7 @@
         "requestBody": {
           "description": "Product media version create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -64417,7 +64878,7 @@
         }
       }
     },
-    "/api/productMedia/{id}/versions/{version}": {
+    "/api/v1/productMedia/{id}/versions/{version}": {
       "get": {
         "tags": [
           "Product Media"
@@ -64453,7 +64914,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -64827,7 +65288,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -65313,7 +65774,7 @@
         }
       }
     },
-    "/api/productsProperties": {
+    "/api/v1/productsProperties": {
       "post": {
         "tags": [
           "Product Property"
@@ -65323,7 +65784,7 @@
         "description": "Creates new products properties.",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.batch.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -65612,7 +66073,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -65696,7 +66157,7 @@
         "description": "Updates multiple products properties.",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -65952,7 +66413,7 @@
         "description": "Deletes multiple products properties.",
         "requestBody": {
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -66192,7 +66653,7 @@
         }
       }
     },
-    "/api/productsTags": {
+    "/api/v1/productsTags": {
       "get": {
         "tags": [
           "Product Tag"
@@ -66328,7 +66789,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -66460,7 +66921,7 @@
         "requestBody": {
           "description": "Product tag create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -66732,7 +67193,7 @@
         }
       }
     },
-    "/api/productsTags/{id}": {
+    "/api/v1/productsTags/{id}": {
       "patch": {
         "tags": [
           "Product Tag"
@@ -66757,7 +67218,7 @@
         "requestBody": {
           "description": "Product tag update request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -67079,7 +67540,7 @@
         }
       }
     },
-    "/api/productsMerchandiseGroups": {
+    "/api/v1/productsMerchandiseGroups": {
       "get": {
         "tags": [
           "Product Merchandise Group"
@@ -67091,7 +67552,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -67368,7 +67829,7 @@
         "requestBody": {
           "description": "Product merchandise group create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -67827,7 +68288,7 @@
         }
       }
     },
-    "/api/productsMerchandiseGroups/{id}": {
+    "/api/v1/productsMerchandiseGroups/{id}": {
       "get": {
         "tags": [
           "Product Merchandise Group"
@@ -67853,7 +68314,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -68104,7 +68565,7 @@
         "requestBody": {
           "description": "Product merchandise group update request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -68673,7 +69134,7 @@
         }
       }
     },
-    "/api/productions": {
+    "/api/v1/productions": {
       "get": {
         "tags": [
           "Production"
@@ -68817,7 +69278,7 @@
           "200": {
             "description": "Productions list",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -69516,7 +69977,7 @@
         }
       }
     },
-    "/api/productions/{id}": {
+    "/api/v1/productions/{id}": {
       "get": {
         "tags": [
           "Production"
@@ -69542,7 +70003,7 @@
           "200": {
             "description": "Productions view based on id",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -72923,6 +73384,100 @@
                     }
                   }
                 }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "date": "2024-01-01",
+                    "project": {
+                      "id": "1001"
+                    },
+                    "supplier": {
+                      "id": "2001",
+                      "honorific": "",
+                      "name": "Supplier 1",
+                      "department": "",
+                      "subDepartment": "",
+                      "extraAddressLine": "",
+                      "street": "ExampleStreet 5",
+                      "zipCode": "",
+                      "city": "",
+                      "state": "",
+                      "country": "",
+                      "contactPerson": "",
+                      "telephone": "1234567890",
+                      "telefax": "",
+                      "email": ""
+                    },
+                    "requestForQuotation": {
+                      "id": "6002"
+                    },
+                    "bodyIntroduction": "",
+                    "bodyOutroduction": "",
+                    "salesOrderConfirmationReference": "",
+                    "isConfirmationRequested": false,
+                    "internalDesignation": "",
+                    "language": {
+                      "iso2": "DE"
+                    },
+                    "suppliersOfferReference": "",
+                    "isConfirmed": false,
+                    "confirmedVia": "Internet",
+                    "financials": {
+                      "paymentMethod": {
+                        "id": "4002"
+                      },
+                      "paymentTerms": {
+                        "paymentTargetDiscount": 0,
+                        "paymentTargetDays": 0,
+                        "paymentTargetDiscountDays": 0,
+                        "paymentTargetDiscountAmount": 0,
+                        "isPaymentTargetDiscountApplied": false
+                      },
+                      "costCenter": "",
+                      "tax": {
+                        "taxation": "Domestic",
+                        "vatId": "",
+                        "taxDisplay": "Automatic"
+                      },
+                      "currency": "EUR"
+                    },
+                    "delivery": {
+                      "deliveryTerms": {
+                        "id": "7002"
+                      },
+                      "hasDifferentDeliveryAddress": true,
+                      "deliveryAddress": {
+                        "honorific": "",
+                        "name": "Delivery Address Name",
+                        "department": "",
+                        "subDepartment": "",
+                        "extraAddressLine": "",
+                        "street": "",
+                        "zipCode": "",
+                        "city": "",
+                        "state": "",
+                        "country": "",
+                        "contactPerson": ""
+                      },
+                      "dates": {
+                        "desiredDeliveryDate": null,
+                        "confirmedDeliveryDate": null
+                      }
+                    },
+                    "formatting": {
+                      "hideLetterHead": false,
+                      "hidePrices": false,
+                      "hideProductNumbers": false,
+                      "showLongProductNumbers": false,
+                      "hideProductDescriptions": false,
+                      "showOwnProductNumberInColumn": false
+                    },
+                    "internalComment": "",
+                    "liabilitiesInfo": "",
+                    "positions": []
+                  }
+                }
               }
             }
           }
@@ -73368,6 +73923,45 @@
                         }
                       }
                     }
+                  }
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "date": "2024-09-24",
+                    "positions": [
+                      {
+                        "product": {
+                          "id": "product-1"
+                        },
+                        "quantity": 10,
+                        "purchaseOrderPosition": {
+                          "id": "purchase-order-position-1"
+                        },
+                        "stockMovements": [
+                          {
+                            "quantity": 5,
+                            "warehouse": {
+                              "id": "warehouse-1"
+                            },
+                            "storageLocation": {
+                              "id": "storage-location-1"
+                            },
+                            "qualityControlAttributes": {
+                              "quantity": 2,
+                              "batch": "BATCH-1234",
+                              "bestBeforeDate": "2025-12-31",
+                              "serialNumbers": [
+                                {
+                                  "number": "SN-123456"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -73871,7 +74465,7 @@
         }
       }
     },
-    "/api/purchasePrices": {
+    "/api/v1/purchasePrices": {
       "post": {
         "tags": [
           "Purchase Price"
@@ -73882,7 +74476,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -74581,7 +75175,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -75314,7 +75908,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -75871,7 +76465,7 @@
         }
       }
     },
-    "/api/purchasePrices/{id}": {
+    "/api/v1/purchasePrices/{id}": {
       "get": {
         "tags": [
           "Purchase Price"
@@ -75897,7 +76491,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -76580,7 +77174,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -80524,6 +81118,11 @@
                   ""
                 ],
                 "nullable": true
+              },
+              "examples": {
+                "example": {
+                  "value": ""
+                }
               }
             }
           }
@@ -80888,6 +81487,45 @@
                         }
                       }
                     }
+                  }
+                }
+              },
+              "examples": {
+                "example": {
+                  "value": {
+                    "date": "2024-09-18",
+                    "positions": [
+                      {
+                        "product": {
+                          "id": "product-1"
+                        },
+                        "quantity": 10.5,
+                        "returnPosition": {
+                          "id": "return-1"
+                        },
+                        "stockMovements": [
+                          {
+                            "quantity": 5,
+                            "warehouse": {
+                              "id": "17"
+                            },
+                            "storageLocation": {
+                              "id": "location-1"
+                            },
+                            "qualityControlAttributes": {
+                              "quantity": 2.5,
+                              "batch": "Batch-123",
+                              "bestBeforeDate": "2025-01-01",
+                              "serialNumbers": [
+                                {
+                                  "number": "SN-123456789"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -83409,6 +84047,11 @@
                   ""
                 ],
                 "nullable": true
+              },
+              "examples": {
+                "example": {
+                  "value": ""
+                }
               }
             }
           }
@@ -83668,6 +84311,11 @@
                   ""
                 ],
                 "nullable": true
+              },
+              "examples": {
+                "example": {
+                  "value": ""
+                }
               }
             }
           }
@@ -87989,7 +88637,7 @@
         }
       }
     },
-    "/api/salesPrices": {
+    "/api/v1/salesPrices": {
       "post": {
         "tags": [
           "Sales Price"
@@ -88000,7 +88648,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -88532,7 +89180,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -88851,7 +89499,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -89220,7 +89868,7 @@
         }
       }
     },
-    "/api/salesPrices/{id}": {
+    "/api/v1/salesPrices/{id}": {
       "get": {
         "tags": [
           "Sales Price"
@@ -89246,7 +89894,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -89730,7 +90378,7 @@
         "requestBody": {
           "description": "",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -91819,6 +92467,11 @@
                                 "format": "float",
                                 "example": 100
                               }
+                            },
+                            "example": {
+                              "length": 10.5,
+                              "width": 100,
+                              "height": 100
                             }
                           }
                         }
@@ -98274,11 +98927,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/vnd.xentral.default.v1+json": {}
-          }
-        },
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
