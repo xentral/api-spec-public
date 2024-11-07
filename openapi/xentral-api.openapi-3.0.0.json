@@ -11039,7 +11039,7 @@
                       }
                     },
                     "quantity": {
-                      "x-description-missing": true,
+                      "description": "The quantity for the position",
                       "type": "number",
                       "format": "double",
                       "example": 2
@@ -11075,23 +11075,23 @@
                       }
                     },
                     "vatCategory": {
-                      "x-description-missing": true,
+                      "description": "The VAT category that applies to the position",
                       "type": "string",
                       "example": "reduced"
                     },
                     "taxRate": {
-                      "x-description-missing": true,
+                      "description": "The VAT rate that applied to the position",
                       "type": "number",
                       "format": "float",
                       "example": 38.45
                     },
                     "discounts": {
-                      "x-description-missing": true,
+                      "description": "Discounts applied to position",
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
                         "totalPercent": {
-                          "x-description-missing": true,
+                          "description": "The percentage discount applied to position",
                           "type": "number",
                           "format": "float",
                           "nullable": true,
@@ -17370,7 +17370,7 @@
         }
       }
     },
-    "/api/deliveries": {
+    "/api/v1/deliveries": {
       "get": {
         "tags": [
           "Delivery"
@@ -17479,7 +17479,7 @@
           "200": {
             "description": "Delivery list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -17716,7 +17716,7 @@
         }
       }
     },
-    "/api/deliveries/{id}": {
+    "/api/v1/deliveries/{id}": {
       "get": {
         "tags": [
           "Delivery"
@@ -17742,7 +17742,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -17953,7 +17953,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -18138,7 +18138,7 @@
         }
       }
     },
-    "/api/provisionalReturns": {
+    "/api/v1/provisionalReturns": {
       "get": {
         "tags": [
           "Provisional Return"
@@ -18247,7 +18247,7 @@
           "200": {
             "description": "Provisional Return list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -18407,7 +18407,7 @@
         }
       }
     },
-    "/api/deliveryNotes": {
+    "/api/v1/deliveryNotes": {
       "get": {
         "tags": [
           "Delivery Note"
@@ -18485,7 +18485,10 @@
                       "documentDate",
                       "createdAt",
                       "status",
-                      "salesOrderId"
+                      "salesOrderId",
+                      "updatedAt",
+                      "country",
+                      "projectId"
                     ]
                   },
                   "op": {
@@ -18496,7 +18499,11 @@
                       "equals",
                       "notEquals",
                       "in",
-                      "notIn"
+                      "notIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith"
                     ]
                   },
                   "value": {
@@ -18525,7 +18532,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -18550,6 +18557,12 @@
                             "type": "string",
                             "format": "datetime",
                             "description": "Creation date of the delivery note",
+                            "example": "2024-01-01 00:00:00"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "datetime",
+                            "description": "Last update date of the delivery note",
                             "example": "2024-01-01 00:00:00"
                           },
                           "documentDate": {
@@ -18940,7 +18953,7 @@
         }
       }
     },
-    "/api/deliveryNotes/{id}": {
+    "/api/v1/deliveryNotes/{id}": {
       "get": {
         "tags": [
           "Delivery Note"
@@ -18966,7 +18979,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -19132,6 +19145,13 @@
                           "example": {
                             "iso2": "DE"
                           }
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "description": "Update date",
+                          "example": "2024-10-15 15:03:46"
                         },
                         "log": {
                           "type": "object",
@@ -19723,7 +19743,7 @@
         }
       }
     },
-    "/api/deliveryNotesTags": {
+    "/api/v1/deliveryNotesTags": {
       "get": {
         "tags": [
           "Delivery Note Tag"
@@ -19848,7 +19868,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -19970,7 +19990,7 @@
         }
       }
     },
-    "/api/deliveryNotes/{id}/deliveries": {
+    "/api/v1/deliveryNotes/{id}/deliveries": {
       "get": {
         "tags": [
           "Delivery Note"
@@ -19996,7 +20016,7 @@
           "200": {
             "description": "Delivery list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -20429,7 +20449,7 @@
         }
       }
     },
-    "/api/deliveryNotes/{id}/shipments": {
+    "/api/v1/deliveryNotes/{id}/shipments": {
       "get": {
         "tags": [
           "Delivery Note"
@@ -20455,7 +20475,7 @@
           "200": {
             "description": "Delivery list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -20888,7 +20908,7 @@
         }
       }
     },
-    "/api/deliveryTerms": {
+    "/api/v1/deliveryTerms": {
       "get": {
         "tags": [
           "Delivery Terms"
@@ -20985,7 +21005,7 @@
           "200": {
             "description": "Delivery Terms list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -26876,30 +26896,23 @@
         }
       }
     },
-    "/api/invoices/{id}/positions": {
+    "/api/v1/invoices/{id}/positions": {
       "post": {
         "tags": [
           "Invoice"
         ],
         "operationId": "invoice.createPositions",
-        "summary": "[ALPHA] Create Positions for Invoice",
-        "description": "[ALPHA] Adds invoice positions",
+        "summary": "Create Positions for Invoice",
+        "description": "Adds invoice positions",
         "requestBody": {
-          "description": "Create credit note positions object",
+          "description": "Invoice positions object\n\n The following payload structure is available:\n\nWhen a position has `salesOrderPosition.id` in the payload then product, quantity, price, vatCategory, taxRate, discounts are optional. The optional values override the values fetched from a sales order position\n\nWhen `salesOrderPosition.id` is not present in the payload or null, then product, quantity, price, vatCategory, taxRate, discounts are required",
           "content": {
-            "application/vnd.xentral.default.v1-alpha+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "additionalProperties": false,
-                  "required": [
-                    "product",
-                    "quantity",
-                    "price",
-                    "vatCategory",
-                    "taxRate"
-                  ],
                   "properties": {
                     "salesOrderPosition": {
                       "description": "Nullable reference to another resource",
@@ -26941,10 +26954,10 @@
                       }
                     },
                     "quantity": {
-                      "x-description-missing": true,
-                      "type": "number",
-                      "format": "double",
-                      "example": 2
+                      "description": "The quantity for the position",
+                      "type": "string",
+                      "format": "float",
+                      "example": "2.0"
                     },
                     "price": {
                       "description": "Money object with amount and currency",
@@ -26976,32 +26989,27 @@
                         }
                       }
                     },
-                    "vatCategory": {
-                      "x-description-missing": true,
+                    "deliveryDate": {
+                      "description": "The VAT category that applies to the position",
                       "type": "string",
-                      "example": "reduced"
-                    },
-                    "taxRate": {
-                      "x-description-missing": true,
-                      "type": "number",
-                      "format": "float",
-                      "example": 38.45
+                      "format": "date",
+                      "example": "2024-12-23"
                     },
                     "discounts": {
-                      "x-description-missing": true,
+                      "description": "Discounts applied to position",
                       "type": "object",
                       "additionalProperties": false,
                       "properties": {
                         "totalPercent": {
-                          "x-description-missing": true,
-                          "type": "number",
+                          "description": "The percentage discount applied to position",
+                          "type": "string",
                           "format": "float",
                           "nullable": true,
-                          "example": 38.45
+                          "example": "38.45"
                         }
                       },
                       "example": {
-                        "totalPercent": 38.45
+                        "totalPercent": "38.45"
                       }
                     }
                   }
@@ -27014,25 +27022,17 @@
                       "product": {
                         "id": "1"
                       },
-                      "quantity": 1,
+                      "quantity": "1.0",
                       "price": {
                         "amount": "100.00",
                         "currency": "EUR"
                       },
-                      "vatCategory": "normal",
-                      "taxRate": 19
+                      "deliveryDate": "2024-12-23"
                     },
                     {
-                      "product": {
+                      "salesOrderPosition": {
                         "id": "2"
-                      },
-                      "quantity": 3,
-                      "price": {
-                        "amount": "20.20",
-                        "currency": "EUR"
-                      },
-                      "vatCategory": "normal",
-                      "taxRate": 19
+                      }
                     }
                   ]
                 }
@@ -73780,7 +73780,7 @@
         }
       }
     },
-    "/api/purchaseOrders/{id}/goodsReceipts": {
+    "/api/v1/purchaseOrders/{id}/goodsReceipts": {
       "post": {
         "tags": [
           "Goods Receipt"
@@ -73805,7 +73805,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -77735,19 +77735,6 @@
         "operationId": "purchasePrice.delete",
         "summary": "Delete purchase price",
         "description": "Deletes a single purchase price",
-        "requestBody": {
-          "content": {
-            "application/vnd.xentral.default.v1": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "in": "path",
@@ -78723,7 +78710,7 @@
         }
       }
     },
-    "/api/returns": {
+    "/api/v1/returns": {
       "post": {
         "tags": [
           "Return"
@@ -78734,7 +78721,7 @@
         "requestBody": {
           "description": "Request payload for return creation",
           "content": {
-            "application/vnd.xentral.fromsalesorder.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -79151,7 +79138,7 @@
           "200": {
             "description": "A list of returns",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -79380,7 +79367,7 @@
         }
       }
     },
-    "/api/returns/{id}": {
+    "/api/v1/returns/{id}": {
       "get": {
         "tags": [
           "Return"
@@ -79406,7 +79393,7 @@
           "200": {
             "description": "One return.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -79433,6 +79420,83 @@
                           "format": "date",
                           "example": "2023-03-16",
                           "description": "Date of creation of the Return order"
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "unknown",
+                            "open",
+                            "canceled",
+                            "completed",
+                            "sent",
+                            "created",
+                            "announced",
+                            "released",
+                            "checked",
+                            "done"
+                          ],
+                          "description": "Status of the Return order",
+                          "example": "completed"
+                        },
+                        "progress": {
+                          "type": "string",
+                          "enum": [
+                            "announced",
+                            "received",
+                            "checked",
+                            "done"
+                          ],
+                          "description": "Proress of the Return order",
+                          "example": "announced"
+                        },
+                        "documentNumber": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "2023-000001",
+                          "description": "Internal identification of the Return order"
+                        },
+                        "bodyOutroduction": {
+                          "type": "string",
+                          "description": "Free text for return note",
+                          "example": "Freitext"
+                        },
+                        "internalComment": {
+                          "type": "string",
+                          "description": "Internal comment about the return.",
+                          "example": "Internal comment"
+                        },
+                        "shippingMethod": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "Shipping method used for the return note",
+                          "example": {
+                            "id": 1
+                          }
+                        },
+                        "project": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "Project of return",
+                          "example": {
+                            "id": 2,
+                            "name": "B2C"
+                          }
                         },
                         "salesOrder": {
                           "description": "Nullable reference to another resource",
@@ -79615,7 +79679,7 @@
         }
       }
     },
-    "/api/returns/{id}/documents": {
+    "/api/v1/returns/{id}/documents": {
       "post": {
         "tags": [
           "Return"
@@ -79640,7 +79704,7 @@
         "requestBody": {
           "description": "Sales order document create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -79939,7 +80003,7 @@
         "requestBody": {
           "description": "Sales order documents update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -80241,7 +80305,7 @@
         "requestBody": {
           "description": "Sales order documents delete multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -80592,7 +80656,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -80780,7 +80844,7 @@
         }
       }
     },
-    "/api/returns/{id}/documents/{documentId}": {
+    "/api/v1/returns/{id}/documents/{documentId}": {
       "get": {
         "tags": [
           "Return"
@@ -80844,7 +80908,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -81086,7 +81150,7 @@
         }
       }
     },
-    "/api/returns/{id}/actions/release": {
+    "/api/v1/returns/{id}/actions/release": {
       "post": {
         "tags": [
           "Return"
@@ -81108,25 +81172,6 @@
             }
           }
         ],
-        "requestBody": {
-          "description": "Empty",
-          "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true
-              },
-              "examples": {
-                "example": {
-                  "value": ""
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -81344,7 +81389,7 @@
         }
       }
     },
-    "/api/returns/{id}/goodsReceipts": {
+    "/api/v1/returns/{id}/goodsReceipts": {
       "post": {
         "tags": [
           "Goods Receipt"
@@ -81369,7 +81414,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -81775,7 +81820,7 @@
         }
       }
     },
-    "/api/returnReasons": {
+    "/api/v1/returnReasons": {
       "get": {
         "tags": [
           "Return Reason"
@@ -81815,7 +81860,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -81958,7 +82003,7 @@
         }
       }
     },
-    "/api/salesOrders": {
+    "/api/v1/salesOrders": {
       "get": {
         "tags": [
           "Sales Order"
@@ -82039,7 +82084,13 @@
                       "transactionNumber",
                       "externalOrderNumber",
                       "customerOrderNumber",
-                      "externalOrderId"
+                      "externalOrderId",
+                      "customerId",
+                      "customerNumber",
+                      "email",
+                      "zipCode",
+                      "shippingEmail",
+                      "shippingZip"
                     ]
                   },
                   "op": {
@@ -82079,7 +82130,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -82131,6 +82182,18 @@
                             "format": "date",
                             "description": "Date of creation of a Sales Order",
                             "example": "2025-01-01"
+                          },
+                          "netSales": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Net sales amount of the Sales Order",
+                            "example": 100
+                          },
+                          "total": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Total amount of the Sales Order",
+                            "example": 100
                           },
                           "status": {
                             "type": "string",
@@ -82289,6 +82352,9 @@
                                   "name": {
                                     "type": "string"
                                   },
+                                  "title": {
+                                    "type": "string"
+                                  },
                                   "contactPerson": {
                                     "type": "string"
                                   },
@@ -82305,6 +82371,9 @@
                                     "type": "string"
                                   },
                                   "city": {
+                                    "type": "string"
+                                  },
+                                  "fax": {
                                     "type": "string"
                                   },
                                   "state": {
@@ -82645,6 +82714,8 @@
                           "externalOrderId": "10",
                           "bodyOutroduction": "body",
                           "date": "2024-01-01",
+                          "netSales": 620,
+                          "total": 737.8,
                           "status": "created",
                           "customer": {
                             "id": "1"
@@ -82667,7 +82738,25 @@
                             "paymentMethod": {
                               "id": "3"
                             },
-                            "currency": "EUR"
+                            "currency": "EUR",
+                            "billingAddress": {
+                              "type": "mr",
+                              "name": "John Doe",
+                              "department": "",
+                              "subDepartment": "",
+                              "street": "Musterstrasse 6",
+                              "zipCode": "12345",
+                              "city": "Musterdorf",
+                              "state": "",
+                              "country": "DE",
+                              "title": "",
+                              "contactPerson": "",
+                              "addressSupplement": "",
+                              "fax": "0821123456790",
+                              "email": "info@xentral.com",
+                              "salutation": "",
+                              "gln": ""
+                            }
                           },
                           "delivery": {
                             "autoShipping": true,
@@ -82738,7 +82827,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.minimal.v1+json": {
+              "application/vnd.xentral.minimal+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -82861,7 +82950,7 @@
         }
       }
     },
-    "/api/salesOrders/actions/import": {
+    "/api/v1/salesOrders/actions/import": {
       "post": {
         "tags": [
           "Sales Order"
@@ -82872,7 +82961,7 @@
         "requestBody": {
           "description": "Sales order import request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -83073,6 +83162,9 @@
                           "name": {
                             "type": "string"
                           },
+                          "title": {
+                            "type": "string"
+                          },
                           "contactPerson": {
                             "type": "string"
                           },
@@ -83089,6 +83181,9 @@
                             "type": "string"
                           },
                           "city": {
+                            "type": "string"
+                          },
+                          "fax": {
                             "type": "string"
                           },
                           "state": {
@@ -84014,7 +84109,7 @@
         }
       }
     },
-    "/api/salesOrders/{id}/actions/dispatch": {
+    "/api/v1/salesOrders/{id}/actions/dispatch": {
       "post": {
         "tags": [
           "Sales Order"
@@ -84033,29 +84128,9 @@
               "pattern": "\\d+",
               "example": "17",
               "description": "Resource identifier."
-            },
-            "example": "17"
-          }
-        ],
-        "requestBody": {
-          "description": "Empty",
-          "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true
-              },
-              "examples": {
-                "example": {
-                  "value": ""
-                }
-              }
             }
           }
-        },
+        ],
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -84279,7 +84354,7 @@
         }
       }
     },
-    "/api/salesOrders/{id}/actions/cancel": {
+    "/api/v1/salesOrders/{id}/actions/cancel": {
       "post": {
         "tags": [
           "Sales Order"
@@ -84301,25 +84376,6 @@
             }
           }
         ],
-        "requestBody": {
-          "description": "Empty",
-          "content": {
-            "application/vnd.xentral.default.v1-beta": {
-              "schema": {
-                "type": "string",
-                "enum": [
-                  ""
-                ],
-                "nullable": true
-              },
-              "examples": {
-                "example": {
-                  "value": ""
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -84433,7 +84489,7 @@
         }
       }
     },
-    "/api/salesOrders/{id}": {
+    "/api/v1/salesOrders/{id}": {
       "get": {
         "tags": [
           "Sales Order"
@@ -84459,7 +84515,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -84539,6 +84595,13 @@
                           "format": "date",
                           "description": "Date of creation of a Sales Order",
                           "example": "2025-01-01"
+                        },
+                        "earliestFulfillmentDate": {
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true,
+                          "description": "Earliest Fulfillment Date",
+                          "example": "2024-01-01"
                         },
                         "status": {
                           "type": "string",
@@ -84711,6 +84774,9 @@
                                 "name": {
                                   "type": "string"
                                 },
+                                "title": {
+                                  "type": "string"
+                                },
                                 "contactPerson": {
                                   "type": "string"
                                 },
@@ -84727,6 +84793,9 @@
                                   "type": "string"
                                 },
                                 "city": {
+                                  "type": "string"
+                                },
+                                "fax": {
                                   "type": "string"
                                 },
                                 "state": {
@@ -85367,7 +85436,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.minimal.v1+json": {
+              "application/vnd.xentral.minimal+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -85467,7 +85536,7 @@
         "requestBody": {
           "description": "Sales order edit request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -87142,7 +87211,7 @@
         }
       }
     },
-    "/api/salesOrders/{id}/documents": {
+    "/api/v1/salesOrders/{id}/documents": {
       "post": {
         "tags": [
           "Sales Order"
@@ -87167,7 +87236,7 @@
         "requestBody": {
           "description": "Sales order document create request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -87466,7 +87535,7 @@
         "requestBody": {
           "description": "Sales order documents update multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -87768,7 +87837,7 @@
         "requestBody": {
           "description": "Sales order documents delete multiple request payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -88119,7 +88188,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -88315,7 +88384,7 @@
         }
       }
     },
-    "/api/salesOrders/{id}/documents/{documentId}": {
+    "/api/v1/salesOrders/{id}/documents/{documentId}": {
       "get": {
         "tags": [
           "Sales Order"
@@ -88379,7 +88448,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -90969,7 +91038,7 @@
         }
       }
     },
-    "/api/warehouses/{warehouseId}/storageLocations/{storageLocationId}/items": {
+    "/api/v1/warehouses/{warehouseId}/storageLocations/{storageLocationId}/items": {
       "get": {
         "tags": [
           "Storage Item"
@@ -91120,7 +91189,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.default.v2-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -91503,7 +91572,7 @@
         "requestBody": {
           "description": "Add item to Storage Location payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -91905,7 +91974,7 @@
         "requestBody": {
           "description": "Retrieve item from Storage Location payload",
           "content": {
-            "application/vnd.xentral.default.v1-beta+json": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -92237,7 +92306,7 @@
         }
       }
     },
-    "/api/warehouses/{warehouseId}/storageLocations": {
+    "/api/v1/warehouses/{warehouseId}/storageLocations": {
       "get": {
         "tags": [
           "Storage Location"
@@ -92302,18 +92371,27 @@
                   "op": {
                     "type": "string",
                     "enum": [
-                      "greaterThan",
-                      "lessThan",
                       "equals",
                       "notEquals",
                       "in",
-                      "notIn"
+                      "notIn",
+                      "exactlyIn",
+                      "allIn",
+                      "allNotIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "greaterThan",
+                      "lessThan",
+                      "is"
                     ]
                   },
                   "value": {
                     "oneOf": [
                       {
                         "type": "string",
+                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
                         "title": "String"
                       },
                       {
@@ -92337,7 +92415,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -92759,7 +92837,7 @@
         }
       }
     },
-    "/api/shippingMethods": {
+    "/api/v1/shippingMethods": {
       "get": {
         "tags": [
           "Shipping Methods"
@@ -92799,7 +92877,7 @@
           "200": {
             "description": "Shipping method list",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -97084,7 +97162,7 @@
         }
       }
     },
-    "/api/taxRates/{countryCode}": {
+    "/api/v1/taxRates/{countryCode}": {
       "get": {
         "tags": [
           "Tax Rate"
@@ -97193,7 +97271,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -99150,7 +99228,7 @@
         }
       }
     },
-    "/api/warehouses": {
+    "/api/v1/warehouses": {
       "get": {
         "tags": [
           "Warehouse"
@@ -99238,7 +99316,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.default.v1-beta+json": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
