@@ -486,69 +486,12 @@
                           "tags": {
                             "type": "array",
                             "example": [
-                              {
-                                "id": 1,
-                                "name": "Official",
-                                "description": "This is my tag",
-                                "palette": "default",
-                                "isOfficial": true,
-                                "createdAt": "2023-01-01T00:00:00+00:00",
-                                "updatedAt": "2023-01-01T00:00:00+00:00"
-                              }
+                              "tag1",
+                              "tag2"
                             ],
                             "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "id",
-                                "name"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "number",
-                                  "description": "Tag ID",
-                                  "example": 1
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "Tag name",
-                                  "example": "Official"
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "description": "Tag description",
-                                  "example": "This is my tag"
-                                },
-                                "palette": {
-                                  "type": "string",
-                                  "enum": [
-                                    "default",
-                                    "warning",
-                                    "success",
-                                    "danger",
-                                    "primary"
-                                  ],
-                                  "description": "The palette value of the tag",
-                                  "example": "default"
-                                },
-                                "isOfficial": {
-                                  "type": "boolean",
-                                  "description": "Whether the tag is used for official Xentral reports",
-                                  "example": true
-                                },
-                                "createdAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Creation time"
-                                },
-                                "updatedAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Last update time"
-                                }
-                              }
+                              "type": "string",
+                              "description": "Tag name"
                             }
                           },
                           "parameters": {
@@ -1037,69 +980,12 @@
                           "tags": {
                             "type": "array",
                             "example": [
-                              {
-                                "id": 1,
-                                "name": "Official",
-                                "description": "This is my tag",
-                                "palette": "default",
-                                "isOfficial": true,
-                                "createdAt": "2023-01-01T00:00:00+00:00",
-                                "updatedAt": "2023-01-01T00:00:00+00:00"
-                              }
+                              "tag1",
+                              "tag2"
                             ],
                             "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "id",
-                                "name"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "number",
-                                  "description": "Tag ID",
-                                  "example": 1
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "Tag name",
-                                  "example": "Official"
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "description": "Tag description",
-                                  "example": "This is my tag"
-                                },
-                                "palette": {
-                                  "type": "string",
-                                  "enum": [
-                                    "default",
-                                    "warning",
-                                    "success",
-                                    "danger",
-                                    "primary"
-                                  ],
-                                  "description": "The palette value of the tag",
-                                  "example": "default"
-                                },
-                                "isOfficial": {
-                                  "type": "boolean",
-                                  "description": "Whether the tag is used for official Xentral reports",
-                                  "example": true
-                                },
-                                "createdAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Creation time"
-                                },
-                                "updatedAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Last update time"
-                                }
-                              }
+                              "type": "string",
+                              "description": "Tag name"
                             }
                           },
                           "parameters": {
@@ -1295,69 +1181,12 @@
                           "tags": {
                             "type": "array",
                             "example": [
-                              {
-                                "id": 1,
-                                "name": "Official",
-                                "description": "This is my tag",
-                                "palette": "default",
-                                "isOfficial": true,
-                                "createdAt": "2023-01-01T00:00:00+00:00",
-                                "updatedAt": "2023-01-01T00:00:00+00:00"
-                              }
+                              "tag1",
+                              "tag2"
                             ],
                             "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "id",
-                                "name"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "number",
-                                  "description": "Tag ID",
-                                  "example": 1
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "Tag name",
-                                  "example": "Official"
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "description": "Tag description",
-                                  "example": "This is my tag"
-                                },
-                                "palette": {
-                                  "type": "string",
-                                  "enum": [
-                                    "default",
-                                    "warning",
-                                    "success",
-                                    "danger",
-                                    "primary"
-                                  ],
-                                  "description": "The palette value of the tag",
-                                  "example": "default"
-                                },
-                                "isOfficial": {
-                                  "type": "boolean",
-                                  "description": "Whether the tag is used for official Xentral reports",
-                                  "example": true
-                                },
-                                "createdAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Creation time"
-                                },
-                                "updatedAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Last update time"
-                                }
-                              }
+                              "type": "string",
+                              "description": "Tag name"
                             }
                           },
                           "parameters": {
@@ -1860,69 +1689,12 @@
                           "tags": {
                             "type": "array",
                             "example": [
-                              {
-                                "id": 1,
-                                "name": "Official",
-                                "description": "This is my tag",
-                                "palette": "default",
-                                "isOfficial": true,
-                                "createdAt": "2023-01-01T00:00:00+00:00",
-                                "updatedAt": "2023-01-01T00:00:00+00:00"
-                              }
+                              "tag1",
+                              "tag2"
                             ],
                             "items": {
-                              "type": "object",
-                              "additionalProperties": false,
-                              "required": [
-                                "id",
-                                "name"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "number",
-                                  "description": "Tag ID",
-                                  "example": 1
-                                },
-                                "name": {
-                                  "type": "string",
-                                  "description": "Tag name",
-                                  "example": "Official"
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "description": "Tag description",
-                                  "example": "This is my tag"
-                                },
-                                "palette": {
-                                  "type": "string",
-                                  "enum": [
-                                    "default",
-                                    "warning",
-                                    "success",
-                                    "danger",
-                                    "primary"
-                                  ],
-                                  "description": "The palette value of the tag",
-                                  "example": "default"
-                                },
-                                "isOfficial": {
-                                  "type": "boolean",
-                                  "description": "Whether the tag is used for official Xentral reports",
-                                  "example": true
-                                },
-                                "createdAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Creation time"
-                                },
-                                "updatedAt": {
-                                  "example": "2023-01-01T00:00:00+00:00",
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "Last update time"
-                                }
-                              }
+                              "type": "string",
+                              "description": "Tag name"
                             }
                           },
                           "parameters": {
@@ -5174,69 +4946,12 @@
                                 "tags": {
                                   "type": "array",
                                   "example": [
-                                    {
-                                      "id": 1,
-                                      "name": "Official",
-                                      "description": "This is my tag",
-                                      "palette": "default",
-                                      "isOfficial": true,
-                                      "createdAt": "2023-01-01T00:00:00+00:00",
-                                      "updatedAt": "2023-01-01T00:00:00+00:00"
-                                    }
+                                    "tag1",
+                                    "tag2"
                                   ],
                                   "items": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "id",
-                                      "name"
-                                    ],
-                                    "properties": {
-                                      "id": {
-                                        "type": "number",
-                                        "description": "Tag ID",
-                                        "example": 1
-                                      },
-                                      "name": {
-                                        "type": "string",
-                                        "description": "Tag name",
-                                        "example": "Official"
-                                      },
-                                      "description": {
-                                        "type": "string",
-                                        "description": "Tag description",
-                                        "example": "This is my tag"
-                                      },
-                                      "palette": {
-                                        "type": "string",
-                                        "enum": [
-                                          "default",
-                                          "warning",
-                                          "success",
-                                          "danger",
-                                          "primary"
-                                        ],
-                                        "description": "The palette value of the tag",
-                                        "example": "default"
-                                      },
-                                      "isOfficial": {
-                                        "type": "boolean",
-                                        "description": "Whether the tag is used for official Xentral reports",
-                                        "example": true
-                                      },
-                                      "createdAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Creation time"
-                                      },
-                                      "updatedAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Last update time"
-                                      }
-                                    }
+                                    "type": "string",
+                                    "description": "Tag name"
                                   }
                                 },
                                 "parameters": {
@@ -5680,69 +5395,12 @@
                                 "tags": {
                                   "type": "array",
                                   "example": [
-                                    {
-                                      "id": 1,
-                                      "name": "Official",
-                                      "description": "This is my tag",
-                                      "palette": "default",
-                                      "isOfficial": true,
-                                      "createdAt": "2023-01-01T00:00:00+00:00",
-                                      "updatedAt": "2023-01-01T00:00:00+00:00"
-                                    }
+                                    "tag1",
+                                    "tag2"
                                   ],
                                   "items": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "id",
-                                      "name"
-                                    ],
-                                    "properties": {
-                                      "id": {
-                                        "type": "number",
-                                        "description": "Tag ID",
-                                        "example": 1
-                                      },
-                                      "name": {
-                                        "type": "string",
-                                        "description": "Tag name",
-                                        "example": "Official"
-                                      },
-                                      "description": {
-                                        "type": "string",
-                                        "description": "Tag description",
-                                        "example": "This is my tag"
-                                      },
-                                      "palette": {
-                                        "type": "string",
-                                        "enum": [
-                                          "default",
-                                          "warning",
-                                          "success",
-                                          "danger",
-                                          "primary"
-                                        ],
-                                        "description": "The palette value of the tag",
-                                        "example": "default"
-                                      },
-                                      "isOfficial": {
-                                        "type": "boolean",
-                                        "description": "Whether the tag is used for official Xentral reports",
-                                        "example": true
-                                      },
-                                      "createdAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Creation time"
-                                      },
-                                      "updatedAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Last update time"
-                                      }
-                                    }
+                                    "type": "string",
+                                    "description": "Tag name"
                                   }
                                 },
                                 "parameters": {
@@ -5974,69 +5632,12 @@
                                 "tags": {
                                   "type": "array",
                                   "example": [
-                                    {
-                                      "id": 1,
-                                      "name": "Official",
-                                      "description": "This is my tag",
-                                      "palette": "default",
-                                      "isOfficial": true,
-                                      "createdAt": "2023-01-01T00:00:00+00:00",
-                                      "updatedAt": "2023-01-01T00:00:00+00:00"
-                                    }
+                                    "tag1",
+                                    "tag2"
                                   ],
                                   "items": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "id",
-                                      "name"
-                                    ],
-                                    "properties": {
-                                      "id": {
-                                        "type": "number",
-                                        "description": "Tag ID",
-                                        "example": 1
-                                      },
-                                      "name": {
-                                        "type": "string",
-                                        "description": "Tag name",
-                                        "example": "Official"
-                                      },
-                                      "description": {
-                                        "type": "string",
-                                        "description": "Tag description",
-                                        "example": "This is my tag"
-                                      },
-                                      "palette": {
-                                        "type": "string",
-                                        "enum": [
-                                          "default",
-                                          "warning",
-                                          "success",
-                                          "danger",
-                                          "primary"
-                                        ],
-                                        "description": "The palette value of the tag",
-                                        "example": "default"
-                                      },
-                                      "isOfficial": {
-                                        "type": "boolean",
-                                        "description": "Whether the tag is used for official Xentral reports",
-                                        "example": true
-                                      },
-                                      "createdAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Creation time"
-                                      },
-                                      "updatedAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Last update time"
-                                      }
-                                    }
+                                    "type": "string",
+                                    "description": "Tag name"
                                   }
                                 },
                                 "parameters": {
@@ -6494,69 +6095,12 @@
                                 "tags": {
                                   "type": "array",
                                   "example": [
-                                    {
-                                      "id": 1,
-                                      "name": "Official",
-                                      "description": "This is my tag",
-                                      "palette": "default",
-                                      "isOfficial": true,
-                                      "createdAt": "2023-01-01T00:00:00+00:00",
-                                      "updatedAt": "2023-01-01T00:00:00+00:00"
-                                    }
+                                    "tag1",
+                                    "tag2"
                                   ],
                                   "items": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "id",
-                                      "name"
-                                    ],
-                                    "properties": {
-                                      "id": {
-                                        "type": "number",
-                                        "description": "Tag ID",
-                                        "example": 1
-                                      },
-                                      "name": {
-                                        "type": "string",
-                                        "description": "Tag name",
-                                        "example": "Official"
-                                      },
-                                      "description": {
-                                        "type": "string",
-                                        "description": "Tag description",
-                                        "example": "This is my tag"
-                                      },
-                                      "palette": {
-                                        "type": "string",
-                                        "enum": [
-                                          "default",
-                                          "warning",
-                                          "success",
-                                          "danger",
-                                          "primary"
-                                        ],
-                                        "description": "The palette value of the tag",
-                                        "example": "default"
-                                      },
-                                      "isOfficial": {
-                                        "type": "boolean",
-                                        "description": "Whether the tag is used for official Xentral reports",
-                                        "example": true
-                                      },
-                                      "createdAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Creation time"
-                                      },
-                                      "updatedAt": {
-                                        "example": "2023-01-01T00:00:00+00:00",
-                                        "type": "string",
-                                        "format": "date-time",
-                                        "description": "Last update time"
-                                      }
-                                    }
+                                    "type": "string",
+                                    "description": "Tag name"
                                   }
                                 },
                                 "parameters": {
@@ -7248,7 +6792,7 @@
         ],
         "operationId": "analytics.query",
         "summary": "Execute a query synchronously",
-        "description": "Execute a query synchronously on the Analytics platform and get result table (Redshift dialect). The number of records that you receive as results is limited to a reasonable amount. This endpoint is mainly for viewing the data. Use the export endpoints in order to fetch all results.",
+        "description": "Execute a query synchronously on the Analytics platform and get result table (Redshift dialect) with limited amount of records",
         "requestBody": {
           "description": "Query payload",
           "content": {
@@ -8212,7 +7756,7 @@
         }
       }
     },
-    "/api/v1/creditNotes": {
+    "/api/creditNotes": {
       "post": {
         "tags": [
           "Credit Note"
@@ -8223,7 +7767,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Create a credit note object",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "required": [
@@ -8275,59 +7819,7 @@
                 }
               }
             },
-            "application/vnd.xentral.minimal+json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "invoice"
-                ],
-                "additionalProperties": false,
-                "properties": {
-                  "invoice": {
-                    "description": "Reference to another resource",
-                    "type": "object",
-                    "additionalProperties": false,
-                    "required": [
-                      "id"
-                    ],
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "pattern": "\\d+",
-                        "example": "17",
-                        "description": "Resource identifier."
-                      }
-                    },
-                    "example": {
-                      "id": "1337"
-                    }
-                  },
-                  "documentNumber": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 35
-                  }
-                }
-              },
-              "examples": {
-                "Create credit not from an invoice": {
-                  "value": {
-                    "invoice": {
-                      "id": "1337"
-                    }
-                  }
-                },
-                "Create credit not from an invoice with a document number": {
-                  "value": {
-                    "invoice": {
-                      "id": "1337"
-                    },
-                    "documentNumber": "415263"
-                  }
-                }
-              }
-            },
-            "application/vnd.xentral.fromreturn+json": {
+            "application/vnd.xentral.fromreturn.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -8679,7 +8171,6 @@
                           "notEquals",
                           "in",
                           "notIn",
-                          "exactlyIn",
                           "allIn",
                           "allNotIn",
                           "contains",
@@ -8687,21 +8178,16 @@
                           "startsWith",
                           "endsWith",
                           "greaterThan",
-                          "lessThan",
-                          "is"
+                          "lessThan"
                         ]
                       },
                       "value": {
                         "oneOf": [
                           {
-                            "type": "string",
-                            "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                            "title": "String"
+                            "type": "string"
                           },
                           {
                             "type": "array",
-                            "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                            "title": "Array",
                             "items": {
                               "type": "string"
                             }
@@ -8783,7 +8269,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.minimal+json": {
+              "application/vnd.xentral.minimal.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -9081,7 +8567,7 @@
                   }
                 }
               },
-              "text/csv": {
+              "application/vnd.xentral.default.v1+csv": {
                 "schema": {
                   "type": "string"
                 }
@@ -9100,7 +8586,7 @@
         }
       }
     },
-    "/api/v1/creditNotes/{id}": {
+    "/api/creditNotes/{id}": {
       "get": {
         "tags": [
           "Credit Note"
@@ -9126,7 +8612,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -10115,7 +9601,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Update single credit note",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -10522,7 +10008,7 @@
         }
       }
     },
-    "/api/v1/creditNotes/{id}/balance": {
+    "/api/creditNotes/{id}/balance": {
       "get": {
         "tags": [
           "Credit Note"
@@ -10548,7 +10034,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -11038,7 +10524,7 @@
         }
       }
     },
-    "/api/v1/creditNotes/{id}/documents": {
+    "/api/creditNotes/{id}/documents": {
       "get": {
         "tags": [
           "Credit Note"
@@ -11064,7 +10550,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -11488,7 +10974,7 @@
         }
       }
     },
-    "/api/v1/creditNotes/{id}/positions": {
+    "/api/creditNotes/{id}/positions": {
       "post": {
         "tags": [
           "Credit Note"
@@ -11496,24 +10982,10 @@
         "operationId": "creditNote.createPositions",
         "summary": "[ALPHA] Create Positions for Credit note",
         "description": "[ALPHA] Adds credit note positions",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "The resource's identifier.",
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            }
-          }
-        ],
         "requestBody": {
           "description": "[ALPHA] Create credit note positions object",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-alpha+json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -11654,6 +11126,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Resource successfully created response",
@@ -11903,24 +11389,10 @@
         "operationId": "creditNote.updatePositions",
         "summary": "[ALPHA] Update Positions for Credit Note",
         "description": "[ALPHA] Updates credit note positions",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "The resource's identifier.",
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            }
-          }
-        ],
         "requestBody": {
           "description": "[ALPHA] Update credit note positions object",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-alpha+json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -12069,6 +11541,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -12292,7 +11778,7 @@
         }
       }
     },
-    "/api/v1/creditNotes/{id}/positions/{positionId}": {
+    "/api/creditNotes/{id}/positions/{positionId}": {
       "delete": {
         "operationId": "creditNote.deletePosition",
         "summary": "[ALPHA] Delete Position from Credit Note",
@@ -12536,7 +12022,7 @@
         }
       }
     },
-    "/api/v1/creditNotesTags": {
+    "/api/creditNotesTags": {
       "get": {
         "tags": [
           "Credit Note Tag"
@@ -12548,7 +12034,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -12597,7 +12083,7 @@
         }
       }
     },
-    "/api/v1/customers": {
+    "/api/customers": {
       "post": {
         "tags": [
           "Customer"
@@ -12608,7 +12094,7 @@
         "requestBody": {
           "description": "Create a customer object",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -13053,6 +12539,1025 @@
         "tags": [
           "Customer"
         ],
+        "operationId": "customer.list",
+        "summary": "List customer",
+        "description": "Lists an existing customer",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "enum": [
+                          "search",
+                          "id",
+                          "name",
+                          "number",
+                          "country",
+                          "zip",
+                          "city",
+                          "project",
+                          "projectName",
+                          "phone",
+                          "fax",
+                          "mobile",
+                          "email",
+                          "addressNote",
+                          "department",
+                          "subdivision",
+                          "vatNumber",
+                          "taxNumber",
+                          "gln",
+                          "tag",
+                          "tagName",
+                          "street"
+                        ]
+                      },
+                      "op": {
+                        "type": "string",
+                        "enum": [
+                          "equals",
+                          "notEquals",
+                          "in",
+                          "notIn",
+                          "exactlyIn",
+                          "allIn",
+                          "allNotIn",
+                          "contains",
+                          "notContains",
+                          "startsWith",
+                          "endsWith",
+                          "greaterThan",
+                          "lessThan"
+                        ]
+                      },
+                      "value": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "name",
+                      "number",
+                      "country",
+                      "zip",
+                      "city",
+                      "project",
+                      "projectName",
+                      "telephone",
+                      "fax",
+                      "mobile",
+                      "email",
+                      "addressNote",
+                      "department",
+                      "subdivision",
+                      "vatNumber",
+                      "taxNumber",
+                      "gln"
+                    ]
+                  },
+                  "dir": {
+                    "type": "string",
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer list.",
+            "content": {
+              "application/vnd.xentral.default.v1+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data",
+                    "extra"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "type",
+                          "general"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "type": {
+                            "x-description-missing": true,
+                            "type": "string",
+                            "example": "company"
+                          },
+                          "project": {
+                            "description": "An optional object with id and name",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "nullable": true,
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "pattern": "\\d+",
+                                "example": "17",
+                                "description": "Resource identifier."
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "example": {
+                              "id": "1337",
+                              "name": "Diamond"
+                            }
+                          },
+                          "general": {
+                            "x-description-missing": true,
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "name",
+                              "address"
+                            ],
+                            "properties": {
+                              "number": {
+                                "type": "string"
+                              },
+                              "fax": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "mobile": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "department": {
+                                "type": "string"
+                              },
+                              "subdivision": {
+                                "type": "string"
+                              },
+                              "vatNumber": {
+                                "type": "string"
+                              },
+                              "taxNumber": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "gln": {
+                                "type": "string"
+                              },
+                              "employeeNumber": {
+                                "type": "string"
+                              },
+                              "honorific": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "birthday": {
+                                "type": "string",
+                                "nullable": true,
+                                "format": "date"
+                              },
+                              "tags": {
+                                "description": "A list of tags",
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "id": {
+                                      "description": "The identifier of the tag",
+                                      "type": "string",
+                                      "pattern": "\\d+",
+                                      "example": "1337"
+                                    },
+                                    "name": {
+                                      "description": "The name of the tag",
+                                      "type": "string",
+                                      "example": "Active"
+                                    },
+                                    "color": {
+                                      "type": "string",
+                                      "pattern": "[a-fA-F0-9]{6}",
+                                      "example": "ff0000",
+                                      "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                                    }
+                                  }
+                                }
+                              },
+                              "customerNumber": {
+                                "type": "string"
+                              },
+                              "phone": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "email": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": [
+                                  "street",
+                                  "zip",
+                                  "city",
+                                  "state",
+                                  "country",
+                                  "note"
+                                ],
+                                "properties": {
+                                  "street": {
+                                    "type": "string"
+                                  },
+                                  "zip": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  },
+                                  "state": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "country": {
+                                    "type": "string"
+                                  },
+                                  "note": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "example": {
+                              "number": "1201",
+                              "fax": "123456",
+                              "mobile": "123456",
+                              "department": "IT",
+                              "subdivision": "Development",
+                              "vatNumber": "DE123456789",
+                              "taxNumber": "123456",
+                              "gln": "123456",
+                              "employeeNumber": "123456",
+                              "honorific": "Herr",
+                              "title": "Dr.",
+                              "name": "Tom Schneider",
+                              "birthday": "1980-04-30",
+                              "tags": [
+                                {
+                                  "id": "1101",
+                                  "name": "Tag#1",
+                                  "color": "FF0000"
+                                },
+                                {
+                                  "id": "1102",
+                                  "name": "Tag#2",
+                                  "color": "0000FF"
+                                }
+                              ],
+                              "customerNumber": "123456",
+                              "phone": "123456",
+                              "email": "max@musterman.com",
+                              "address": {
+                                "note": "Erster Stock",
+                                "street": "Musterstrasse 20",
+                                "zip": "12345",
+                                "city": "Musterstadt",
+                                "state": "Bayern",
+                                "country": "Deutschland"
+                              }
+                            }
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "description": "Either ID or name and key."
+                                },
+                                "key": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "color": {
+                                  "type": "string",
+                                  "pattern": "[a-fA-F0-9]{6}",
+                                  "example": "ff0000",
+                                  "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                                }
+                              }
+                            }
+                          },
+                          "freeFields": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "pattern": "\\d+",
+                                  "example": "17",
+                                  "description": "Resource identifier."
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/vnd.xentral.default.v1+csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "406": {
+            "description": "Requested resource representation does not exist."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "customer.updateMultiple",
+        "summary": "Update multiple customers tags",
+        "description": "Updates tags for multiple customers",
+        "requestBody": {
+          "description": "Customer update multiple request payload",
+          "content": {
+            "application/vnd.xentral.default.v1+json": {
+              "schema": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "\\d+",
+                      "example": "17",
+                      "description": "Resource identifier."
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "description": "Either ID or name and key.",
+                            "example": "1101"
+                          },
+                          "key": {
+                            "x-description-missing": true,
+                            "type": "string",
+                            "example": "Tag3"
+                          },
+                          "name": {
+                            "x-description-missing": true,
+                            "type": "string",
+                            "example": "Tag#3"
+                          },
+                          "color": {
+                            "type": "string",
+                            "pattern": "[a-fA-F0-9]{6}",
+                            "example": "ff0000",
+                            "description": "Hexadecimal color value in 6-digit format without the leading # character."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "patch multiple customers": {
+                  "value": [
+                    {
+                      "id": "1201",
+                      "tags": [
+                        {
+                          "id": "1101"
+                        },
+                        {
+                          "key": "Tag3",
+                          "name": "Tag#3",
+                          "color": "FF0000"
+                        },
+                        {
+                          "key": "Tag4",
+                          "name": "Tag#4",
+                          "color": "0000FF"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "1202",
+                      "tags": [
+                        {
+                          "id": "1101"
+                        },
+                        {
+                          "key": "Tag3",
+                          "name": "Tag#3",
+                          "color": "FF0000"
+                        },
+                        {
+                          "key": "Tag4",
+                          "name": "Tag#4",
+                          "color": "0000FF"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully, no response body"
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/customers": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
         "operationId": "customer.list.v1",
         "summary": "List customer",
         "description": "Lists an existing customer",
@@ -13125,21 +13630,16 @@
                           "startsWith",
                           "endsWith",
                           "greaterThan",
-                          "lessThan",
-                          "is"
+                          "lessThan"
                         ]
                       },
                       "value": {
                         "oneOf": [
                           {
-                            "type": "string",
-                            "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                            "title": "String"
+                            "type": "string"
                           },
                           {
                             "type": "array",
-                            "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                            "title": "Array",
                             "items": {
                               "type": "string"
                             }
@@ -13221,7 +13721,7 @@
           "200": {
             "description": "Customer list.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -13538,7 +14038,7 @@
                   }
                 }
               },
-              "text/csv": {
+              "application/vnd.xentral.default.v1+csv": {
                 "schema": {
                   "type": "string"
                 }
@@ -13762,311 +14262,9 @@
             "description": "Too many API calls made."
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "Customer"
-        ],
-        "operationId": "customer.updateMultiple",
-        "summary": "Update multiple customers tags",
-        "description": "Updates tags for multiple customers",
-        "requestBody": {
-          "description": "Customer update multiple request payload",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "pattern": "\\d+",
-                      "example": "17",
-                      "description": "Resource identifier."
-                    },
-                    "tags": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "description": "Either ID or name and key.",
-                            "example": "1101"
-                          },
-                          "key": {
-                            "x-description-missing": true,
-                            "type": "string",
-                            "example": "Tag3"
-                          },
-                          "name": {
-                            "x-description-missing": true,
-                            "type": "string",
-                            "example": "Tag#3"
-                          },
-                          "color": {
-                            "type": "string",
-                            "pattern": "[a-fA-F0-9]{6}",
-                            "example": "ff0000",
-                            "description": "Hexadecimal color value in 6-digit format without the leading # character."
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "patch multiple customers": {
-                  "value": [
-                    {
-                      "id": "1201",
-                      "tags": [
-                        {
-                          "id": "1101"
-                        },
-                        {
-                          "key": "Tag3",
-                          "name": "Tag#3",
-                          "color": "FF0000"
-                        },
-                        {
-                          "key": "Tag4",
-                          "name": "Tag#4",
-                          "color": "0000FF"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "1202",
-                      "tags": [
-                        {
-                          "id": "1101"
-                        },
-                        {
-                          "key": "Tag3",
-                          "name": "Tag#3",
-                          "color": "FF0000"
-                        },
-                        {
-                          "key": "Tag4",
-                          "name": "Tag#4",
-                          "color": "0000FF"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "Operation completed successfully, no response body"
-          },
-          "400": {
-            "description": "IETF RFC 7807 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
       }
     },
-    "/api/v1/customers/{id}": {
+    "/api/customers/{id}": {
       "get": {
         "tags": [
           "Customer"
@@ -14092,7 +14290,7 @@
           "200": {
             "description": "Customer view.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -14501,7 +14699,7 @@
         "requestBody": {
           "description": "Customer update request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -14808,7 +15006,7 @@
         }
       }
     },
-    "/api/v1/customers/{id}/contactPerson": {
+    "/api/customers/{id}/contactPerson": {
       "get": {
         "tags": [
           "Customer - Contact Person"
@@ -16007,7 +16205,7 @@
         }
       }
     },
-    "/api/v1/customers/{customerId}/contactPerson/{contactPersonId}": {
+    "/api/customers/{customerId}/contactPerson/{contactPersonId}": {
       "patch": {
         "tags": [
           "Customer - Contact Person"
@@ -17063,7 +17261,7 @@
         }
       }
     },
-    "/api/v1/customersTags": {
+    "/api/customersTags": {
       "get": {
         "tags": [
           "Customer Tag"
@@ -17075,7 +17273,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -20925,7 +21123,7 @@
         }
       }
     },
-    "/api/v1/employees": {
+    "/api/employees": {
       "get": {
         "tags": [
           "Employee"
@@ -20947,7 +21145,7 @@
           "200": {
             "description": "Employee minimal list.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.minimal.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -23076,7 +23274,7 @@
         }
       }
     },
-    "/api/v1/invoices": {
+    "/api/invoices": {
       "post": {
         "tags": [
           "Invoice"
@@ -23087,7 +23285,7 @@
         "requestBody": {
           "description": "Create an invoice object from a sales order or an empty invoice",
           "content": {
-            "application/vnd.xentral.minimal+json": {
+            "application/vnd.xentral.minimal.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -23444,21 +23642,16 @@
                       "startsWith",
                       "endsWith",
                       "greaterThan",
-                      "lessThan",
-                      "is"
+                      "lessThan"
                     ]
                   },
                   "value": {
                     "oneOf": [
                       {
-                        "type": "string",
-                        "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                        "title": "String"
+                        "type": "string"
                       },
                       {
                         "type": "array",
-                        "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                        "title": "Array",
                         "items": {
                           "type": "string"
                         }
@@ -23542,7 +23735,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/vnd.xentral.minimal+json": {
+              "application/vnd.xentral.minimal.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -23921,7 +24114,7 @@
                   }
                 }
               },
-              "text/csv": {
+              "application/vnd.xentral.default.v1+csv": {
                 "schema": {
                   "type": "string"
                 }
@@ -24144,7 +24337,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}": {
+    "/api/invoices/{id}": {
       "get": {
         "tags": [
           "Invoice"
@@ -24170,7 +24363,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -24204,7 +24397,6 @@
                         "log": {
                           "x-description-missing": true,
                           "type": "object",
-                          "nullable": true,
                           "additionalProperties": false,
                           "required": [
                             "createdAt",
@@ -24821,7 +25013,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.minimal+json": {
+              "application/vnd.xentral.minimal.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -24893,7 +25085,7 @@
                   }
                 }
               },
-              "application/pdf": {
+              "application/vnd.xentral.default.v1-beta+pdf": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -25179,7 +25371,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Update single invoice",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -25694,7 +25886,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}/balance": {
+    "/api/invoices/{id}/balance": {
       "get": {
         "tags": [
           "Invoice"
@@ -25720,7 +25912,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -26210,7 +26402,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}/documents": {
+    "/api/invoices/{id}/documents": {
       "get": {
         "tags": [
           "Invoice"
@@ -26236,7 +26428,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -26712,20 +26904,6 @@
         "operationId": "invoice.createPositions",
         "summary": "Create Positions for Invoice",
         "description": "Adds invoice positions",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "The resource's identifier.",
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            }
-          }
-        ],
         "requestBody": {
           "description": "Invoice positions object\n\n The following payload structure is available:\n\nWhen a position has `salesOrderPosition.id` in the payload then product, quantity, price, vatCategory, taxRate, discounts are optional. The optional values override the values fetched from a sales order position\n\nWhen `salesOrderPosition.id` is not present in the payload or null, then product, quantity, price, vatCategory, taxRate, discounts are required",
           "content": {
@@ -26862,6 +27040,20 @@
             }
           }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The resource's identifier.",
+            "schema": {
+              "type": "string",
+              "pattern": "\\d+",
+              "example": "17",
+              "description": "Resource identifier."
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Resource successfully created response",
@@ -27105,7 +27297,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}/positions/{positionId}": {
+    "/api/invoices/{id}/positions/{positionId}": {
       "delete": {
         "operationId": "invoice.deletePosition",
         "summary": "[ALPHA] Delete Position from Invoice",
@@ -27349,7 +27541,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}/send": {
+    "/api/invoices/{id}/send": {
       "patch": {
         "tags": [
           "Invoice"
@@ -27374,7 +27566,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Send invoice",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "anyOf": [
                   {
@@ -27701,7 +27893,7 @@
         }
       }
     },
-    "/api/v1/invoices/{id}/status": {
+    "/api/invoices/{id}/status": {
       "patch": {
         "tags": [
           "Invoice"
@@ -27947,7 +28139,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Update status for single invoice",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -27996,7 +28188,7 @@
         }
       }
     },
-    "/api/v1/invoicesTags": {
+    "/api/invoicesTags": {
       "get": {
         "tags": [
           "Invoice Tag"
@@ -28008,7 +28200,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -28057,7 +28249,7 @@
         }
       }
     },
-    "/api/v1/liabilities": {
+    "/api/liabilities": {
       "post": {
         "tags": [
           "Liability"
@@ -28068,7 +28260,7 @@
         "requestBody": {
           "description": "Create a liability object",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-alpha+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -29143,7 +29335,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -29673,7 +29865,7 @@
         }
       }
     },
-    "/api/v1/liabilities/{id}": {
+    "/api/liabilities/{id}": {
       "get": {
         "tags": [
           "Liability"
@@ -29699,7 +29891,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -30420,13 +30612,13 @@
         }
       }
     },
-    "/api/v1/liabilities/{id}/documents": {
+    "/api/liabilities/{id}/documents": {
       "post": {
         "tags": [
           "Liability"
         ],
         "operationId": "liability.document.upload",
-        "summary": "Add a liability document to an existing liability",
+        "summary": "[ALPHA] Add a liability document to an existing liability",
         "description": "Upload a file and adds this file as document to given liability",
         "parameters": [
           {
@@ -30445,7 +30637,7 @@
         "requestBody": {
           "description": "Liability document create request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-alpha+json": {
               "schema": {
                 "type": "object",
                 "required": [
@@ -30828,7 +31020,7 @@
         }
       }
     },
-    "/api/v1/paymentMethods": {
+    "/api/paymentMethods": {
       "get": {
         "tags": [
           "Payment Methods"
@@ -30953,7 +31145,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -31089,7 +31281,7 @@
         }
       }
     },
-    "/api/v1/paymentTermsGroups": {
+    "/api/paymentTermsGroups": {
       "get": {
         "tags": [
           "Payment Terms Group"
@@ -31225,7 +31417,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -31520,7 +31712,7 @@
         "requestBody": {
           "description": "Request to create a new paymentTermsGroup.",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -31887,7 +32079,7 @@
         }
       }
     },
-    "/api/v1/paymentTermsGroups/{id}": {
+    "/api/paymentTermsGroups/{id}": {
       "get": {
         "tags": [
           "Payment Terms Group"
@@ -31913,7 +32105,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -32087,7 +32279,7 @@
         }
       }
     },
-    "/api/v1/cashiers": {
+    "/api/cashiers": {
       "get": {
         "tags": [
           "Point Of Sale"
@@ -32112,7 +32304,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -32254,7 +32446,7 @@
         }
       }
     },
-    "/api/v1/cashiers/{id}/pinCheck": {
+    "/api/cashiers/{id}/pinCheck": {
       "post": {
         "tags": [
           "Point Of Sale"
@@ -32279,7 +32471,7 @@
         "requestBody": {
           "description": "Verify PIN",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -32315,6 +32507,70 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
+              "application/vnd.xentral.default.v1-beta+json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "x-description-missing": true,
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        },
+                        "name": {
+                          "x-description-missing": true,
+                          "type": "string",
+                          "nullable": false,
+                          "example": "Kassierer SW"
+                        },
+                        "project": {
+                          "description": "Reference to another resource",
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "pattern": "\\d+",
+                              "example": "17",
+                              "description": "Resource identifier."
+                            }
+                          },
+                          "example": {
+                            "id": "1337"
+                          }
+                        },
+                        "permissionLevel": {
+                          "x-description-missing": true,
+                          "type": "string",
+                          "pattern": "\\d",
+                          "nullable": false,
+                          "example": "0"
+                        }
+                      },
+                      "example": {
+                        "id": "1",
+                        "name": "Kassierer SW",
+                        "project": {
+                          "id": "2"
+                        },
+                        "permissionLevel": "0"
+                      }
+                    }
+                  }
+                }
+              },
               "application/json": {
                 "schema": {
                   "type": "object",
@@ -32600,7 +32856,7 @@
         }
       }
     },
-    "/api/v1/cashRegisters/{id}/balance": {
+    "/api/cashRegisters/{id}/balance": {
       "get": {
         "tags": [
           "Point Of Sale"
@@ -32626,7 +32882,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -32881,7 +33137,7 @@
         }
       }
     },
-    "/api/v1/posJournals": {
+    "/api/posJournals": {
       "get": {
         "tags": [
           "Point Of Sale"
@@ -33025,7 +33281,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -33297,7 +33553,7 @@
         }
       }
     },
-    "/api/v1/posJournals/actions/add": {
+    "/api/posJournals/actions/add": {
       "post": {
         "tags": [
           "Point Of Sale"
@@ -33309,7 +33565,7 @@
         "requestBody": {
           "description": "[EARLY ACCESS] Add journal entry",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -33782,7 +34038,7 @@
         }
       }
     },
-    "/api/v1/posCashCount/actions/add": {
+    "/api/posCashCount/actions/add": {
       "post": {
         "tags": [
           "Point Of Sale"
@@ -33794,7 +34050,7 @@
         "requestBody": {
           "description": "Add cash count body",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -77509,7 +77765,7 @@
         }
       }
     },
-    "/api/v1/projects": {
+    "/api/projects": {
       "get": {
         "tags": [
           "Project"
@@ -77649,7 +77905,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -77822,7 +78078,7 @@
         }
       }
     },
-    "/api/v1/projects/{id}/posSettings": {
+    "/api/projects/{id}/posSettings": {
       "get": {
         "tags": [
           "Project"
@@ -77848,7 +78104,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -92778,7 +93034,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/csvExport/invoicesAndCreditNotes": {
+    "/api/accounting/datev/csvExport/invoicesAndCreditNotes": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -92789,7 +93045,7 @@
         "requestBody": {
           "description": "Execute the accounting CSV export for invoices and credit notes",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -93071,7 +93327,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/csvExport/liabilities": {
+    "/api/accounting/datev/csvExport/liabilities": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -93082,7 +93338,7 @@
         "requestBody": {
           "description": "Execute the accounting CSV export for liabilities",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -93350,7 +93606,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/csvExport/accountTransactions": {
+    "/api/accounting/datev/csvExport/accountTransactions": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -93361,7 +93617,7 @@
         "requestBody": {
           "description": "Execute the accounting CSV export for account transactions",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -93621,7 +93877,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/xmlExport/invoices": {
+    "/api/accounting/datev/xmlExport/invoices": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -93632,7 +93888,7 @@
         "requestBody": {
           "description": "Execute the accounting XML export for invoices",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -93896,7 +94152,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/xmlExport/creditNotes": {
+    "/api/accounting/datev/xmlExport/creditNotes": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -93907,7 +94163,7 @@
         "requestBody": {
           "description": "Execute the accounting XML export for credit notes",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -94171,7 +94427,7 @@
         }
       }
     },
-    "/api/v1/accounting/datev/xmlExport/liabilities": {
+    "/api/accounting/datev/xmlExport/liabilities": {
       "post": {
         "tags": [
           "Accounting Export"
@@ -94182,7 +94438,7 @@
         "requestBody": {
           "description": "Execute the accounting XML export for liabilities",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -94450,7 +94706,7 @@
         }
       }
     },
-    "/api/v1/accounting/downloads/{downloadKey}/status": {
+    "/api/accounting/downloads/{downloadKey}/status": {
       "get": {
         "tags": [
           "Accounting Export"
@@ -94472,7 +94728,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -94776,7 +95032,7 @@
         }
       }
     },
-    "/api/v1/accounting/downloads/{downloadKey}": {
+    "/api/accounting/downloads/{downloadKey}": {
       "get": {
         "tags": [
           "Accounting Export"
@@ -94798,12 +95054,12 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "text/csv": {
+              "application/vnd.xentral.default.v1-beta+csv": {
                 "schema": {
                   "type": "string"
                 }
               },
-              "application/zip": {
+              "application/vnd.xentral.default.v1-beta+zip": {
                 "schema": {
                   "type": "string"
                 }
@@ -95029,7 +95285,7 @@
         }
       }
     },
-    "/api/v1/suppliers": {
+    "/api/suppliers": {
       "get": {
         "tags": [
           "Supplier"
@@ -95105,21 +95361,16 @@
                           "startsWith",
                           "endsWith",
                           "greaterThan",
-                          "lessThan",
-                          "is"
+                          "lessThan"
                         ]
                       },
                       "value": {
                         "oneOf": [
                           {
-                            "type": "string",
-                            "description": "Used for the operations 'equals', 'notEquals', 'contains', 'notContains', 'startsWith', 'endsWith' and 'is'.",
-                            "title": "String"
+                            "type": "string"
                           },
                           {
                             "type": "array",
-                            "description": "Used for the operations 'in', 'notIn', 'exactlyIn', 'allIn' and 'allNotIn'.",
-                            "title": "Array",
                             "items": {
                               "type": "string"
                             }
@@ -95209,7 +95460,7 @@
           "200": {
             "description": "Supplier list.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -95531,7 +95782,7 @@
                   }
                 }
               },
-              "text/csv": {
+              "application/vnd.xentral.default.v1+csv": {
                 "schema": {
                   "type": "string"
                 }
@@ -95766,7 +96017,7 @@
         "requestBody": {
           "description": "Supplier update multiple request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "array",
                 "minItems": 1,
@@ -96049,7 +96300,7 @@
         }
       }
     },
-    "/api/v1/suppliers/{id}": {
+    "/api/suppliers/{id}": {
       "get": {
         "tags": [
           "Supplier"
@@ -96075,7 +96326,7 @@
           "200": {
             "description": "Supplier view.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -96485,7 +96736,7 @@
         "requestBody": {
           "description": "Supplier update request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -96802,7 +97053,7 @@
         }
       }
     },
-    "/api/v1/suppliersTags": {
+    "/api/suppliersTags": {
       "get": {
         "tags": [
           "Supplier Tag"
@@ -96814,7 +97065,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -97370,7 +97621,7 @@
         }
       }
     },
-    "/api/v1/users": {
+    "/api/users": {
       "post": {
         "tags": [
           "User"
@@ -97380,7 +97631,7 @@
         "description": "Creates a new user using one of the available operations",
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -97775,7 +98026,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -97960,7 +98211,7 @@
         }
       }
     },
-    "/api/v1/users/{id}": {
+    "/api/users/{id}": {
       "get": {
         "tags": [
           "User"
@@ -97986,7 +98237,7 @@
           "200": {
             "description": "A single user resource.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -98093,7 +98344,7 @@
                   }
                 }
               },
-              "application/vnd.xentral.user-permissions+json": {
+              "application/vnd.xentral.user-permissions.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -98272,7 +98523,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -98322,7 +98573,7 @@
                 }
               }
             },
-            "application/vnd.xentral.password+json": {
+            "application/vnd.xentral.password.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -98346,7 +98597,7 @@
                 }
               }
             },
-            "application/vnd.xentral.mfa+json": {
+            "application/vnd.xentral.mfa.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -98620,7 +98871,7 @@
         }
       }
     },
-    "/api/v1/users/{id}/permissions": {
+    "/api/users/{id}/permissions": {
       "get": {
         "tags": [
           "User"
@@ -98646,7 +98897,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -98732,7 +98983,7 @@
         }
       }
     },
-    "/api/v1/users/{id}/resetPassword/request": {
+    "/api/users/{id}/resetPassword/request": {
       "post": {
         "tags": [
           "User"
@@ -99404,7 +99655,7 @@
         }
       }
     },
-    "/api/v1/webhooks": {
+    "/api/webhooks": {
       "post": {
         "tags": [
           "Webhook"
@@ -99415,7 +99666,7 @@
         "requestBody": {
           "description": "Webhook create request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -99737,7 +99988,7 @@
           "200": {
             "description": "Webhook list.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -99847,7 +100098,7 @@
         }
       }
     },
-    "/api/v1/webhooks/{id}": {
+    "/api/webhooks/{id}": {
       "get": {
         "tags": [
           "Webhook"
@@ -99873,7 +100124,7 @@
           "200": {
             "description": "Webhook view.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -100197,7 +100448,7 @@
         "requestBody": {
           "description": "Webhook update request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -100521,7 +100772,7 @@
         }
       }
     },
-    "/api/v1/webhookEventTypes": {
+    "/api/webhookEventTypes": {
       "get": {
         "tags": [
           "Webhook"
@@ -100545,7 +100796,7 @@
           "200": {
             "description": "Webhook event type list.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
