@@ -406,7 +406,7 @@
     "samples-languages": []
   },
   "paths": {
-    "/api/v1/analytics/report": {
+    "/api/analytics/report": {
       "get": {
         "tags": [
           "Report"
@@ -418,7 +418,7 @@
           "200": {
             "description": "Report response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -831,7 +831,7 @@
         "requestBody": {
           "description": "Create report request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -969,7 +969,7 @@
           "200": {
             "description": "Report response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -1160,7 +1160,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -1201,7 +1201,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}": {
+    "/api/analytics/report/{id}": {
       "get": {
         "tags": [
           "Report"
@@ -1227,7 +1227,7 @@
           "200": {
             "description": "Report response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -1654,7 +1654,7 @@
         "requestBody": {
           "description": "Create report request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -1792,7 +1792,7 @@
           "200": {
             "description": "Report response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -1983,7 +1983,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -2264,7 +2264,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}/export": {
+    "/api/analytics/report/{id}/export": {
       "get": {
         "tags": [
           "Report"
@@ -2290,7 +2290,7 @@
           "200": {
             "description": "Query execution response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -2601,7 +2601,7 @@
           "200": {
             "description": "Query execution response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -2894,7 +2894,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}/permalink": {
+    "/api/analytics/report/{id}/permalink": {
       "get": {
         "tags": [
           "Report"
@@ -2920,7 +2920,7 @@
           "200": {
             "description": "Report permalink response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -3215,7 +3215,7 @@
         "requestBody": {
           "description": "Payload for creating permalink for report",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -3266,7 +3266,7 @@
           "200": {
             "description": "Report permalink response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -3778,7 +3778,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}/permalink/{token}": {
+    "/api/analytics/report/{id}/permalink/{token}": {
       "get": {
         "tags": [
           "Report"
@@ -3815,7 +3815,7 @@
           "202": {
             "description": "Request accepted. URL token is valid. No data can be provided yet, but data processing got triggered.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -4130,7 +4130,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}/schedule": {
+    "/api/analytics/report/{id}/schedule": {
       "get": {
         "tags": [
           "Report"
@@ -4156,7 +4156,7 @@
           "200": {
             "description": "Report schedule response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -4472,7 +4472,7 @@
         "requestBody": {
           "description": "Payload for creating report schedule",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -4526,7 +4526,7 @@
           "200": {
             "description": "Report schedule response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -4819,7 +4819,7 @@
         }
       }
     },
-    "/api/v1/analytics/report/{id}/schedule/{uuid}": {
+    "/api/analytics/report/{id}/schedule/{uuid}": {
       "delete": {
         "tags": [
           "Report"
@@ -5073,7 +5073,7 @@
         }
       }
     },
-    "/api/v1/analytics/collection": {
+    "/api/analytics/collection": {
       "get": {
         "tags": [
           "Collection"
@@ -5085,7 +5085,7 @@
           "200": {
             "description": "Collection response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -5534,7 +5534,7 @@
         "requestBody": {
           "description": "Create collection request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -5591,7 +5591,7 @@
           "200": {
             "description": "Collection response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -5818,7 +5818,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -5859,7 +5859,7 @@
         }
       }
     },
-    "/api/v1/analytics/collection/{id}": {
+    "/api/analytics/collection/{id}": {
       "get": {
         "tags": [
           "Collection"
@@ -5885,7 +5885,7 @@
           "200": {
             "description": "Collection response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -6348,7 +6348,7 @@
         "requestBody": {
           "description": "Update collection request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -6405,7 +6405,7 @@
           "200": {
             "description": "Collection response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -6632,7 +6632,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -6913,7 +6913,7 @@
         }
       }
     },
-    "/api/v1/analytics/documentation": {
+    "/api/analytics/documentation": {
       "get": {
         "tags": [
           "Documentation"
@@ -6925,7 +6925,7 @@
           "200": {
             "description": "Documentation response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7241,7 +7241,7 @@
         }
       }
     },
-    "/api/v1/analytics/query": {
+    "/api/analytics/query": {
       "post": {
         "tags": [
           "Query"
@@ -7252,7 +7252,7 @@
         "requestBody": {
           "description": "Query payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -7353,7 +7353,7 @@
           "200": {
             "description": "Query response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7460,7 +7460,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7507,7 +7507,7 @@
         }
       }
     },
-    "/api/v1/analytics/query/export": {
+    "/api/analytics/query/export": {
       "post": {
         "tags": [
           "Query"
@@ -7518,7 +7518,7 @@
         "requestBody": {
           "description": "Query payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -7600,7 +7600,7 @@
           "200": {
             "description": "Query execution response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7674,7 +7674,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7731,7 +7731,7 @@
           "200": {
             "description": "Query execution response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7805,7 +7805,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7846,7 +7846,7 @@
         }
       }
     },
-    "/api/v1/analytics/query/export/{uuid}": {
+    "/api/analytics/query/export/{uuid}": {
       "get": {
         "tags": [
           "Query"
@@ -7872,7 +7872,7 @@
           "200": {
             "description": "Query execution response",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7946,7 +7946,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -7987,7 +7987,7 @@
         }
       }
     },
-    "/api/v1/analytics/credit": {
+    "/api/analytics/credit": {
       "get": {
         "tags": [
           "Credit"
@@ -7999,7 +7999,7 @@
           "200": {
             "description": "Shows the amount of used credits for this month as well as the total amount of credits available",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -8047,7 +8047,7 @@
           "400": {
             "description": "Bad Request due to malformed payload or SQL statement",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -8088,7 +8088,7 @@
         }
       }
     },
-    "/api/v1/analytics/reportUsage": {
+    "/api/analytics/reportUsage": {
       "get": {
         "tags": [
           "Report Usage"
@@ -8125,7 +8125,7 @@
           "200": {
             "description": "Shows all records of chargeable requests made within the given timeframe",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -17729,7 +17729,7 @@
         }
       }
     },
-    "/api/v1/shipments/{id}": {
+    "/api/shipments/{id}": {
       "get": {
         "tags": [
           "Delivery"
@@ -22776,7 +22776,7 @@
         }
       }
     },
-    "/api/v1/stockMovementTypes": {
+    "/api/stockMovementTypes": {
       "post": {
         "tags": [
           "Stock Movement Types"
@@ -22787,7 +22787,7 @@
         "requestBody": {
           "description": "Stock movement type creation request.",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -70341,7 +70341,7 @@
         }
       }
     },
-    "/api/v1/purchaseOrders": {
+    "/api/purchaseOrders": {
       "get": {
         "tags": [
           "Purchase Order"
@@ -70477,7 +70477,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -71053,7 +71053,7 @@
         "requestBody": {
           "description": "Purchase order create request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -71856,7 +71856,7 @@
         }
       }
     },
-    "/api/v1/purchaseOrders/{id}": {
+    "/api/purchaseOrders/{id}": {
       "get": {
         "tags": [
           "Purchase Order"
@@ -71882,7 +71882,7 @@
           "200": {
             "description": "Operation completed successfully.",
             "content": {
-              "application/json": {
+              "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": false,
@@ -72633,7 +72633,7 @@
         "requestBody": {
           "description": "Purchase order update request payload",
           "content": {
-            "application/json": {
+            "application/vnd.xentral.default.v1-beta+json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": false,
@@ -73955,7 +73955,7 @@
         }
       }
     },
-    "/api/v1/purchaseOrders/{id}/actions/cancel": {
+    "/api/purchaseOrders/{id}/actions/cancel": {
       "patch": {
         "tags": [
           "Purchase Order"
@@ -74082,7 +74082,7 @@
         }
       }
     },
-    "/api/v1/purchaseOrders/{id}/actions/release": {
+    "/api/purchaseOrders/{id}/actions/release": {
       "patch": {
         "tags": [
           "Purchase Order"
@@ -82718,28 +82718,6 @@
                   "positions"
                 ],
                 "properties": {
-                  "desiredDeliveryDate": {
-                    "type": "string",
-                    "format": "date",
-                    "nullable": true
-                  },
-                  "reservationDate": {
-                    "type": "string",
-                    "format": "date",
-                    "nullable": true
-                  },
-                  "desiredDeliveryDateAsCalendarWeek": {
-                    "type": "boolean",
-                    "description": "Flag indicating whether a calendar week should be printed on documents"
-                  },
-                  "editor": {
-                    "type": "string",
-                    "description": "Creator of the Sales Order"
-                  },
-                  "salesRepresentativeId": {
-                    "type": "integer",
-                    "description": "The ID of the sales representative"
-                  },
                   "date": {
                     "type": "string",
                     "format": "date"
@@ -83555,11 +83533,6 @@
                 "Import sales order": {
                   "value": {
                     "date": "2023-12-01",
-                    "desiredDeliveryDate": "2023-11-11",
-                    "reservationDate": "2023-11-12",
-                    "editor": "Administrator1",
-                    "desiredDeliveryDateAsCalendarWeek": false,
-                    "salesRepresentativeId": 1,
                     "externalOrderNumber": "120013",
                     "externalOrderId": "453894034",
                     "customer": {
@@ -84327,7 +84300,7 @@
                           "example": "10"
                         },
                         "salesChannel": {
-                          "description": "Represents a sales channel as a reference to another resource. This object can be null and contains an identifier and an optional name.",
+                          "description": "Nullable reference to another resource",
                           "type": "object",
                           "additionalProperties": false,
                           "nullable": true,
@@ -84340,10 +84313,6 @@
                               "pattern": "\\d+",
                               "example": "17",
                               "description": "Resource identifier."
-                            },
-                            "name": {
-                              "type": "string",
-                              "nullable": true
                             }
                           },
                           "example": {
