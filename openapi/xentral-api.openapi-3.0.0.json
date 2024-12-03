@@ -13156,6 +13156,7 @@
             "in": "query",
             "name": "cursor",
             "required": false,
+            "style": "deepObject",
             "schema": {
               "type": "object",
               "additionalProperties": false,
@@ -17063,6 +17064,647 @@
         }
       }
     },
+    "/api/v2/customers": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "customer.create.v2",
+        "summary": "Create a customer",
+        "description": "Creates a new customer.",
+        "requestBody": {
+          "description": "Request structure to create a customer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Discriminator to create a company. If 'company' is used then 'name' is required. If 'person' is used then 'firstname' and 'lastename' are required.",
+                    "enum": [
+                      "person",
+                      "company"
+                    ]
+                  },
+                  "firstname": {
+                    "type": "string",
+                    "description": "Firstname of customer",
+                    "example": "Max"
+                  },
+                  "lastname": {
+                    "type": "string",
+                    "description": "Lastname of customer",
+                    "example": "Mustmermann"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the company",
+                    "example": "General Cosmic Company"
+                  },
+                  "title": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Title prefix for customer name. It will be used for communication.",
+                    "example": "Prof. Dr."
+                  },
+                  "birthdate": {
+                    "type": "string",
+                    "format": "date",
+                    "nullable": true,
+                    "description": "Birhtdate of customer",
+                    "example": "2024-03-01"
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "Customer number. if this is not provided default number ranges will be applied automatically",
+                    "example": "C700001"
+                  },
+                  "salutation": {
+                    "type": "string",
+                    "enum": [
+                      "mr",
+                      "mrs",
+                      "company",
+                      "other"
+                    ],
+                    "nullable": true,
+                    "description": "Decide kind of person if necessary. This value is e.g. responsible to apply automatic rules for salutation",
+                    "example": "mr"
+                  },
+                  "salutationPhrase": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "You can specify a salutation how a customer/company should be addressed and override automatic rules.",
+                    "example": "Dear Sir"
+                  },
+                  "department": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Specify a department for customer",
+                    "example": "Sales"
+                  },
+                  "subDepartment": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "Specify a sub-department for customer",
+                    "example": "Onlines Sales"
+                  },
+                  "project": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Specify project customer should belong to",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Contact information of a customer",
+                    "properties": {
+                      "phone": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Phone number of a custoemr",
+                        "example": "+49(30)12093756"
+                      },
+                      "mobile": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Mobile number of a customer",
+                        "example": "+49(172)56565656"
+                      },
+                      "fax": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Fax number of a customer",
+                        "example": "+49(30)12093756-1"
+                      },
+                      "email": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Email address of a customer",
+                        "example": "customer@domain.tpl"
+                      },
+                      "website": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "URL of customers website"
+                      },
+                      "additionalData": {
+                        "type": "array",
+                        "description": "List of additional not default contact data",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "nullable": true,
+                          "required": [
+                            "key",
+                            "value"
+                          ],
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "description": "Specific key for customer contact data",
+                              "example": "mobile2"
+                            },
+                            "value": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "Value for specified customers contact data key",
+                              "example": "+1(800)555 12235"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "backOfficeContact": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "nullable": true,
+                    "description": "Contact person who is responsible for this contact",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "number",
+                        "description": "ID of contact person",
+                        "example": "765"
+                      }
+                    }
+                  },
+                  "distributionContact": {
+                    "type": "object",
+                    "nullable": true,
+                    "description": "Contact person in case of distribution for this contact",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "number",
+                        "description": "ID of contact person",
+                        "example": "645"
+                      }
+                    }
+                  },
+                  "lead": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "nullable": true,
+                    "required": [
+                      "isLead",
+                      "status"
+                    ],
+                    "properties": {
+                      "isLead": {
+                        "type": "boolean",
+                        "nullable": false,
+                        "description": "Decides if customer is a lead",
+                        "example": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Lead status of this customer.",
+                        "example": "marketingqualifiedlead"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Create Person Customer - minimal": {
+                  "value": {
+                    "type": "person",
+                    "firstname": "Max",
+                    "lastname": "Mustermann"
+                  }
+                },
+                "Create Person Customer - fully qualified": {
+                  "value": {
+                    "type": "person",
+                    "firstname": "Max",
+                    "lastname": "Mustermann",
+                    "title": "Prof. Dr.",
+                    "birthdate": "2024-01-02",
+                    "number": "C700001",
+                    "salutation": "mr",
+                    "salutationPhrase": "Dear my friend",
+                    "department": "Sales",
+                    "subDepartment": "Online Sales",
+                    "project": {
+                      "id": "4"
+                    },
+                    "contact": {
+                      "phone": "+49(30)111333555",
+                      "mobile": "+49(172)99988877",
+                      "fax": "+49(30)111333555-1",
+                      "email": "max@company.tpl",
+                      "website": "http://company.tpl/members/max.mustermann",
+                      "additionalData": [
+                        {
+                          "key": "skype",
+                          "value": "max12345"
+                        }
+                      ]
+                    },
+                    "backOfficeContact": {
+                      "id": "57"
+                    },
+                    "distributionContact": {
+                      "id": "45"
+                    },
+                    "lead": {
+                      "isLead": true,
+                      "status": "marketingqualifiedlead"
+                    }
+                  }
+                },
+                "Create Company Customer - minimal": {
+                  "value": {
+                    "type": "company",
+                    "name": "General Cosmic Company"
+                  }
+                },
+                "Create Company Customer - fully qualified": {
+                  "value": {
+                    "type": "company",
+                    "name": "General Cosmic Company",
+                    "salutationPhrase": "Dear owners",
+                    "department": "Sales",
+                    "subDepartment": "Online Sales",
+                    "project": {
+                      "id": "4"
+                    },
+                    "contact": {
+                      "phone": "+49(30)111333555",
+                      "mobile": "+49(172)99988877",
+                      "fax": "+49(30)111333555-1",
+                      "email": "owners@company.tpl",
+                      "website": "http://company.tpl",
+                      "additionalData": [
+                        {
+                          "key": "skype",
+                          "value": "companyOwner"
+                        }
+                      ]
+                    },
+                    "backOfficeContact": {
+                      "id": "57"
+                    },
+                    "distributionContact": {
+                      "id": "45"
+                    },
+                    "lead": {
+                      "isLead": false,
+                      "status": "UNQUALIFIED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resource successfully created response",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string",
+                  "example": "https://example.xentral.biz/api/users/17"
+                },
+                "description": "URI of the created resource"
+              }
+            },
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    ""
+                  ],
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 7807 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Unable to authorize the client"
+          },
+          "404": {
+            "description": "Resource was not found or not enough access privileges"
+          },
+          "409": {
+            "description": "Request conflict with the current state of the target resource",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Resource representation send in the request is not supported."
+          },
+          "429": {
+            "description": "Too many API calls made."
+          }
+        }
+      }
+    },
     "/api/v1/customersTags": {
       "get": {
         "tags": [
@@ -17394,6 +18036,20 @@
                               "id": "1337"
                             }
                           },
+                          "sentAt": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Date when the delivery was sent",
+                            "example": "2022-01-07"
+                          },
+                          "sentAtTimestamp": {
+                            "type": "string",
+                            "format": "datetime",
+                            "nullable": true,
+                            "description": "Timestamp when the delivery was sent",
+                            "example": "2022-01-07 00:00:00"
+                          },
                           "label": {
                             "type": "object",
                             "nullable": true,
@@ -17437,6 +18093,8 @@
                           "shippingMethod": {
                             "id": "SM-12345"
                           },
+                          "sentAt": "2022-01-07",
+                          "sentAtTimestamp": "2022-01-07 00:00:00",
                           "label": {
                             "fileType": "image/gif",
                             "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
@@ -17651,6 +18309,20 @@
                             "id": "1337"
                           }
                         },
+                        "sentAt": {
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true,
+                          "description": "Date when the delivery was sent",
+                          "example": "2022-01-07"
+                        },
+                        "sentAtTimestamp": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "description": "Timestamp when the delivery was sent",
+                          "example": "2022-01-07 00:00:00"
+                        },
                         "label": {
                           "type": "object",
                           "nullable": true,
@@ -17694,6 +18366,8 @@
                         "shippingMethod": {
                           "id": "SM-12345"
                         },
+                        "sentAt": "2022-01-07",
+                        "sentAtTimestamp": "2022-01-07 00:00:00",
                         "label": {
                           "fileType": "image/gif",
                           "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
@@ -17862,6 +18536,20 @@
                             "id": "1337"
                           }
                         },
+                        "sentAt": {
+                          "type": "string",
+                          "format": "date",
+                          "nullable": true,
+                          "description": "Date when the delivery was sent",
+                          "example": "2022-01-07"
+                        },
+                        "sentAtTimestamp": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "description": "Timestamp when the delivery was sent",
+                          "example": "2022-01-07 00:00:00"
+                        },
                         "label": {
                           "type": "object",
                           "nullable": true,
@@ -17905,6 +18593,8 @@
                         "shippingMethod": {
                           "id": "SM-12345"
                         },
+                        "sentAt": "2022-01-07",
+                        "sentAtTimestamp": "2022-01-07 00:00:00",
                         "label": {
                           "fileType": "image/gif",
                           "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
@@ -18290,7 +18980,10 @@
                       "salesOrderId",
                       "updatedAt",
                       "country",
-                      "projectId"
+                      "projectId",
+                      "customerId",
+                      "customerNumber",
+                      "shippingAddressName"
                     ]
                   },
                   "op": {
@@ -19931,6 +20624,20 @@
                               "id": "1337"
                             }
                           },
+                          "sentAt": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Date when the delivery was sent",
+                            "example": "2022-01-07"
+                          },
+                          "sentAtTimestamp": {
+                            "type": "string",
+                            "format": "datetime",
+                            "nullable": true,
+                            "description": "Timestamp when the delivery was sent",
+                            "example": "2022-01-07 00:00:00"
+                          },
                           "label": {
                             "type": "object",
                             "nullable": true,
@@ -19974,6 +20681,8 @@
                           "shippingMethod": {
                             "id": "SM-12345"
                           },
+                          "sentAt": "2022-01-07",
+                          "sentAtTimestamp": "2022-01-07 00:00:00",
                           "label": {
                             "fileType": "image/gif",
                             "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
@@ -20390,6 +21099,20 @@
                               "id": "1337"
                             }
                           },
+                          "sentAt": {
+                            "type": "string",
+                            "format": "date",
+                            "nullable": true,
+                            "description": "Date when the delivery was sent",
+                            "example": "2022-01-07"
+                          },
+                          "sentAtTimestamp": {
+                            "type": "string",
+                            "format": "datetime",
+                            "nullable": true,
+                            "description": "Timestamp when the delivery was sent",
+                            "example": "2022-01-07 00:00:00"
+                          },
                           "label": {
                             "type": "object",
                             "nullable": true,
@@ -20433,6 +21156,8 @@
                           "shippingMethod": {
                             "id": "SM-12345"
                           },
+                          "sentAt": "2022-01-07",
+                          "sentAtTimestamp": "2022-01-07 00:00:00",
                           "label": {
                             "fileType": "image/gif",
                             "fileContent": "R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
@@ -78848,14 +79573,21 @@
                         "type": "string",
                         "enum": [
                           "customerId",
-                          "salesOrderId"
+                          "salesOrderId",
+                          "updatedAt",
+                          "createdAt"
                         ]
                       },
                       "op": {
                         "type": "string",
                         "enum": [
                           "equals",
-                          "in"
+                          "in",
+                          "greaterThan",
+                          "notEquals",
+                          "isOnOrBefore",
+                          "isOnOrAfter",
+                          "notIn"
                         ]
                       },
                       "value": {
