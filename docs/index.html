@@ -1189,6 +1189,16 @@
   <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
+</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">outgoingPayment.executed</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about an outgoing payment executed</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-outgoingPayment.executed-security"></div><div class="mt-2"></div><div class="mt-2"><div><div class="flex py-2"><div class=" mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Channel Extensions</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">x-internal</span></div><div><div class="text-sm">true</div></div></div></div></div></div></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-outgoingPayment.executed-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about an outgoing payment executed</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>creation date and time</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">paymentId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier of the payment</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">businessAccountType</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Type of the business account</p>
+</div></div><ul class="text-xs">Allowed values:<!-- --> <li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;amazonfbm&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;amazonkonto&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;amazonpay&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;ebaypayment&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;fidor&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;finapi&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;hbci4phpapi&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;kasse&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;klarna&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;mollie&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;payone&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;paypal&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;plaid&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;sepa&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;shopify&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;sofort&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;stripe&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;konto&quot;</span></li></ul></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>,
+  <span class="hljs-attr">"paymentId"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"businessAccountType"</span>: <span class="hljs-string">"amazonfbm"</span>
+}
+</code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">datev.exported</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about an datev export</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-datev.exported-security"></div><div class="mt-2"></div><div class="mt-2"><div><div class="flex py-2"><div class=" mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Channel Extensions</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">x-internal</span></div><div><div class="text-sm">true</div></div></div></div></div></div></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-datev.exported-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about an datev export</p>
 </div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">updatedAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>start date and time</p>
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
@@ -5670,6 +5680,61 @@
         }
       }
     },
+    "outgoingPayment.executed": {
+      "x-internal": true,
+      "publish": {
+        "summary": "Inform about an outgoing payment executed",
+        "message": {
+          "name": "OutgoingPaymentExecuted",
+          "payload": {
+            "title": "Outgoing Payment executed",
+            "description": "Inform about an outgoing payment executed",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "creation date and time"
+              },
+              "paymentId": {
+                "type": "integer",
+                "description": "Unique identifier of the payment"
+              },
+              "businessAccountType": {
+                "type": "string",
+                "description": "Type of the business account",
+                "enum": [
+                  "amazonfbm",
+                  "amazonkonto",
+                  "amazonpay",
+                  "ebaypayment",
+                  "fidor",
+                  "finapi",
+                  "hbci4phpapi",
+                  "kasse",
+                  "klarna",
+                  "mollie",
+                  "payone",
+                  "paypal",
+                  "plaid",
+                  "sepa",
+                  "shopify",
+                  "sofort",
+                  "stripe",
+                  "konto"
+                ]
+              }
+            },
+            "required": [
+              "createdAt",
+              "paymentId",
+              "businessAccountType"
+            ],
+            "additionalProperties": false,
+            "x-parser-schema-id": "<anonymous-schema-126>"
+          }
+        }
+      }
+    },
     "datev.exported": {
       "x-internal": true,
       "publish": {
@@ -5690,7 +5755,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-126>"
+            "x-parser-schema-id": "<anonymous-schema-127>"
           }
         }
       }
@@ -5715,7 +5780,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-127>"
+            "x-parser-schema-id": "<anonymous-schema-128>"
           }
         }
       }
@@ -5745,7 +5810,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-128>"
+            "x-parser-schema-id": "<anonymous-schema-129>"
           }
         }
       }
@@ -5775,7 +5840,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-129>"
+            "x-parser-schema-id": "<anonymous-schema-130>"
           }
         }
       }
@@ -5805,7 +5870,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-130>"
+            "x-parser-schema-id": "<anonymous-schema-131>"
           }
         }
       }
@@ -5835,7 +5900,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-131>"
+            "x-parser-schema-id": "<anonymous-schema-132>"
           }
         }
       }
@@ -5865,7 +5930,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-132>"
+            "x-parser-schema-id": "<anonymous-schema-133>"
           }
         }
       }
@@ -5897,7 +5962,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-133>"
+            "x-parser-schema-id": "<anonymous-schema-134>"
           }
         }
       }
@@ -5940,7 +6005,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-134>"
+            "x-parser-schema-id": "<anonymous-schema-135>"
           }
         }
       }
@@ -5972,7 +6037,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-135>"
+            "x-parser-schema-id": "<anonymous-schema-136>"
           }
         }
       }
@@ -6015,7 +6080,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-136>"
+            "x-parser-schema-id": "<anonymous-schema-137>"
           }
         }
       }
@@ -6047,7 +6112,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-137>"
+            "x-parser-schema-id": "<anonymous-schema-138>"
           }
         }
       }
@@ -6090,7 +6155,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-138>"
+            "x-parser-schema-id": "<anonymous-schema-139>"
           }
         }
       }
@@ -6133,7 +6198,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-139>"
+            "x-parser-schema-id": "<anonymous-schema-140>"
           }
         }
       }
@@ -6176,7 +6241,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-140>"
+            "x-parser-schema-id": "<anonymous-schema-141>"
           }
         }
       }
@@ -6219,7 +6284,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-141>"
+            "x-parser-schema-id": "<anonymous-schema-142>"
           }
         }
       }
