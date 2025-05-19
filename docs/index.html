@@ -994,18 +994,6 @@
   <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
-</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">collectiveBill.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new collective bill</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-collectiveBill.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-collectiveBill.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a new collective bill</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">addressId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the address</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">invoiceId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the invoice</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Invoice creation date and time</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">jobId</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>jobId returned from API-request or process-starter</p>
-</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
-  <span class="hljs-attr">"addressId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"invoiceId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>,
-  <span class="hljs-attr">"jobId"</span>: <span class="hljs-string">"string"</span>
-}
-</code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">offer.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a offer created</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-offer.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-offer.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a offer creation</p>
 </div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">offerId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the offer</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Offer created date and time</p>
@@ -5150,48 +5138,6 @@
         }
       }
     },
-    "collectiveBill.created": {
-      "publish": {
-        "summary": "Inform about a new collective bill",
-        "message": {
-          "name": "CollectiveBillCreated",
-          "payload": {
-            "title": "Collective Bill Created",
-            "description": "Inform about a new collective bill",
-            "properties": {
-              "addressId": {
-                "type": "integer",
-                "description": "Unique identifier for the address"
-              },
-              "invoiceId": {
-                "type": "integer",
-                "description": "Unique identifier for the invoice"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Invoice creation date and time"
-              },
-              "jobId": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "nullable": true,
-                "description": "jobId returned from API-request or process-starter"
-              }
-            },
-            "required": [
-              "addressId",
-              "invoiceId",
-              "createdAt"
-            ],
-            "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-97>"
-          }
-        }
-      }
-    },
     "offer.created": {
       "publish": {
         "summary": "Inform about a offer created",
@@ -5216,7 +5162,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-98>"
+            "x-parser-schema-id": "<anonymous-schema-97>"
           }
         }
       }
@@ -5245,7 +5191,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-99>"
+            "x-parser-schema-id": "<anonymous-schema-98>"
           }
         }
       }
@@ -5274,7 +5220,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-100>"
+            "x-parser-schema-id": "<anonymous-schema-99>"
           }
         }
       }
@@ -5303,7 +5249,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-101>"
+            "x-parser-schema-id": "<anonymous-schema-100>"
           }
         }
       }
@@ -5332,7 +5278,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-102>"
+            "x-parser-schema-id": "<anonymous-schema-101>"
           }
         }
       }
@@ -5361,7 +5307,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-103>"
+            "x-parser-schema-id": "<anonymous-schema-102>"
           }
         }
       }
@@ -5390,7 +5336,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-104>"
+            "x-parser-schema-id": "<anonymous-schema-103>"
           }
         }
       }
@@ -5424,7 +5370,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-105>"
+            "x-parser-schema-id": "<anonymous-schema-104>"
           }
         }
       }
@@ -5461,7 +5407,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-106>"
+            "x-parser-schema-id": "<anonymous-schema-105>"
           }
         }
       }
@@ -5497,7 +5443,7 @@
               "productNumbers"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-107>"
+            "x-parser-schema-id": "<anonymous-schema-106>"
           }
         }
       }
@@ -5530,7 +5476,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-108>"
+            "x-parser-schema-id": "<anonymous-schema-107>"
           }
         }
       }
@@ -5563,7 +5509,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-109>"
+            "x-parser-schema-id": "<anonymous-schema-108>"
           }
         }
       }
@@ -5597,7 +5543,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-110>"
+            "x-parser-schema-id": "<anonymous-schema-109>"
           }
         }
       }
@@ -5626,7 +5572,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-111>"
+            "x-parser-schema-id": "<anonymous-schema-110>"
           }
         }
       }
@@ -5655,7 +5601,7 @@
               "exportedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-112>"
+            "x-parser-schema-id": "<anonymous-schema-111>"
           }
         }
       }
@@ -5684,7 +5630,7 @@
               "viewedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-113>"
+            "x-parser-schema-id": "<anonymous-schema-112>"
           }
         }
       }
@@ -5708,7 +5654,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-114>"
+            "x-parser-schema-id": "<anonymous-schema-113>"
           }
         }
       }
@@ -5732,7 +5678,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-115>"
+            "x-parser-schema-id": "<anonymous-schema-114>"
           }
         }
       }
@@ -5769,7 +5715,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-116>"
+            "x-parser-schema-id": "<anonymous-schema-115>"
           }
         }
       }
@@ -5814,7 +5760,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-117>"
+            "x-parser-schema-id": "<anonymous-schema-116>"
           }
         }
       }
@@ -5844,7 +5790,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-118>"
+            "x-parser-schema-id": "<anonymous-schema-117>"
           }
         }
       }
@@ -5899,7 +5845,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-119>"
+            "x-parser-schema-id": "<anonymous-schema-118>"
           }
         }
       }
@@ -5957,7 +5903,7 @@
               "trackingNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-120>"
+            "x-parser-schema-id": "<anonymous-schema-119>"
           }
         }
       }
@@ -5986,7 +5932,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-121>"
+            "x-parser-schema-id": "<anonymous-schema-120>"
           }
         }
       }
@@ -6009,7 +5955,7 @@
               "pickListId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-122>"
+            "x-parser-schema-id": "<anonymous-schema-121>"
           }
         }
       }
@@ -6039,7 +5985,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-123>"
+            "x-parser-schema-id": "<anonymous-schema-122>"
           }
         }
       }
@@ -6075,7 +6021,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-124>"
+            "x-parser-schema-id": "<anonymous-schema-123>"
           }
         }
       }
@@ -6116,7 +6062,7 @@
               "errorDescription"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-125>"
+            "x-parser-schema-id": "<anonymous-schema-124>"
           }
         }
       }
@@ -6150,7 +6096,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-126>"
+            "x-parser-schema-id": "<anonymous-schema-125>"
           }
         }
       }
@@ -6184,7 +6130,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-127>"
+            "x-parser-schema-id": "<anonymous-schema-126>"
           }
         }
       }
@@ -6219,7 +6165,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-128>"
+            "x-parser-schema-id": "<anonymous-schema-127>"
           }
         }
       }
@@ -6243,7 +6189,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-129>"
+            "x-parser-schema-id": "<anonymous-schema-128>"
           }
         }
       }
@@ -6267,7 +6213,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-130>"
+            "x-parser-schema-id": "<anonymous-schema-129>"
           }
         }
       }
@@ -6322,7 +6268,7 @@
               "businessAccountType"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-131>"
+            "x-parser-schema-id": "<anonymous-schema-130>"
           }
         }
       }
@@ -6346,7 +6292,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-132>"
+            "x-parser-schema-id": "<anonymous-schema-131>"
           }
         }
       }
@@ -6370,7 +6316,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-133>"
+            "x-parser-schema-id": "<anonymous-schema-132>"
           }
         }
       }
@@ -6440,7 +6386,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-134>"
+            "x-parser-schema-id": "<anonymous-schema-133>"
           }
         }
       }
@@ -6656,7 +6602,7 @@
               "shouldCreateQr"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-135>"
+            "x-parser-schema-id": "<anonymous-schema-134>"
           }
         }
       }
@@ -6685,7 +6631,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-136>"
+            "x-parser-schema-id": "<anonymous-schema-135>"
           }
         }
       }
@@ -6714,7 +6660,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-137>"
+            "x-parser-schema-id": "<anonymous-schema-136>"
           }
         }
       }
@@ -6743,7 +6689,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-138>"
+            "x-parser-schema-id": "<anonymous-schema-137>"
           }
         }
       }
@@ -6772,7 +6718,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-139>"
+            "x-parser-schema-id": "<anonymous-schema-138>"
           }
         }
       }
@@ -6801,7 +6747,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-140>"
+            "x-parser-schema-id": "<anonymous-schema-139>"
           }
         }
       }
@@ -6833,7 +6779,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-141>"
+            "x-parser-schema-id": "<anonymous-schema-140>"
           }
         }
       }
@@ -6876,7 +6822,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-142>"
+            "x-parser-schema-id": "<anonymous-schema-141>"
           }
         }
       }
@@ -6908,7 +6854,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-143>"
+            "x-parser-schema-id": "<anonymous-schema-142>"
           }
         }
       }
@@ -6951,7 +6897,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-144>"
+            "x-parser-schema-id": "<anonymous-schema-143>"
           }
         }
       }
@@ -6983,7 +6929,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-145>"
+            "x-parser-schema-id": "<anonymous-schema-144>"
           }
         }
       }
@@ -7026,7 +6972,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-146>"
+            "x-parser-schema-id": "<anonymous-schema-145>"
           }
         }
       }
@@ -7069,7 +7015,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-147>"
+            "x-parser-schema-id": "<anonymous-schema-146>"
           }
         }
       }
@@ -7112,7 +7058,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-148>"
+            "x-parser-schema-id": "<anonymous-schema-147>"
           }
         }
       }
@@ -7155,7 +7101,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-149>"
+            "x-parser-schema-id": "<anonymous-schema-148>"
           }
         }
       }
