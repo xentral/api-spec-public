@@ -20,9 +20,14 @@
     <body>
       <div id="root"><section class="aui-root"><div class="container:xl relative md:flex bg-white leading-normal" id=""><div class="panel--center relative py-8 flex-1"><div class="relative z-10"><section id="operations" class="mt-16"><h2 class="2xl:w-7/12 text-3xl font-light mb-4 px-8">Operations</h2><ul><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new sales order</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a new sales order</p>
 </div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order creation date and time</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Project</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"><span class="bg-purple-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">&gt;= 1</span></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the project</p>
+</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order creation date and time</p>
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"project"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>
+  },
   <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
@@ -120,10 +125,15 @@
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.protocolCreated</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a sales order protocol</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.protocolCreated-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.protocolCreated-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a sales order protocol</p>
 </div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderProtocolId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the order protocol</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order protocol date and time</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Project</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the project</p>
+</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order protocol date and time</p>
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"salesOrderProtocolId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"project"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
+  },
   <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
@@ -205,42 +215,6 @@
     <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
   },
   <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
-}
-</code></pre>
-</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">user.changedPage</span></h3></div><p class="text-gray-600 text-sm mt-2">Triggered when the user visits a new page</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-user.changedPage-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-user.changedPage-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Triggered when the user visits a new page</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">userId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the user</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">mainVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Main tracking value which is typically the module or the main route</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">secondVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Secondary tracking value which is typically a combination query parameters or some nested route</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Date and time of the login operation</p>
-</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
-  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"mainVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"secondVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
-}
-</code></pre>
-</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">user.loggedIn</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a successful login operation of a user</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-user.loggedIn-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-user.loggedIn-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a successful login operation of a user</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">userId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the user</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">mainVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Main tracking value which is in this case a constant with value 'login'</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">secondVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Secondary tracking value which is in this an empty string</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Date and time of the login operation</p>
-</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
-  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"mainVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"secondVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
-}
-</code></pre>
-</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">user.loggedOut</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a logout operation of a user</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-user.loggedOut-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-user.loggedOut-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a logout operation of a user</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">userId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the user</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">mainVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Main tracking value which is in this case a constant with value 'logout'</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">secondVal</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Secondary tracking value which is in this an empty string</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Date and time of the login operation</p>
-</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
-  <span class="hljs-attr">"userId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"mainVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"secondVal"</span>: <span class="hljs-string">"string"</span>,
-  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">product.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new product</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-product.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-product.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a new product</p>
@@ -1410,7 +1384,8 @@
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">tip</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">number</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->float</span></div><div><div class="prose max-w-none text-sm"><p>Tip amount</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>The document number</p>
 </div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentType</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>The document type</p>
-</div></div><ul class="text-xs">Allowed values:<!-- --> <li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;invoice&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;credit_note&quot;</span></li></ul></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Creation date and time</p>
+</div></div><ul class="text-xs">Allowed values:<!-- --> <li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;invoice&quot;</span></li><li class="border inline-block text-orange-600 rounded ml-1 py-0 px-2"><span>&quot;credit_note&quot;</span></li></ul></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">guid</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>unique identifier</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Creation date and time</p>
 </div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"operation"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"project"</span>: {
@@ -1421,6 +1396,7 @@
   <span class="hljs-attr">"tip"</span>: <span class="hljs-number">0.1</span>,
   <span class="hljs-attr">"documentNumber"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"documentType"</span>: <span class="hljs-string">"invoice"</span>,
+  <span class="hljs-attr">"guid"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
@@ -1709,6 +1685,21 @@
                 "type": "integer",
                 "description": "Unique identifier for the order"
               },
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Project",
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "Unique identifier for the project"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time",
@@ -1717,6 +1708,7 @@
             },
             "required": [
               "salesOrderId",
+              "project",
               "createdAt"
             ],
             "additionalProperties": false,
@@ -2051,6 +2043,20 @@
                 "type": "integer",
                 "description": "Unique identifier for the order"
               },
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Project",
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Unique identifier for the project"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time",
@@ -2060,6 +2066,7 @@
             "required": [
               "salesOrderProtocolId",
               "salesOrderId",
+              "project",
               "createdAt"
             ],
             "additionalProperties": false,
@@ -2288,123 +2295,6 @@
         }
       }
     },
-    "user.changedPage": {
-      "publish": {
-        "summary": "Triggered when the user visits a new page",
-        "message": {
-          "name": "UserChangedPage",
-          "payload": {
-            "title": "User Changed Page",
-            "description": "Triggered when the user visits a new page",
-            "properties": {
-              "userId": {
-                "type": "integer",
-                "description": "Unique identifier for the user"
-              },
-              "mainVal": {
-                "type": "string",
-                "description": "Main tracking value which is typically the module or the main route"
-              },
-              "secondVal": {
-                "type": "string",
-                "description": "Secondary tracking value which is typically a combination query parameters or some nested route"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Date and time of the login operation"
-              }
-            },
-            "required": [
-              "userId",
-              "mainVal",
-              "secondVal",
-              "createdAt"
-            ],
-            "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-14>"
-          }
-        }
-      }
-    },
-    "user.loggedIn": {
-      "publish": {
-        "summary": "Inform about a successful login operation of a user",
-        "message": {
-          "name": "UserLoggedIn",
-          "payload": {
-            "title": "User Logged In",
-            "description": "Inform about a successful login operation of a user",
-            "properties": {
-              "userId": {
-                "type": "integer",
-                "description": "Unique identifier for the user"
-              },
-              "mainVal": {
-                "type": "string",
-                "description": "Main tracking value which is in this case a constant with value 'login'"
-              },
-              "secondVal": {
-                "type": "string",
-                "description": "Secondary tracking value which is in this an empty string"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Date and time of the login operation"
-              }
-            },
-            "required": [
-              "userId",
-              "mainVal",
-              "secondVal",
-              "createdAt"
-            ],
-            "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-15>"
-          }
-        }
-      }
-    },
-    "user.loggedOut": {
-      "publish": {
-        "summary": "Inform about a logout operation of a user",
-        "message": {
-          "name": "UserLoggedOut",
-          "payload": {
-            "title": "User Logged Out",
-            "description": "Inform about a logout operation of a user",
-            "properties": {
-              "userId": {
-                "type": "integer",
-                "description": "Unique identifier for the user"
-              },
-              "mainVal": {
-                "type": "string",
-                "description": "Main tracking value which is in this case a constant with value 'logout'"
-              },
-              "secondVal": {
-                "type": "string",
-                "description": "Secondary tracking value which is in this an empty string"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Date and time of the login operation"
-              }
-            },
-            "required": [
-              "userId",
-              "mainVal",
-              "secondVal",
-              "createdAt"
-            ],
-            "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-16>"
-          }
-        }
-      }
-    },
     "product.created": {
       "publish": {
         "summary": "Inform about a new product",
@@ -2451,7 +2341,7 @@
               "number"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-17>"
+            "x-parser-schema-id": "<anonymous-schema-14>"
           }
         }
       }
@@ -2502,7 +2392,7 @@
               "number"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-18>"
+            "x-parser-schema-id": "<anonymous-schema-15>"
           }
         }
       }
@@ -2525,7 +2415,7 @@
               "id"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-19>"
+            "x-parser-schema-id": "<anonymous-schema-16>"
           }
         }
       }
@@ -2576,7 +2466,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-20>"
+            "x-parser-schema-id": "<anonymous-schema-17>"
           }
         }
       }
@@ -2624,7 +2514,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-21>"
+            "x-parser-schema-id": "<anonymous-schema-18>"
           }
         }
       }
@@ -2660,7 +2550,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-22>"
+            "x-parser-schema-id": "<anonymous-schema-19>"
           }
         }
       }
@@ -2704,7 +2594,7 @@
                 }
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-23>"
+            "x-parser-schema-id": "<anonymous-schema-20>"
           }
         }
       }
@@ -2747,7 +2637,7 @@
               "variantOf"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-24>"
+            "x-parser-schema-id": "<anonymous-schema-21>"
           }
         }
       }
@@ -2780,7 +2670,7 @@
               "name"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-25>"
+            "x-parser-schema-id": "<anonymous-schema-22>"
           }
         }
       }
@@ -2886,7 +2776,7 @@
                 "format": "date"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-26>"
+            "x-parser-schema-id": "<anonymous-schema-23>"
           }
         }
       }
@@ -2992,7 +2882,7 @@
                 "format": "date"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-27>"
+            "x-parser-schema-id": "<anonymous-schema-24>"
           }
         }
       }
@@ -3015,7 +2905,7 @@
                 "description": "ID"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-28>"
+            "x-parser-schema-id": "<anonymous-schema-25>"
           }
         }
       }
@@ -3185,7 +3075,7 @@
               "expiresAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-29>"
+            "x-parser-schema-id": "<anonymous-schema-26>"
           }
         }
       }
@@ -3355,7 +3245,7 @@
               "expiresAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-30>"
+            "x-parser-schema-id": "<anonymous-schema-27>"
           }
         }
       }
@@ -3378,7 +3268,7 @@
               "id"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-31>"
+            "x-parser-schema-id": "<anonymous-schema-28>"
           }
         }
       }
@@ -3409,7 +3299,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-32>"
+            "x-parser-schema-id": "<anonymous-schema-29>"
           }
         }
       }
@@ -3440,7 +3330,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-33>"
+            "x-parser-schema-id": "<anonymous-schema-30>"
           }
         }
       }
@@ -3471,7 +3361,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-34>"
+            "x-parser-schema-id": "<anonymous-schema-31>"
           }
         }
       }
@@ -3500,7 +3390,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-35>"
+            "x-parser-schema-id": "<anonymous-schema-32>"
           }
         }
       }
@@ -3529,7 +3419,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-36>"
+            "x-parser-schema-id": "<anonymous-schema-33>"
           }
         }
       }
@@ -3558,7 +3448,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-37>"
+            "x-parser-schema-id": "<anonymous-schema-34>"
           }
         }
       }
@@ -3587,7 +3477,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-38>"
+            "x-parser-schema-id": "<anonymous-schema-35>"
           }
         }
       }
@@ -3616,7 +3506,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-39>"
+            "x-parser-schema-id": "<anonymous-schema-36>"
           }
         }
       }
@@ -3645,7 +3535,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-40>"
+            "x-parser-schema-id": "<anonymous-schema-37>"
           }
         }
       }
@@ -3674,7 +3564,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-41>"
+            "x-parser-schema-id": "<anonymous-schema-38>"
           }
         }
       }
@@ -3708,7 +3598,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-42>"
+            "x-parser-schema-id": "<anonymous-schema-39>"
           }
         }
       }
@@ -3737,7 +3627,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-43>"
+            "x-parser-schema-id": "<anonymous-schema-40>"
           }
         }
       }
@@ -3766,7 +3656,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-44>"
+            "x-parser-schema-id": "<anonymous-schema-41>"
           }
         }
       }
@@ -3795,7 +3685,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-45>"
+            "x-parser-schema-id": "<anonymous-schema-42>"
           }
         }
       }
@@ -3824,7 +3714,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-46>"
+            "x-parser-schema-id": "<anonymous-schema-43>"
           }
         }
       }
@@ -3853,7 +3743,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-47>"
+            "x-parser-schema-id": "<anonymous-schema-44>"
           }
         }
       }
@@ -3882,7 +3772,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-48>"
+            "x-parser-schema-id": "<anonymous-schema-45>"
           }
         }
       }
@@ -3911,7 +3801,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-49>"
+            "x-parser-schema-id": "<anonymous-schema-46>"
           }
         }
       }
@@ -3945,7 +3835,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-50>"
+            "x-parser-schema-id": "<anonymous-schema-47>"
           }
         }
       }
@@ -3974,7 +3864,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-51>"
+            "x-parser-schema-id": "<anonymous-schema-48>"
           }
         }
       }
@@ -4003,7 +3893,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-52>"
+            "x-parser-schema-id": "<anonymous-schema-49>"
           }
         }
       }
@@ -4032,7 +3922,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-53>"
+            "x-parser-schema-id": "<anonymous-schema-50>"
           }
         }
       }
@@ -4061,7 +3951,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-54>"
+            "x-parser-schema-id": "<anonymous-schema-51>"
           }
         }
       }
@@ -4090,7 +3980,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-55>"
+            "x-parser-schema-id": "<anonymous-schema-52>"
           }
         }
       }
@@ -4119,7 +4009,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-56>"
+            "x-parser-schema-id": "<anonymous-schema-53>"
           }
         }
       }
@@ -4148,7 +4038,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-57>"
+            "x-parser-schema-id": "<anonymous-schema-54>"
           }
         }
       }
@@ -4182,7 +4072,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-58>"
+            "x-parser-schema-id": "<anonymous-schema-55>"
           }
         }
       }
@@ -4212,7 +4102,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-59>"
+            "x-parser-schema-id": "<anonymous-schema-56>"
           }
         }
       }
@@ -4242,7 +4132,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-60>"
+            "x-parser-schema-id": "<anonymous-schema-57>"
           }
         }
       }
@@ -4272,7 +4162,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-61>"
+            "x-parser-schema-id": "<anonymous-schema-58>"
           }
         }
       }
@@ -4302,7 +4192,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-62>"
+            "x-parser-schema-id": "<anonymous-schema-59>"
           }
         }
       }
@@ -4332,7 +4222,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-63>"
+            "x-parser-schema-id": "<anonymous-schema-60>"
           }
         }
       }
@@ -4362,7 +4252,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-64>"
+            "x-parser-schema-id": "<anonymous-schema-61>"
           }
         }
       }
@@ -4392,7 +4282,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-65>"
+            "x-parser-schema-id": "<anonymous-schema-62>"
           }
         }
       }
@@ -4427,7 +4317,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-66>"
+            "x-parser-schema-id": "<anonymous-schema-63>"
           }
         }
       }
@@ -4456,7 +4346,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-67>"
+            "x-parser-schema-id": "<anonymous-schema-64>"
           }
         }
       }
@@ -4485,7 +4375,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-68>"
+            "x-parser-schema-id": "<anonymous-schema-65>"
           }
         }
       }
@@ -4514,7 +4404,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-69>"
+            "x-parser-schema-id": "<anonymous-schema-66>"
           }
         }
       }
@@ -4543,7 +4433,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-70>"
+            "x-parser-schema-id": "<anonymous-schema-67>"
           }
         }
       }
@@ -4577,7 +4467,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-71>"
+            "x-parser-schema-id": "<anonymous-schema-68>"
           }
         }
       }
@@ -4606,7 +4496,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-72>"
+            "x-parser-schema-id": "<anonymous-schema-69>"
           }
         }
       }
@@ -4635,7 +4525,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-73>"
+            "x-parser-schema-id": "<anonymous-schema-70>"
           }
         }
       }
@@ -4664,7 +4554,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-74>"
+            "x-parser-schema-id": "<anonymous-schema-71>"
           }
         }
       }
@@ -4693,7 +4583,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-75>"
+            "x-parser-schema-id": "<anonymous-schema-72>"
           }
         }
       }
@@ -4722,7 +4612,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-76>"
+            "x-parser-schema-id": "<anonymous-schema-73>"
           }
         }
       }
@@ -4751,7 +4641,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-77>"
+            "x-parser-schema-id": "<anonymous-schema-74>"
           }
         }
       }
@@ -4780,7 +4670,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-78>"
+            "x-parser-schema-id": "<anonymous-schema-75>"
           }
         }
       }
@@ -4809,7 +4699,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-79>"
+            "x-parser-schema-id": "<anonymous-schema-76>"
           }
         }
       }
@@ -4838,7 +4728,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-80>"
+            "x-parser-schema-id": "<anonymous-schema-77>"
           }
         }
       }
@@ -4867,7 +4757,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-81>"
+            "x-parser-schema-id": "<anonymous-schema-78>"
           }
         }
       }
@@ -4896,7 +4786,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-82>"
+            "x-parser-schema-id": "<anonymous-schema-79>"
           }
         }
       }
@@ -4930,7 +4820,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-83>"
+            "x-parser-schema-id": "<anonymous-schema-80>"
           }
         }
       }
@@ -4959,7 +4849,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-84>"
+            "x-parser-schema-id": "<anonymous-schema-81>"
           }
         }
       }
@@ -4988,7 +4878,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-85>"
+            "x-parser-schema-id": "<anonymous-schema-82>"
           }
         }
       }
@@ -5017,7 +4907,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-86>"
+            "x-parser-schema-id": "<anonymous-schema-83>"
           }
         }
       }
@@ -5046,7 +4936,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-87>"
+            "x-parser-schema-id": "<anonymous-schema-84>"
           }
         }
       }
@@ -5075,7 +4965,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-88>"
+            "x-parser-schema-id": "<anonymous-schema-85>"
           }
         }
       }
@@ -5109,7 +4999,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-89>"
+            "x-parser-schema-id": "<anonymous-schema-86>"
           }
         }
       }
@@ -5139,7 +5029,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-90>"
+            "x-parser-schema-id": "<anonymous-schema-87>"
           }
         }
       }
@@ -5169,7 +5059,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-91>"
+            "x-parser-schema-id": "<anonymous-schema-88>"
           }
         }
       }
@@ -5198,7 +5088,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-92>"
+            "x-parser-schema-id": "<anonymous-schema-89>"
           }
         }
       }
@@ -5228,7 +5118,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-93>"
+            "x-parser-schema-id": "<anonymous-schema-90>"
           }
         }
       }
@@ -5257,7 +5147,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-94>"
+            "x-parser-schema-id": "<anonymous-schema-91>"
           }
         }
       }
@@ -5286,7 +5176,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-95>"
+            "x-parser-schema-id": "<anonymous-schema-92>"
           }
         }
       }
@@ -5315,7 +5205,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-96>"
+            "x-parser-schema-id": "<anonymous-schema-93>"
           }
         }
       }
@@ -5344,7 +5234,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-97>"
+            "x-parser-schema-id": "<anonymous-schema-94>"
           }
         }
       }
@@ -5373,7 +5263,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-98>"
+            "x-parser-schema-id": "<anonymous-schema-95>"
           }
         }
       }
@@ -5407,7 +5297,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-99>"
+            "x-parser-schema-id": "<anonymous-schema-96>"
           }
         }
       }
@@ -5449,7 +5339,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-100>"
+            "x-parser-schema-id": "<anonymous-schema-97>"
           }
         }
       }
@@ -5478,7 +5368,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-101>"
+            "x-parser-schema-id": "<anonymous-schema-98>"
           }
         }
       }
@@ -5507,7 +5397,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-102>"
+            "x-parser-schema-id": "<anonymous-schema-99>"
           }
         }
       }
@@ -5536,7 +5426,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-103>"
+            "x-parser-schema-id": "<anonymous-schema-100>"
           }
         }
       }
@@ -5565,7 +5455,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-104>"
+            "x-parser-schema-id": "<anonymous-schema-101>"
           }
         }
       }
@@ -5594,7 +5484,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-105>"
+            "x-parser-schema-id": "<anonymous-schema-102>"
           }
         }
       }
@@ -5623,7 +5513,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-106>"
+            "x-parser-schema-id": "<anonymous-schema-103>"
           }
         }
       }
@@ -5652,7 +5542,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-107>"
+            "x-parser-schema-id": "<anonymous-schema-104>"
           }
         }
       }
@@ -5686,7 +5576,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-108>"
+            "x-parser-schema-id": "<anonymous-schema-105>"
           }
         }
       }
@@ -5723,7 +5613,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-109>"
+            "x-parser-schema-id": "<anonymous-schema-106>"
           }
         }
       }
@@ -5759,7 +5649,7 @@
               "productNumbers"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-110>"
+            "x-parser-schema-id": "<anonymous-schema-107>"
           }
         }
       }
@@ -5792,7 +5682,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-111>"
+            "x-parser-schema-id": "<anonymous-schema-108>"
           }
         }
       }
@@ -5825,7 +5715,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-112>"
+            "x-parser-schema-id": "<anonymous-schema-109>"
           }
         }
       }
@@ -5859,7 +5749,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-113>"
+            "x-parser-schema-id": "<anonymous-schema-110>"
           }
         }
       }
@@ -5888,7 +5778,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-114>"
+            "x-parser-schema-id": "<anonymous-schema-111>"
           }
         }
       }
@@ -5917,7 +5807,7 @@
               "exportedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-115>"
+            "x-parser-schema-id": "<anonymous-schema-112>"
           }
         }
       }
@@ -5946,7 +5836,7 @@
               "viewedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-116>"
+            "x-parser-schema-id": "<anonymous-schema-113>"
           }
         }
       }
@@ -5970,7 +5860,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-117>"
+            "x-parser-schema-id": "<anonymous-schema-114>"
           }
         }
       }
@@ -5994,7 +5884,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-118>"
+            "x-parser-schema-id": "<anonymous-schema-115>"
           }
         }
       }
@@ -6031,7 +5921,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-119>"
+            "x-parser-schema-id": "<anonymous-schema-116>"
           }
         }
       }
@@ -6076,7 +5966,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-120>"
+            "x-parser-schema-id": "<anonymous-schema-117>"
           }
         }
       }
@@ -6106,7 +5996,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-121>"
+            "x-parser-schema-id": "<anonymous-schema-118>"
           }
         }
       }
@@ -6161,7 +6051,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-122>"
+            "x-parser-schema-id": "<anonymous-schema-119>"
           }
         }
       }
@@ -6219,7 +6109,7 @@
               "trackingNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-123>"
+            "x-parser-schema-id": "<anonymous-schema-120>"
           }
         }
       }
@@ -6248,7 +6138,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-124>"
+            "x-parser-schema-id": "<anonymous-schema-121>"
           }
         }
       }
@@ -6271,7 +6161,7 @@
               "pickListId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-125>"
+            "x-parser-schema-id": "<anonymous-schema-122>"
           }
         }
       }
@@ -6301,7 +6191,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-126>"
+            "x-parser-schema-id": "<anonymous-schema-123>"
           }
         }
       }
@@ -6337,7 +6227,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-127>"
+            "x-parser-schema-id": "<anonymous-schema-124>"
           }
         }
       }
@@ -6378,7 +6268,7 @@
               "errorDescription"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-128>"
+            "x-parser-schema-id": "<anonymous-schema-125>"
           }
         }
       }
@@ -6412,7 +6302,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-129>"
+            "x-parser-schema-id": "<anonymous-schema-126>"
           }
         }
       }
@@ -6446,7 +6336,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-130>"
+            "x-parser-schema-id": "<anonymous-schema-127>"
           }
         }
       }
@@ -6481,7 +6371,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-131>"
+            "x-parser-schema-id": "<anonymous-schema-128>"
           }
         }
       }
@@ -6505,7 +6395,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-132>"
+            "x-parser-schema-id": "<anonymous-schema-129>"
           }
         }
       }
@@ -6529,7 +6419,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-133>"
+            "x-parser-schema-id": "<anonymous-schema-130>"
           }
         }
       }
@@ -6584,7 +6474,7 @@
               "businessAccountType"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-134>"
+            "x-parser-schema-id": "<anonymous-schema-131>"
           }
         }
       }
@@ -6608,7 +6498,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-135>"
+            "x-parser-schema-id": "<anonymous-schema-132>"
           }
         }
       }
@@ -6632,7 +6522,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-136>"
+            "x-parser-schema-id": "<anonymous-schema-133>"
           }
         }
       }
@@ -6691,6 +6581,13 @@
                 ],
                 "description": "The document type"
               },
+              "guid": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "unique identifier"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time",
@@ -6708,7 +6605,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-137>"
+            "x-parser-schema-id": "<anonymous-schema-134>"
           }
         }
       }
@@ -6924,7 +6821,7 @@
               "shouldCreateQr"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-138>"
+            "x-parser-schema-id": "<anonymous-schema-135>"
           }
         }
       }
@@ -6953,7 +6850,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-139>"
+            "x-parser-schema-id": "<anonymous-schema-136>"
           }
         }
       }
@@ -6982,7 +6879,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-140>"
+            "x-parser-schema-id": "<anonymous-schema-137>"
           }
         }
       }
@@ -7011,7 +6908,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-141>"
+            "x-parser-schema-id": "<anonymous-schema-138>"
           }
         }
       }
@@ -7040,7 +6937,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-142>"
+            "x-parser-schema-id": "<anonymous-schema-139>"
           }
         }
       }
@@ -7069,7 +6966,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-143>"
+            "x-parser-schema-id": "<anonymous-schema-140>"
           }
         }
       }
@@ -7101,7 +6998,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-144>"
+            "x-parser-schema-id": "<anonymous-schema-141>"
           }
         }
       }
@@ -7144,7 +7041,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-145>"
+            "x-parser-schema-id": "<anonymous-schema-142>"
           }
         }
       }
@@ -7176,7 +7073,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-146>"
+            "x-parser-schema-id": "<anonymous-schema-143>"
           }
         }
       }
@@ -7219,7 +7116,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-147>"
+            "x-parser-schema-id": "<anonymous-schema-144>"
           }
         }
       }
@@ -7251,7 +7148,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-148>"
+            "x-parser-schema-id": "<anonymous-schema-145>"
           }
         }
       }
@@ -7294,7 +7191,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-149>"
+            "x-parser-schema-id": "<anonymous-schema-146>"
           }
         }
       }
@@ -7337,7 +7234,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-150>"
+            "x-parser-schema-id": "<anonymous-schema-147>"
           }
         }
       }
@@ -7380,7 +7277,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-151>"
+            "x-parser-schema-id": "<anonymous-schema-148>"
           }
         }
       }
@@ -7423,7 +7320,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-152>"
+            "x-parser-schema-id": "<anonymous-schema-149>"
           }
         }
       }
