@@ -18,68 +18,17 @@
     </head>
   
     <body>
-      <div id="root"><section class="aui-root"><div class="container:xl relative md:flex bg-white leading-normal" id=""><div class="panel--center relative py-8 flex-1"><div class="relative z-10"><section id="operations" class="mt-16"><h2 class="2xl:w-7/12 text-3xl font-light mb-4 px-8">Operations</h2><ul><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new sales order</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">oneOf</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a new sales order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Adheres to:</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was created</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Associated project details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Or to Sales Order Fat Event Base:</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object [Sales Order Fat Event Base]</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the event</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Sales order document number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date of the sales order document</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">status</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Current status of the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">writeProtection</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if the sales order is write-protected</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">address</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Customer address information</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Associated project details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">documentAddress</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Address used on the document</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">internalDesignation</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Internal designation or reference</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">deviatingShipToAddress</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Alternative shipping address</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">isSalesOrderToSupplier</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if the order is to a supplier</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">externalOrderNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>External order number from customer</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">customerOrderNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Customer's own order number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">transactionNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Transaction number for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">externalOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>External system order identifier</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">desiredDeliveryDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Requested delivery date</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">desiredDeliveryDateAsCalendarWeek</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, delivery date is specified as a calendar week</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">earliestFulfillmentDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Earliest possible fulfillment date</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">reservationDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date when the order was reserved</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">preferredWarehouse</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Preferred warehouse for fulfillment</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">commissionConsignmentWarehouse</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Commission or consignment warehouse details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">storageCountry</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Country where goods are stored</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">freeText</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Free text notes for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">distribution</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Distribution channel or type</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">useAlternativeDocumentTitle</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if an alternative document title is used</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">autoDispatch</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, order is dispatched automatically</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">exportCheck</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if export check is required</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createDocuments</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Document creation instructions</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualPaymentApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, payment requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualShippingCostApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, shipping cost requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualDeliveryBlockApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, delivery block requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">fastLane</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if order is processed via fast lane</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disableCancellationEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, cancellation email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disableTrackingEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, tracking email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disablePaymentEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, payment email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">language</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Language code for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">texts</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Text blocks or translations</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">vatId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>VAT identification number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">costCenter</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Cost center reference</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">deliveryTerms</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Delivery terms (e.g., Incoterms)</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">internalComment</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Internal comment or note</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">directDebitDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date for direct debit payment</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">shippingMethod</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Shipping method details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">effectiveAddresses</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>List of effective addresses for delivery</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">financials</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Financial details of the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">masterReferenceNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Master reference number for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">printSettings</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Settings for document printing</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">sales</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Sales representative or team information</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">editor</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>User or system that last edited the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">trafficLights</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Traffic light status indicators</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">currentlyEditedBy</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>User currently editing the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was created</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">updatedAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was last updated</p>
-</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+      <div id="root"><section class="aui-root"><div class="container:xl relative md:flex bg-white leading-normal" id=""><div class="panel--center relative py-8 flex-1"><div class="relative z-10"><section id="operations" class="mt-16"><h2 class="2xl:w-7/12 text-3xl font-light mb-4 px-8">Operations</h2><ul><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.created</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a new sales order</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.created-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.created-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a new sales order</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the order</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Project</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"><span class="bg-purple-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">&gt;= 1</span></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the project</p>
+</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order creation date and time</p>
+</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>,
-  <span class="hljs-attr">"project"</span>: {}
+  <span class="hljs-attr">"project"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>
+  },
+  <span class="hljs-attr">"createdAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.deleted</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a sales order deletion</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.deleted-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.deleted-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a sales order deletion</p>
@@ -108,68 +57,17 @@
   <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
-</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.updated</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a sales order updated</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.updated-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.updated-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">oneOf</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about an updated sales order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Adheres to:</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">updatedAt</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was created</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Associated project details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Or to Sales Order Fat Event Base:</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object [Sales Order Fat Event Base]</div><div class="inline-block"></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the event</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Sales order document number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">documentDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date of the sales order document</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">status</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Current status of the sales order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">writeProtection</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if the sales order is write-protected</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">address</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Customer address information</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Associated project details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">documentAddress</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Address used on the document</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">internalDesignation</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Internal designation or reference</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">deviatingShipToAddress</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Alternative shipping address</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">isSalesOrderToSupplier</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if the order is to a supplier</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">externalOrderNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>External order number from customer</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">customerOrderNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Customer's own order number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">transactionNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Transaction number for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">externalOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>External system order identifier</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">desiredDeliveryDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Requested delivery date</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">desiredDeliveryDateAsCalendarWeek</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, delivery date is specified as a calendar week</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">earliestFulfillmentDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Earliest possible fulfillment date</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">reservationDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date when the order was reserved</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">preferredWarehouse</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Preferred warehouse for fulfillment</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">commissionConsignmentWarehouse</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Commission or consignment warehouse details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">storageCountry</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Country where goods are stored</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">freeText</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Free text notes for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">distribution</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Distribution channel or type</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">useAlternativeDocumentTitle</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if an alternative document title is used</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">autoDispatch</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, order is dispatched automatically</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">exportCheck</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if export check is required</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createDocuments</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Document creation instructions</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualPaymentApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, payment requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualShippingCostApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, shipping cost requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">manualDeliveryBlockApproval</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, delivery block requires manual approval</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">fastLane</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Indicates if order is processed via fast lane</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disableCancellationEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, cancellation email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disableTrackingEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, tracking email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">disablePaymentEmail</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">boolean</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>If true, payment email is disabled</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">language</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Language code for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">texts</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Text blocks or translations</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">vatId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>VAT identification number</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">costCenter</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Cost center reference</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">deliveryTerms</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Delivery terms (e.g., Incoterms)</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">internalComment</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Internal comment or note</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">directDebitDate</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string | null</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date</span></div><div><div class="prose max-w-none text-sm"><p>Date for direct debit payment</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">shippingMethod</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Shipping method details</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">effectiveAddresses</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>List of effective addresses for delivery</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">financials</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Financial details of the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">masterReferenceNumber</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Master reference number for the order</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">printSettings</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Settings for document printing</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">sales</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Sales representative or team information</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">editor</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>User or system that last edited the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">trafficLights</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Traffic light status indicators</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">currentlyEditedBy</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>User currently editing the order</p>
-</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><p class="mt-2 text-xs text-gray-700">Additional properties are allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">createdAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was created</p>
-</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">updatedAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Timestamp when the order was last updated</p>
-</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
+</div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.updated</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a sales order updated</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.updated-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.updated-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a sales order updated</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100  hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">salesOrderId</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the order</p>
+</div></div></div></div></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm italic">project</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">object | null</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Project</p>
+</div></div></div></div></div><div class="rounded p-4 py-2 border bg-gray-100 bg-gray-200 hidden"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">id</span></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">integer</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Unique identifier for the project</p>
+</div></div></div></div></div></div><p class="mt-2 text-xs text-gray-700">Additional properties are <strong>NOT</strong> allowed.</p></div></div><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><span class="break-anywhere text-sm italic">updatedAt</span><div class="text-red-600 text-xs">required</div></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">string</div><div class="inline-block"><span class="bg-yellow-600 font-bold no-underline text-white rounded lowercase mr-2 p-1 text-xs">format: <!-- -->date-time</span></div><div><div class="prose max-w-none text-sm"><p>Order update date and time</p>
+</div></div></div></div></div></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>,
-  <span class="hljs-attr">"project"</span>: {}
+  <span class="hljs-attr">"project"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-number">0</span>
+  },
+  <span class="hljs-attr">"updatedAt"</span>: <span class="hljs-string">"2019-08-24T14:15:22Z"</span>
 }
 </code></pre>
 </div><h6 class="text-xs font-bold text-gray-600 italic mt-2">This example has been generated automatically.</h6></div></div></div></div></div></div></div></div></div></div></li><li class="mb-12" id="operation-receive-publish"><div><div class="panel-item--center px-8"><div class="mb-4"><h3><span class="font-mono border uppercase p-1 rounded mr-2 border-green-600 text-green-600" title="receive">PUB</span> <span class="font-mono text-base">salesOrder.imported</span></h3></div><p class="text-gray-600 text-sm mt-2">Inform about a sales order imported</p><div class="border bg-gray-100 rounded px-4 py-2 mt-2"><div class="text-sm text-gray-700">Operation ID<span class="border text-orange-600 rounded text-xs ml-2 py-0 px-2">publish</span></div></div><div class="mt-2 text-sm"><p>Available only on servers:</p><ul class="flex flex-wrap leading-normal"><li class="inline-block mt-2 mr-2"><a href="#server-kafka" class="border border-solid border-blue-300 hover:bg-blue-300 hover:text-blue-600 text-blue-500 font-bold no-underline text-xs rounded px-3 py-1 cursor-pointer"><span class="underline">kafka</span></a></li></ul></div><div class="mt-2" id="operation-receive-salesOrder.imported-security"></div><div class="mt-2"></div><div class="mt-2"></div><div class="mt-2"></div></div><div class="w-full mt-4" id="operation-receive-salesOrder.imported-message"><div class="mt-2"><p class="px-8">Accepts the following message:</p><div class="mt-2"><div class="panel-item"><div class="panel-item--center px-8"><div class="shadow rounded bg-gray-200 p-4 border"><div><span class="border text-orange-600 rounded text-xs py-0 px-2"></span></div><div class="mt-2"><div><div class="flex py-2"><div class="min-w-1/4 mr-2"><button class="focus:outline-none undefined" type="button"><div class="inline-block"><span class="break-anywhere text-sm ">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  "><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button><button type="button" class="ml-1 text-sm text-gray-500">Expand all</button></div><div><div><div class="capitalize text-sm text-teal-500 font-bold inline-block mr-2">restricted any</div><div class="inline-block"></div><div><div class="prose max-w-none text-sm"><p>Inform about a sales order imported</p>
@@ -1782,428 +1680,38 @@
           "payload": {
             "title": "Sales Order Created",
             "description": "Inform about a new sales order",
-            "oneOf": [
-              {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "salesOrderId",
-                  "project",
-                  "createdAt"
-                ],
-                "properties": {
-                  "salesOrderId": {
-                    "type": "integer",
-                    "description": "Unique identifier for the sales order",
-                    "x-parser-schema-id": "<anonymous-schema-3>"
-                  },
-                  "createdAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Timestamp when the order was created",
-                    "x-parser-schema-id": "<anonymous-schema-4>"
-                  },
-                  "project": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Associated project details",
-                    "x-parser-schema-id": "<anonymous-schema-5>"
-                  }
-                },
-                "x-parser-schema-id": "<anonymous-schema-2>"
+            "properties": {
+              "salesOrderId": {
+                "type": "integer",
+                "description": "Unique identifier for the order"
               },
-              {
-                "title": "Sales Order Fat Event Base",
-                "type": "object",
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Project",
+                "additionalProperties": false,
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": "Unique identifier for the event",
-                    "x-parser-schema-id": "<anonymous-schema-7>"
-                  },
-                  "salesOrderId": {
-                    "type": "integer",
-                    "description": "Unique identifier for the sales order",
-                    "x-parser-schema-id": "<anonymous-schema-8>"
-                  },
-                  "documentNumber": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Sales order document number",
-                    "x-parser-schema-id": "<anonymous-schema-9>"
-                  },
-                  "documentDate": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "description": "Date of the sales order document",
-                    "x-parser-schema-id": "<anonymous-schema-10>"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Current status of the sales order",
-                    "x-parser-schema-id": "<anonymous-schema-11>"
-                  },
-                  "writeProtection": {
-                    "type": "boolean",
-                    "description": "Indicates if the sales order is write-protected",
-                    "x-parser-schema-id": "<anonymous-schema-12>"
-                  },
-                  "address": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Customer address information",
-                    "x-parser-schema-id": "<anonymous-schema-13>"
-                  },
-                  "project": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Associated project details",
-                    "x-parser-schema-id": "<anonymous-schema-14>"
-                  },
-                  "documentAddress": {
-                    "type": "object",
-                    "description": "Address used on the document",
-                    "x-parser-schema-id": "<anonymous-schema-15>"
-                  },
-                  "internalDesignation": {
-                    "type": "string",
-                    "description": "Internal designation or reference",
-                    "x-parser-schema-id": "<anonymous-schema-16>"
-                  },
-                  "deviatingShipToAddress": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Alternative shipping address",
-                    "x-parser-schema-id": "<anonymous-schema-17>"
-                  },
-                  "isSalesOrderToSupplier": {
-                    "type": "boolean",
-                    "description": "Indicates if the order is to a supplier",
-                    "x-parser-schema-id": "<anonymous-schema-18>"
-                  },
-                  "externalOrderNumber": {
-                    "type": "string",
-                    "description": "External order number from customer",
-                    "x-parser-schema-id": "<anonymous-schema-19>"
-                  },
-                  "customerOrderNumber": {
-                    "type": "string",
-                    "description": "Customer's own order number",
-                    "x-parser-schema-id": "<anonymous-schema-20>"
-                  },
-                  "transactionNumber": {
-                    "type": "string",
-                    "description": "Transaction number for the order",
-                    "x-parser-schema-id": "<anonymous-schema-21>"
-                  },
-                  "externalOrderId": {
-                    "type": "string",
-                    "description": "External system order identifier",
-                    "x-parser-schema-id": "<anonymous-schema-22>"
-                  },
-                  "desiredDeliveryDate": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "description": "Requested delivery date",
-                    "x-parser-schema-id": "<anonymous-schema-23>"
-                  },
-                  "desiredDeliveryDateAsCalendarWeek": {
-                    "type": "boolean",
-                    "description": "If true, delivery date is specified as a calendar week",
-                    "x-parser-schema-id": "<anonymous-schema-24>"
-                  },
-                  "earliestFulfillmentDate": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "description": "Earliest possible fulfillment date",
-                    "x-parser-schema-id": "<anonymous-schema-25>"
-                  },
-                  "reservationDate": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "description": "Date when the order was reserved",
-                    "x-parser-schema-id": "<anonymous-schema-26>"
-                  },
-                  "preferredWarehouse": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Preferred warehouse for fulfillment",
-                    "x-parser-schema-id": "<anonymous-schema-27>"
-                  },
-                  "commissionConsignmentWarehouse": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Commission or consignment warehouse details",
-                    "x-parser-schema-id": "<anonymous-schema-28>"
-                  },
-                  "storageCountry": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "description": "Country where goods are stored",
-                    "x-parser-schema-id": "<anonymous-schema-29>"
-                  },
-                  "freeText": {
-                    "type": "string",
-                    "description": "Free text notes for the order",
-                    "x-parser-schema-id": "<anonymous-schema-30>"
-                  },
-                  "distribution": {
-                    "type": "string",
-                    "description": "Distribution channel or type",
-                    "x-parser-schema-id": "<anonymous-schema-31>"
-                  },
-                  "useAlternativeDocumentTitle": {
-                    "type": "boolean",
-                    "description": "Indicates if an alternative document title is used",
-                    "x-parser-schema-id": "<anonymous-schema-32>"
-                  },
-                  "autoDispatch": {
-                    "type": "boolean",
-                    "description": "If true, order is dispatched automatically",
-                    "x-parser-schema-id": "<anonymous-schema-33>"
-                  },
-                  "exportCheck": {
-                    "type": "boolean",
-                    "description": "Indicates if export check is required",
-                    "x-parser-schema-id": "<anonymous-schema-34>"
-                  },
-                  "createDocuments": {
-                    "type": "string",
-                    "description": "Document creation instructions",
-                    "x-parser-schema-id": "<anonymous-schema-35>"
-                  },
-                  "manualPaymentApproval": {
-                    "type": "boolean",
-                    "description": "If true, payment requires manual approval",
-                    "x-parser-schema-id": "<anonymous-schema-36>"
-                  },
-                  "manualShippingCostApproval": {
-                    "type": "boolean",
-                    "description": "If true, shipping cost requires manual approval",
-                    "x-parser-schema-id": "<anonymous-schema-37>"
-                  },
-                  "manualDeliveryBlockApproval": {
-                    "type": "boolean",
-                    "description": "If true, delivery block requires manual approval",
-                    "x-parser-schema-id": "<anonymous-schema-38>"
-                  },
-                  "fastLane": {
-                    "type": "boolean",
-                    "description": "Indicates if order is processed via fast lane",
-                    "x-parser-schema-id": "<anonymous-schema-39>"
-                  },
-                  "disableCancellationEmail": {
-                    "type": "boolean",
-                    "description": "If true, cancellation email is disabled",
-                    "x-parser-schema-id": "<anonymous-schema-40>"
-                  },
-                  "disableTrackingEmail": {
-                    "type": "boolean",
-                    "description": "If true, tracking email is disabled",
-                    "x-parser-schema-id": "<anonymous-schema-41>"
-                  },
-                  "disablePaymentEmail": {
-                    "type": "boolean",
-                    "description": "If true, payment email is disabled",
-                    "x-parser-schema-id": "<anonymous-schema-42>"
-                  },
-                  "language": {
-                    "type": "string",
-                    "description": "Language code for the order",
-                    "x-parser-schema-id": "<anonymous-schema-43>"
-                  },
-                  "texts": {
-                    "type": "object",
-                    "description": "Text blocks or translations",
-                    "x-parser-schema-id": "<anonymous-schema-44>"
-                  },
-                  "vatId": {
-                    "type": "string",
-                    "description": "VAT identification number",
-                    "x-parser-schema-id": "<anonymous-schema-45>"
-                  },
-                  "costCenter": {
-                    "type": "string",
-                    "description": "Cost center reference",
-                    "x-parser-schema-id": "<anonymous-schema-46>"
-                  },
-                  "deliveryTerms": {
-                    "type": "string",
-                    "description": "Delivery terms (e.g., Incoterms)",
-                    "x-parser-schema-id": "<anonymous-schema-47>"
-                  },
-                  "internalComment": {
-                    "type": "string",
-                    "description": "Internal comment or note",
-                    "x-parser-schema-id": "<anonymous-schema-48>"
-                  },
-                  "directDebitDate": {
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "description": "Date for direct debit payment",
-                    "x-parser-schema-id": "<anonymous-schema-49>"
-                  },
-                  "shippingMethod": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Shipping method details",
-                    "x-parser-schema-id": "<anonymous-schema-50>"
-                  },
-                  "effectiveAddresses": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "items": {
-                      "type": "object"
-                    },
-                    "description": "List of effective addresses for delivery",
-                    "x-parser-schema-id": "<anonymous-schema-51>"
-                  },
-                  "financials": {
-                    "type": "object",
-                    "description": "Financial details of the order",
-                    "x-parser-schema-id": "<anonymous-schema-52>"
-                  },
-                  "masterReferenceNumber": {
-                    "type": "string",
-                    "description": "Master reference number for the order",
-                    "x-parser-schema-id": "<anonymous-schema-53>"
-                  },
-                  "printSettings": {
-                    "type": "object",
-                    "description": "Settings for document printing",
-                    "x-parser-schema-id": "<anonymous-schema-54>"
-                  },
-                  "sales": {
-                    "type": "object",
-                    "description": "Sales representative or team information",
-                    "x-parser-schema-id": "<anonymous-schema-55>"
-                  },
-                  "editor": {
-                    "type": "object",
-                    "description": "User or system that last edited the order",
-                    "x-parser-schema-id": "<anonymous-schema-56>"
-                  },
-                  "trafficLights": {
-                    "type": "object",
-                    "description": "Traffic light status indicators",
-                    "x-parser-schema-id": "<anonymous-schema-57>"
-                  },
-                  "currentlyEditedBy": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "User currently editing the order",
-                    "x-parser-schema-id": "<anonymous-schema-58>"
-                  },
-                  "createdAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Timestamp when the order was created",
-                    "x-parser-schema-id": "<anonymous-schema-59>"
-                  },
-                  "updatedAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Timestamp when the order was last updated",
-                    "x-parser-schema-id": "<anonymous-schema-60>"
+                    "minimum": 1,
+                    "description": "Unique identifier for the project"
                   }
-                },
-                "required": [
-                  "id",
-                  "salesOrderId",
-                  "documentNumber",
-                  "documentDate",
-                  "status",
-                  "writeProtection",
-                  "address",
-                  "project",
-                  "documentAddress",
-                  "internalDesignation",
-                  "deviatingShipToAddress",
-                  "isSalesOrderToSupplier",
-                  "externalOrderNumber",
-                  "customerOrderNumber",
-                  "transactionNumber",
-                  "externalOrderId",
-                  "desiredDeliveryDate",
-                  "desiredDeliveryDateAsCalendarWeek",
-                  "earliestFulfillmentDate",
-                  "reservationDate",
-                  "preferredWarehouse",
-                  "commissionConsignmentWarehouse",
-                  "storageCountry",
-                  "freeText",
-                  "distribution",
-                  "useAlternativeDocumentTitle",
-                  "autoDispatch",
-                  "exportCheck",
-                  "createDocuments",
-                  "manualPaymentApproval",
-                  "manualShippingCostApproval",
-                  "manualDeliveryBlockApproval",
-                  "fastLane",
-                  "disableCancellationEmail",
-                  "disableTrackingEmail",
-                  "disablePaymentEmail",
-                  "language",
-                  "texts",
-                  "vatId",
-                  "costCenter",
-                  "deliveryTerms",
-                  "internalComment",
-                  "directDebitDate",
-                  "shippingMethod",
-                  "effectiveAddresses",
-                  "financials",
-                  "masterReferenceNumber",
-                  "printSettings",
-                  "sales",
-                  "editor",
-                  "trafficLights",
-                  "currentlyEditedBy",
-                  "createdAt",
-                  "updatedAt"
-                ],
-                "additionalProperties": false,
-                "x-parser-schema-id": "<anonymous-schema-6>"
+                }
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Order creation date and time"
               }
+            },
+            "required": [
+              "salesOrderId",
+              "project",
+              "createdAt"
             ],
+            "additionalProperties": false,
             "x-parser-schema-id": "<anonymous-schema-1>"
           }
         }
@@ -2248,7 +1756,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-61>"
+            "x-parser-schema-id": "<anonymous-schema-2>"
           }
         }
       }
@@ -2292,7 +1800,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-62>"
+            "x-parser-schema-id": "<anonymous-schema-3>"
           }
         }
       }
@@ -2304,42 +1812,39 @@
           "name": "SalesOrderUpdated",
           "payload": {
             "title": "Sales Order Updated",
-            "description": "Inform about an updated sales order",
-            "oneOf": [
-              {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "salesOrderId",
-                  "project",
-                  "createdAt"
-                ],
-                "properties": {
-                  "salesOrderId": {
-                    "type": "integer",
-                    "description": "Unique identifier for the sales order",
-                    "x-parser-schema-id": "<anonymous-schema-65>"
-                  },
-                  "updatedAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Timestamp when the order was created",
-                    "x-parser-schema-id": "<anonymous-schema-66>"
-                  },
-                  "project": {
-                    "type": [
-                      "object",
-                      "null"
-                    ],
-                    "description": "Associated project details",
-                    "x-parser-schema-id": "<anonymous-schema-67>"
-                  }
-                },
-                "x-parser-schema-id": "<anonymous-schema-64>"
+            "description": "Inform about a sales order updated",
+            "properties": {
+              "salesOrderId": {
+                "type": "integer",
+                "description": "Unique identifier for the order"
               },
-              "$ref:$.channels.salesOrder.created.publish.message.payload.oneOf[1]"
+              "project": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Project",
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "Unique identifier for the project"
+                  }
+                }
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Order update date and time"
+              }
+            },
+            "required": [
+              "salesOrderId",
+              "project",
+              "updatedAt"
             ],
-            "x-parser-schema-id": "<anonymous-schema-63>"
+            "additionalProperties": false,
+            "x-parser-schema-id": "<anonymous-schema-4>"
           }
         }
       }
@@ -2383,7 +1888,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-68>"
+            "x-parser-schema-id": "<anonymous-schema-5>"
           }
         }
       }
@@ -2428,7 +1933,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-69>"
+            "x-parser-schema-id": "<anonymous-schema-6>"
           }
         }
       }
@@ -2472,7 +1977,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-70>"
+            "x-parser-schema-id": "<anonymous-schema-7>"
           }
         }
       }
@@ -2516,7 +2021,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-71>"
+            "x-parser-schema-id": "<anonymous-schema-8>"
           }
         }
       }
@@ -2565,7 +2070,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-72>"
+            "x-parser-schema-id": "<anonymous-schema-9>"
           }
         }
       }
@@ -2620,7 +2125,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-73>"
+            "x-parser-schema-id": "<anonymous-schema-10>"
           }
         }
       }
@@ -2675,7 +2180,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-74>"
+            "x-parser-schema-id": "<anonymous-schema-11>"
           }
         }
       }
@@ -2730,7 +2235,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-75>"
+            "x-parser-schema-id": "<anonymous-schema-12>"
           }
         }
       }
@@ -2785,7 +2290,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-76>"
+            "x-parser-schema-id": "<anonymous-schema-13>"
           }
         }
       }
@@ -2836,7 +2341,7 @@
               "number"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-77>"
+            "x-parser-schema-id": "<anonymous-schema-14>"
           }
         }
       }
@@ -2887,7 +2392,7 @@
               "number"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-78>"
+            "x-parser-schema-id": "<anonymous-schema-15>"
           }
         }
       }
@@ -2910,7 +2415,7 @@
               "id"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-79>"
+            "x-parser-schema-id": "<anonymous-schema-16>"
           }
         }
       }
@@ -2961,7 +2466,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-80>"
+            "x-parser-schema-id": "<anonymous-schema-17>"
           }
         }
       }
@@ -3009,7 +2514,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-81>"
+            "x-parser-schema-id": "<anonymous-schema-18>"
           }
         }
       }
@@ -3045,7 +2550,7 @@
               "properties"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-82>"
+            "x-parser-schema-id": "<anonymous-schema-19>"
           }
         }
       }
@@ -3089,7 +2594,7 @@
                 }
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-83>"
+            "x-parser-schema-id": "<anonymous-schema-20>"
           }
         }
       }
@@ -3132,7 +2637,7 @@
               "variantOf"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-84>"
+            "x-parser-schema-id": "<anonymous-schema-21>"
           }
         }
       }
@@ -3165,7 +2670,7 @@
               "name"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-85>"
+            "x-parser-schema-id": "<anonymous-schema-22>"
           }
         }
       }
@@ -3271,7 +2776,7 @@
                 "format": "date"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-86>"
+            "x-parser-schema-id": "<anonymous-schema-23>"
           }
         }
       }
@@ -3377,7 +2882,7 @@
                 "format": "date"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-87>"
+            "x-parser-schema-id": "<anonymous-schema-24>"
           }
         }
       }
@@ -3400,7 +2905,7 @@
                 "description": "ID"
               }
             },
-            "x-parser-schema-id": "<anonymous-schema-88>"
+            "x-parser-schema-id": "<anonymous-schema-25>"
           }
         }
       }
@@ -3570,7 +3075,7 @@
               "expiresAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-89>"
+            "x-parser-schema-id": "<anonymous-schema-26>"
           }
         }
       }
@@ -3740,7 +3245,7 @@
               "expiresAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-90>"
+            "x-parser-schema-id": "<anonymous-schema-27>"
           }
         }
       }
@@ -3763,7 +3268,7 @@
               "id"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-91>"
+            "x-parser-schema-id": "<anonymous-schema-28>"
           }
         }
       }
@@ -3794,7 +3299,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-92>"
+            "x-parser-schema-id": "<anonymous-schema-29>"
           }
         }
       }
@@ -3825,7 +3330,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-93>"
+            "x-parser-schema-id": "<anonymous-schema-30>"
           }
         }
       }
@@ -3856,7 +3361,7 @@
               "parentId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-94>"
+            "x-parser-schema-id": "<anonymous-schema-31>"
           }
         }
       }
@@ -3885,7 +3390,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-95>"
+            "x-parser-schema-id": "<anonymous-schema-32>"
           }
         }
       }
@@ -3914,7 +3419,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-96>"
+            "x-parser-schema-id": "<anonymous-schema-33>"
           }
         }
       }
@@ -3943,7 +3448,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-97>"
+            "x-parser-schema-id": "<anonymous-schema-34>"
           }
         }
       }
@@ -3972,7 +3477,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-98>"
+            "x-parser-schema-id": "<anonymous-schema-35>"
           }
         }
       }
@@ -4001,7 +3506,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-99>"
+            "x-parser-schema-id": "<anonymous-schema-36>"
           }
         }
       }
@@ -4030,7 +3535,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-100>"
+            "x-parser-schema-id": "<anonymous-schema-37>"
           }
         }
       }
@@ -4059,7 +3564,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-101>"
+            "x-parser-schema-id": "<anonymous-schema-38>"
           }
         }
       }
@@ -4093,7 +3598,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-102>"
+            "x-parser-schema-id": "<anonymous-schema-39>"
           }
         }
       }
@@ -4122,7 +3627,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-103>"
+            "x-parser-schema-id": "<anonymous-schema-40>"
           }
         }
       }
@@ -4151,7 +3656,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-104>"
+            "x-parser-schema-id": "<anonymous-schema-41>"
           }
         }
       }
@@ -4180,7 +3685,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-105>"
+            "x-parser-schema-id": "<anonymous-schema-42>"
           }
         }
       }
@@ -4209,7 +3714,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-106>"
+            "x-parser-schema-id": "<anonymous-schema-43>"
           }
         }
       }
@@ -4238,7 +3743,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-107>"
+            "x-parser-schema-id": "<anonymous-schema-44>"
           }
         }
       }
@@ -4267,7 +3772,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-108>"
+            "x-parser-schema-id": "<anonymous-schema-45>"
           }
         }
       }
@@ -4296,7 +3801,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-109>"
+            "x-parser-schema-id": "<anonymous-schema-46>"
           }
         }
       }
@@ -4330,7 +3835,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-110>"
+            "x-parser-schema-id": "<anonymous-schema-47>"
           }
         }
       }
@@ -4359,7 +3864,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-111>"
+            "x-parser-schema-id": "<anonymous-schema-48>"
           }
         }
       }
@@ -4388,7 +3893,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-112>"
+            "x-parser-schema-id": "<anonymous-schema-49>"
           }
         }
       }
@@ -4417,7 +3922,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-113>"
+            "x-parser-schema-id": "<anonymous-schema-50>"
           }
         }
       }
@@ -4446,7 +3951,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-114>"
+            "x-parser-schema-id": "<anonymous-schema-51>"
           }
         }
       }
@@ -4475,7 +3980,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-115>"
+            "x-parser-schema-id": "<anonymous-schema-52>"
           }
         }
       }
@@ -4504,7 +4009,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-116>"
+            "x-parser-schema-id": "<anonymous-schema-53>"
           }
         }
       }
@@ -4533,7 +4038,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-117>"
+            "x-parser-schema-id": "<anonymous-schema-54>"
           }
         }
       }
@@ -4567,7 +4072,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-118>"
+            "x-parser-schema-id": "<anonymous-schema-55>"
           }
         }
       }
@@ -4597,7 +4102,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-119>"
+            "x-parser-schema-id": "<anonymous-schema-56>"
           }
         }
       }
@@ -4627,7 +4132,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-120>"
+            "x-parser-schema-id": "<anonymous-schema-57>"
           }
         }
       }
@@ -4657,7 +4162,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-121>"
+            "x-parser-schema-id": "<anonymous-schema-58>"
           }
         }
       }
@@ -4687,7 +4192,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-122>"
+            "x-parser-schema-id": "<anonymous-schema-59>"
           }
         }
       }
@@ -4717,7 +4222,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-123>"
+            "x-parser-schema-id": "<anonymous-schema-60>"
           }
         }
       }
@@ -4747,7 +4252,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-124>"
+            "x-parser-schema-id": "<anonymous-schema-61>"
           }
         }
       }
@@ -4777,7 +4282,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-125>"
+            "x-parser-schema-id": "<anonymous-schema-62>"
           }
         }
       }
@@ -4812,7 +4317,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-126>"
+            "x-parser-schema-id": "<anonymous-schema-63>"
           }
         }
       }
@@ -4841,7 +4346,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-127>"
+            "x-parser-schema-id": "<anonymous-schema-64>"
           }
         }
       }
@@ -4870,7 +4375,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-128>"
+            "x-parser-schema-id": "<anonymous-schema-65>"
           }
         }
       }
@@ -4899,7 +4404,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-129>"
+            "x-parser-schema-id": "<anonymous-schema-66>"
           }
         }
       }
@@ -4928,7 +4433,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-130>"
+            "x-parser-schema-id": "<anonymous-schema-67>"
           }
         }
       }
@@ -4962,7 +4467,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-131>"
+            "x-parser-schema-id": "<anonymous-schema-68>"
           }
         }
       }
@@ -4991,7 +4496,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-132>"
+            "x-parser-schema-id": "<anonymous-schema-69>"
           }
         }
       }
@@ -5020,7 +4525,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-133>"
+            "x-parser-schema-id": "<anonymous-schema-70>"
           }
         }
       }
@@ -5049,7 +4554,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-134>"
+            "x-parser-schema-id": "<anonymous-schema-71>"
           }
         }
       }
@@ -5078,7 +4583,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-135>"
+            "x-parser-schema-id": "<anonymous-schema-72>"
           }
         }
       }
@@ -5107,7 +4612,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-136>"
+            "x-parser-schema-id": "<anonymous-schema-73>"
           }
         }
       }
@@ -5136,7 +4641,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-137>"
+            "x-parser-schema-id": "<anonymous-schema-74>"
           }
         }
       }
@@ -5165,7 +4670,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-138>"
+            "x-parser-schema-id": "<anonymous-schema-75>"
           }
         }
       }
@@ -5194,7 +4699,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-139>"
+            "x-parser-schema-id": "<anonymous-schema-76>"
           }
         }
       }
@@ -5223,7 +4728,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-140>"
+            "x-parser-schema-id": "<anonymous-schema-77>"
           }
         }
       }
@@ -5252,7 +4757,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-141>"
+            "x-parser-schema-id": "<anonymous-schema-78>"
           }
         }
       }
@@ -5281,7 +4786,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-142>"
+            "x-parser-schema-id": "<anonymous-schema-79>"
           }
         }
       }
@@ -5315,7 +4820,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-143>"
+            "x-parser-schema-id": "<anonymous-schema-80>"
           }
         }
       }
@@ -5344,7 +4849,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-144>"
+            "x-parser-schema-id": "<anonymous-schema-81>"
           }
         }
       }
@@ -5373,7 +4878,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-145>"
+            "x-parser-schema-id": "<anonymous-schema-82>"
           }
         }
       }
@@ -5402,7 +4907,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-146>"
+            "x-parser-schema-id": "<anonymous-schema-83>"
           }
         }
       }
@@ -5431,7 +4936,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-147>"
+            "x-parser-schema-id": "<anonymous-schema-84>"
           }
         }
       }
@@ -5460,7 +4965,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-148>"
+            "x-parser-schema-id": "<anonymous-schema-85>"
           }
         }
       }
@@ -5494,7 +4999,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-149>"
+            "x-parser-schema-id": "<anonymous-schema-86>"
           }
         }
       }
@@ -5524,7 +5029,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-150>"
+            "x-parser-schema-id": "<anonymous-schema-87>"
           }
         }
       }
@@ -5554,7 +5059,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-151>"
+            "x-parser-schema-id": "<anonymous-schema-88>"
           }
         }
       }
@@ -5583,7 +5088,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-152>"
+            "x-parser-schema-id": "<anonymous-schema-89>"
           }
         }
       }
@@ -5613,7 +5118,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-153>"
+            "x-parser-schema-id": "<anonymous-schema-90>"
           }
         }
       }
@@ -5642,7 +5147,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-154>"
+            "x-parser-schema-id": "<anonymous-schema-91>"
           }
         }
       }
@@ -5671,7 +5176,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-155>"
+            "x-parser-schema-id": "<anonymous-schema-92>"
           }
         }
       }
@@ -5700,7 +5205,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-156>"
+            "x-parser-schema-id": "<anonymous-schema-93>"
           }
         }
       }
@@ -5729,7 +5234,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-157>"
+            "x-parser-schema-id": "<anonymous-schema-94>"
           }
         }
       }
@@ -5758,7 +5263,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-158>"
+            "x-parser-schema-id": "<anonymous-schema-95>"
           }
         }
       }
@@ -5792,7 +5297,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-159>"
+            "x-parser-schema-id": "<anonymous-schema-96>"
           }
         }
       }
@@ -5834,7 +5339,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-160>"
+            "x-parser-schema-id": "<anonymous-schema-97>"
           }
         }
       }
@@ -5863,7 +5368,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-161>"
+            "x-parser-schema-id": "<anonymous-schema-98>"
           }
         }
       }
@@ -5892,7 +5397,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-162>"
+            "x-parser-schema-id": "<anonymous-schema-99>"
           }
         }
       }
@@ -5921,7 +5426,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-163>"
+            "x-parser-schema-id": "<anonymous-schema-100>"
           }
         }
       }
@@ -5950,7 +5455,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-164>"
+            "x-parser-schema-id": "<anonymous-schema-101>"
           }
         }
       }
@@ -5979,7 +5484,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-165>"
+            "x-parser-schema-id": "<anonymous-schema-102>"
           }
         }
       }
@@ -6008,7 +5513,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-166>"
+            "x-parser-schema-id": "<anonymous-schema-103>"
           }
         }
       }
@@ -6037,7 +5542,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-167>"
+            "x-parser-schema-id": "<anonymous-schema-104>"
           }
         }
       }
@@ -6071,7 +5576,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-168>"
+            "x-parser-schema-id": "<anonymous-schema-105>"
           }
         }
       }
@@ -6108,7 +5613,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-169>"
+            "x-parser-schema-id": "<anonymous-schema-106>"
           }
         }
       }
@@ -6144,7 +5649,7 @@
               "productNumbers"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-170>"
+            "x-parser-schema-id": "<anonymous-schema-107>"
           }
         }
       }
@@ -6177,7 +5682,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-171>"
+            "x-parser-schema-id": "<anonymous-schema-108>"
           }
         }
       }
@@ -6210,7 +5715,7 @@
               "productNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-172>"
+            "x-parser-schema-id": "<anonymous-schema-109>"
           }
         }
       }
@@ -6244,7 +5749,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-173>"
+            "x-parser-schema-id": "<anonymous-schema-110>"
           }
         }
       }
@@ -6273,7 +5778,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-174>"
+            "x-parser-schema-id": "<anonymous-schema-111>"
           }
         }
       }
@@ -6302,7 +5807,7 @@
               "exportedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-175>"
+            "x-parser-schema-id": "<anonymous-schema-112>"
           }
         }
       }
@@ -6331,7 +5836,7 @@
               "viewedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-176>"
+            "x-parser-schema-id": "<anonymous-schema-113>"
           }
         }
       }
@@ -6355,7 +5860,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-177>"
+            "x-parser-schema-id": "<anonymous-schema-114>"
           }
         }
       }
@@ -6379,7 +5884,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-178>"
+            "x-parser-schema-id": "<anonymous-schema-115>"
           }
         }
       }
@@ -6416,7 +5921,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-179>"
+            "x-parser-schema-id": "<anonymous-schema-116>"
           }
         }
       }
@@ -6461,7 +5966,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-180>"
+            "x-parser-schema-id": "<anonymous-schema-117>"
           }
         }
       }
@@ -6491,7 +5996,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-181>"
+            "x-parser-schema-id": "<anonymous-schema-118>"
           }
         }
       }
@@ -6546,7 +6051,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-182>"
+            "x-parser-schema-id": "<anonymous-schema-119>"
           }
         }
       }
@@ -6604,7 +6109,7 @@
               "trackingNumber"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-183>"
+            "x-parser-schema-id": "<anonymous-schema-120>"
           }
         }
       }
@@ -6633,7 +6138,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-184>"
+            "x-parser-schema-id": "<anonymous-schema-121>"
           }
         }
       }
@@ -6656,7 +6161,7 @@
               "pickListId"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-185>"
+            "x-parser-schema-id": "<anonymous-schema-122>"
           }
         }
       }
@@ -6686,7 +6191,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-186>"
+            "x-parser-schema-id": "<anonymous-schema-123>"
           }
         }
       }
@@ -6722,7 +6227,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-187>"
+            "x-parser-schema-id": "<anonymous-schema-124>"
           }
         }
       }
@@ -6763,7 +6268,7 @@
               "errorDescription"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-188>"
+            "x-parser-schema-id": "<anonymous-schema-125>"
           }
         }
       }
@@ -6797,7 +6302,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-189>"
+            "x-parser-schema-id": "<anonymous-schema-126>"
           }
         }
       }
@@ -6831,7 +6336,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-190>"
+            "x-parser-schema-id": "<anonymous-schema-127>"
           }
         }
       }
@@ -6866,7 +6371,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-191>"
+            "x-parser-schema-id": "<anonymous-schema-128>"
           }
         }
       }
@@ -6890,7 +6395,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-192>"
+            "x-parser-schema-id": "<anonymous-schema-129>"
           }
         }
       }
@@ -6914,7 +6419,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-193>"
+            "x-parser-schema-id": "<anonymous-schema-130>"
           }
         }
       }
@@ -6969,7 +6474,7 @@
               "businessAccountType"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-194>"
+            "x-parser-schema-id": "<anonymous-schema-131>"
           }
         }
       }
@@ -6993,7 +6498,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-195>"
+            "x-parser-schema-id": "<anonymous-schema-132>"
           }
         }
       }
@@ -7017,7 +6522,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-196>"
+            "x-parser-schema-id": "<anonymous-schema-133>"
           }
         }
       }
@@ -7100,7 +6605,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-197>"
+            "x-parser-schema-id": "<anonymous-schema-134>"
           }
         }
       }
@@ -7316,7 +6821,7 @@
               "shouldCreateQr"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-198>"
+            "x-parser-schema-id": "<anonymous-schema-135>"
           }
         }
       }
@@ -7345,7 +6850,7 @@
               "createdAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-199>"
+            "x-parser-schema-id": "<anonymous-schema-136>"
           }
         }
       }
@@ -7374,7 +6879,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-200>"
+            "x-parser-schema-id": "<anonymous-schema-137>"
           }
         }
       }
@@ -7403,7 +6908,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-201>"
+            "x-parser-schema-id": "<anonymous-schema-138>"
           }
         }
       }
@@ -7432,7 +6937,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-202>"
+            "x-parser-schema-id": "<anonymous-schema-139>"
           }
         }
       }
@@ -7461,7 +6966,7 @@
               "updatedAt"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-203>"
+            "x-parser-schema-id": "<anonymous-schema-140>"
           }
         }
       }
@@ -7493,7 +6998,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-204>"
+            "x-parser-schema-id": "<anonymous-schema-141>"
           }
         }
       }
@@ -7536,7 +7041,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-205>"
+            "x-parser-schema-id": "<anonymous-schema-142>"
           }
         }
       }
@@ -7568,7 +7073,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-206>"
+            "x-parser-schema-id": "<anonymous-schema-143>"
           }
         }
       }
@@ -7611,7 +7116,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-207>"
+            "x-parser-schema-id": "<anonymous-schema-144>"
           }
         }
       }
@@ -7643,7 +7148,7 @@
               "product"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-208>"
+            "x-parser-schema-id": "<anonymous-schema-145>"
           }
         }
       }
@@ -7686,7 +7191,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-209>"
+            "x-parser-schema-id": "<anonymous-schema-146>"
           }
         }
       }
@@ -7729,7 +7234,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-210>"
+            "x-parser-schema-id": "<anonymous-schema-147>"
           }
         }
       }
@@ -7772,7 +7277,7 @@
               "crossSellingProduct"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-211>"
+            "x-parser-schema-id": "<anonymous-schema-148>"
           }
         }
       }
@@ -7815,7 +7320,7 @@
               "productPart"
             ],
             "additionalProperties": false,
-            "x-parser-schema-id": "<anonymous-schema-212>"
+            "x-parser-schema-id": "<anonymous-schema-149>"
           }
         }
       }
