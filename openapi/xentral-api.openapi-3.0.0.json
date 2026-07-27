@@ -36790,39 +36790,159 @@
         }
       }
     },
-    "/api/v1/revenueAccountMapping": {
+    "/api/v1/revenueAccountMapping/group": {
       "post": {
         "tags": [
           "Revenue Account Mapping"
         ],
-        "operationId": "revenueAccountMapping.create.v1",
+        "operationId": "revenueAccountMapping.group.create.v1",
         "summary": "🔒 Create revenue account mapping",
         "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nCreate revenue account mapping",
         "requestBody": {
-          "description": "Create a revenue account mapping object",
+          "description": "Create or replace a grouped revenue account mapping (posting rule exception)",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": true,
                 "required": [
-                  "accountId"
+                  "name",
+                  "accountId",
+                  "deliveryCountryCode"
                 ],
                 "properties": {
+                  "name": {
+                    "type": "string"
+                  },
                   "accountId": {
                     "type": "string"
                   },
                   "deliveryCountryCode": {
-                    "type": "string"
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
                   },
-                  "projectId": {
-                    "type": "string"
+                  "project": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
-                  "productId": {
-                    "type": "string"
+                  "product": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
-                  "warehouseId": {
-                    "type": "string"
+                  "productCategory": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
+                  },
+                  "taxType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
                   "isActive": {
                     "type": "boolean"
@@ -36830,13 +36950,34 @@
                 }
               },
               "examples": {
-                "revenue account mapping": {
+                "revenue account mapping group": {
                   "value": {
+                    "name": "EU exception",
                     "accountId": "1",
-                    "deliveryCountryCode": "DE",
-                    "projectId": "1",
-                    "productId": "1",
-                    "warehouseId": "1",
+                    "deliveryCountryCode": [
+                      "DE",
+                      "AT"
+                    ],
+                    "project": [
+                      {
+                        "id": "1",
+                        "name": "Project A"
+                      }
+                    ],
+                    "product": [],
+                    "productCategory": [
+                      {
+                        "id": "7",
+                        "name": "Tools"
+                      }
+                    ],
+                    "taxType": [
+                      {
+                        "id": "3",
+                        "name": "Standard"
+                      }
+                    ],
+                    "shop": [],
                     "isActive": true
                   }
                 }
@@ -36852,51 +36993,157 @@
                 "schema": {
                   "type": "object",
                   "additionalProperties": true,
-                  "description": "Revenue account mapping entry",
+                  "description": "Grouped revenue account mapping entry (posting rule exception). Aggregates the OR-rows that share a group id.",
                   "properties": {
-                    "id": {
-                      "description": "Revenue account mapping ID",
+                    "groupId": {
+                      "description": "Group ID",
                       "type": "string",
-                      "example": "1"
-                    },
-                    "accountId": {
-                      "description": "Account ID",
-                      "type": "string",
-                      "example": "1000"
+                      "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
                     },
                     "name": {
                       "description": "Name of the mapping",
                       "type": "string",
-                      "example": "Mapping Rule 1"
+                      "example": "EU exception"
+                    },
+                    "account": {
+                      "description": "Booking account",
+                      "type": "object",
+                      "additionalProperties": true,
+                      "example": {
+                        "id": "1",
+                        "accountNumber": "8400"
+                      }
                     },
                     "deliveryCountryCode": {
-                      "description": "Delivery country code",
-                      "type": "string",
-                      "example": "DE"
+                      "description": "Delivery country codes",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "DE",
+                        "AT"
+                      ]
                     },
-                    "projectId": {
-                      "description": "Project ID",
-                      "type": "string",
-                      "nullable": true,
-                      "example": "1"
+                    "taxType": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "An id/name reference used within a revenue account mapping group",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "Entity ID",
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "name": {
+                            "description": "Entity display name",
+                            "type": "string",
+                            "example": "Project A"
+                          }
+                        }
+                      }
                     },
-                    "productId": {
-                      "description": "Product ID",
-                      "type": "string",
-                      "nullable": true,
-                      "example": "1"
+                    "project": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "An id/name reference used within a revenue account mapping group",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "Entity ID",
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "name": {
+                            "description": "Entity display name",
+                            "type": "string",
+                            "example": "Project A"
+                          }
+                        }
+                      }
                     },
-                    "warehouseId": {
-                      "description": "Warehouse ID",
-                      "type": "string",
-                      "nullable": true,
-                      "example": "1"
+                    "product": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "An id/name reference used within a revenue account mapping group",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "Entity ID",
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "name": {
+                            "description": "Entity display name",
+                            "type": "string",
+                            "example": "Project A"
+                          }
+                        }
+                      }
                     },
-                    "warehouseCountryCode": {
-                      "description": "Warehouse country code",
-                      "type": "string",
-                      "nullable": true,
-                      "example": "DE"
+                    "productCategory": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "An id/name reference used within a revenue account mapping group",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "Entity ID",
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "name": {
+                            "description": "Entity display name",
+                            "type": "string",
+                            "example": "Project A"
+                          }
+                        }
+                      }
+                    },
+                    "shop": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "description": "An id/name reference used within a revenue account mapping group",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "Entity ID",
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "name": {
+                            "description": "Entity display name",
+                            "type": "string",
+                            "example": "Project A"
+                          }
+                        }
+                      }
                     },
                     "isActive": {
                       "description": "Is active",
@@ -36915,18 +37162,6 @@
                       "format": "date-time",
                       "example": "2022-01-01T00:00:00Z"
                     }
-                  },
-                  "example": {
-                    "id": "1",
-                    "accountId": "1000",
-                    "deliveryCountryCode": "DE",
-                    "projectId": "1",
-                    "productId": "1",
-                    "warehouseId": "1",
-                    "warehouseCountryCode": "DE",
-                    "isActive": true,
-                    "createdAt": "2022-01-01T00:00:00Z",
-                    "updatedAt": "2022-01-01T00:00:00Z"
                   }
                 }
               }
@@ -37335,7 +37570,7 @@
         "tags": [
           "Revenue Account Mapping"
         ],
-        "operationId": "revenueAccountMapping.list.v1",
+        "operationId": "revenueAccountMapping.group.list.v1",
         "summary": "🔒 List Revenue Account Mapping Entries",
         "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nList revenue account mapping entries",
         "parameters": [
@@ -37353,19 +37588,14 @@
                   "key": {
                     "type": "string",
                     "enum": [
-                      "id",
-                      "accountId",
-                      "deliveryCountryCode",
+                      "groupId",
                       "name",
-                      "projectId",
-                      "warehouseId",
-                      "productId",
-                      "warehouseCountryCode",
+                      "accountId",
                       "isActive",
                       "createdAt",
                       "updatedAt"
                     ],
-                    "example": "id"
+                    "example": "groupId"
                   },
                   "op": {
                     "type": "string",
@@ -37448,13 +37678,9 @@
                   "field": {
                     "type": "string",
                     "enum": [
-                      "id",
+                      "groupId",
+                      "name",
                       "accountId",
-                      "deliveryCountryCode",
-                      "projectId",
-                      "warehouseId",
-                      "productId",
-                      "warehouseCountryCode",
                       "isActive",
                       "createdAt",
                       "updatedAt"
@@ -37486,51 +37712,157 @@
                       "items": {
                         "type": "object",
                         "additionalProperties": true,
-                        "description": "Revenue account mapping entry",
+                        "description": "Grouped revenue account mapping entry (posting rule exception). Aggregates the OR-rows that share a group id.",
                         "properties": {
-                          "id": {
-                            "description": "Revenue account mapping ID",
+                          "groupId": {
+                            "description": "Group ID",
                             "type": "string",
-                            "example": "1"
-                          },
-                          "accountId": {
-                            "description": "Account ID",
-                            "type": "string",
-                            "example": "1000"
+                            "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
                           },
                           "name": {
                             "description": "Name of the mapping",
                             "type": "string",
-                            "example": "Mapping Rule 1"
+                            "example": "EU exception"
+                          },
+                          "account": {
+                            "description": "Booking account",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "example": {
+                              "id": "1",
+                              "accountNumber": "8400"
+                            }
                           },
                           "deliveryCountryCode": {
-                            "description": "Delivery country code",
-                            "type": "string",
-                            "example": "DE"
+                            "description": "Delivery country codes",
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "DE",
+                              "AT"
+                            ]
                           },
-                          "projectId": {
-                            "description": "Project ID",
-                            "type": "string",
-                            "nullable": true,
-                            "example": "1"
+                          "taxType": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "An id/name reference used within a revenue account mapping group",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "description": "Entity ID",
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "name": {
+                                  "description": "Entity display name",
+                                  "type": "string",
+                                  "example": "Project A"
+                                }
+                              }
+                            }
                           },
-                          "productId": {
-                            "description": "Product ID",
-                            "type": "string",
-                            "nullable": true,
-                            "example": "1"
+                          "project": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "An id/name reference used within a revenue account mapping group",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "description": "Entity ID",
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "name": {
+                                  "description": "Entity display name",
+                                  "type": "string",
+                                  "example": "Project A"
+                                }
+                              }
+                            }
                           },
-                          "warehouseId": {
-                            "description": "Warehouse ID",
-                            "type": "string",
-                            "nullable": true,
-                            "example": "1"
+                          "product": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "An id/name reference used within a revenue account mapping group",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "description": "Entity ID",
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "name": {
+                                  "description": "Entity display name",
+                                  "type": "string",
+                                  "example": "Project A"
+                                }
+                              }
+                            }
                           },
-                          "warehouseCountryCode": {
-                            "description": "Warehouse country code",
-                            "type": "string",
-                            "nullable": true,
-                            "example": "DE"
+                          "productCategory": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "An id/name reference used within a revenue account mapping group",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "description": "Entity ID",
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "name": {
+                                  "description": "Entity display name",
+                                  "type": "string",
+                                  "example": "Project A"
+                                }
+                              }
+                            }
+                          },
+                          "shop": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "description": "An id/name reference used within a revenue account mapping group",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "description": "Entity ID",
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "name": {
+                                  "description": "Entity display name",
+                                  "type": "string",
+                                  "example": "Project A"
+                                }
+                              }
+                            }
                           },
                           "isActive": {
                             "description": "Is active",
@@ -37549,18 +37881,6 @@
                             "format": "date-time",
                             "example": "2022-01-01T00:00:00Z"
                           }
-                        },
-                        "example": {
-                          "id": "1",
-                          "accountId": "1000",
-                          "deliveryCountryCode": "DE",
-                          "projectId": "1",
-                          "productId": "1",
-                          "warehouseId": "1",
-                          "warehouseCountryCode": "DE",
-                          "isActive": true,
-                          "createdAt": "2022-01-01T00:00:00Z",
-                          "updatedAt": "2022-01-01T00:00:00Z"
                         }
                       }
                     }
@@ -37817,12 +38137,12 @@
         }
       }
     },
-    "/api/v1/revenueAccountMapping/{id}": {
+    "/api/v1/revenueAccountMapping/group/{id}": {
       "get": {
         "tags": [
           "Revenue Account Mapping"
         ],
-        "operationId": "revenueAccountMapping.get.v1",
+        "operationId": "revenueAccountMapping.group.get.v1",
         "summary": "🔒 Get Revenue Account Mapping Entry by ID",
         "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nRetrieves a specific revenue account mapping entry by its ID.",
         "parameters": [
@@ -37851,51 +38171,157 @@
                     "data": {
                       "type": "object",
                       "additionalProperties": true,
-                      "description": "Revenue account mapping entry",
+                      "description": "Grouped revenue account mapping entry (posting rule exception). Aggregates the OR-rows that share a group id.",
                       "properties": {
-                        "id": {
-                          "description": "Revenue account mapping ID",
+                        "groupId": {
+                          "description": "Group ID",
                           "type": "string",
-                          "example": "1"
-                        },
-                        "accountId": {
-                          "description": "Account ID",
-                          "type": "string",
-                          "example": "1000"
+                          "example": "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
                         },
                         "name": {
                           "description": "Name of the mapping",
                           "type": "string",
-                          "example": "Mapping Rule 1"
+                          "example": "EU exception"
+                        },
+                        "account": {
+                          "description": "Booking account",
+                          "type": "object",
+                          "additionalProperties": true,
+                          "example": {
+                            "id": "1",
+                            "accountNumber": "8400"
+                          }
                         },
                         "deliveryCountryCode": {
-                          "description": "Delivery country code",
-                          "type": "string",
-                          "example": "DE"
+                          "description": "Delivery country codes",
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "DE",
+                            "AT"
+                          ]
                         },
-                        "projectId": {
-                          "description": "Project ID",
-                          "type": "string",
-                          "nullable": true,
-                          "example": "1"
+                        "taxType": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "An id/name reference used within a revenue account mapping group",
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Entity ID",
+                                "type": "string",
+                                "example": "1"
+                              },
+                              "name": {
+                                "description": "Entity display name",
+                                "type": "string",
+                                "example": "Project A"
+                              }
+                            }
+                          }
                         },
-                        "productId": {
-                          "description": "Product ID",
-                          "type": "string",
-                          "nullable": true,
-                          "example": "1"
+                        "project": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "An id/name reference used within a revenue account mapping group",
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Entity ID",
+                                "type": "string",
+                                "example": "1"
+                              },
+                              "name": {
+                                "description": "Entity display name",
+                                "type": "string",
+                                "example": "Project A"
+                              }
+                            }
+                          }
                         },
-                        "warehouseId": {
-                          "description": "Warehouse ID",
-                          "type": "string",
-                          "nullable": true,
-                          "example": "1"
+                        "product": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "An id/name reference used within a revenue account mapping group",
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Entity ID",
+                                "type": "string",
+                                "example": "1"
+                              },
+                              "name": {
+                                "description": "Entity display name",
+                                "type": "string",
+                                "example": "Project A"
+                              }
+                            }
+                          }
                         },
-                        "warehouseCountryCode": {
-                          "description": "Warehouse country code",
-                          "type": "string",
-                          "nullable": true,
-                          "example": "DE"
+                        "productCategory": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "An id/name reference used within a revenue account mapping group",
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Entity ID",
+                                "type": "string",
+                                "example": "1"
+                              },
+                              "name": {
+                                "description": "Entity display name",
+                                "type": "string",
+                                "example": "Project A"
+                              }
+                            }
+                          }
+                        },
+                        "shop": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "An id/name reference used within a revenue account mapping group",
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Entity ID",
+                                "type": "string",
+                                "example": "1"
+                              },
+                              "name": {
+                                "description": "Entity display name",
+                                "type": "string",
+                                "example": "Project A"
+                              }
+                            }
+                          }
                         },
                         "isActive": {
                           "description": "Is active",
@@ -37914,18 +38340,6 @@
                           "format": "date-time",
                           "example": "2022-01-01T00:00:00Z"
                         }
-                      },
-                      "example": {
-                        "id": "1",
-                        "accountId": "1000",
-                        "deliveryCountryCode": "DE",
-                        "projectId": "1",
-                        "productId": "1",
-                        "warehouseId": "1",
-                        "warehouseCountryCode": "DE",
-                        "isActive": true,
-                        "createdAt": "2022-01-01T00:00:00Z",
-                        "updatedAt": "2022-01-01T00:00:00Z"
                       }
                     }
                   }
@@ -38184,7 +38598,7 @@
         "tags": [
           "Revenue Account Mapping"
         ],
-        "operationId": "revenueAccountMapping.update.v1",
+        "operationId": "revenueAccountMapping.group.update.v1",
         "summary": "🔒 Update revenue account mapping",
         "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nUpdates a single revenue account mapping.",
         "parameters": [
@@ -38199,30 +38613,150 @@
           }
         ],
         "requestBody": {
-          "description": "Create a revenue account mapping object",
+          "description": "Create or replace a grouped revenue account mapping (posting rule exception)",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "additionalProperties": true,
                 "required": [
-                  "accountId"
+                  "name",
+                  "accountId",
+                  "deliveryCountryCode"
                 ],
                 "properties": {
+                  "name": {
+                    "type": "string"
+                  },
                   "accountId": {
                     "type": "string"
                   },
                   "deliveryCountryCode": {
-                    "type": "string"
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
                   },
-                  "projectId": {
-                    "type": "string"
+                  "project": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
-                  "productId": {
-                    "type": "string"
+                  "product": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
-                  "warehouseId": {
-                    "type": "string"
+                  "productCategory": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
+                  },
+                  "taxType": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
+                  },
+                  "shop": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "description": "An id/name reference used within a revenue account mapping group",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Entity ID",
+                          "type": "string",
+                          "example": "1"
+                        },
+                        "name": {
+                          "description": "Entity display name",
+                          "type": "string",
+                          "example": "Project A"
+                        }
+                      }
+                    }
                   },
                   "isActive": {
                     "type": "boolean"
@@ -38230,13 +38764,34 @@
                 }
               },
               "examples": {
-                "revenue account mapping": {
+                "revenue account mapping group": {
                   "value": {
+                    "name": "EU exception",
                     "accountId": "1",
-                    "deliveryCountryCode": "DE",
-                    "projectId": "1",
-                    "productId": "1",
-                    "warehouseId": "1",
+                    "deliveryCountryCode": [
+                      "DE",
+                      "AT"
+                    ],
+                    "project": [
+                      {
+                        "id": "1",
+                        "name": "Project A"
+                      }
+                    ],
+                    "product": [],
+                    "productCategory": [
+                      {
+                        "id": "7",
+                        "name": "Tools"
+                      }
+                    ],
+                    "taxType": [
+                      {
+                        "id": "3",
+                        "name": "Standard"
+                      }
+                    ],
+                    "shop": [],
                     "isActive": true
                   }
                 }
@@ -38722,7 +39277,7 @@
         "tags": [
           "Revenue Account Mapping"
         ],
-        "operationId": "revenueAccountMapping.delete.v1",
+        "operationId": "revenueAccountMapping.group.delete.v1",
         "summary": "🔒 Delete Revenue Account Mapping Entry by ID",
         "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nDeletes a specific revenue account mapping entry by its ID.",
         "parameters": [
@@ -65969,6 +66524,26 @@
                         "id": "12345"
                       }
                     },
+                    "defaultStorageLocation": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "id"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "pattern": "\\d+",
+                          "example": "17",
+                          "description": "Resource identifier."
+                        }
+                      },
+                      "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz. Set to null to clear.",
+                      "nullable": true,
+                      "example": {
+                        "id": "17"
+                      }
+                    },
                     "isShippingCostsProduct": {
                       "type": "boolean",
                       "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook.",
@@ -67457,6 +68032,25 @@
                     "nullable": true,
                     "example": {
                       "id": "12345"
+                    }
+                  },
+                  "defaultStorageLocation": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
+                    "example": {
+                      "id": "17"
                     }
                   },
                   "isShippingCostsProduct": {
@@ -69492,6 +70086,13 @@
                             "description": "Shows the sales tax of the product.",
                             "example": "reduced"
                           },
+                          "individualTaxRate": {
+                            "type": "number",
+                            "format": "float",
+                            "nullable": true,
+                            "description": "The configured individual/custom tax-rate percentage (Individueller Steuersatz) when an individual tax rate is active on the product; null when no individual tax rate is set. Note: 0 is a valid individual tax rate, so null (not 0) indicates 'not set'.",
+                            "example": 4.9
+                          },
                           "regionOfOrigin": {
                             "type": "string",
                             "description": "Region where the product originates from.",
@@ -69627,6 +70228,65 @@
                                 "amount": "13.37",
                                 "currency": "EUR"
                               }
+                            }
+                          },
+                          "calculatoryPurchasePriceSettings": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for the calculatory purchase price triggers.",
+                            "properties": {
+                              "addPurchasePriceToCalculationTriggers": {
+                                "type": "array",
+                                "nullable": true,
+                                "description": "Define triggers that will add a purchase price to the product calculation.",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "onPurchaseOrderCompletion",
+                                    "onGoodsReceipt"
+                                  ]
+                                },
+                                "maxItems": 1,
+                                "example": [
+                                  "onPurchaseOrderCompletion"
+                                ]
+                              },
+                              "calculatoryPurchasePriceRecalculationTriggers": {
+                                "type": "array",
+                                "nullable": true,
+                                "description": "Define triggers that will execute the calculatory purchase price recalculation.",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "onPurchaseOrderCompletion",
+                                    "onGoodsReceipt"
+                                  ]
+                                },
+                                "maxItems": 1,
+                                "example": [
+                                  "onPurchaseOrderCompletion"
+                                ]
+                              },
+                              "calculatoryPurchasePriceRecalculationMethod": {
+                                "type": "string",
+                                "nullable": true,
+                                "enum": [
+                                  "allRecordedPurchasesWeightedAverage",
+                                  "latestPurchaseOrdersWeightedAverage",
+                                  "movingAverage"
+                                ],
+                                "description": "defines the calculation method or price recalculation",
+                                "example": "allRecordedPurchasesWeightedAverage"
+                              }
+                            },
+                            "example": {
+                              "addPurchasePriceToCalculationTriggers": [
+                                "onPurchaseOrderCompletion"
+                              ],
+                              "calculatoryPurchasePriceRecalculationTriggers": [
+                                "onPurchaseOrderCompletion"
+                              ],
+                              "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                             }
                           },
                           "salesChannel": {
@@ -80673,6 +81333,13 @@
                           "description": "Shows the sales tax of the product.",
                           "example": "reduced"
                         },
+                        "individualTaxRate": {
+                          "type": "number",
+                          "format": "float",
+                          "nullable": true,
+                          "description": "The configured individual/custom tax-rate percentage (Individueller Steuersatz) when an individual tax rate is active on the product; null when no individual tax rate is set. Note: 0 is a valid individual tax rate, so null (not 0) indicates 'not set'.",
+                          "example": 4.9
+                        },
                         "isShippingCostsProduct": {
                           "type": "boolean",
                           "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook.",
@@ -80796,6 +81463,65 @@
                               "amount": "13.37",
                               "currency": "EUR"
                             }
+                          }
+                        },
+                        "calculatoryPurchasePriceSettings": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for the calculatory purchase price triggers.",
+                          "properties": {
+                            "addPurchasePriceToCalculationTriggers": {
+                              "type": "array",
+                              "nullable": true,
+                              "description": "Define triggers that will add a purchase price to the product calculation.",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "onPurchaseOrderCompletion",
+                                  "onGoodsReceipt"
+                                ]
+                              },
+                              "maxItems": 1,
+                              "example": [
+                                "onPurchaseOrderCompletion"
+                              ]
+                            },
+                            "calculatoryPurchasePriceRecalculationTriggers": {
+                              "type": "array",
+                              "nullable": true,
+                              "description": "Define triggers that will execute the calculatory purchase price recalculation.",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "onPurchaseOrderCompletion",
+                                  "onGoodsReceipt"
+                                ]
+                              },
+                              "maxItems": 1,
+                              "example": [
+                                "onPurchaseOrderCompletion"
+                              ]
+                            },
+                            "calculatoryPurchasePriceRecalculationMethod": {
+                              "type": "string",
+                              "nullable": true,
+                              "enum": [
+                                "allRecordedPurchasesWeightedAverage",
+                                "latestPurchaseOrdersWeightedAverage",
+                                "movingAverage"
+                              ],
+                              "description": "defines the calculation method or price recalculation",
+                              "example": "allRecordedPurchasesWeightedAverage"
+                            }
+                          },
+                          "example": {
+                            "addPurchasePriceToCalculationTriggers": [
+                              "onPurchaseOrderCompletion"
+                            ],
+                            "calculatoryPurchasePriceRecalculationTriggers": [
+                              "onPurchaseOrderCompletion"
+                            ],
+                            "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                           }
                         },
                         "salesChannel": {
@@ -81509,6 +82235,15 @@
                             "amount": "13.37",
                             "currency": "EUR"
                           }
+                        },
+                        "calculatoryPurchasePriceSettings": {
+                          "addPurchasePriceToCalculationTriggers": [
+                            "onPurchaseOrderCompletion"
+                          ],
+                          "calculatoryPurchasePriceRecalculationTriggers": [
+                            "onPurchaseOrderCompletion"
+                          ],
+                          "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                         },
                         "salesChannel": {
                           "description": "A high-quality product.",
@@ -85606,6 +86341,16 @@
                 }
               }
             }
+          },
+          {
+            "name": "includeTranslations",
+            "in": "query",
+            "required": false,
+            "description": "When true, each property additionally exposes its `translations` array.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -85630,12 +86375,20 @@
                             "description": "Resource identifier."
                           },
                           "property": {
-                            "description": "An object with id and name",
+                            "description": "The property definition: its id, name, and the assigned project (null when none is assigned).",
+                            "example": {
+                              "id": "2",
+                              "name": "Test123",
+                              "project": {
+                                "id": "17"
+                              }
+                            },
                             "type": "object",
                             "additionalProperties": false,
                             "required": [
                               "id",
-                              "name"
+                              "name",
+                              "project"
                             ],
                             "properties": {
                               "id": {
@@ -85646,11 +86399,24 @@
                               },
                               "name": {
                                 "type": "string"
+                              },
+                              "project": {
+                                "description": "Project assigned to the property, or null when none is assigned.",
+                                "type": "object",
+                                "additionalProperties": false,
+                                "nullable": true,
+                                "required": [
+                                  "id"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "pattern": "\\d+",
+                                    "example": "17",
+                                    "description": "Resource identifier."
+                                  }
+                                }
                               }
-                            },
-                            "example": {
-                              "id": "1337",
-                              "name": "Diamond"
                             }
                           },
                           "value": {
@@ -85664,6 +86430,60 @@
                             "type": "string",
                             "nullable": true,
                             "example": "kg"
+                          },
+                          "translations": {
+                            "description": "Property translations. Only present when the request sets `includeTranslations=true`.",
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "language",
+                                "salesChannel",
+                                "name",
+                                "value"
+                              ],
+                              "properties": {
+                                "language": {
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "iso2"
+                                  ],
+                                  "properties": {
+                                    "iso2": {
+                                      "type": "string",
+                                      "example": "EN"
+                                    }
+                                  }
+                                },
+                                "salesChannel": {
+                                  "description": "Sales channel the translation applies to, or null when it applies to all channels.",
+                                  "type": "object",
+                                  "additionalProperties": false,
+                                  "nullable": true,
+                                  "required": [
+                                    "id"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "pattern": "\\d+",
+                                      "example": "17",
+                                      "description": "Resource identifier."
+                                    }
+                                  }
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Colour"
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "example": "RedEN"
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -85715,7 +86535,10 @@
                           "id": "1",
                           "property": {
                             "id": "1",
-                            "name": "Color"
+                            "name": "Color",
+                            "project": {
+                              "id": "17"
+                            }
                           },
                           "value": "blue",
                           "unit": null
@@ -94654,6 +95477,13 @@
                           "description": "Shows the sales tax of the product.",
                           "example": "reduced"
                         },
+                        "individualTaxRate": {
+                          "type": "number",
+                          "format": "float",
+                          "nullable": true,
+                          "description": "The configured individual/custom tax-rate percentage (Individueller Steuersatz) when an individual tax rate is active on the product; null when no individual tax rate is set. Note: 0 is a valid individual tax rate, so null (not 0) indicates 'not set'.",
+                          "example": 4.9
+                        },
                         "isShippingCostsProduct": {
                           "type": "boolean",
                           "description": "Determines if a product is used as a shipping costs product. For more information have a look into our handbook.",
@@ -94777,6 +95607,65 @@
                               "amount": "13.37",
                               "currency": "EUR"
                             }
+                          }
+                        },
+                        "calculatoryPurchasePriceSettings": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "description": "Contains settings for the calculatory purchase price triggers.",
+                          "properties": {
+                            "addPurchasePriceToCalculationTriggers": {
+                              "type": "array",
+                              "nullable": true,
+                              "description": "Define triggers that will add a purchase price to the product calculation.",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "onPurchaseOrderCompletion",
+                                  "onGoodsReceipt"
+                                ]
+                              },
+                              "maxItems": 1,
+                              "example": [
+                                "onPurchaseOrderCompletion"
+                              ]
+                            },
+                            "calculatoryPurchasePriceRecalculationTriggers": {
+                              "type": "array",
+                              "nullable": true,
+                              "description": "Define triggers that will execute the calculatory purchase price recalculation.",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "onPurchaseOrderCompletion",
+                                  "onGoodsReceipt"
+                                ]
+                              },
+                              "maxItems": 1,
+                              "example": [
+                                "onPurchaseOrderCompletion"
+                              ]
+                            },
+                            "calculatoryPurchasePriceRecalculationMethod": {
+                              "type": "string",
+                              "nullable": true,
+                              "enum": [
+                                "allRecordedPurchasesWeightedAverage",
+                                "latestPurchaseOrdersWeightedAverage",
+                                "movingAverage"
+                              ],
+                              "description": "defines the calculation method or price recalculation",
+                              "example": "allRecordedPurchasesWeightedAverage"
+                            }
+                          },
+                          "example": {
+                            "addPurchasePriceToCalculationTriggers": [
+                              "onPurchaseOrderCompletion"
+                            ],
+                            "calculatoryPurchasePriceRecalculationTriggers": [
+                              "onPurchaseOrderCompletion"
+                            ],
+                            "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                           }
                         },
                         "salesChannel": {
@@ -95490,6 +96379,15 @@
                             "amount": "13.37",
                             "currency": "EUR"
                           }
+                        },
+                        "calculatoryPurchasePriceSettings": {
+                          "addPurchasePriceToCalculationTriggers": [
+                            "onPurchaseOrderCompletion"
+                          ],
+                          "calculatoryPurchasePriceRecalculationTriggers": [
+                            "onPurchaseOrderCompletion"
+                          ],
+                          "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                         },
                         "salesChannel": {
                           "description": "A high-quality product.",
@@ -96983,6 +97881,26 @@
                     },
                     "example": {
                       "id": "1337"
+                    }
+                  },
+                  "defaultStorageLocation": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "\\d+",
+                        "example": "17",
+                        "description": "Resource identifier."
+                      }
+                    },
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz. Set to null to clear.",
+                    "nullable": true,
+                    "example": {
+                      "id": "17"
                     }
                   },
                   "categories": {
@@ -103925,6 +104843,13 @@
                             "description": "Shows the sales tax of the product.",
                             "example": "reduced"
                           },
+                          "individualTaxRate": {
+                            "type": "number",
+                            "format": "float",
+                            "nullable": true,
+                            "description": "The configured individual/custom tax-rate percentage (Individueller Steuersatz) when an individual tax rate is active on the product; null when no individual tax rate is set. Note: 0 is a valid individual tax rate, so null (not 0) indicates 'not set'.",
+                            "example": 4.9
+                          },
                           "regionOfOrigin": {
                             "type": "string",
                             "description": "Region where the product originates from.",
@@ -104060,6 +104985,65 @@
                                 "amount": "13.37",
                                 "currency": "EUR"
                               }
+                            }
+                          },
+                          "calculatoryPurchasePriceSettings": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "Contains settings for the calculatory purchase price triggers.",
+                            "properties": {
+                              "addPurchasePriceToCalculationTriggers": {
+                                "type": "array",
+                                "nullable": true,
+                                "description": "Define triggers that will add a purchase price to the product calculation.",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "onPurchaseOrderCompletion",
+                                    "onGoodsReceipt"
+                                  ]
+                                },
+                                "maxItems": 1,
+                                "example": [
+                                  "onPurchaseOrderCompletion"
+                                ]
+                              },
+                              "calculatoryPurchasePriceRecalculationTriggers": {
+                                "type": "array",
+                                "nullable": true,
+                                "description": "Define triggers that will execute the calculatory purchase price recalculation.",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "onPurchaseOrderCompletion",
+                                    "onGoodsReceipt"
+                                  ]
+                                },
+                                "maxItems": 1,
+                                "example": [
+                                  "onPurchaseOrderCompletion"
+                                ]
+                              },
+                              "calculatoryPurchasePriceRecalculationMethod": {
+                                "type": "string",
+                                "nullable": true,
+                                "enum": [
+                                  "allRecordedPurchasesWeightedAverage",
+                                  "latestPurchaseOrdersWeightedAverage",
+                                  "movingAverage"
+                                ],
+                                "description": "defines the calculation method or price recalculation",
+                                "example": "allRecordedPurchasesWeightedAverage"
+                              }
+                            },
+                            "example": {
+                              "addPurchasePriceToCalculationTriggers": [
+                                "onPurchaseOrderCompletion"
+                              ],
+                              "calculatoryPurchasePriceRecalculationTriggers": [
+                                "onPurchaseOrderCompletion"
+                              ],
+                              "calculatoryPurchasePriceRecalculationMethod": "latestPurchaseOrdersWeightedAverage"
                             }
                           },
                           "salesChannel": {
@@ -136116,6 +137100,9 @@
                                   "phoneNumber": {
                                     "type": "string"
                                   },
+                                  "mobile": {
+                                    "type": "string"
+                                  },
                                   "salutation": {
                                     "type": "string"
                                   },
@@ -136583,7 +137570,8 @@
                               "email": "info@xentral.com",
                               "salutation": "",
                               "gln": "",
-                              "phoneNumber": "0123456789"
+                              "phoneNumber": "0123456789",
+                              "mobile": "0176987654"
                             }
                           },
                           "delivery": {
@@ -137081,6 +138069,9 @@
                             "type": "string"
                           },
                           "phoneNumber": {
+                            "type": "string"
+                          },
+                          "mobile": {
                             "type": "string"
                           },
                           "salutation": {
@@ -139499,6 +140490,9 @@
                                   "type": "string"
                                 },
                                 "phoneNumber": {
+                                  "type": "string"
+                                },
+                                "mobile": {
                                   "type": "string"
                                 },
                                 "salutation": {
