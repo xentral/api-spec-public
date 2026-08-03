@@ -126808,6 +126808,7 @@
                       "id",
                       "product",
                       "supplier",
+                      "supplierItemNumber",
                       "currency",
                       "fromQuantity",
                       "isValidAt"
@@ -129932,6 +129933,7 @@
                       "id",
                       "product",
                       "supplier",
+                      "supplierItemNumber",
                       "currency",
                       "fromQuantity",
                       "isValidAt"
@@ -129945,6 +129947,8 @@
                       "notEquals",
                       "in",
                       "notIn",
+                      "contains",
+                      "notContains",
                       "startsWith",
                       "endsWith",
                       "lessThan",
@@ -136732,7 +136736,7 @@
                           },
                           "documentNumber": {
                             "type": "string",
-                            "description": "Internal identification associated with a Sales Order",
+                            "description": "The sales order document number",
                             "example": "SO-1234"
                           },
                           "isBeingEdited": {
@@ -136742,12 +136746,12 @@
                           },
                           "shippingDateOk": {
                             "type": "boolean",
-                            "description": "Indicates if the shipping date is ok",
+                            "description": "Indicates if the shipping date is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "creditLimitOk": {
                             "type": "boolean",
-                            "description": "Indicates if the credit limit is ok",
+                            "description": "Indicates if the credit limit is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "subsequentDelivery": {
@@ -136757,32 +136761,32 @@
                           },
                           "shippingLockOk": {
                             "type": "boolean",
-                            "description": "Indicates if the shipping lock is ok",
+                            "description": "Indicates if the shipping lock is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "postageOk": {
                             "type": "boolean",
-                            "description": "Indicates if the postage is ok",
+                            "description": "Indicates if the postage is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "customerCheckOk": {
                             "type": "boolean",
-                            "description": "Indicates if the customer check is ok",
+                            "description": "Indicates if the customer check is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "vatOk": {
                             "type": "boolean",
-                            "description": "Indicates if the VAT is ok",
+                            "description": "Indicates if the VAT is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "stockOk": {
                             "type": "boolean",
-                            "description": "Indicates if the stock is ok",
+                            "description": "Indicates if the stock is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "prepaidOk": {
                             "type": "boolean",
-                            "description": "Indicates if the prepaid status is ok",
+                            "description": "Indicates if the prepaid status is ok, this is part of the sales order traffic light",
                             "example": false
                           },
                           "externalOrderNumber": {
@@ -137188,7 +137192,8 @@
                                 "type": "object",
                                 "properties": {
                                   "autoShipping": {
-                                    "type": "boolean"
+                                    "type": "boolean",
+                                    "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
                                   },
                                   "fastLane": {
                                     "type": "boolean"
@@ -137668,7 +137673,7 @@
                           },
                           "documentNumber": {
                             "type": "string",
-                            "description": "Internal identification associated with a Sales Order",
+                            "description": "The sales order document number",
                             "example": "SO-1234"
                           },
                           "date": {
@@ -138159,7 +138164,8 @@
                         "type": "object",
                         "properties": {
                           "autoShipping": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
                           },
                           "fastLane": {
                             "type": "boolean"
@@ -139257,6 +139263,37 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "printPickList": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Set to true to print the picking list (\"Kommissionierliste\") if the order's project has pick-list printing enabled. Defaults to false; no pick list is printed unless explicitly requested."
+                  }
+                }
+              },
+              "examples": {
+                "Dispatch and print the pick list": {
+                  "value": {
+                    "printPickList": true
+                  }
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "examples": {
+                "Dispatch without a body": {
+                  "value": {}
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -140136,7 +140173,7 @@
                         },
                         "documentNumber": {
                           "type": "string",
-                          "description": "Internal identification associated with a Sales Order",
+                          "description": "The sales order document number",
                           "example": "SO-1234"
                         },
                         "externalOrderNumber": {
@@ -140580,7 +140617,8 @@
                               "type": "object",
                               "properties": {
                                 "autoShipping": {
-                                  "type": "boolean"
+                                  "type": "boolean",
+                                  "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
                                 },
                                 "fastLane": {
                                   "type": "boolean"
@@ -141675,7 +141713,7 @@
                         },
                         "documentNumber": {
                           "type": "string",
-                          "description": "Internal identification associated with a Sales Order",
+                          "description": "The sales order document number",
                           "example": "SO-1234"
                         },
                         "date": {
