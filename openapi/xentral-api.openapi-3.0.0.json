@@ -165370,6 +165370,11 @@
                             "type": "string",
                             "nullable": true,
                             "example": "123"
+                          },
+                          "isSupportUser": {
+                            "description": "A boolean value indicating if the user is a support (key) user",
+                            "type": "boolean",
+                            "example": false
                           }
                         },
                         "example": {
@@ -165384,7 +165389,8 @@
                           "isAdmin": true,
                           "email": "ceo@example.com",
                           "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                          "contactId": "123"
+                          "contactId": "123",
+                          "isSupportUser": false
                         }
                       }
                     },
@@ -165714,6 +165720,11 @@
                             "type": "string",
                             "nullable": true,
                             "example": "123"
+                          },
+                          "isSupportUser": {
+                            "description": "A boolean value indicating if the user is a support (key) user",
+                            "type": "boolean",
+                            "example": false
                           }
                         },
                         "example": {
@@ -165728,7 +165739,8 @@
                           "isAdmin": true,
                           "email": "ceo@example.com",
                           "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                          "contactId": "123"
+                          "contactId": "123",
+                          "isSupportUser": false
                         }
                       }
                     },
@@ -165940,6 +165952,11 @@
                           "type": "string",
                           "nullable": true,
                           "example": "123"
+                        },
+                        "isSupportUser": {
+                          "description": "A boolean value indicating if the user is a support (key) user",
+                          "type": "boolean",
+                          "example": false
                         }
                       },
                       "example": {
@@ -165954,7 +165971,8 @@
                         "isAdmin": true,
                         "email": "ceo@example.com",
                         "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                        "contactId": "123"
+                        "contactId": "123",
+                        "isSupportUser": false
                       }
                     }
                   }
@@ -166077,6 +166095,11 @@
                           "type": "string",
                           "nullable": true,
                           "example": "123"
+                        },
+                        "isSupportUser": {
+                          "description": "A boolean value indicating if the user is a support (key) user",
+                          "type": "boolean",
+                          "example": false
                         }
                       },
                       "example": {
@@ -166090,7 +166113,8 @@
                         "locale": "de_DE",
                         "isAdmin": true,
                         "email": "joe@example.com",
-                        "contactId": "123"
+                        "contactId": "123",
+                        "isSupportUser": false
                       }
                     }
                   }
