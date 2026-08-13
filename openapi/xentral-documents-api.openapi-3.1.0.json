@@ -312,48 +312,6 @@
         },
         "type": "object"
       },
-      "BookedQualityControlAttributesData": {
-        "description": "The serial numbers, batch and best before date recorded for one booking of a line item.",
-        "required": [
-          "quantity",
-          "serialNumbers"
-        ],
-        "properties": {
-          "quantity": {
-            "description": "Quantity these attributes apply to.",
-            "type": "number",
-            "format": "float",
-            "example": 4
-          },
-          "batch": {
-            "description": "Batch the goods were booked from. Null if no batch is tracked for the product.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "BATCH-12345"
-          },
-          "bestBeforeDate": {
-            "description": "Best before date of the booked goods. Null if no best before date is tracked for the product.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "date",
-            "example": "2024-12-31"
-          },
-          "serialNumbers": {
-            "description": "Serial numbers of the booked units. Empty if no serial numbers are tracked for the product. Where a line item was booked with more than one batch or best before date, the serial numbers are split across them in the order they were recorded - which batch an individual serial number belongs to is not itself recorded.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "example": "SN-0001"
-            }
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "BusinessDocument": {
         "type": "object",
         "allOf": [
@@ -6221,13 +6179,6 @@
                   "null"
                 ]
               },
-              "stockMovements": {
-                "description": "Quantities of this line item booked from storage locations when the goods were shipped, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Responses grow with the number of units carrying a serial number, so use smaller pages when listing documents with this include.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/StockMovementData"
-                }
-              },
               "customs": {
                 "description": "Customs information for the line item.",
                 "properties": {
@@ -9972,10 +9923,10 @@
                 "example": 2
               },
               "product": {
-                "description": "The product master data of the line item, for headless UIs and PDF rendering: EAN, manufacturer and manufacturer number, measurements (weight, net weight, dimensions), customs data. Only present when requested via `?include=lineItems.product`, otherwise the line item carries the product id only. The embedded product is a curated subset of the `Product` schema: identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. Purchasing, stock-operations, pricing/costing configuration and internal notes are never embedded here — reading those requires the product endpoints. The product's own sub-resources are embedded on demand: `?include=lineItems.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=lineItems.product.customFields` for the product custom fields.",
+                "description": "The product of the line item.",
                 "anyOf": [
                   {
-                    "$ref": "#/components/schemas/Product"
+                    "$ref": "#/components/schemas/ProductReference"
                   },
                   {
                     "properties": {
@@ -10137,8 +10088,7 @@
         "description": "A media file (image or document) linked to a product.",
         "required": [
           "id",
-          "fileId",
-          "isPrimary"
+          "fileId"
         ],
         "properties": {
           "id": {
@@ -10148,26 +10098,12 @@
             "example": "5"
           },
           "category": {
-            "description": "What the file is used for on the product. Null when it is filed under a keyword outside the standard set, for example one this Xentral instance defined itself.",
+            "description": "Media category keyword as maintained on the file assignment.",
             "type": [
               "string",
               "null"
             ],
-            "enum": [
-              "defaultImage",
-              "defaultGroupImage",
-              "labelImage",
-              "otherImage",
-              "printImage",
-              "dataSheet",
-              "certificateAttachment"
-            ],
-            "example": "defaultImage"
-          },
-          "isPrimary": {
-            "description": "Whether this file is the standard image of the product — the one shown for the product and printed on its documents. At most one file per product is marked, and a product whose only images are label or group images has none.",
-            "type": "boolean",
-            "example": true
+            "example": "Shopbild"
           },
           "name": {
             "description": "Name of the underlying file.",
@@ -11357,21 +11293,8 @@
                 "example": 2
               },
               "product": {
-                "description": "The product master data of the material: EAN, manufacturer and manufacturer number, measurements (weight, net weight, dimensions), customs data. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. The embedded product is a curated subset of the `Product` schema: identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. Purchasing, stock-operations, pricing/costing configuration and internal notes are never embedded here — reading those requires the product endpoints. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/Product"
-                  },
-                  {
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "3"
-                      }
-                    },
-                    "type": "object"
-                  }
-                ]
+                "description": "The product of the line item",
+                "type": "object"
               },
               "hasChildLineItems": {
                 "description": "Indicates if this line item has child line items (exploded line items)",
@@ -11754,13 +11677,6 @@
                   }
                 },
                 "type": "object"
-              },
-              "stockMovements": {
-                "description": "Quantities of this line item booked from storage locations when the goods were shipped on the linked delivery note, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Empty for proforma invoices that were not created from a delivery note.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/StockMovementData"
-                }
               }
             },
             "type": "object"
@@ -12670,11 +12586,6 @@
                     "description": "The unique identifier of the return reason.",
                     "type": "string",
                     "example": "2"
-                  },
-                  "name": {
-                    "description": "The name of the return reason.",
-                    "type": "string",
-                    "example": "Wrong size"
                   }
                 },
                 "type": [
@@ -12731,13 +12642,6 @@
                   }
                 },
                 "type": "object"
-              },
-              "stockMovements": {
-                "description": "Quantities of this line item booked into storage locations when the goods were received back, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Responses grow with the number of units carrying a serial number, so use smaller pages when listing documents with this include.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/StockMovementData"
-                }
               }
             },
             "type": "object"
@@ -14176,58 +14080,6 @@
           }
         },
         "type": "object"
-      },
-      "StockMovementData": {
-        "description": "A quantity of a line item booked from or into a single storage location, together with the quality control attributes recorded for it.",
-        "required": [
-          "quantity"
-        ],
-        "properties": {
-          "warehouse": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/WarehouseReferenceData",
-                "description": "Warehouse the quantity was booked from or into. Null if the storage location can no longer be determined."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Warehouse the quantity was booked from or into. Null if the storage location can no longer be determined."
-          },
-          "storageLocation": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/StorageLocationReferenceData",
-                "description": "Storage location the quantity was booked from or into. Null if it can no longer be determined."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Storage location the quantity was booked from or into. Null if it can no longer be determined."
-          },
-          "quantity": {
-            "description": "Quantity booked from or into this storage location.",
-            "type": "number",
-            "format": "float",
-            "example": 4
-          },
-          "qualityControlAttributes": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BookedQualityControlAttributesData",
-                "description": "Serial numbers, batch and best before date recorded for this booking. Null if none of them are tracked for the product."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Serial numbers, batch and best before date recorded for this booking. Null if none of them are tracked for the product."
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
       },
       "StorageLocationReferenceData": {
         "required": [
@@ -18627,19 +18479,6 @@
         },
         "type": "object",
         "additionalProperties": false
-      },
-      "WarehouseReferenceData": {
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "description": "ID of the warehouse",
-            "type": "string",
-            "example": "13"
-          }
-        },
-        "type": "object"
       }
     },
     "securitySchemes": {
@@ -18940,8 +18779,6 @@
                   "lineItems.customFields",
                   "customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -19411,8 +19248,6 @@
                   "address",
                   "customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "lineItems.customFields",
@@ -23607,13 +23442,10 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
-                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -24079,13 +23911,10 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
-                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -25501,8 +25330,7 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product",
-                  "stockMovements"
+                  "product"
                 ]
               }
             }
@@ -26085,8 +25913,6 @@
                   "customFields",
                   "lineItems.customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -26744,8 +26570,6 @@
                   "customFields",
                   "lineItems.customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -28436,8 +28260,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -28907,8 +28729,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -30924,8 +30744,6 @@
                   "address",
                   "materials",
                   "materials.product",
-                  "materials.product.salesPrices",
-                  "materials.product.customFields",
                   "project",
                   "tags"
                 ]
@@ -31198,8 +31016,6 @@
                   "address",
                   "materials",
                   "materials.product",
-                  "materials.product.salesPrices",
-                  "materials.product.customFields",
                   "project",
                   "tags"
                 ]
@@ -33664,9 +33480,6 @@
                   "lineItems.customFields",
                   "customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
-                  "lineItems.stockMovements",
                   "project",
                   "tags",
                   "activity",
@@ -34137,9 +33950,6 @@
                   "address",
                   "customFields",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
-                  "lineItems.stockMovements",
                   "tags",
                   "activity",
                   "lineItems.customFields",
@@ -35317,8 +35127,7 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product",
-                  "stockMovements"
+                  "product"
                 ]
               }
             }
@@ -35762,8 +35571,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -36233,8 +36040,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -38061,13 +37866,10 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
-                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -38630,13 +38432,10 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
-                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -40012,8 +39811,7 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product",
-                  "stockMovements"
+                  "product"
                 ]
               }
             }
@@ -40664,8 +40462,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -41136,8 +40932,6 @@
                   "project",
                   "address",
                   "lineItems.product",
-                  "lineItems.product.salesPrices",
-                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
