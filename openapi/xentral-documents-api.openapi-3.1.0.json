@@ -312,6 +312,48 @@
         },
         "type": "object"
       },
+      "BookedQualityControlAttributesData": {
+        "description": "The serial numbers, batch and best before date recorded for one booking of a line item.",
+        "required": [
+          "quantity",
+          "serialNumbers"
+        ],
+        "properties": {
+          "quantity": {
+            "description": "Quantity these attributes apply to.",
+            "type": "number",
+            "format": "float",
+            "example": 4
+          },
+          "batch": {
+            "description": "Batch the goods were booked from. Null if no batch is tracked for the product.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "BATCH-12345"
+          },
+          "bestBeforeDate": {
+            "description": "Best before date of the booked goods. Null if no best before date is tracked for the product.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2024-12-31"
+          },
+          "serialNumbers": {
+            "description": "Serial numbers of the booked units. Empty if no serial numbers are tracked for the product. Where a line item was booked with more than one batch or best before date, the serial numbers are split across them in the order they were recorded - which batch an individual serial number belongs to is not itself recorded.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "SN-0001"
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "BusinessDocument": {
         "type": "object",
         "allOf": [
@@ -359,7 +401,7 @@
                 "example": "CUST-54321"
               },
               "address": {
-                "description": "Address entity of the document. By default, only the ID is returned. To get the full Address object, use the `include` parameter.",
+                "description": "Address entity of the document. Returned as an ID reference; the list and get endpoints can return the full Address object via the `include` parameter.",
                 "anyOf": [
                   {
                     "$ref": "#/components/schemas/Address"
@@ -378,7 +420,7 @@
                 ]
               },
               "tags": {
-                "description": "Tags assigned to the document. This property is only returned if the `tags` include is used.",
+                "description": "Tags assigned to the document. On GET requests this property is only returned if the `tags` include is used; create and update responses always carry it.",
                 "type": "array",
                 "items": {
                   "properties": {
@@ -511,11 +553,25 @@
                       "example": "customField1"
                     },
                     "value": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "example": "prospect"
+                      "description": "The custom field value. Its JSON type depends on the sibling `type` field: `string`/`translatable_string` and `date`/`datetime` (as ISO 8601 strings) are strings, `integer`/`float` are numbers, `boolean` is a boolean, and `object` is a JSON object.",
+                      "example": "prospect",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "label": {
                       "type": "string",
@@ -640,6 +696,31 @@
             "type": "object"
           }
         ]
+      },
+      "BusinessDocumentTaxDisplay": {
+        "properties": {
+          "financials": {
+            "properties": {
+              "tax": {
+                "properties": {
+                  "taxDisplay": {
+                    "description": "Whether the document shows net or gross prices. \"automatic\" defers to the customer, project and company settings. Setting it through this API does not recalculate prices, tax rates or totals.",
+                    "type": "string",
+                    "enum": [
+                      "automatic",
+                      "net",
+                      "gross"
+                    ],
+                    "example": "net"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
       },
       "BusinessDocumentTaxNotice": {
         "properties": {
@@ -775,12 +856,12 @@
             "description": "Product the produced goods are booked on. Defaults to the product the production produces."
           },
           "batch": {
-            "description": "Batch number created by this production. Only booked into the batch stock when the stored product is managed in batches.",
+            "description": "Batch number created by this production. Defaults to the batch recorded on the production. Only booked into the batch stock when the stored product is managed in batches.",
             "type": "string",
             "example": "CH-2026-07"
           },
           "bestBeforeDate": {
-            "description": "Best-before date of the produced goods. Only booked when the stored product carries a best-before date.",
+            "description": "Best-before date of the produced goods. Defaults to the best-before date recorded on the production. Only booked when the stored product carries a best-before date.",
             "type": "string",
             "format": "date",
             "example": "2027-01-31"
@@ -1140,12 +1221,14 @@
           "project": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/ProjectReferenceData"
+                "$ref": "#/components/schemas/ProjectReferenceData",
+                "description": "The project the document is assigned to. Defaults to the preferred project of the requesting user when one is configured, otherwise to the project of the address."
               },
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The project the document is assigned to. Defaults to the preferred project of the requesting user when one is configured, otherwise to the project of the address."
           },
           "documentDate": {
             "description": "Date of the document. Current date is used when omitted.",
@@ -1208,6 +1291,7 @@
             "example": "This is an internal comment."
           },
           "printSettings": {
+            "description": "Print settings for the document",
             "properties": {
               "withoutLetterhead": {
                 "description": "If true, the document will be printed without letterhead. Defaults to the document-type letterhead setting when omitted.",
@@ -1431,6 +1515,9 @@
           },
           {
             "$ref": "#/components/schemas/HasSales"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
@@ -1978,6 +2065,11 @@
                 "description": "If true, the delivery note is excluded from invoicing: the collective invoice run skips it, and its sales order counts as invoiced - so that order no longer shows up as waiting for an invoice.",
                 "type": "boolean",
                 "example": false
+              },
+              "useAlternativeDocumentTitle": {
+                "description": "Indicates if the alternative document title should be used.",
+                "type": "boolean",
+                "example": false
               }
             },
             "type": "object"
@@ -2154,7 +2246,7 @@
               "string",
               "null"
             ],
-            "example": "123 Main St"
+            "example": "Fuggerstraße 11"
           },
           "zipCode": {
             "description": "ZIP Code",
@@ -2162,7 +2254,7 @@
               "string",
               "null"
             ],
-            "example": "12456"
+            "example": "86150"
           },
           "city": {
             "description": "City",
@@ -2170,7 +2262,7 @@
               "string",
               "null"
             ],
-            "example": "Springfield"
+            "example": "Augsburg"
           },
           "state": {
             "description": "State",
@@ -2178,7 +2270,7 @@
               "string",
               "null"
             ],
-            "example": "Illinois"
+            "example": "BY"
           },
           "country": {
             "description": "Country",
@@ -2186,7 +2278,7 @@
               "string",
               "null"
             ],
-            "example": "US"
+            "example": "DE"
           },
           "gln": {
             "description": "Global Location Number",
@@ -2372,6 +2464,9 @@
           },
           {
             "$ref": "#/components/schemas/HasShippingMethod"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
@@ -2610,6 +2705,9 @@
             "$ref": "#/components/schemas/HasShippingMethod"
           },
           {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
+          },
+          {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
           },
           {
@@ -2652,7 +2750,7 @@
                 "example": false
               },
               "manualShippingCostApproval": {
-                "description": "Use this field to manually approve the shipping costs of the offer. Depending on the shipping method configuration, this might be required before the offer can be dispatched.",
+                "description": "Manually approves the shipping costs. Takes effect only on the sales order created from the offer, where it can be required before dispatch.",
                 "type": "boolean",
                 "example": false
               },
@@ -2665,10 +2763,6 @@
                   }
                 },
                 "type": "object"
-              },
-              "paymentMethod": {
-                "$ref": "#/components/schemas/PaymentMethodReferenceData",
-                "description": "Reference to the payment method used for this offer."
               },
               "lineItems": {
                 "description": "List of line items for the offer. Entries are either product line items (no `type`, or `type: product`) or intermediate line items (`type` naming the intermediate type). Array order defines placement: an intermediate entry is anchored to the product entry preceding it in the array.",
@@ -2687,6 +2781,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/CreateProductLineItemData"
+          },
+          {
+            "$ref": "#/components/schemas/LineItemBillOfMaterials"
           },
           {
             "$ref": "#/components/schemas/LineItemFinancials"
@@ -3010,6 +3107,18 @@
                 "format": "float",
                 "example": 100
               },
+              "batch": {
+                "description": "Batch number for the goods this production produces. Used when the production is completed, unless the completion gives a different one, and only booked into batch stock if the produced product is managed in batches.",
+                "type": "string",
+                "maxLength": 255,
+                "example": "CH-2026-07"
+              },
+              "bestBeforeDate": {
+                "description": "Best-before date for the goods this production produces. Used when the production is completed, unless the completion gives a different one, and only booked if the produced product carries a best-before date.",
+                "type": "string",
+                "format": "date",
+                "example": "2027-01-31"
+              },
               "functionTest": {
                 "description": "Whether function testing is required",
                 "type": "boolean",
@@ -3256,6 +3365,9 @@
           },
           {
             "$ref": "#/components/schemas/HasShippingMethod"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "properties": {
@@ -3592,6 +3704,14 @@
                   "object",
                   "null"
                 ]
+              },
+              "returnNote": {
+                "description": "A free-text note on why this line item was returned, recorded alongside the return reason. Can contain HTML; the note is stored and returned unchanged.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Zipper broke after two weeks"
               }
             },
             "type": "object"
@@ -3632,6 +3752,9 @@
           },
           {
             "$ref": "#/components/schemas/HasShippingMethod"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
@@ -3802,15 +3925,16 @@
                 "format": "date",
                 "example": "2023-10-05"
               },
-              "paymentMethod": {
-                "$ref": "#/components/schemas/PaymentMethodReferenceData",
-                "description": "Reference to the payment method used for this sales order."
-              },
               "deviatingDebtorAccountNumber": {
                 "description": "Deviating debtor account number for accounting purposes.",
                 "type": "string",
                 "maxLength": 32,
                 "example": "10001"
+              },
+              "useAlternativeDocumentTitle": {
+                "description": "Indicates if the alternative document title should be used.",
+                "type": "boolean",
+                "example": false
               }
             },
             "type": "object"
@@ -4020,6 +4144,9 @@
           },
           {
             "$ref": "#/components/schemas/SalesReferenceResource"
+          },
+          {
+            "$ref": "#/components/schemas/TaxDisplayResource"
           },
           {
             "properties": {
@@ -4693,11 +4820,11 @@
                           "null"
                         ],
                         "enum": [
-                          "automatically",
-                          "alwaysNet",
-                          "alwaysGross"
+                          "automatic",
+                          "net",
+                          "gross"
                         ],
-                        "example": "alwaysGross"
+                        "example": "gross"
                       },
                       "useDeliveryThreshold": {
                         "type": "boolean",
@@ -4799,7 +4926,7 @@
                     "vatId": "DE112233445",
                     "taxNumber": "l2/345/67890",
                     "taxation": "eu",
-                    "taxDisplay": "alwaysGross",
+                    "taxDisplay": "gross",
                     "useDeliveryThreshold": true,
                     "customsInformation": "l2/345/67890 – Integrated circuits, origin DE, duty‑free under EU‑US agreement"
                   },
@@ -5315,11 +5442,25 @@
                       "example": "customField1"
                     },
                     "value": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "example": "prospect"
+                      "description": "The custom field value. Its JSON type depends on the sibling `type` field: `string`/`translatable_string` and `date`/`datetime` (as ISO 8601 strings) are strings, `integer`/`float` are numbers, `boolean` is a boolean, and `object` is a JSON object.",
+                      "example": "prospect",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "label": {
                       "type": "string",
@@ -6179,6 +6320,13 @@
                   "null"
                 ]
               },
+              "stockMovements": {
+                "description": "Quantities of this line item booked from storage locations when the goods were shipped, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Responses grow with the number of units carrying a serial number, so use smaller pages when listing documents with this include.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/StockMovementData"
+                }
+              },
               "customs": {
                 "description": "Customs information for the line item.",
                 "properties": {
@@ -6635,6 +6783,19 @@
               "null"
             ],
             "example": "CC-100"
+          },
+          "revenueAccount": {
+            "description": "Revenue account this line item is booked to in the accounting export. Read-only: the tax rules derive it from the product tax group and the document taxation, unless it is frozen. Null when no rule matched, in which case the export falls back to the company default.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "8400"
+          },
+          "revenueAccountFixed": {
+            "description": "Whether the revenue account is frozen. Read-only. While true, the tax rules leave the revenue account untouched instead of re-deriving it on every recalculation.",
+            "type": "boolean",
+            "example": false
           }
         },
         "type": "object"
@@ -7280,6 +7441,9 @@
             "$ref": "#/components/schemas/ShippingMethodResource"
           },
           {
+            "$ref": "#/components/schemas/TaxDisplayResource"
+          },
+          {
             "properties": {
               "status": {
                 "description": "Status of the document.",
@@ -7644,6 +7808,28 @@
         },
         "type": "object"
       },
+      "LineItemBillOfMaterials": {
+        "properties": {
+          "parentLineItem": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LineItemReferenceData",
+                "description": "The line item this one is a part of, making it a child in a bill-of-materials block. Must reference a product line item of the same offer that is not itself a part - the structure is one level deep. Rejected on a line item that has parts of its own, and on one that derives its price from parts - send `calculatePriceFromParts` as false in the same request to convert the latter into a part. Send null to detach the line item from its block."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The line item this one is a part of, making it a child in a bill-of-materials block. Must reference a product line item of the same offer that is not itself a part - the structure is one level deep. Rejected on a line item that has parts of its own, and on one that derives its price from parts - send `calculatePriceFromParts` as false in the same request to convert the latter into a part. Send null to detach the line item from its block."
+          },
+          "calculatePriceFromParts": {
+            "description": "Whether this line item derives its price from its parts. While true, every recalculation of the offer overwrites the price with the sum of the non-optional line items that reference this one as their `parentLineItem`, divided by this line item's quantity, and those parts stop counting towards the document totals on their own. With no parts the derived price is 0 until parts are added. Requires the offer bill-of-materials module (`angebot_stueckliste`): where it is not available the value is stored but no price is ever derived from it. Rejected on a line item that is itself a part of another one.",
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "type": "object"
+      },
       "LineItemFinancials": {
         "properties": {
           "discount": {
@@ -7938,6 +8124,9 @@
             "$ref": "#/components/schemas/SalesReferenceResource"
           },
           {
+            "$ref": "#/components/schemas/TaxDisplayResource"
+          },
+          {
             "properties": {
               "status": {
                 "description": "Status of the document",
@@ -8014,7 +8203,7 @@
                 "example": false
               },
               "manualShippingCostApproval": {
-                "description": "Use this field to manually approve the shipping costs of the offer. Depending on the shipping method configuration, this might be required before the offer can be dispatched.",
+                "description": "Manually approves the shipping costs. Takes effect only on the sales order created from the offer, where it can be required before dispatch.",
                 "type": "boolean",
                 "example": false
               },
@@ -8130,7 +8319,7 @@
                 "maxLength": 50
               },
               "parentLineItem": {
-                "description": "If this line item is a child line item, this will contain the parent line item ID.",
+                "description": "The line item this one is a part of, if it belongs to a bill-of-materials block. Null otherwise.",
                 "properties": {
                   "id": {
                     "type": "string",
@@ -8141,6 +8330,11 @@
                   "object",
                   "null"
                 ]
+              },
+              "calculatePriceFromParts": {
+                "description": "Whether this line item derives its price from its parts. While true, every recalculation of the offer overwrites the price with the sum of the non-optional line items referencing this one as their `parentLineItem`, divided by this line item's quantity, and those parts stop counting towards the document totals on their own. Requires the offer bill-of-materials module (`angebot_stueckliste`): where it is not available the value is stored but no price is ever derived from it.",
+                "type": "boolean",
+                "example": false
               },
               "printSettings": {
                 "description": "Print settings for this line item.",
@@ -9217,11 +9411,25 @@
                       "example": "string"
                     },
                     "value": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "example": "Aluminium"
+                      "description": "The custom field value. Its JSON type depends on the sibling `type` field: `string`/`translatable_string` and `date`/`datetime` (as ISO 8601 strings) are strings, `integer`/`float` are numbers, `boolean` is a boolean, and `object` is a JSON object.",
+                      "example": "Aluminium",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "translations": {
                       "description": "Per-language label and value overrides for languages other than DE.",
@@ -9272,6 +9480,20 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/ProductVariant"
+                }
+              },
+              "options": {
+                "description": "Matrix options of this product with the values they can take (include=options). Only a matrix product holds options; for a variant the list is empty.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductOption"
+                }
+              },
+              "optionValues": {
+                "description": "The option values this product carries as a variant, one per option of its matrix product (include=optionValues). Empty for a product that is not a variant.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductOptionValue"
                 }
               },
               "tags": {
@@ -9923,10 +10145,10 @@
                 "example": 2
               },
               "product": {
-                "description": "The product of the line item.",
+                "description": "The product master data of the line item, for headless UIs and PDF rendering: EAN, manufacturer and manufacturer number, measurements (weight, net weight, dimensions), customs data. Only present when requested via `?include=lineItems.product`, otherwise the line item carries the product id only. The embedded product is a curated subset of the `Product` schema: identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. Purchasing, stock-operations, pricing/costing configuration and internal notes are never embedded here — reading those requires the product endpoints. The product's own sub-resources are embedded on demand: `?include=lineItems.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=lineItems.product.customFields` for the product custom fields.",
                 "anyOf": [
                   {
-                    "$ref": "#/components/schemas/ProductReference"
+                    "$ref": "#/components/schemas/Product"
                   },
                   {
                     "properties": {
@@ -9963,11 +10185,25 @@
                       "example": "customField1"
                     },
                     "value": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "example": "prospect"
+                      "description": "The custom field value. Its JSON type depends on the sibling `type` field: `string`/`translatable_string` and `date`/`datetime` (as ISO 8601 strings) are strings, `integer`/`float` are numbers, `boolean` is a boolean, and `object` is a JSON object.",
+                      "example": "prospect",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "label": {
                       "type": "string",
@@ -10088,7 +10324,8 @@
         "description": "A media file (image or document) linked to a product.",
         "required": [
           "id",
-          "fileId"
+          "fileId",
+          "isPrimary"
         ],
         "properties": {
           "id": {
@@ -10098,12 +10335,26 @@
             "example": "5"
           },
           "category": {
-            "description": "Media category keyword as maintained on the file assignment.",
+            "description": "What the file is used for on the product. Null when it is filed under a keyword outside the standard set, for example one this Xentral instance defined itself.",
             "type": [
               "string",
               "null"
             ],
-            "example": "Shopbild"
+            "enum": [
+              "defaultImage",
+              "defaultGroupImage",
+              "labelImage",
+              "otherImage",
+              "printImage",
+              "dataSheet",
+              "certificateAttachment"
+            ],
+            "example": "defaultImage"
+          },
+          "isPrimary": {
+            "description": "Whether this file is the standard image of the product — the one shown for the product and printed on its documents. At most one file per product is marked, and a product whose only images are label or group images has none.",
+            "type": "boolean",
+            "example": true
           },
           "name": {
             "description": "Name of the underlying file.",
@@ -10159,6 +10410,175 @@
               "null"
             ],
             "example": "Electronics"
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductOption": {
+        "description": "An option of a matrix product, such as size or colour, together with the values it can take. Options are held by the matrix product itself; each of its variants carries one value per option.",
+        "required": [
+          "id",
+          "name",
+          "order",
+          "isActive",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "description": "Product option ID.",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "1401"
+          },
+          "name": {
+            "description": "Name of the option.",
+            "type": "string",
+            "example": "Size"
+          },
+          "order": {
+            "description": "Position of the option in the variant matrix. Lower values are shown first.",
+            "type": "integer",
+            "example": 1
+          },
+          "isActive": {
+            "description": "Whether this option is still offered when new variants are created. Variants that already carry one of its values keep it either way.",
+            "type": "boolean",
+            "example": true
+          },
+          "values": {
+            "description": "The values this option can take, in the order they are shown.",
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "order",
+                "numberSuffix",
+                "isActive"
+              ],
+              "properties": {
+                "id": {
+                  "description": "Option value ID.",
+                  "type": "string",
+                  "pattern": "[0-9]+",
+                  "example": "1501"
+                },
+                "name": {
+                  "description": "Name of the value.",
+                  "type": "string",
+                  "example": "L"
+                },
+                "order": {
+                  "description": "Position of the value within its option. Lower values are shown first.",
+                  "type": "integer",
+                  "example": 1
+                },
+                "numberSuffix": {
+                  "description": "Text appended to the product number of a variant carrying this value. Null when no suffix is configured.",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "example": "-L"
+                },
+                "isActive": {
+                  "description": "Whether this value is still offered when new variants are created. Variants that already carry it keep it either way.",
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "example": [
+              {
+                "id": "1501",
+                "name": "L",
+                "order": 1,
+                "numberSuffix": "-L",
+                "isActive": true
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductOptionValue": {
+        "description": "One option value a variant product carries, together with the option it belongs to. A variant carries one entry per option of its matrix product. The option is normally one of that matrix product's own options, but older data can carry one that is not, and such an entry is still reported. Entries whose option cannot be determined at all are reported with a null option and sorted last, so the values a variant carries are never silently left out.",
+        "required": [
+          "option",
+          "value"
+        ],
+        "properties": {
+          "option": {
+            "description": "The option this value belongs to. Null when it cannot be determined, which happens in older data; the value itself is still reported.",
+            "required": [
+              "id",
+              "name",
+              "isActive"
+            ],
+            "properties": {
+              "id": {
+                "description": "Product option ID.",
+                "type": "string",
+                "pattern": "[0-9]+",
+                "example": "1401"
+              },
+              "name": {
+                "description": "Name of the option.",
+                "type": "string",
+                "example": "Size"
+              },
+              "isActive": {
+                "description": "Whether this option is still offered when new variants are created. This variant keeps the value either way.",
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false
+          },
+          "value": {
+            "description": "The value the variant carries for that option.",
+            "required": [
+              "id",
+              "name",
+              "numberSuffix",
+              "isActive"
+            ],
+            "properties": {
+              "id": {
+                "description": "Option value ID.",
+                "type": "string",
+                "pattern": "[0-9]+",
+                "example": "1501"
+              },
+              "name": {
+                "description": "Name of the value.",
+                "type": "string",
+                "example": "L"
+              },
+              "numberSuffix": {
+                "description": "Text appended to the product number of a variant carrying this value, so the variant's number can be traced back to the values it is built from. Null when no suffix is configured.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "-L"
+              },
+              "isActive": {
+                "description": "Whether this value is still offered when new variants are created. This variant keeps it either way.",
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
           }
         },
         "type": "object",
@@ -10877,6 +11297,13 @@
               "null"
             ],
             "example": "4001234567891"
+          },
+          "optionValues": {
+            "description": "The option values this variant carries, one per option of its matrix product (include=variants.optionValues).",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductOptionValue"
+            }
           }
         },
         "type": "object",
@@ -11076,6 +11503,23 @@
                 ],
                 "format": "float",
                 "example": 10.5
+              },
+              "batch": {
+                "description": "Batch number recorded for the goods this production produces. Completing the production with a batch replaces it. Null when no batch has been recorded.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "CH-2026-07"
+              },
+              "bestBeforeDate": {
+                "description": "Best-before date recorded for the goods this production produces. Completing the production with a best-before date replaces it. Null when none has been recorded.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2027-01-31"
               },
               "tags": {
                 "description": "Tags for categorizing the production",
@@ -11293,8 +11737,21 @@
                 "example": 2
               },
               "product": {
-                "description": "The product of the line item",
-                "type": "object"
+                "description": "The product master data of the material: EAN, manufacturer and manufacturer number, measurements (weight, net weight, dimensions), customs data. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. The embedded product is a curated subset of the `Product` schema: identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. Purchasing, stock-operations, pricing/costing configuration and internal notes are never embedded here — reading those requires the product endpoints. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Product"
+                  },
+                  {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "3"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
               },
               "hasChildLineItems": {
                 "description": "Indicates if this line item has child line items (exploded line items)",
@@ -11677,6 +12134,13 @@
                   }
                 },
                 "type": "object"
+              },
+              "stockMovements": {
+                "description": "Quantities of this line item booked from storage locations when the goods were shipped on the linked delivery note, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Empty for proforma invoices that were not created from a delivery note.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/StockMovementData"
+                }
               }
             },
             "type": "object"
@@ -11756,6 +12220,9 @@
           },
           {
             "$ref": "#/components/schemas/ShippingMethodResource"
+          },
+          {
+            "$ref": "#/components/schemas/TaxDisplayResource"
           },
           {
             "properties": {
@@ -12351,7 +12818,8 @@
             },
             "type": "object"
           },
-          "description": {
+          "returnNote": {
+            "description": "A free-text note on why this line item is being returned, recorded alongside the return reason.",
             "type": [
               "string",
               "null"
@@ -12586,12 +13054,25 @@
                     "description": "The unique identifier of the return reason.",
                     "type": "string",
                     "example": "2"
+                  },
+                  "name": {
+                    "description": "The name of the return reason.",
+                    "type": "string",
+                    "example": "Wrong size"
                   }
                 },
                 "type": [
                   "object",
                   "null"
                 ]
+              },
+              "returnNote": {
+                "description": "A free-text note on why this line item was returned, recorded alongside the return reason. Can contain HTML; the note is stored and returned unchanged.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Zipper broke after two weeks"
               },
               "parentLineItem": {
                 "description": "If this line item is a child line item, this will contain the parent line item ID.",
@@ -12642,6 +13123,13 @@
                   }
                 },
                 "type": "object"
+              },
+              "stockMovements": {
+                "description": "Quantities of this line item booked into storage locations when the goods were received back, with the serial numbers, batches and best before dates recorded for them. Only returned when requested via the `stockMovements` include. Responses grow with the number of units carrying a serial number, so use smaller pages when listing documents with this include.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/StockMovementData"
+                }
               }
             },
             "type": "object"
@@ -12730,6 +13218,9 @@
           },
           {
             "$ref": "#/components/schemas/SalesReferenceResource"
+          },
+          {
+            "$ref": "#/components/schemas/TaxDisplayResource"
           },
           {
             "properties": {
@@ -14081,6 +14572,249 @@
         },
         "type": "object"
       },
+      "StockMovement": {
+        "description": "A single posting in the warehouse ledger: one stock change of one product on one storage location.",
+        "required": [
+          "id",
+          "product",
+          "storageLocation",
+          "quantity",
+          "direction",
+          "stockLevelAfter",
+          "postedAt",
+          "reference",
+          "editor",
+          "project",
+          "causedBy",
+          "stockMovementType",
+          "systemType",
+          "stockTransactionId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TimestampsResource"
+          },
+          {
+            "properties": {
+              "id": {
+                "description": "The unique identifier of the stock movement.",
+                "type": "string",
+                "example": "48211"
+              },
+              "product": {
+                "description": "The product whose stock changed. Only the ID is returned; use the product endpoints for the full record. `null` for the rare posting that records no product.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "1032"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "storageLocation": {
+                "description": "The storage location the stock was booked on. Only the ID is returned. `null` for the rare posting that records no storage location.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "14"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "quantity": {
+                "description": "The moved quantity, signed by the direction: positive when stock was added, negative when it was removed. Movements can therefore be summed up over a period without evaluating `direction`.",
+                "type": "number",
+                "format": "float",
+                "example": -5
+              },
+              "direction": {
+                "description": "Whether this posting added stock to the storage location or removed it from it. A relocation between two storage locations is recorded as two postings, one of each direction.",
+                "type": "string",
+                "enum": [
+                  "inbound",
+                  "outbound"
+                ],
+                "example": "outbound"
+              },
+              "stockLevelAfter": {
+                "description": "The stock level of the product on that storage location immediately after this posting. This is the value recorded at the time of booking, not a recalculation of the current stock.",
+                "type": "number",
+                "format": "float",
+                "example": 120
+              },
+              "postedAt": {
+                "description": "The date and time the stock change was booked. This is the business-relevant point in time and the field to filter on for period analyses; `createdAt` records when the entry itself was written.",
+                "type": "string",
+                "format": "date-time",
+                "example": "2026-07-30T14:22:11+02:00"
+              },
+              "reference": {
+                "description": "The reason for the stock change as shown in the warehouse UI, for example the document it originated from or a manually entered reason. Free text, empty when no reason was recorded.",
+                "type": "string",
+                "example": "Lieferschein LS1023"
+              },
+              "editor": {
+                "description": "Username of the user who caused the stock change. A plain name, not a reference to a user record. Empty for movements booked by automated processes.",
+                "type": "string",
+                "example": "mmustermann"
+              },
+              "project": {
+                "description": "The project of the process that caused the stock change. `null` when that process had no project. This is independent of the project a warehouse itself may belong to.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "2"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "causedBy": {
+                "description": "The record that caused the stock change - a business document, a stocktaking run, a goods posting document or a parcel receipt. `null` when the posting records no cause, as manual corrections and stocktaking bookings do.",
+                "required": [
+                  "type",
+                  "id"
+                ],
+                "properties": {
+                  "type": {
+                    "description": "The kind of record, named as in the rest of the API.",
+                    "type": "string",
+                    "enum": [
+                      "offer",
+                      "salesOrder",
+                      "deliveryNote",
+                      "invoice",
+                      "creditNote",
+                      "proformaInvoice",
+                      "returnOrder",
+                      "purchaseOrder",
+                      "production",
+                      "inventoryRun",
+                      "goodsPostingDocument",
+                      "parcelReceipt",
+                      "serviceOrder"
+                    ],
+                    "example": "deliveryNote"
+                  },
+                  "id": {
+                    "type": "string",
+                    "example": "8871"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "stockMovementType": {
+                "description": "The configured booking type the posting was made with - the record behind the stock movement types endpoint. Only the ID is returned. Its own direction also knows relocation and correction, so it is what tells the two postings of a relocation apart from a genuine inflow and outflow, which `direction` alone cannot express. `null` when the posting names no type.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "7"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "systemType": {
+                "description": "The business process a system-initiated movement belongs to, for example `goods-receipt-from-purchase-order`, `inventory-correction` or `storage-location-relocation`. `manual` marks a movement booked by hand. Treat this as an open set: further values may be added. Currently populated for a small share of movements only, because the stock management it comes from is still being rolled out - expect `null` on most postings, including recent ones.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "goods-receipt-from-purchase-order"
+              },
+              "stockTransactionId": {
+                "description": "Groups the postings that were booked together in one stock transaction, so the two sides of a relocation can be recognised as one operation. Populated for a small share of movements only, for the same reason as `systemType` - expect `null` on most postings, including recent ones.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "9f8b1c40-3d21-4a77-9a2e-6b0f5d8e1c33"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "StockMovementData": {
+        "description": "A quantity of a line item booked from or into a single storage location, together with the quality control attributes recorded for it.",
+        "required": [
+          "quantity"
+        ],
+        "properties": {
+          "warehouse": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WarehouseReferenceData",
+                "description": "Warehouse the quantity was booked from or into. Null if the storage location can no longer be determined."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Warehouse the quantity was booked from or into. Null if the storage location can no longer be determined."
+          },
+          "storageLocation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StorageLocationReferenceData",
+                "description": "Storage location the quantity was booked from or into. Null if it can no longer be determined."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Storage location the quantity was booked from or into. Null if it can no longer be determined."
+          },
+          "quantity": {
+            "description": "Quantity booked from or into this storage location.",
+            "type": "number",
+            "format": "float",
+            "example": 4
+          },
+          "qualityControlAttributes": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BookedQualityControlAttributesData",
+                "description": "Serial numbers, batch and best before date recorded for this booking. Null if none of them are tracked for the product."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Serial numbers, batch and best before date recorded for this booking. Null if none of them are tracked for the product."
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "StorageLocationReferenceData": {
         "required": [
           "id"
@@ -14397,11 +15131,11 @@
                           "null"
                         ],
                         "enum": [
-                          "automatically",
-                          "alwaysNet",
-                          "alwaysGross"
+                          "automatic",
+                          "net",
+                          "gross"
                         ],
-                        "example": "alwaysGross"
+                        "example": "gross"
                       },
                       "taxDeterminationType": {
                         "type": [
@@ -14525,7 +15259,7 @@
                   "tax": {
                     "vatId": "DE112233445",
                     "taxNumber": "l2/345/67890",
-                    "taxDisplay": "alwaysGross",
+                    "taxDisplay": "gross",
                     "taxDeterminationType": "domestic",
                     "customsInformation": "HS-Code 8471.30; Preferential origin: EU"
                   },
@@ -14856,11 +15590,25 @@
                       "example": "customField1"
                     },
                     "value": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
-                      "example": "preferred"
+                      "description": "The custom field value. Its JSON type depends on the sibling `type` field: `string`/`translatable_string` and `date`/`datetime` (as ISO 8601 strings) are strings, `integer`/`float` are numbers, `boolean` is a boolean, and `object` is a JSON object.",
+                      "example": "preferred",
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
                     },
                     "label": {
                       "type": "string",
@@ -15095,11 +15843,11 @@
             "description": "Tax display preference on receipts",
             "type": "string",
             "enum": [
-              "automatically",
-              "alwaysNet",
-              "alwaysGross"
+              "automatic",
+              "net",
+              "gross"
             ],
-            "example": "alwaysGross"
+            "example": "gross"
           },
           "taxDeterminationType": {
             "description": "Tax determination type for liabilities",
@@ -15196,11 +15944,11 @@
             "description": "Tax display preference",
             "type": "string",
             "enum": [
-              "automatically",
-              "alwaysNet",
-              "alwaysGross"
+              "automatic",
+              "net",
+              "gross"
             ],
-            "example": "alwaysGross"
+            "example": "gross"
           },
           "useDeliveryThreshold": {
             "description": "Use delivery threshold",
@@ -15218,6 +15966,31 @@
         },
         "type": "object",
         "additionalProperties": false
+      },
+      "TaxDisplayResource": {
+        "properties": {
+          "financials": {
+            "properties": {
+              "tax": {
+                "properties": {
+                  "taxDisplay": {
+                    "description": "Whether the document shows net or gross prices. \"automatic\" defers to the customer, project and company settings. Setting it through this API does not recalculate prices, tax rates or totals.",
+                    "type": "string",
+                    "enum": [
+                      "automatic",
+                      "net",
+                      "gross"
+                    ],
+                    "example": "net"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
       },
       "TimestampsResource": {
         "properties": {
@@ -15589,6 +16362,9 @@
           },
           {
             "$ref": "#/components/schemas/HasSales"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
@@ -16316,6 +17092,11 @@
                 "description": "If true, the delivery note is excluded from invoicing: the collective invoice run skips it, and its sales order counts as invoiced - so that order no longer shows up as waiting for an invoice.",
                 "type": "boolean",
                 "example": false
+              },
+              "useAlternativeDocumentTitle": {
+                "description": "Indicates if the alternative document title should be used.",
+                "type": "boolean",
+                "example": false
               }
             },
             "type": "object"
@@ -16567,6 +17348,9 @@
             "$ref": "#/components/schemas/HasShippingMethod"
           },
           {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
+          },
+          {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
           },
           {
@@ -16790,6 +17574,9 @@
             "$ref": "#/components/schemas/HasShippingMethod"
           },
           {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
+          },
+          {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
           },
           {
@@ -16840,7 +17627,7 @@
                 "example": false
               },
               "manualShippingCostApproval": {
-                "description": "Use this field to manually approve the shipping costs of the offer. Depending on the shipping method configuration, this might be required before the offer can be dispatched.",
+                "description": "Manually approves the shipping costs. Takes effect only on the sales order created from the offer, where it can be required before dispatch.",
                 "type": "boolean",
                 "example": false
               },
@@ -16898,6 +17685,9 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/UpdateProductLineItemData"
+          },
+          {
+            "$ref": "#/components/schemas/LineItemBillOfMaterials"
           },
           {
             "$ref": "#/components/schemas/LineItemFinancials"
@@ -17009,7 +17799,7 @@
               "string",
               "null"
             ],
-            "example": "123 Main St"
+            "example": "Fuggerstraße 11"
           },
           "zipCode": {
             "description": "ZIP Code",
@@ -17017,7 +17807,7 @@
               "string",
               "null"
             ],
-            "example": "12456"
+            "example": "86150"
           },
           "city": {
             "description": "City",
@@ -17025,7 +17815,7 @@
               "string",
               "null"
             ],
-            "example": "Springfield"
+            "example": "Augsburg"
           },
           "state": {
             "description": "State",
@@ -17033,7 +17823,7 @@
               "string",
               "null"
             ],
-            "example": "Illinois"
+            "example": "BY"
           },
           "country": {
             "description": "Country",
@@ -17041,7 +17831,7 @@
               "string",
               "null"
             ],
-            "example": "US"
+            "example": "DE"
           },
           "gln": {
             "description": "Global Location Number",
@@ -17466,6 +18256,9 @@
             "$ref": "#/components/schemas/HasShippingMethod"
           },
           {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
+          },
+          {
             "properties": {
               "confirmedDeliveryDate": {
                 "description": "Confirmed delivery date of the purchase order.",
@@ -17857,6 +18650,14 @@
                   "object",
                   "null"
                 ]
+              },
+              "returnNote": {
+                "description": "A free-text note on why this line item was returned, recorded alongside the return reason. Can contain HTML; the note is stored and returned unchanged.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Zipper broke after two weeks"
               }
             },
             "type": "object"
@@ -17897,6 +18698,9 @@
           },
           {
             "$ref": "#/components/schemas/HasShippingMethod"
+          },
+          {
+            "$ref": "#/components/schemas/BusinessDocumentTaxDisplay"
           },
           {
             "$ref": "#/components/schemas/BusinessDocumentTaxNotice"
@@ -18062,10 +18866,6 @@
                 "format": "date",
                 "example": "2023-10-05"
               },
-              "paymentMethod": {
-                "$ref": "#/components/schemas/PaymentMethodReferenceData",
-                "description": "Reference to the payment method used for this sales order."
-              },
               "trafficLights": {
                 "description": "Custom traffic light states to set on the sales order. Only custom traffic lights can be set; system traffic lights are computed automatically and cannot be written. Look up the available custom traffic light IDs via GET /api/v3/salesOrderTrafficLights (entries with type \"custom\"). Each provided entry is applied; any custom traffic light not included is left unchanged.",
                 "type": "array",
@@ -18078,6 +18878,11 @@
                 "type": "string",
                 "maxLength": 32,
                 "example": "10001"
+              },
+              "useAlternativeDocumentTitle": {
+                "description": "Indicates if the alternative document title should be used.",
+                "type": "boolean",
+                "example": false
               }
             },
             "type": "object"
@@ -18479,6 +19284,19 @@
         },
         "type": "object",
         "additionalProperties": false
+      },
+      "WarehouseReferenceData": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of the warehouse",
+            "type": "string",
+            "example": "13"
+          }
+        },
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -18577,6 +19395,10 @@
     {
       "name": "ReturnOrder",
       "description": "ReturnOrder"
+    },
+    {
+      "name": "StockMovement",
+      "description": "StockMovement"
     },
     {
       "name": "EmailAccount",
@@ -18779,6 +19601,8 @@
                   "lineItems.customFields",
                   "customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -19248,6 +20072,8 @@
                   "address",
                   "customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "lineItems.customFields",
@@ -19395,7 +20221,7 @@
           "CreditNote"
         ],
         "summary": "🔒 Update credit note V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-creditnotes-id",
         "parameters": [
           {
@@ -19418,7 +20244,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -23442,10 +24268,13 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
+                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -23839,8 +24668,8 @@
                         "noInvoice": [
                           "The no invoice field must be true or false."
                         ],
-                        "salesOrder": [
-                          "The salesOrder field is invalid."
+                        "useAlternativeDocumentTitle": [
+                          "The use alternative document title field must be true or false."
                         ]
                       }
                     }
@@ -23911,10 +24740,13 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
+                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -24059,7 +24891,7 @@
           "DeliveryNote"
         ],
         "summary": "🔒 Update delivery note V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `deliveryNote:update`.\n\nUpdate a delivery note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `deliveryNote:update`.\n\nUpdate a delivery note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-deliverynotes-id",
         "parameters": [
           {
@@ -24082,7 +24914,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a delivery note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a delivery note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -24122,8 +24954,8 @@
                         "noInvoice": [
                           "The no invoice field must be true or false."
                         ],
-                        "salesOrder": [
-                          "The salesOrder field is invalid."
+                        "useAlternativeDocumentTitle": [
+                          "The use alternative document title field must be true or false."
                         ]
                       }
                     }
@@ -25330,7 +26162,8 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product"
+                  "product",
+                  "stockMovements"
                 ]
               }
             }
@@ -25913,6 +26746,8 @@
                   "customFields",
                   "lineItems.customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -26570,6 +27405,8 @@
                   "customFields",
                   "lineItems.customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "project",
                   "tags",
                   "activity",
@@ -26717,7 +27554,7 @@
           "Invoice"
         ],
         "summary": "🔒 Update invoice V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:update`.\n\nUpdate an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:update`.\n\nUpdate an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-invoices-id",
         "parameters": [
           {
@@ -26740,7 +27577,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -28260,6 +29097,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -28729,6 +29568,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -28877,7 +29718,7 @@
           "Offer"
         ],
         "summary": "🔒 Update offer V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:update`.\n\nUpdate an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:update`.\n\nUpdate an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-offers-id",
         "parameters": [
           {
@@ -28900,7 +29741,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -30596,7 +31437,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`documentDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`writeProtection`: *equals*, *notEquals* \n\n`address.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`status`: *equals*, *notEquals*, *in*, *notIn* \n\n`internalComment`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`internalDesignation`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`productionStartDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionEndDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockRetrievalDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockProvisioningDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`materialReservation`: *equals*, *notEquals*, *in*, *notIn* \n\n`materialRetrieval`: *equals*, *notEquals*, *in*, *notIn* \n\n`resolveMultiLevelBOM`: *equals*, *notEquals* \n\n`functionTest`: *equals*, *notEquals* \n\n`createSerialNumbers`: *equals*, *notEquals* \n\n`recordSubSerialNumbers`: *equals*, *notEquals* \n\n`printSettings.showTaskDescription`: *equals*, *notEquals* \n\n`bodyText`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`preferredWarehouse.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`documentDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`writeProtection`: *equals*, *notEquals* \n\n`address.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`status`: *equals*, *notEquals*, *in*, *notIn* \n\n`internalComment`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`internalDesignation`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`batch`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`bestBeforeDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionStartDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionEndDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockRetrievalDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockProvisioningDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`materialReservation`: *equals*, *notEquals*, *in*, *notIn* \n\n`materialRetrieval`: *equals*, *notEquals*, *in*, *notIn* \n\n`resolveMultiLevelBOM`: *equals*, *notEquals* \n\n`functionTest`: *equals*, *notEquals* \n\n`createSerialNumbers`: *equals*, *notEquals* \n\n`recordSubSerialNumbers`: *equals*, *notEquals* \n\n`printSettings.showTaskDescription`: *equals*, *notEquals* \n\n`bodyText`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`preferredWarehouse.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -30616,6 +31457,8 @@
                       "status",
                       "internalComment",
                       "internalDesignation",
+                      "batch",
+                      "bestBeforeDate",
                       "productionStartDate",
                       "productionEndDate",
                       "stockRetrievalDate",
@@ -30691,7 +31534,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "Sort via id, -id, documentNumber, -documentNumber, documentDate, -documentDate, productionStartDate, -productionStartDate, productionEndDate, -productionEndDate, stockRetrievalDate, -stockRetrievalDate, stockProvisioningDate, -stockProvisioningDate, createdAt, -createdAt, updatedAt and -updatedAt. Default sort is -created_at",
+            "description": "Sort via id, -id, documentNumber, -documentNumber, documentDate, -documentDate, batch, -batch, bestBeforeDate, -bestBeforeDate, productionStartDate, -productionStartDate, productionEndDate, -productionEndDate, stockRetrievalDate, -stockRetrievalDate, stockProvisioningDate, -stockProvisioningDate, createdAt, -createdAt, updatedAt and -updatedAt. Default sort is -created_at",
             "required": false,
             "style": "form",
             "explode": false,
@@ -30705,6 +31548,10 @@
                   "-documentNumber",
                   "documentDate",
                   "-documentDate",
+                  "batch",
+                  "-batch",
+                  "bestBeforeDate",
+                  "-bestBeforeDate",
                   "productionStartDate",
                   "-productionStartDate",
                   "productionEndDate",
@@ -30744,6 +31591,8 @@
                   "address",
                   "materials",
                   "materials.product",
+                  "materials.product.salesPrices",
+                  "materials.product.customFields",
                   "project",
                   "tags"
                 ]
@@ -31016,6 +31865,8 @@
                   "address",
                   "materials",
                   "materials.product",
+                  "materials.product.salesPrices",
+                  "materials.product.customFields",
                   "project",
                   "tags"
                 ]
@@ -31798,13 +32649,13 @@
           "Product"
         ],
         "summary": "🔒 List products V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
         "operationId": "GET::api-v3-products",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isVariant`: *equals*, *notEquals* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -31832,7 +32683,6 @@
                       "externalReferences.number",
                       "externalReferences.name",
                       "externalReferences.salesChannel.id",
-                      "isVariant",
                       "isMatrixProduct",
                       "isStockItem",
                       "isDiscountProduct",
@@ -31951,6 +32801,9 @@
                   "customFields",
                   "workInstructions",
                   "variants",
+                  "variants.optionValues",
+                  "options",
+                  "optionValues",
                   "tags",
                   "properties",
                   "salesChannels",
@@ -32007,7 +32860,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference.",
+            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
             "content": {
               "application/json": {
                 "schema": {
@@ -32297,7 +33150,7 @@
           "Product"
         ],
         "summary": "🔒 View product V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nView a single product. Embed sub-resources with ?include=.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nView a single product. Embed sub-resources with ?include=. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
         "operationId": "GET::api-v3-products-id",
         "parameters": [
           {
@@ -32335,6 +33188,9 @@
                   "customFields",
                   "workInstructions",
                   "variants",
+                  "variants.optionValues",
+                  "options",
+                  "optionValues",
                   "tags",
                   "properties",
                   "salesChannels",
@@ -32347,7 +33203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "View a single product. Embed sub-resources with ?include=.",
+            "description": "View a single product. Embed sub-resources with ?include=. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
             "content": {
               "application/json": {
                 "schema": {
@@ -33480,6 +34336,9 @@
                   "lineItems.customFields",
                   "customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
+                  "lineItems.stockMovements",
                   "project",
                   "tags",
                   "activity",
@@ -33950,6 +34809,9 @@
                   "address",
                   "customFields",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
+                  "lineItems.stockMovements",
                   "tags",
                   "activity",
                   "lineItems.customFields",
@@ -34098,7 +34960,7 @@
           "ProformaInvoice"
         ],
         "summary": "🔒 Update proforma invoice V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `proformaInvoice:update`.\n\nUpdate a proforma invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `proformaInvoice:update`.\n\nUpdate a proforma invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-proformainvoices-id",
         "parameters": [
           {
@@ -34121,7 +34983,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a proforma invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a proforma invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -35127,7 +35989,8 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product"
+                  "product",
+                  "stockMovements"
                 ]
               }
             }
@@ -35571,6 +36434,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -36040,6 +36905,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -36188,7 +37055,7 @@
           "PurchaseOrder"
         ],
         "summary": "🔒 Update purchase order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-purchaseorders-id",
         "parameters": [
           {
@@ -36211,7 +37078,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -37866,10 +38733,13 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
+                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -38432,10 +39302,13 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
                   "lineItems.customFields",
+                  "lineItems.stockMovements",
                   "relatedDocuments"
                 ]
               }
@@ -38580,7 +39453,7 @@
           "ReturnOrder"
         ],
         "summary": "🔒 Update return order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `return:update`.\n\nUpdate a return order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `return:update`.\n\nUpdate a return order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-returnorders-id",
         "parameters": [
           {
@@ -38603,7 +39476,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a return order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a return order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -39709,8 +40582,8 @@
                         "returnReason": [
                           "The returnReason field is invalid."
                         ],
-                        "quantity": [
-                          "The quantity field is required."
+                        "returnNote": [
+                          "The return note field must be a string."
                         ]
                       }
                     }
@@ -39811,7 +40684,8 @@
                 "type": "string",
                 "enum": [
                   "customFields",
-                  "product"
+                  "product",
+                  "stockMovements"
                 ]
               }
             }
@@ -40019,11 +40893,11 @@
                         "returnReason": [
                           "The returnReason field is invalid."
                         ],
+                        "returnNote": [
+                          "The return note field must be a string."
+                        ],
                         "name": [
                           "The name field must be a string."
-                        ],
-                        "description": [
-                          "The description field must be a string."
                         ]
                       }
                     }
@@ -40462,6 +41336,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -40932,6 +41808,8 @@
                   "project",
                   "address",
                   "lineItems.product",
+                  "lineItems.product.salesPrices",
+                  "lineItems.product.customFields",
                   "tags",
                   "activity",
                   "customFields",
@@ -41082,7 +41960,7 @@
           "SalesOrder"
         ],
         "summary": "🔒 Update sales order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-salesorders-id",
         "parameters": [
           {
@@ -41105,7 +41983,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body does not carry the line items, so the id of an inline-created line item has to be read with a follow-up GET - or create it through the dedicated line-item endpoint, which returns the new line item directly.",
+            "description": "Update a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
             "content": {
               "application/json": {
                 "schema": {
@@ -43405,6 +44283,277 @@
         },
         "x-scopes": [
           "serviceOrder:update"
+        ]
+      }
+    },
+    "/api/v3/stockMovements": {
+      "get": {
+        "tags": [
+          "StockMovement"
+        ],
+        "summary": "🔒 List stock movements V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `stockMovement:read`.\n\nPaginated list of stock movements - the warehouse ledger. Every posting that changed the stock of a product on a storage location is recorded here, which makes this the source for movement analyses. Filter by `product.id`, `storageLocation.id` or `warehouse.id` to narrow it down to what you want to analyse, and by `postedAt` to restrict the period.",
+        "operationId": "GET::api-v3-stockmovements",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`product.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`storageLocation.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`warehouse.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`direction`: *equals*, *notEquals*, *in*, *notIn* \n\n`postedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`reference`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`editor`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`causedBy.type`: *equals*, *notEquals*, *in*, *notIn* \n\n`causedBy.id`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`stockMovementType.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "product.id",
+                      "storageLocation.id",
+                      "warehouse.id",
+                      "project.id",
+                      "direction",
+                      "postedAt",
+                      "reference",
+                      "editor",
+                      "causedBy.type",
+                      "causedBy.id",
+                      "stockMovementType.id",
+                      "createdAt"
+                    ]
+                  },
+                  "op": {
+                    "description": "operator",
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "lessThan",
+                      "lessThanOrEquals",
+                      "greaterThan",
+                      "greaterThanOrEquals",
+                      "isNull",
+                      "isNotNull",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith"
+                    ]
+                  },
+                  "value": {
+                    "description": "The property value.",
+                    "oneOf": [
+                      {
+                        "title": "String",
+                        "type": "string"
+                      },
+                      {
+                        "title": "Array",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              }
+            },
+            "examples": {
+              "All movements of one storage location since July": {
+                "summary": "",
+                "value": [
+                  {
+                    "key": "storageLocation.id",
+                    "op": "equals",
+                    "value": "14"
+                  },
+                  {
+                    "key": "postedAt",
+                    "op": "greaterThanOrEquals",
+                    "value": "2026-07-01"
+                  }
+                ]
+              },
+              "Outbound movements of one product": {
+                "summary": "",
+                "value": [
+                  {
+                    "key": "product.id",
+                    "op": "equals",
+                    "value": "1032"
+                  },
+                  {
+                    "key": "direction",
+                    "op": "equals",
+                    "value": "outbound"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort via id, -id, postedAt, -postedAt, quantity, -quantity, createdAt and -createdAt. Default sort is -id",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "id",
+                  "-id",
+                  "postedAt",
+                  "-postedAt",
+                  "quantity",
+                  "-quantity",
+                  "createdAt",
+                  "-createdAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of items per page. Default: 15, Max: 100",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 15
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of stock movements - the warehouse ledger. Every posting that changed the stock of a product on a storage location is recorded here, which makes this the source for movement analyses. Filter by `product.id`, `storageLocation.id` or `warehouse.id` to narrow it down to what you want to analyse, and by `postedAt` to restrict the period.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/StockMovement"
+                      },
+                      "x-description-ignore": true,
+                      "x-example-ignore": true
+                    },
+                    "meta": {
+                      "description": "Pagination meta data",
+                      "properties": {
+                        "currentPage": {
+                          "description": "The current page number",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "from": {
+                          "description": "The first item being returned in the current page",
+                          "type": "integer",
+                          "example": 1,
+                          "nullable": true
+                        },
+                        "path": {
+                          "description": "The base path for the paginated results",
+                          "type": "string",
+                          "example": "https://api.example.com/items"
+                        },
+                        "perPage": {
+                          "description": "The number of items shown per page",
+                          "type": "integer",
+                          "example": 15
+                        },
+                        "to": {
+                          "description": "The last item being returned in the current page",
+                          "type": "integer",
+                          "example": 15,
+                          "nullable": true
+                        }
+                      },
+                      "type": "object",
+                      "x-example-ignore": true
+                    },
+                    "links": {
+                      "description": "Pagination links",
+                      "properties": {
+                        "first": {
+                          "description": "URL to the first page",
+                          "type": "string",
+                          "example": "https://api.example.com/items?page=1",
+                          "nullable": true
+                        },
+                        "last": {
+                          "description": "URL to the last page",
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "prev": {
+                          "description": "URL to the previous page",
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "next": {
+                          "description": "URL to the next page",
+                          "type": "string",
+                          "example": "https://api.example.com/items?page=17",
+                          "nullable": true
+                        }
+                      },
+                      "type": "object",
+                      "x-example-ignore": true
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "stockMovement:read"
         ]
       }
     },
