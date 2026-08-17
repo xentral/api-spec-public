@@ -165839,7 +165839,7 @@
         ],
         "operationId": "user.view",
         "summary": "View user",
-        "description": "Returns details of a single user",
+        "description": "Returns details of a single user. To read the rights of a user, prefer `GET /api/v3/users/{id}?include=moduleRights` over the `application/vnd.xentral.user-permissions+json` variant of this endpoint: it returns the same rights alongside the user record in the v3 response format. That endpoint is currently in beta.",
         "parameters": [
           {
             "in": "path",
@@ -166567,7 +166567,7 @@
         ],
         "operationId": "user.permission.view",
         "summary": "List user permissions",
-        "description": "Returns all permissions of an user.",
+        "description": "Returns all permissions of an user. `GET /api/v3/users/{id}?include=moduleRights` returns the same rights together with the user record and is the preferred way to read them; it is currently in beta.",
         "parameters": [
           {
             "in": "path",
@@ -166679,7 +166679,7 @@
         ],
         "operationId": "user.actions.downloadPermissions",
         "summary": "Download user permissions",
-        "description": "Returns user permissions in a downloadable format with German field names preserved.",
+        "description": "Returns user permissions in a downloadable format with German field names preserved. For programmatic access, prefer `GET /api/v3/users/{id}?include=moduleRights`, which returns the same rights in the v3 response format; it is currently in beta.",
         "parameters": [
           {
             "in": "path",
@@ -169797,6 +169797,15 @@
               "default": "latest"
             },
             "description": "Xentral version to request the available event types for."
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "example": "schema",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of extra data to include. Supported value: `schema` — adds the JSON Schema of the delivered webhook document per event type. Without it the response is unchanged; any other value is rejected with 400."
           }
         ],
         "responses": {
@@ -169831,6 +169840,28 @@
                             "description": "The group the event type belongs to.",
                             "type": "string",
                             "example": "salesOrder"
+                          },
+                          "schema": {
+                            "description": "Only present with `include=schema`: the JSON Schema of the complete webhook document this instance would deliver for the event type (`{\"type\": …, \"body\": …}`), with all references resolved. Where the payload depends on this instance's feature flags, the schema reflects the instance's current configuration. `null` when no schema is available for the event type.",
+                            "type": "object",
+                            "nullable": true,
+                            "example": {
+                              "type": "object",
+                              "required": [
+                                "type",
+                                "body"
+                              ],
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "const": "com.xentral.salesOrder.created.v1"
+                                },
+                                "body": {
+                                  "title": "Sales Order Created",
+                                  "type": "object"
+                                }
+                              }
+                            }
                           }
                         }
                       },
@@ -169850,6 +169881,226 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "IETF RFC 9457 Problem API compliant response",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "violations"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/request-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1,
+                          "example": "Request payload validation failed."
+                        },
+                        "violations": {
+                          "oneOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "example": {
+                                  "username": [
+                                    "This value should not be blank."
+                                  ],
+                                  "email": [
+                                    "This value is not a valid email address."
+                                  ]
+                                }
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            },
+                            {
+                              "type": "object",
+                              "example": {
+                                "_": [
+                                  "This value should contain at most `9` elements."
+                                ]
+                              },
+                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflict"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "items"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/conflictItems"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "title",
+                              "messages"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "title": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "messages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://developer.xentral.com/reference/problems#token-scopes"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "type",
+                        "title",
+                        "messages"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "https://api.xentral.biz/problems/generic-validation"
+                          ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "messages": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
