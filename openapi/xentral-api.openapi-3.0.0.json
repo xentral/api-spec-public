@@ -126808,7 +126808,6 @@
                       "id",
                       "product",
                       "supplier",
-                      "supplierItemNumber",
                       "currency",
                       "fromQuantity",
                       "isValidAt"
@@ -129933,7 +129932,6 @@
                       "id",
                       "product",
                       "supplier",
-                      "supplierItemNumber",
                       "currency",
                       "fromQuantity",
                       "isValidAt"
@@ -129947,8 +129945,6 @@
                       "notEquals",
                       "in",
                       "notIn",
-                      "contains",
-                      "notContains",
                       "startsWith",
                       "endsWith",
                       "lessThan",
@@ -136736,7 +136732,7 @@
                           },
                           "documentNumber": {
                             "type": "string",
-                            "description": "The sales order document number",
+                            "description": "Internal identification associated with a Sales Order",
                             "example": "SO-1234"
                           },
                           "isBeingEdited": {
@@ -136746,12 +136742,12 @@
                           },
                           "shippingDateOk": {
                             "type": "boolean",
-                            "description": "Indicates if the shipping date is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the shipping date is ok",
                             "example": false
                           },
                           "creditLimitOk": {
                             "type": "boolean",
-                            "description": "Indicates if the credit limit is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the credit limit is ok",
                             "example": false
                           },
                           "subsequentDelivery": {
@@ -136761,32 +136757,32 @@
                           },
                           "shippingLockOk": {
                             "type": "boolean",
-                            "description": "Indicates if the shipping lock is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the shipping lock is ok",
                             "example": false
                           },
                           "postageOk": {
                             "type": "boolean",
-                            "description": "Indicates if the postage is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the postage is ok",
                             "example": false
                           },
                           "customerCheckOk": {
                             "type": "boolean",
-                            "description": "Indicates if the customer check is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the customer check is ok",
                             "example": false
                           },
                           "vatOk": {
                             "type": "boolean",
-                            "description": "Indicates if the VAT is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the VAT is ok",
                             "example": false
                           },
                           "stockOk": {
                             "type": "boolean",
-                            "description": "Indicates if the stock is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the stock is ok",
                             "example": false
                           },
                           "prepaidOk": {
                             "type": "boolean",
-                            "description": "Indicates if the prepaid status is ok, this is part of the sales order traffic light",
+                            "description": "Indicates if the prepaid status is ok",
                             "example": false
                           },
                           "externalOrderNumber": {
@@ -137192,8 +137188,7 @@
                                 "type": "object",
                                 "properties": {
                                   "autoShipping": {
-                                    "type": "boolean",
-                                    "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
+                                    "type": "boolean"
                                   },
                                   "fastLane": {
                                     "type": "boolean"
@@ -137673,7 +137668,7 @@
                           },
                           "documentNumber": {
                             "type": "string",
-                            "description": "The sales order document number",
+                            "description": "Internal identification associated with a Sales Order",
                             "example": "SO-1234"
                           },
                           "date": {
@@ -138164,8 +138159,7 @@
                         "type": "object",
                         "properties": {
                           "autoShipping": {
-                            "type": "boolean",
-                            "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
+                            "type": "boolean"
                           },
                           "fastLane": {
                             "type": "boolean"
@@ -139263,37 +139257,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                  "printPickList": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Set to true to print the picking list (\"Kommissionierliste\") if the order's project has pick-list printing enabled. Defaults to false; no pick list is printed unless explicitly requested."
-                  }
-                }
-              },
-              "examples": {
-                "Dispatch and print the pick list": {
-                  "value": {
-                    "printPickList": true
-                  }
-                }
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "examples": {
-                "Dispatch without a body": {
-                  "value": {}
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "204": {
             "description": "Operation completed successfully, no response body"
@@ -140173,7 +140136,7 @@
                         },
                         "documentNumber": {
                           "type": "string",
-                          "description": "The sales order document number",
+                          "description": "Internal identification associated with a Sales Order",
                           "example": "SO-1234"
                         },
                         "externalOrderNumber": {
@@ -140617,8 +140580,7 @@
                               "type": "object",
                               "properties": {
                                 "autoShipping": {
-                                  "type": "boolean",
-                                  "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
+                                  "type": "boolean"
                                 },
                                 "fastLane": {
                                   "type": "boolean"
@@ -141713,7 +141675,7 @@
                         },
                         "documentNumber": {
                           "type": "string",
-                          "description": "The sales order document number",
+                          "description": "Internal identification associated with a Sales Order",
                           "example": "SO-1234"
                         },
                         "date": {
@@ -165370,11 +165332,6 @@
                             "type": "string",
                             "nullable": true,
                             "example": "123"
-                          },
-                          "isSupportUser": {
-                            "description": "A boolean value indicating if the user is a support (key) user",
-                            "type": "boolean",
-                            "example": false
                           }
                         },
                         "example": {
@@ -165389,8 +165346,7 @@
                           "isAdmin": true,
                           "email": "ceo@example.com",
                           "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                          "contactId": "123",
-                          "isSupportUser": false
+                          "contactId": "123"
                         }
                       }
                     },
@@ -165720,11 +165676,6 @@
                             "type": "string",
                             "nullable": true,
                             "example": "123"
-                          },
-                          "isSupportUser": {
-                            "description": "A boolean value indicating if the user is a support (key) user",
-                            "type": "boolean",
-                            "example": false
                           }
                         },
                         "example": {
@@ -165739,8 +165690,7 @@
                           "isAdmin": true,
                           "email": "ceo@example.com",
                           "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                          "contactId": "123",
-                          "isSupportUser": false
+                          "contactId": "123"
                         }
                       }
                     },
@@ -165839,7 +165789,7 @@
         ],
         "operationId": "user.view",
         "summary": "View user",
-        "description": "Returns details of a single user. To read the rights of a user, prefer `GET /api/v3/users/{id}?include=moduleRights` over the `application/vnd.xentral.user-permissions+json` variant of this endpoint: it returns the same rights alongside the user record in the v3 response format. That endpoint is currently in beta.",
+        "description": "Returns details of a single user",
         "parameters": [
           {
             "in": "path",
@@ -165952,11 +165902,6 @@
                           "type": "string",
                           "nullable": true,
                           "example": "123"
-                        },
-                        "isSupportUser": {
-                          "description": "A boolean value indicating if the user is a support (key) user",
-                          "type": "boolean",
-                          "example": false
                         }
                       },
                       "example": {
@@ -165971,8 +165916,7 @@
                         "isAdmin": true,
                         "email": "ceo@example.com",
                         "emailVerifiedAt": "2023-08-14T14:45:36+02:00",
-                        "contactId": "123",
-                        "isSupportUser": false
+                        "contactId": "123"
                       }
                     }
                   }
@@ -166095,11 +166039,6 @@
                           "type": "string",
                           "nullable": true,
                           "example": "123"
-                        },
-                        "isSupportUser": {
-                          "description": "A boolean value indicating if the user is a support (key) user",
-                          "type": "boolean",
-                          "example": false
                         }
                       },
                       "example": {
@@ -166113,8 +166052,7 @@
                         "locale": "de_DE",
                         "isAdmin": true,
                         "email": "joe@example.com",
-                        "contactId": "123",
-                        "isSupportUser": false
+                        "contactId": "123"
                       }
                     }
                   }
@@ -166567,7 +166505,7 @@
         ],
         "operationId": "user.permission.view",
         "summary": "List user permissions",
-        "description": "Returns all permissions of an user. `GET /api/v3/users/{id}?include=moduleRights` returns the same rights together with the user record and is the preferred way to read them; it is currently in beta.",
+        "description": "Returns all permissions of an user.",
         "parameters": [
           {
             "in": "path",
@@ -166679,7 +166617,7 @@
         ],
         "operationId": "user.actions.downloadPermissions",
         "summary": "Download user permissions",
-        "description": "Returns user permissions in a downloadable format with German field names preserved. For programmatic access, prefer `GET /api/v3/users/{id}?include=moduleRights`, which returns the same rights in the v3 response format; it is currently in beta.",
+        "description": "Returns user permissions in a downloadable format with German field names preserved.",
         "parameters": [
           {
             "in": "path",
@@ -169797,15 +169735,6 @@
               "default": "latest"
             },
             "description": "Xentral version to request the available event types for."
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "example": "schema",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Comma-separated list of extra data to include. Supported value: `schema` — adds the JSON Schema of the delivered webhook document per event type. Without it the response is unchanged; any other value is rejected with 400."
           }
         ],
         "responses": {
@@ -169840,28 +169769,6 @@
                             "description": "The group the event type belongs to.",
                             "type": "string",
                             "example": "salesOrder"
-                          },
-                          "schema": {
-                            "description": "Only present with `include=schema`: the JSON Schema of the complete webhook document this instance would deliver for the event type (`{\"type\": …, \"body\": …}`), with all references resolved. Where the payload depends on this instance's feature flags, the schema reflects the instance's current configuration. `null` when no schema is available for the event type.",
-                            "type": "object",
-                            "nullable": true,
-                            "example": {
-                              "type": "object",
-                              "required": [
-                                "type",
-                                "body"
-                              ],
-                              "properties": {
-                                "type": {
-                                  "type": "string",
-                                  "const": "com.xentral.salesOrder.created.v1"
-                                },
-                                "body": {
-                                  "title": "Sales Order Created",
-                                  "type": "object"
-                                }
-                              }
-                            }
                           }
                         }
                       },
@@ -169881,226 +169788,6 @@
                       ]
                     }
                   }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "IETF RFC 9457 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "scopes"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://developer.xentral.com/reference/problems#token-scopes"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "scopes": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
                 }
               }
             }
