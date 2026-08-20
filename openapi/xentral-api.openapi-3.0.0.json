@@ -16652,577 +16652,6 @@
             "description": "Too many API calls made."
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Payment Service Provider"
-        ],
-        "operationId": "paymentServiceProvider.transaction.create.v1",
-        "summary": "Create payment service provider transactions",
-        "description": "Creates one or more transactions for a specific payment service provider.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            },
-            "description": "This is the business account identifier",
-            "example": "123"
-          }
-        ],
-        "requestBody": {
-          "description": "Create payment service provider transactions",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "transactions"
-                ],
-                "properties": {
-                  "transactions": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "transaction"
-                      ],
-                      "properties": {
-                        "transaction": {
-                          "type": "object",
-                          "required": [
-                            "id",
-                            "vendorKey",
-                            "type",
-                            "createdAt",
-                            "updatedAt",
-                            "status",
-                            "amount",
-                            "descriptiveText"
-                          ],
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "description": "Unique identifier of the transaction"
-                            },
-                            "vendorKey": {
-                              "type": "string",
-                              "description": "Key identifying the payment service provider vendor",
-                              "enum": [
-                                "paypal",
-                                "mollie"
-                              ],
-                              "example": "paypal"
-                            },
-                            "parentId": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Identifier of the parent transaction if this is a child transaction"
-                            },
-                            "referenceNumber": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Reference number associated with the transaction"
-                            },
-                            "merchantId": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Identifier of the merchant in the payment service provider's system"
-                            },
-                            "type": {
-                              "type": "string",
-                              "description": "Type of the transaction"
-                            },
-                            "feeType": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Type of fee associated with the transaction"
-                            },
-                            "createdAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "Creation timestamp of the transaction"
-                            },
-                            "updatedAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "Last update timestamp of the transaction"
-                            },
-                            "status": {
-                              "type": "string",
-                              "description": "Current status of the transaction"
-                            },
-                            "amount": {
-                              "type": "object",
-                              "required": [
-                                "amount",
-                                "currency"
-                              ],
-                              "properties": {
-                                "amount": {
-                                  "type": "string",
-                                  "description": "Transaction amount"
-                                },
-                                "currency": {
-                                  "type": "string",
-                                  "minLength": 3,
-                                  "maxLength": 3,
-                                  "description": "Currency matches one of currency values as specified in ISO-4217."
-                                }
-                              }
-                            },
-                            "descriptiveText": {
-                              "type": "string",
-                              "description": "Human-readable description of the transaction"
-                            },
-                            "feeAmount": {
-                              "type": "object",
-                              "nullable": true,
-                              "properties": {
-                                "amount": {
-                                  "type": "string",
-                                  "description": "Fee amount"
-                                },
-                                "currency": {
-                                  "type": "string",
-                                  "minLength": 3,
-                                  "maxLength": 3,
-                                  "description": "Currency matches one of currency values as specified in ISO-4217."
-                                }
-                              }
-                            },
-                            "paymentMethodType": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Type of payment method used for the transaction"
-                            },
-                            "payoutId": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "Identifier of the associated payout"
-                            },
-                            "payerInfo": {
-                              "type": "object",
-                              "nullable": true,
-                              "properties": {
-                                "accountId": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Identifier of the payer's account"
-                                },
-                                "email": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Email address of the payer"
-                                },
-                                "firstName": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "First name of the payer"
-                                },
-                                "lastName": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Last name of the payer"
-                                },
-                                "countryCode": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Country code of the payer's location"
-                                }
-                              }
-                            },
-                            "shippingInfo": {
-                              "type": "object",
-                              "nullable": true,
-                              "properties": {
-                                "recipientName": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Name of the shipping recipient"
-                                },
-                                "addressLine1": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "First line of the shipping address"
-                                },
-                                "addressLine2": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Second line of the shipping address"
-                                },
-                                "city": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "City of the shipping address"
-                                },
-                                "zipCode": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Postal code of the shipping address"
-                                },
-                                "countryCode": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Country code of the shipping address"
-                                }
-                              }
-                            },
-                            "bankView": {
-                              "type": "object",
-                              "nullable": true,
-                              "properties": {
-                                "iban": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "International Bank Account Number"
-                                },
-                                "accountNumber": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Bank account number"
-                                },
-                                "bic": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Bank Identification Code (BIC)"
-                                },
-                                "bankName": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Name of the bank"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "examples": {
-                "Create payment service provider transactions": {
-                  "value": {
-                    "transactions": [
-                      {
-                        "transaction": {
-                          "id": "txn_001",
-                          "vendorKey": "paypal",
-                          "parentId": null,
-                          "referenceNumber": "ref_001",
-                          "merchantId": "merchant_001",
-                          "type": "payment",
-                          "feeType": "processing_fee",
-                          "createdAt": "2023-10-05T14:30:00+01:00",
-                          "updatedAt": "2023-10-05T15:30:00+01:00",
-                          "status": "completed",
-                          "amount": {
-                            "amount": "100.50",
-                            "currency": "USD"
-                          },
-                          "descriptiveText": "Test transaction",
-                          "feeAmount": {
-                            "amount": "10.25",
-                            "currency": "USD"
-                          },
-                          "paymentMethodType": "credit_card",
-                          "payoutId": "payout_001",
-                          "payerInfo": {
-                            "accountId": "payer_001",
-                            "email": "payer@example.com",
-                            "firstName": "John",
-                            "lastName": "Doe",
-                            "countryCode": "DE"
-                          },
-                          "shippingInfo": {
-                            "recipientName": "Jane Doe",
-                            "addressLine1": "123 Main St",
-                            "addressLine2": "Apt 4B",
-                            "city": "Berlin",
-                            "zipCode": "10001",
-                            "countryCode": "DE"
-                          },
-                          "bankView": {
-                            "iban": "DE89370400440532013000",
-                            "accountNumber": "123456789",
-                            "bic": "BIC12345678",
-                            "bankName": "Test Bank"
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Transactions created successfully"
-          },
-          "400": {
-            "description": "IETF RFC 9457 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "scopes"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://developer.xentral.com/reference/problems#token-scopes"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "scopes": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unable to authenticate the client",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message explaining why the request failed.",
-                      "example": "Missing required scopes: customer:create."
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Missing required scopes: customer:create."
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
       }
     },
     "/api/v1/customers/{id}": {
@@ -25598,26 +25027,26 @@
                             "bankName": {
                               "type": "string",
                               "nullable": true,
-                              "description": "Name of bank institute",
-                              "example": "Deutsche Bank"
+                              "description": "Name of bank institute. Masked by default. Requires customer:readBanking scope for unmasked value.",
+                              "example": "Deu**********"
                             },
                             "owner": {
                               "type": "string",
                               "nullable": true,
-                              "description": "Name of bank account owner",
-                              "example": "Max Mustermann"
+                              "description": "Name of bank account owner. Masked by default. Requires customer:readBanking scope for unmasked value.",
+                              "example": "Max***********"
                             },
                             "iban": {
                               "type": "string",
                               "nullable": true,
-                              "description": "International bank account number",
-                              "example": "DE89370400440532013000"
+                              "description": "International bank account number. Masked by default (e.g. DE89**************3000). Requires customer:readBanking scope for unmasked value.",
+                              "example": "DE89**************3000"
                             },
                             "bic": {
                               "type": "string",
                               "nullable": true,
-                              "description": "Business Identifier Code",
-                              "example": "DEUTDEFFXXX"
+                              "description": "Business Identifier Code. Masked by default. Requires customer:readBanking scope for unmasked value.",
+                              "example": "*******FXXX"
                             },
                             "sepa": {
                               "type": "object",
@@ -25632,8 +25061,8 @@
                                 "mandateReference": {
                                   "type": "string",
                                   "nullable": true,
-                                  "description": "SEPA mandate reference",
-                                  "example": "K21124DE60S21F2S09WX11G4FY"
+                                  "description": "SEPA mandate reference. Masked by default. Requires customer:readBanking scope for unmasked value.",
+                                  "example": "K21***********************"
                                 },
                                 "mandateReferenceChange": {
                                   "type": "boolean",
@@ -25671,13 +25100,13 @@
                             }
                           },
                           "example": {
-                            "bankName": "Deutsche Bank",
-                            "owner": "Max Mustermann",
-                            "iban": "DE89370400440532013000",
-                            "bic": "DEUTDEFFXXX",
+                            "bankName": "Deu**********",
+                            "owner": "Max***********",
+                            "iban": "DE89**************3000",
+                            "bic": "*******FXXX",
                             "sepa": {
                               "companySepa": true,
-                              "mandateReference": "K21124DE60S21F2S09WX11G4FY",
+                              "mandateReference": "K21***********************",
                               "mandateReferenceChange": false,
                               "mandateReferenceDate": "2025-03-01",
                               "usage": "recurring",
@@ -25880,13 +25309,13 @@
                           "defaultCurrency": "EUR"
                         },
                         "primaryBankAccount": {
-                          "bankName": "Deutsche Bank",
-                          "owner": "Max Mustermann",
-                          "iban": "DE89370400440532013000",
-                          "bic": "DEUTDEFFXXX",
+                          "bankName": "Deu**********",
+                          "owner": "Max***********",
+                          "iban": "DE89**************3000",
+                          "bic": "*******FXXX",
                           "sepa": {
                             "companySepa": true,
-                            "mandateReference": "K21124DE60S21F2S09WX11G4FY",
+                            "mandateReference": "K21***********************",
                             "mandateReferenceChange": false,
                             "mandateReferenceDate": "2025-03-01",
                             "usage": "recurring",
