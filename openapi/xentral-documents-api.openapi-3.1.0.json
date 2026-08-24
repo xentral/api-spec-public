@@ -21264,6 +21264,232 @@
         "type": "object",
         "additionalProperties": false
       },
+      "Voucher": {
+        "description": "A voucher: a code that carries a monetary value and can be redeemed on a sales order or an invoice. Look a voucher up by its `code` to find out whether it exists and how much of its value is left. Fully redeemed vouchers keep being returned here, unlike in the voucher overview of the application, so that a used-up code can be told apart from an unknown one; filter by `remainingAmount` to exclude them. `createdAt` and `updatedAt` were introduced with this endpoint - on vouchers that already existed they report when the endpoint was rolled out, not when the voucher was issued. Use `issueDate` for that.",
+        "required": [
+          "id",
+          "code",
+          "issueDate",
+          "amount",
+          "remainingAmount",
+          "taxRate",
+          "validFrom",
+          "expiresAt",
+          "onlyForCustomer",
+          "printSettings",
+          "customer",
+          "salesManager",
+          "product",
+          "invoice",
+          "invoiceLineItem",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TimestampsResource"
+          },
+          {
+            "properties": {
+              "id": {
+                "description": "The unique identifier of the voucher.",
+                "type": "string",
+                "example": "4711"
+              },
+              "code": {
+                "description": "The code the voucher is redeemed with. Codes are unique across all vouchers.",
+                "type": "string",
+                "example": "AB123456"
+              },
+              "issueDate": {
+                "description": "The date the voucher was issued. `null` when it was not recorded, which happens for vouchers imported from a webshop that reports no issue date.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2026-03-14"
+              },
+              "amount": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Money",
+                    "description": "The value the voucher was issued with. `null` when the stored currency is not a currency this API can express; the value itself is unaffected and still shown in the application."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The value the voucher was issued with. `null` when the stored currency is not a currency this API can express; the value itself is unaffected and still shown in the application."
+              },
+              "remainingAmount": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Money",
+                    "description": "The balance still available for redemption - the value to check before applying the voucher to an order. It is `0` once the voucher is fully redeemed, and it can exceed `amount` or be negative on vouchers whose balance was corrected by hand. `null` under the same condition as `amount`."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The balance still available for redemption - the value to check before applying the voucher to an order. It is `0` once the voucher is fully redeemed, and it can exceed `amount` or be negative on vouchers whose balance was corrected by hand. `null` under the same condition as `amount`."
+              },
+              "taxRate": {
+                "description": "The tax treatment the voucher is redeemed with. `null` when none was recorded - which is the case both for vouchers imported from a webshop and for vouchers saved without a tax treatment. Redeeming such a voucher on a sales order or an invoice applies the exempt rate; redeeming it at the point of sale derives the rate from the document being paid.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "standard",
+                  "reduced",
+                  "exempt"
+                ],
+                "example": "standard"
+              },
+              "validFrom": {
+                "description": "The first day the voucher can be redeemed. `null` when the validity has no start.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2026-03-14"
+              },
+              "expiresAt": {
+                "description": "The last day the voucher can be redeemed. `null` when the voucher does not expire.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2027-03-13"
+              },
+              "onlyForCustomer": {
+                "description": "When true, only the customer the voucher is bound to may redeem it. Redeeming it on a document of any other customer is rejected. When false, whoever holds the code can redeem it.",
+                "type": "boolean",
+                "example": false
+              },
+              "printSettings": {
+                "properties": {
+                  "showCode": {
+                    "description": "Whether the voucher code is printed on the invoice the voucher was sold with.",
+                    "type": "boolean",
+                    "example": true
+                  }
+                },
+                "type": "object"
+              },
+              "customer": {
+                "description": "The customer the voucher is bound to. Returned as an ID reference; the list and get endpoints can return the full object via the `include` parameter. This is not a record of who bought the voucher: every redemption rebinds it to the customer of the document it was redeemed on. `null` when the voucher is bound to no customer.",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Address"
+                  },
+                  {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "salesManager": {
+                "description": "The sales manager credited with the voucher and the commission they earn on it. Read-only: both are maintained in the voucher overview of the application. `null` when no sales manager is credited.",
+                "required": [
+                  "id",
+                  "commissionAmount"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "880"
+                  },
+                  "commissionAmount": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Money",
+                        "description": "The commission as an amount, not as a percentage. `0` when no commission is recorded, and `null` under the same condition as `amount`."
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "description": "The commission as an amount, not as a percentage. `0` when no commission is recorded, and `null` under the same condition as `amount`."
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "example": {
+                  "id": "880",
+                  "commissionAmount": {
+                    "amount": 5,
+                    "currency": "EUR"
+                  }
+                }
+              },
+              "product": {
+                "description": "The voucher product the voucher was sold as - the product that carries its revenue account and its tax settings. Returned as an ID reference; the list and get endpoints can return the product via the `include` parameter, limited to the fields the product endpoints serve without `product:read`. `null` for vouchers imported from a webshop, which name no product.",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Product"
+                  },
+                  {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "invoice": {
+                "description": "The invoice the voucher was sold with. Only the ID is returned; use the invoice endpoints for the full record. `null` for vouchers created by hand and for vouchers imported from a webshop, which is the majority of them.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "invoiceLineItem": {
+                "description": "The line item of that invoice the voucher was sold on. Only the ID is returned. `null` when the voucher names no invoice, and for vouchers whose invoice records no line item.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
       "WarehouseReferenceData": {
         "required": [
           "id"
@@ -21366,6 +21592,10 @@
     {
       "name": "SalesOrder",
       "description": "SalesOrder"
+    },
+    {
+      "name": "Voucher",
+      "description": "Voucher"
     },
     {
       "name": "DeliveryNote",
@@ -49724,6 +49954,372 @@
         "x-beta": true,
         "x-scopes": [
           "supplier:update"
+        ]
+      }
+    },
+    "/api/v3/vouchers": {
+      "get": {
+        "tags": [
+          "Voucher"
+        ],
+        "summary": "🔒 List vouchers V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `voucher:read`.\n\nPaginated list of vouchers. Filter by `code` to look a single voucher up the way a webshop does - the code is what a customer enters, and `remainingAmount` is what is left to redeem. Vouchers whose balance is used up are part of the list; filter them out with `remainingAmount` if you only want the ones that can still be redeemed.",
+        "operationId": "GET::api-v3-vouchers",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`code`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`remainingAmount`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`issueDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`validFrom`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`expiresAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`customer.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`onlyForCustomer`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "code",
+                      "remainingAmount",
+                      "issueDate",
+                      "validFrom",
+                      "expiresAt",
+                      "customer.id",
+                      "onlyForCustomer",
+                      "createdAt",
+                      "updatedAt"
+                    ]
+                  },
+                  "op": {
+                    "description": "operator",
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith",
+                      "lessThan",
+                      "lessThanOrEquals",
+                      "greaterThan",
+                      "greaterThanOrEquals",
+                      "isNull",
+                      "isNotNull"
+                    ]
+                  },
+                  "value": {
+                    "description": "The property value.",
+                    "oneOf": [
+                      {
+                        "title": "String",
+                        "type": "string"
+                      },
+                      {
+                        "title": "Array",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              }
+            },
+            "examples": {
+              "Look one voucher up by its code": {
+                "summary": "",
+                "value": [
+                  {
+                    "key": "code",
+                    "op": "equals",
+                    "value": "AB123456"
+                  }
+                ]
+              },
+              "Vouchers of one customer that still carry a balance": {
+                "summary": "",
+                "value": [
+                  {
+                    "key": "customer.id",
+                    "op": "equals",
+                    "value": "1337"
+                  },
+                  {
+                    "key": "remainingAmount",
+                    "op": "notEquals",
+                    "value": "0"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort via id, -id, issueDate, -issueDate, expiresAt, -expiresAt, remainingAmount, -remainingAmount, createdAt, -createdAt, updatedAt and -updatedAt. Default sort is -id",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "id",
+                  "-id",
+                  "issueDate",
+                  "-issueDate",
+                  "expiresAt",
+                  "-expiresAt",
+                  "remainingAmount",
+                  "-remainingAmount",
+                  "createdAt",
+                  "-createdAt",
+                  "updatedAt",
+                  "-updatedAt"
+                ]
+              }
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "customer",
+                  "product"
+                ]
+              }
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of items per page. Default: 15, Max: 100",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 15
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of vouchers. Filter by `code` to look a single voucher up the way a webshop does - the code is what a customer enters, and `remainingAmount` is what is left to redeem. Vouchers whose balance is used up are part of the list; filter them out with `remainingAmount` if you only want the ones that can still be redeemed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Voucher"
+                      },
+                      "x-description-ignore": true,
+                      "x-example-ignore": true
+                    },
+                    "meta": {
+                      "description": "Pagination meta data",
+                      "properties": {
+                        "currentPage": {
+                          "description": "The current page number",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "from": {
+                          "description": "The first item being returned in the current page",
+                          "type": "integer",
+                          "example": 1,
+                          "nullable": true
+                        },
+                        "path": {
+                          "description": "The base path for the paginated results",
+                          "type": "string",
+                          "example": "https://api.example.com/items"
+                        },
+                        "perPage": {
+                          "description": "The number of items shown per page",
+                          "type": "integer",
+                          "example": 15
+                        },
+                        "to": {
+                          "description": "The last item being returned in the current page",
+                          "type": "integer",
+                          "example": 15,
+                          "nullable": true
+                        }
+                      },
+                      "type": "object",
+                      "x-example-ignore": true
+                    },
+                    "links": {
+                      "description": "Pagination links",
+                      "properties": {
+                        "first": {
+                          "description": "URL to the first page",
+                          "type": "string",
+                          "example": "https://api.example.com/items?page=1",
+                          "nullable": true
+                        },
+                        "last": {
+                          "description": "URL to the last page",
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "prev": {
+                          "description": "URL to the previous page",
+                          "type": "string",
+                          "example": null,
+                          "nullable": true
+                        },
+                        "next": {
+                          "description": "URL to the next page",
+                          "type": "string",
+                          "example": "https://api.example.com/items?page=17",
+                          "nullable": true
+                        }
+                      },
+                      "type": "object",
+                      "x-example-ignore": true
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "voucher:read"
+        ]
+      }
+    },
+    "/api/v3/vouchers/{id}": {
+      "get": {
+        "tags": [
+          "Voucher"
+        ],
+        "summary": "🔒 View voucher V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `voucher:read`.\n\nView a single voucher.",
+        "operationId": "GET::api-v3-vouchers-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "customer",
+                  "product"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "View a single voucher.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Voucher"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "voucher:read"
         ]
       }
     }
