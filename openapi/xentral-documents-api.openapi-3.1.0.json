@@ -35,7 +35,7 @@
   "components": {
     "schemas": {
       "AccountAssignment": {
-        "description": "An account assignment entry on a supplier invoice.",
+        "description": "An account assignment (Vorkontierung) entry on a supplier invoice.",
         "required": [
           "id",
           "liability",
@@ -90,7 +90,7 @@
             }
           },
           "counterAccount": {
-            "description": "Contra account.",
+            "description": "Contra account (Gegenkonto).",
             "type": "string",
             "example": "4400"
           },
@@ -423,7 +423,19 @@
                 "description": "Tags assigned to the document. On GET requests this property is only returned if the `tags` include is used; create and update responses always carry it.",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Tag"
+                  "properties": {
+                    "id": {
+                      "description": "ID of the tag",
+                      "type": "string",
+                      "example": "4"
+                    },
+                    "title": {
+                      "description": "Title of the tag",
+                      "type": "string",
+                      "example": "important"
+                    }
+                  },
+                  "type": "object"
                 }
               },
               "documentAddress": {
@@ -3057,304 +3069,6 @@
         },
         "type": "object"
       },
-      "CreateProductRequest": {
-        "description": "Data for creating a new product.",
-        "required": [
-          "name",
-          "project"
-        ],
-        "properties": {
-          "name": {
-            "description": "Product name (primary language).",
-            "type": "string",
-            "maxLength": 255,
-            "example": "Widget Pro"
-          },
-          "number": {
-            "description": "SKU / product number. Must not be in use by another product; a taken number is rejected with 409 Conflict. If omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. Note: deleting a product releases its number for reuse, but the placeholder number DEL stays permanently taken once any product has been deleted.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "SKU-1001"
-          },
-          "project": {
-            "description": "Project the product belongs to.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Project ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "1"
-              }
-            },
-            "type": "object"
-          },
-          "description": {
-            "description": "Product description (primary language).",
-            "type": "string",
-            "example": "A high-quality widget."
-          },
-          "ean": {
-            "description": "European Article Number.",
-            "type": "string",
-            "maxLength": 1024,
-            "example": "4001234567890"
-          },
-          "unit": {
-            "description": "Unit of measure.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "piece"
-          },
-          "customsTariffNumber": {
-            "description": "Customs tariff number.",
-            "type": "string",
-            "maxLength": 64,
-            "example": "85340011"
-          },
-          "internalComment": {
-            "description": "Internal comment (not shown to customers).",
-            "type": "string",
-            "example": "Handle with care"
-          },
-          "countryOfOrigin": {
-            "description": "Country of origin (ISO 3166-1 alpha-2).",
-            "type": "string",
-            "maxLength": 2,
-            "pattern": "^[A-Z]{2}$",
-            "example": "DE"
-          },
-          "regionOfOrigin": {
-            "description": "German federal state of origin (two-digit code; 99 = foreign origin).",
-            "type": "string",
-            "enum": [
-              "01",
-              "02",
-              "03",
-              "04",
-              "05",
-              "06",
-              "07",
-              "08",
-              "09",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "99"
-            ],
-            "example": "08"
-          },
-          "ageRating": {
-            "description": "Age rating (DHL identity check), e.g. 16 or 18.",
-            "type": "string",
-            "maxLength": 3,
-            "example": "18"
-          },
-          "minimumOrderQuantity": {
-            "description": "Minimum order quantity.",
-            "type": "integer",
-            "minimum": 0,
-            "example": 10
-          },
-          "minimumStockLevel": {
-            "description": "Minimum stock level.",
-            "type": "integer",
-            "minimum": 0,
-            "example": 5
-          },
-          "taxRate": {
-            "description": "VAT rate tier applied to the product. Defaults to standard.",
-            "type": "string",
-            "enum": [
-              "standard",
-              "reduced",
-              "exempt"
-            ],
-            "example": "standard"
-          },
-          "serialNumberTracking": {
-            "description": "Serial-number tracking mode. Defaults to none.",
-            "type": "string",
-            "enum": [
-              "none",
-              "stockGenerated",
-              "stockOriginal",
-              "trackOriginal"
-            ],
-            "example": "none"
-          },
-          "disabledReason": {
-            "description": "Reason/message for the internal block.",
-            "type": "string",
-            "example": "Out of assortment"
-          },
-          "isStockItem": {
-            "description": "Whether the product is stock-managed.",
-            "type": "boolean",
-            "example": true
-          },
-          "isDisabled": {
-            "description": "Whether the product is internally blocked (disabled).",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBatches": {
-            "description": "Whether batch/charge management is active.",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBestBeforeDate": {
-            "description": "Whether best-before-date tracking is active.",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBillOfMaterials": {
-            "description": "Whether the product has a bill of materials.",
-            "type": "boolean",
-            "example": false
-          },
-          "isAssembledJustInTime": {
-            "description": "Whether the BOM is assembled just-in-time.",
-            "type": "boolean",
-            "example": false
-          },
-          "isProductionProduct": {
-            "description": "Whether the product is produced in-house.",
-            "type": "boolean",
-            "example": false
-          },
-          "isExternallyProduced": {
-            "description": "Whether the product is produced externally.",
-            "type": "boolean",
-            "example": false
-          },
-          "isShippingCostsProduct": {
-            "description": "Whether the product represents shipping costs.",
-            "type": "boolean",
-            "example": false
-          },
-          "isMatrixProduct": {
-            "description": "Whether the product is a matrix (variant parent) product.",
-            "type": "boolean",
-            "example": false
-          },
-          "isStockTakingDisabled": {
-            "description": "Whether stock-taking is disabled for the product.",
-            "type": "boolean",
-            "example": false
-          },
-          "allowPurchaseFromAllSuppliers": {
-            "description": "Whether purchasing from all suppliers is allowed.",
-            "type": "boolean",
-            "example": false
-          },
-          "printSettings": {
-            "$ref": "#/components/schemas/ProductPrintSettingsData",
-            "description": "Document print settings applied when the product appears on a document."
-          },
-          "manufacturer": {
-            "description": "Manufacturer name.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "Dell"
-          },
-          "manufacturerProductNumber": {
-            "description": "Product number assigned by the manufacturer.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "MFR-77"
-          },
-          "manufacturerUrl": {
-            "description": "Manufacturer URL.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "https://dell.com"
-          },
-          "measurements": {
-            "$ref": "#/components/schemas/ProductMeasurementsData",
-            "description": "Physical measurements."
-          },
-          "isDiscountProduct": {
-            "description": "Whether the product is a discount product.",
-            "type": "boolean",
-            "example": false
-          },
-          "discountPercentage": {
-            "description": "Discount percentage.",
-            "type": "number",
-            "minimum": 0,
-            "example": 0
-          },
-          "stockTaking": {
-            "$ref": "#/components/schemas/ProductStockTakingData",
-            "description": "Stock-taking valuation."
-          },
-          "calculatedPurchasePrice": {
-            "$ref": "#/components/schemas/ProductCalculatedPurchasePriceData",
-            "description": "Calculated purchase price."
-          },
-          "calculatoryPurchasePriceSettings": {
-            "$ref": "#/components/schemas/ProductCalculatoryPurchasePriceSettingsData",
-            "description": "Calculatory purchase-price recalculation configuration."
-          },
-          "merchandiseGroup": {
-            "description": "Merchandise group of the product, used for account mapping and number ranges.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Merchandise group ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "7"
-              }
-            },
-            "type": "object"
-          },
-          "defaultSupplier": {
-            "description": "Default supplier address.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Address ID of the default supplier.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "880"
-              }
-            },
-            "type": "object"
-          },
-          "variantOf": {
-            "description": "Parent product this product is a variant of. Omit the field or pass null to create a regular (non-variant) product.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Parent product ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "50000"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "CreateProductionData": {
         "type": "object",
         "allOf": [
@@ -3489,11 +3203,15 @@
                 "example": false
               },
               "tags": {
-                "description": "Tags for categorizing the production. New tags will be automatically created if they do not exist.",
+                "description": "Tags for categorizing the production",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/TagReferenceData"
-                }
+                  "type": "string"
+                },
+                "example": [
+                  "urgent",
+                  "quality-check"
+                ]
               }
             },
             "type": "object"
@@ -4406,528 +4124,6 @@
           "commissionConsignmentWarehouse": {
             "$ref": "#/components/schemas/StorageLocationReferenceData",
             "description": "Consignment storage location"
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
-      "CreateSupplierInvoiceRequest": {
-        "required": [
-          "supplier"
-        ],
-        "properties": {
-          "supplier": {
-            "description": "The supplier this invoice was received from.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "The supplier ID.",
-                "type": "string",
-                "example": "42"
-              }
-            },
-            "type": "object"
-          },
-          "supplierInvoiceNumber": {
-            "description": "The invoice number as printed on the supplier's invoice document.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "RE-2026-0815"
-          },
-          "date": {
-            "description": "Invoice date as printed on the supplier's invoice. Defaults to today.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "date",
-            "example": "2026-08-01"
-          },
-          "receiptDate": {
-            "description": "Date the invoice was received. Defaults to today.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "date",
-            "example": "2026-08-03"
-          },
-          "serviceDate": {
-            "description": "Date of supply or service.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "format": "date",
-            "example": "2026-07-28"
-          },
-          "project": {
-            "description": "Project this invoice belongs to. Defaults to the supplier's default project.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "The project ID.",
-                "type": "string",
-                "example": "3"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "salesOrder": {
-            "description": "Sales order this invoice relates to.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "The sales order ID.",
-                "type": "string",
-                "example": "77"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "purchaseOrder": {
-            "description": "Primary purchase order this invoice belongs to. Additional purchase orders can be assigned via the purchase order assignment sub-resource.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "The purchase order ID.",
-                "type": "string",
-                "example": "55"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "paymentReference": {
-            "description": "Payment reference used when paying this invoice.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "RE-2026-0815 / Kd-Nr 1001"
-          },
-          "internalComment": {
-            "description": "Internal comment, not visible to the supplier.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "Prices verified against the purchase order."
-          },
-          "description": {
-            "description": "Free-text description of the invoice.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "Office supplies July"
-          },
-          "vatId": {
-            "description": "VAT identification number printed on the supplier's invoice. Defaults to the VAT ID stored on the supplier.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 64,
-            "example": "DE123456789"
-          },
-          "financials": {
-            "description": "Financial settings of the invoice.",
-            "properties": {
-              "currency": {
-                "description": "ISO 4217 currency code of the invoice. Defaults to the project or company default currency.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "maxLength": 3,
-                "example": "EUR"
-              },
-              "paymentMethod": {
-                "description": "Payment method used to pay this invoice. Defaults to the supplier's payment method or the company default.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "description": "The payment method ID.",
-                    "type": "string",
-                    "example": "2"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ]
-              }
-            },
-            "type": "object"
-          },
-          "amountGross": {
-            "description": "Gross total of the invoice. The currency must match the invoice currency. Defaults to 0.",
-            "required": [
-              "amount",
-              "currency"
-            ],
-            "properties": {
-              "amount": {
-                "description": "The monetary amount. Must be between -99999999.99 and 99999999.99.",
-                "type": "string",
-                "example": "119.00"
-              },
-              "currency": {
-                "description": "ISO 4217 currency code; must match the invoice currency.",
-                "type": "string",
-                "example": "EUR"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "freightCharge": {
-            "description": "Freight charge portion of the invoice. The currency must match the invoice currency. Defaults to 0.",
-            "required": [
-              "amount",
-              "currency"
-            ],
-            "properties": {
-              "amount": {
-                "description": "The monetary amount. Must be between -99999999.99 and 99999999.99.",
-                "type": "string",
-                "example": "4.90"
-              },
-              "currency": {
-                "description": "ISO 4217 currency code; must match the invoice currency.",
-                "type": "string",
-                "example": "EUR"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "taxationType": {
-            "description": "Taxation scheme of the invoice. Defaults to the taxation scheme stored on the supplier.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "domestic",
-              "eu",
-              "export",
-              "import"
-            ],
-            "example": "domestic"
-          },
-          "taxes": {
-            "description": "Tax rates and amounts contained in the invoice total. Rates default to the standard and reduced rates of the project.",
-            "properties": {
-              "normalTax": {
-                "properties": {
-                  "rate": {
-                    "description": "Standard tax rate in percent.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 100,
-                    "minimum": 0,
-                    "example": 19
-                  },
-                  "amount": {
-                    "description": "Net amount taxed at the standard rate.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 999999.9999,
-                    "minimum": -999999.9999,
-                    "example": 100
-                  }
-                },
-                "type": "object"
-              },
-              "reducedTax": {
-                "properties": {
-                  "rate": {
-                    "description": "Reduced tax rate in percent.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 100,
-                    "minimum": 0,
-                    "example": 7
-                  },
-                  "amount": {
-                    "description": "Net amount taxed at the reduced rate.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 999999.9999,
-                    "minimum": -999999.9999,
-                    "example": 0
-                  }
-                },
-                "type": "object"
-              },
-              "customTax1": {
-                "properties": {
-                  "rate": {
-                    "description": "First custom tax rate in percent.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 100,
-                    "minimum": 0,
-                    "example": 5.5
-                  },
-                  "amount": {
-                    "description": "Net amount taxed at the first custom rate.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 999999.9999,
-                    "minimum": -999999.9999,
-                    "example": 0
-                  },
-                  "name": {
-                    "description": "Label of the first custom tax rate.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "maxLength": 64,
-                    "example": "FR TVA"
-                  }
-                },
-                "type": "object"
-              },
-              "customTax2": {
-                "properties": {
-                  "rate": {
-                    "description": "Second custom tax rate in percent.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 100,
-                    "minimum": 0,
-                    "example": 0
-                  },
-                  "amount": {
-                    "description": "Net amount taxed at the second custom rate.",
-                    "type": [
-                      "number",
-                      "null"
-                    ],
-                    "format": "float",
-                    "maximum": 999999.9999,
-                    "minimum": -999999.9999,
-                    "example": 0
-                  },
-                  "name": {
-                    "description": "Label of the second custom tax rate.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "maxLength": 64,
-                    "example": ""
-                  }
-                },
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
-          "paymentTerms": {
-            "description": "Payment terms of the invoice.",
-            "properties": {
-              "dueDate": {
-                "description": "Date the invoice is payable by. Defaults to today plus the supplier's payment target days.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-08-31"
-              },
-              "paymentTargetDiscountDate": {
-                "description": "Last date the early payment discount may be taken. Omit or send null when no discount period applies. Note: when the record is later opened in the Xentral UI and this date is empty, the UI backfills it from the invoice date plus the supplier's discount days — an empty date only persists for suppliers without configured discount days.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-08-15"
-              },
-              "paymentTargetDiscount": {
-                "description": "Early payment discount in percent. Defaults to the discount rate stored on the supplier.",
-                "type": [
-                  "number",
-                  "null"
-                ],
-                "format": "float",
-                "example": 2
-              },
-              "paymentTargetDiscountFixed": {
-                "description": "Fixes the early payment discount so it is not recalculated from the supplier's terms when the invoice is edited. Defaults to true when paymentTargetDiscount is provided, otherwise false.",
-                "type": "boolean",
-                "example": false
-              }
-            },
-            "type": "object"
-          },
-          "payment": {
-            "description": "Payment details of the invoice.",
-            "properties": {
-              "paidAmount": {
-                "description": "Amount already paid. The currency must match the invoice currency. Defaults to 0.",
-                "required": [
-                  "amount",
-                  "currency"
-                ],
-                "properties": {
-                  "amount": {
-                    "description": "The monetary amount. Must be between -99999999.99 and 99999999.99.",
-                    "type": "string",
-                    "example": "0.00"
-                  },
-                  "currency": {
-                    "description": "ISO 4217 currency code; must match the invoice currency.",
-                    "type": "string",
-                    "example": "EUR"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ]
-              },
-              "paidOnDate": {
-                "description": "Date the invoice was paid.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-08-20"
-              },
-              "discountReceived": {
-                "description": "Early payment discount amount actually received. The currency must match the invoice currency. Defaults to 0.",
-                "required": [
-                  "amount",
-                  "currency"
-                ],
-                "properties": {
-                  "amount": {
-                    "description": "The monetary amount. Must be between -99999999.99 and 99999999.99.",
-                    "type": "string",
-                    "example": "0.00"
-                  },
-                  "currency": {
-                    "description": "ISO 4217 currency code; must match the invoice currency.",
-                    "type": "string",
-                    "example": "EUR"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ]
-              }
-            },
-            "type": "object"
-          },
-          "generalLedgerAccount": {
-            "description": "General ledger account number from the chart of accounts.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "4400"
-          },
-          "costCenter": {
-            "description": "Cost center number.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "1000"
-          },
-          "isInNeedOfClarification": {
-            "description": "Marks the invoice as a clarification case. Defaults to false.",
-            "type": "boolean",
-            "example": false
-          },
-          "clarificationReason": {
-            "description": "Reason why the invoice needs clarification.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "Amount differs from purchase order"
-          },
-          "goodsCheckAccepted": {
-            "description": "Whether the goods check (sachliche Prüfung) has been accepted. Defaults to false.",
-            "type": "boolean",
-            "example": false
-          },
-          "invoiceCheckAccepted": {
-            "description": "Whether the invoice check has been accepted. Defaults to false.",
-            "type": "boolean",
-            "example": false
-          },
-          "paymentStatus": {
-            "description": "Payment state of the invoice. Only `pending` and `paid` can be set on creation. Defaults to `pending`. A payment method that is configured to auto-pay liabilities overrides this and creates the invoice as `paid`.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "pending",
-              "paid"
-            ],
-            "example": "pending"
           }
         },
         "type": "object",
@@ -6329,7 +5525,17 @@
                 "description": "Tags assigned to the customer",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Tag"
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "important"
+                    }
+                  },
+                  "type": "object"
                 }
               }
             },
@@ -9956,15 +9162,31 @@
               "calculatoryPurchasePriceSettings": {
                 "description": "Calculatory purchase-price recalculation configuration.",
                 "properties": {
-                  "addPurchasePriceToCalculationTrigger": {
-                    "description": "Trigger that adds the purchase price to the calculation.",
-                    "type": "string",
-                    "enum": [
-                      "manual",
-                      "onPurchaseOrderCompletion",
-                      "onGoodsReceipt"
-                    ],
-                    "example": "manual"
+                  "addPurchasePriceToCalculationTriggers": {
+                    "description": "Triggers that add the purchase price to the calculation.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "manual",
+                        "onPurchaseOrderCompletion",
+                        "onGoodsReceipt"
+                      ]
+                    },
+                    "example": []
+                  },
+                  "calculatoryPurchasePriceRecalculationTriggers": {
+                    "description": "Triggers that recalculate the calculatory purchase price.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "manual",
+                        "onPurchaseOrderCompletion",
+                        "onGoodsReceipt"
+                      ]
+                    },
+                    "example": []
                   },
                   "calculatoryPurchasePriceRecalculationMethod": {
                     "description": "Method used to recalculate the calculatory purchase price.",
@@ -9979,7 +9201,8 @@
                 },
                 "type": "object",
                 "example": {
-                  "addPurchasePriceToCalculationTrigger": "manual",
+                  "addPurchasePriceToCalculationTriggers": [],
+                  "calculatoryPurchasePriceRecalculationTriggers": [],
                   "calculatoryPurchasePriceRecalculationMethod": "allRecordedPurchasesWeightedAverage"
                 },
                 "additionalProperties": false
@@ -10302,7 +9525,7 @@
                 }
               },
               "stock": {
-                "description": "Live warehouse stock, broken down per storage location including batch, best-before date and serial numbers. Only present when requested, and only on single-record endpoints: via include=stock on the single-product endpoint, or via include=materials.product.stock on a single production, where the production document prints the same breakdown for each material. On a production the physical fields are served and the `available` and `sellable` aggregates are omitted, because each material would pay for them separately. Reading it always requires the product:read scope, and it costs several warehouse round trips per product — which is why no list endpoint offers it.",
+                "description": "Live warehouse stock, broken down per storage location including batch, best-before date and serial numbers. Only present when requested via include=stock, which is available on the single-product endpoint only.",
                 "properties": {
                   "quantity": {
                     "description": "Total physical stock on hand across all warehouses.",
@@ -10490,22 +9713,6 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ProductCalculatedPurchasePriceData": {
-        "description": "Calculated purchase price of the product. The two fields are independent: send only the price to change it without switching its use on or off, and only the flag to switch it while keeping the price. The price is also maintained automatically by the purchase-price calculation, so a price can be present while the flag is false.",
-        "properties": {
-          "hasCalculatedPurchasePrice": {
-            "description": "Whether the calculated purchase price is used instead of the recorded purchase price. While it is false, the price is kept but not applied.",
-            "type": "boolean",
-            "example": true
-          },
-          "price": {
-            "$ref": "#/components/schemas/Money",
-            "description": "Calculated purchase price."
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "ProductCalculationLineItemResource": {
         "description": "A product calculation line item",
         "required": [
@@ -10644,33 +9851,6 @@
               "null"
             ],
             "example": "this is an internal comment"
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
-      "ProductCalculatoryPurchasePriceSettingsData": {
-        "description": "Calculatory purchase-price recalculation configuration. Both fields map to a single legacy column each, so exactly one trigger and one method apply. The movingAverage method is not available together with the onPurchaseOrderCompletion trigger; that combination is rejected.",
-        "properties": {
-          "addPurchasePriceToCalculationTrigger": {
-            "description": "Trigger that adds the purchase price to the calculation. Defaults to manual.",
-            "type": "string",
-            "enum": [
-              "manual",
-              "onPurchaseOrderCompletion",
-              "onGoodsReceipt"
-            ],
-            "example": "onGoodsReceipt"
-          },
-          "calculatoryPurchasePriceRecalculationMethod": {
-            "description": "Method used to recalculate the calculatory purchase price. Defaults to allRecordedPurchasesWeightedAverage.",
-            "type": "string",
-            "enum": [
-              "allRecordedPurchasesWeightedAverage",
-              "latestPurchaseOrdersWeightedAverage",
-              "movingAverage"
-            ],
-            "example": "movingAverage"
           }
         },
         "type": "object",
@@ -11140,43 +10320,6 @@
           }
         ]
       },
-      "ProductMeasurementsData": {
-        "description": "Physical measurements of the product.",
-        "properties": {
-          "weight": {
-            "description": "Weight in kg.",
-            "type": "number",
-            "minimum": 0,
-            "example": 1.2
-          },
-          "netWeight": {
-            "description": "Net weight in kg.",
-            "type": "number",
-            "minimum": 0,
-            "example": 1
-          },
-          "length": {
-            "description": "Length in cm.",
-            "type": "number",
-            "minimum": 0,
-            "example": 30
-          },
-          "width": {
-            "description": "Width in cm.",
-            "type": "number",
-            "minimum": 0,
-            "example": 20
-          },
-          "height": {
-            "description": "Height in cm.",
-            "type": "number",
-            "minimum": 0,
-            "example": 2
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "ProductMedia": {
         "description": "A media file (image or document) linked to a product.",
         "required": [
@@ -11584,25 +10727,8 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ProductPrintSettingsData": {
-        "description": "Document print settings applied when the product appears on a document. Both fields are independent: send only the one you want to change.",
-        "properties": {
-          "withoutPrices": {
-            "description": "Hide the price on documents (PDF).",
-            "type": "boolean",
-            "example": false
-          },
-          "withoutJustInTimeItems": {
-            "description": "Hide just-in-time component items on documents.",
-            "type": "boolean",
-            "example": false
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "ProductProperty": {
-        "description": "A property assigned to a product together with the value entries this product has for it.",
+        "description": "A property assigned to a product together with its value entries.",
         "required": [
           "id",
           "name",
@@ -11611,7 +10737,7 @@
         ],
         "properties": {
           "id": {
-            "description": "Global property definition ID, shared by every product carrying this property.",
+            "description": "Product property assignment ID.",
             "type": "string",
             "pattern": "[0-9]+",
             "example": "1337"
@@ -11762,6 +10888,32 @@
         },
         "type": "object",
         "additionalProperties": false
+      },
+      "ProductReference": {
+        "required": [
+          "id",
+          "number"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TimestampsResource"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "number": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": "object"
+          }
+        ]
       },
       "ProductReferenceData": {
         "required": [
@@ -11980,24 +11132,6 @@
             ],
             "format": "date",
             "example": "2025-01-01"
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
-      "ProductStockTakingData": {
-        "description": "Stock-taking valuation of the product. The two fields are independent: send only the value to change it without switching the valuation on or off, and only the flag to switch the valuation while keeping the value.",
-        "properties": {
-          "hasStockTakingValue": {
-            "description": "Whether the stock-taking value is used to value the product in stock. While it is false, the value is kept but not applied.",
-            "type": "boolean",
-            "example": true
-          },
-          "stockTakingValue": {
-            "description": "Stock-taking value.",
-            "type": "number",
-            "minimum": 0,
-            "example": 9.99
           }
         },
         "type": "object",
@@ -12257,11 +11391,8 @@
                 "example": "PROD-12345"
               },
               "documentDate": {
-                "description": "Main date of the production document. Null when the document carries no date.",
-                "type": [
-                  "string",
-                  "null"
-                ],
+                "description": "Main date date of the production document",
+                "type": "string",
                 "format": "date",
                 "example": "2024-01-15"
               },
@@ -12342,31 +11473,14 @@
                   "id": "1"
                 }
               },
-              "editor": {
-                "description": "The employee responsible for the production, the reference the production document prints its editor name from. References an address, not a user — the same reference the business documents carry. Null when no employee is assigned; the document's legacy free-text editor name is not exposed.",
-                "properties": {
-                  "id": {
-                    "description": "Address ID of the employee.",
-                    "type": "string",
-                    "example": "4"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "example": {
-                  "id": "4"
-                }
-              },
               "produceProduct": {
-                "description": "The product the production produces. By default only its ID is returned; request `?include=produceProduct` for the product itself. The embedded product is the same curated subset a document line item carries (`?include=materials.product`): identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. A token that additionally holds the `product:read` scope receives the full Product resource instead — purchasing, stock-operations and pricing configuration and internal notes stay tied to that scope, exactly as on the product endpoints.",
+                "description": "Product entity to be produced. By default, only the ID is returned. To get the full Product object, use the `include` parameter.",
                 "example": {
                   "id": "1"
                 },
                 "anyOf": [
                   {
-                    "$ref": "#/components/schemas/Product"
+                    "$ref": "#/components/schemas/ProductReference"
                   },
                   {
                     "properties": {
@@ -12408,11 +11522,18 @@
                 "example": "2027-01-31"
               },
               "tags": {
-                "description": "Tags for categorizing the production. Only returned when the `tags` include is used.",
-                "type": "array",
+                "description": "Tags for categorizing the production",
+                "type": [
+                  "array",
+                  "null"
+                ],
                 "items": {
-                  "$ref": "#/components/schemas/Tag"
-                }
+                  "type": "string"
+                },
+                "example": [
+                  "urgent",
+                  "quality-check"
+                ]
               },
               "internalDesignation": {
                 "description": "Internal designation",
@@ -12427,13 +11548,6 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/ProductionLineItem"
-                }
-              },
-              "workInstructions": {
-                "description": "The steps to carry out, in the order the production document prints them. Copied from the produced product when the production is created and editable per production afterwards, which is why they are read here and not on the product. Only present when requested via `?include=workInstructions`. The step image is not part of the payload.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ProductionWorkInstruction"
                 }
               },
               "materialReservation": {
@@ -12568,13 +11682,6 @@
                   "id": "1"
                 }
               },
-              "relatedDocuments": {
-                "description": "Documents linked to this production — currently the sales order it was created for. Only present when requested via `?include=relatedDocuments`. The reverse direction exists as well: a sales order lists its productions here.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/RelatedDocumentSubResource"
-                }
-              },
               "activity": {
                 "description": "Activity log entries for the production. By default, this is not loaded. Use the `include` parameter to load.",
                 "type": "array",
@@ -12630,7 +11737,7 @@
                 "example": 2
               },
               "product": {
-                "description": "The product master data of the material. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. What the embedded product contains follows the scope of the token, the same boundary the product endpoints draw: with `production:read` alone it is the curated subset a business document embeds — identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags — while a token that also holds `product:read` receives the full Product resource, and only then can it request `?include=materials.product.stock` for the material's physical stock per storage location. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
+                "description": "The product master data of the material: EAN, manufacturer and manufacturer number, measurements (weight, net weight, dimensions), customs data. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. The embedded product is a curated subset of the `Product` schema: identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags. Purchasing, stock-operations, pricing/costing configuration and internal notes are never embedded here — reading those requires the product endpoints. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
                 "anyOf": [
                   {
                     "$ref": "#/components/schemas/Product"
@@ -12667,58 +11774,6 @@
                   "id": "1"
                 }
               },
-              "customFields": {
-                "description": "The material's own free fields with their values and metadata, labelled from the same company settings the legacy position dialog uses. Only present when requested via `?include=materials.customFields`.",
-                "type": "array",
-                "items": {
-                  "properties": {
-                    "key": {
-                      "type": "string",
-                      "example": "customField1"
-                    },
-                    "value": {
-                      "description": "The free-field value. Legacy free fields are always strings.",
-                      "example": "Aluminium",
-                      "oneOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    },
-                    "label": {
-                      "type": "string",
-                      "example": "Material"
-                    },
-                    "type": {
-                      "description": "The data type of the free field. Legacy free fields always report `string`.",
-                      "type": "string",
-                      "enum": [
-                        "string",
-                        "integer",
-                        "float",
-                        "date",
-                        "datetime",
-                        "boolean",
-                        "translatable_string",
-                        "object"
-                      ],
-                      "example": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "example": [
-                  {
-                    "key": "customField1",
-                    "value": "Aluminium",
-                    "label": "Material",
-                    "type": "string"
-                  }
-                ]
-              },
               "sort": {
                 "description": "The sort order of the line item",
                 "type": "integer",
@@ -12728,98 +11783,6 @@
             "type": "object"
           }
         ]
-      },
-      "ProductionWorkInstruction": {
-        "description": "A work instruction of a production: one step to carry out, copied from the produced product when the production is created and editable per production afterwards.",
-        "required": [
-          "id",
-          "name",
-          "timePerUnit",
-          "order",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "description": "Work instruction ID.",
-            "type": "string",
-            "pattern": "[0-9]+",
-            "example": "1337"
-          },
-          "name": {
-            "description": "Short name of the work instruction.",
-            "type": "string",
-            "example": "Assemble housing"
-          },
-          "description": {
-            "description": "Detailed description of the work instruction. Only printed on the production document when `printSettings.showTaskDescription` is set.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "Attach the front panel using four M3 screws."
-          },
-          "timePerUnit": {
-            "description": "Time required per produced unit, in seconds. The total is not stored: the production document multiplies this by the produced quantity.",
-            "type": "integer",
-            "example": 120
-          },
-          "workstationGroup": {
-            "description": "Workstation group the step is carried out at.",
-            "properties": {
-              "id": {
-                "description": "Workstation group ID.",
-                "type": "string",
-                "pattern": "[0-9]+"
-              },
-              "name": {
-                "description": "Workstation group name, as printed on the production document.",
-                "type": "string"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ],
-            "example": {
-              "id": "5",
-              "name": "Assembly"
-            }
-          },
-          "plannedEmployee": {
-            "description": "Employee planned for this step. References an address, not a user — the same records the production document resolves its editor through.",
-            "properties": {
-              "id": {
-                "description": "Address ID of the planned employee.",
-                "type": "string",
-                "pattern": "[0-9]+"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ],
-            "example": {
-              "id": "42"
-            }
-          },
-          "status": {
-            "description": "Progress of the step. `notStarted` is also what a step reports that was never touched: the underlying column holds no value for it.",
-            "type": "string",
-            "enum": [
-              "notStarted",
-              "started",
-              "completed"
-            ],
-            "example": "notStarted"
-          },
-          "order": {
-            "description": "Sort order of the work instruction.",
-            "type": "integer",
-            "example": 10
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
       },
       "ProformaInvoice": {
         "description": "proforma invoice document",
@@ -16718,7 +15681,17 @@
                 "description": "Tags assigned to the supplier",
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Tag"
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "important"
+                    }
+                  },
+                  "type": "object"
                 }
               }
             },
@@ -16847,619 +15820,6 @@
         },
         "type": "object",
         "additionalProperties": false
-      },
-      "SupplierInvoice": {
-        "description": "A supplier invoice (liability / accounts payable document).",
-        "required": [
-          "id",
-          "documentNumber",
-          "documentStatus",
-          "supplier",
-          "supplierInvoiceNumber",
-          "date",
-          "receiptDate",
-          "serviceDate",
-          "project",
-          "salesOrder",
-          "purchaseOrder",
-          "paymentReference",
-          "internalComment",
-          "description",
-          "vatId",
-          "financials",
-          "amountGross",
-          "freightCharge",
-          "taxationType",
-          "taxes",
-          "paymentTerms",
-          "payment",
-          "generalLedgerAccount",
-          "costCenter",
-          "isInNeedOfClarification",
-          "clarificationReason",
-          "goodsCheckAccepted",
-          "goodsCheckAcceptedBy",
-          "invoiceCheckAccepted",
-          "paymentStatus"
-        ],
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TimestampsResource"
-          },
-          {
-            "properties": {
-              "id": {
-                "description": "The supplier invoice ID.",
-                "type": "string",
-                "example": "1"
-              },
-              "documentNumber": {
-                "description": "Document number assigned when the invoice is released. Null while the invoice is a draft.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "700123"
-              },
-              "documentStatus": {
-                "description": "Document lifecycle state. A cancelled invoice keeps its payment state, so this is the field that reports a cancellation.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "enum": [
-                  "draft",
-                  "released",
-                  "cancelled"
-                ],
-                "example": "draft"
-              },
-              "supplier": {
-                "description": "The supplier this invoice was received from.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "description": "The supplier ID.",
-                    "type": "string",
-                    "example": "42"
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "id": "42"
-                }
-              },
-              "supplierInvoiceNumber": {
-                "description": "The invoice number as printed on the supplier's invoice document.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "RE-2026-0815"
-              },
-              "date": {
-                "description": "Invoice date.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-08-01"
-              },
-              "receiptDate": {
-                "description": "Date the invoice was received.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-08-03"
-              },
-              "serviceDate": {
-                "description": "Date of supply or service.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-07-28"
-              },
-              "project": {
-                "description": "Project this invoice belongs to.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "description": "The project ID.",
-                    "type": "string",
-                    "example": "3"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "example": {
-                  "id": "3"
-                }
-              },
-              "salesOrder": {
-                "description": "Sales order this invoice relates to.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "description": "The sales order ID.",
-                    "type": "string",
-                    "example": "77"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "example": {
-                  "id": "77"
-                }
-              },
-              "purchaseOrder": {
-                "description": "Primary purchase order this invoice belongs to.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "description": "The purchase order ID.",
-                    "type": "string",
-                    "example": "55"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "example": {
-                  "id": "55"
-                }
-              },
-              "paymentReference": {
-                "description": "Payment reference.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "RE-2026-0815 / Kd-Nr 1001"
-              },
-              "internalComment": {
-                "description": "Internal comment, not visible to the supplier.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "Prices verified."
-              },
-              "description": {
-                "description": "Free-text description of the invoice.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "Office supplies July"
-              },
-              "vatId": {
-                "description": "VAT identification number printed on the supplier's invoice.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "DE123456789"
-              },
-              "financials": {
-                "description": "Financial settings of the invoice.",
-                "required": [
-                  "currency",
-                  "paymentMethod"
-                ],
-                "properties": {
-                  "currency": {
-                    "description": "ISO 4217 currency code of the invoice.",
-                    "type": "string",
-                    "example": "EUR"
-                  },
-                  "paymentMethod": {
-                    "description": "Payment method used to pay this invoice. Null when the stored payment method is not linked to a configured one.",
-                    "required": [
-                      "id"
-                    ],
-                    "properties": {
-                      "id": {
-                        "description": "The payment method ID.",
-                        "type": "string",
-                        "example": "2"
-                      }
-                    },
-                    "type": [
-                      "object",
-                      "null"
-                    ]
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "currency": "EUR",
-                  "paymentMethod": {
-                    "id": "2"
-                  }
-                }
-              },
-              "amountGross": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Money",
-                    "description": "Gross total of the invoice. Null when the record carries no currency."
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Gross total of the invoice. Null when the record carries no currency."
-              },
-              "freightCharge": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Money",
-                    "description": "Freight charge portion of the invoice. Null when the record carries no currency."
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "Freight charge portion of the invoice. Null when the record carries no currency."
-              },
-              "taxationType": {
-                "description": "Taxation scheme of the invoice. Null when the stored value is not part of the documented set.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "enum": [
-                  "domestic",
-                  "eu",
-                  "export",
-                  "import"
-                ],
-                "example": "domestic"
-              },
-              "taxes": {
-                "description": "Tax rates and amounts contained in the invoice total.",
-                "required": [
-                  "normalTax",
-                  "reducedTax",
-                  "customTax1",
-                  "customTax2"
-                ],
-                "properties": {
-                  "normalTax": {
-                    "required": [
-                      "rate",
-                      "amount"
-                    ],
-                    "properties": {
-                      "rate": {
-                        "description": "Standard tax rate in percent.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 19
-                      },
-                      "amount": {
-                        "description": "Net amount taxed at the standard rate.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 100
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "reducedTax": {
-                    "required": [
-                      "rate",
-                      "amount"
-                    ],
-                    "properties": {
-                      "rate": {
-                        "description": "Reduced tax rate in percent.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 7
-                      },
-                      "amount": {
-                        "description": "Net amount taxed at the reduced rate.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 0
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "customTax1": {
-                    "required": [
-                      "rate",
-                      "amount",
-                      "name"
-                    ],
-                    "properties": {
-                      "rate": {
-                        "description": "First custom tax rate in percent.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 5.5
-                      },
-                      "amount": {
-                        "description": "Net amount taxed at the first custom rate.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 0
-                      },
-                      "name": {
-                        "description": "Label of the first custom tax rate.",
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "example": "FR TVA"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "customTax2": {
-                    "required": [
-                      "rate",
-                      "amount",
-                      "name"
-                    ],
-                    "properties": {
-                      "rate": {
-                        "description": "Second custom tax rate in percent.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 0
-                      },
-                      "amount": {
-                        "description": "Net amount taxed at the second custom rate.",
-                        "type": [
-                          "number",
-                          "null"
-                        ],
-                        "format": "float",
-                        "example": 0
-                      },
-                      "name": {
-                        "description": "Label of the second custom tax rate.",
-                        "type": [
-                          "string",
-                          "null"
-                        ],
-                        "example": ""
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "normalTax": {
-                    "rate": 19,
-                    "amount": 100
-                  },
-                  "reducedTax": {
-                    "rate": 7,
-                    "amount": 0
-                  },
-                  "customTax1": {
-                    "rate": null,
-                    "amount": 0,
-                    "name": null
-                  },
-                  "customTax2": {
-                    "rate": null,
-                    "amount": 0,
-                    "name": null
-                  }
-                }
-              },
-              "paymentTerms": {
-                "description": "Payment terms of the invoice.",
-                "required": [
-                  "dueDate",
-                  "paymentTargetDiscountDate",
-                  "paymentTargetDiscount",
-                  "paymentTargetDiscountFixed"
-                ],
-                "properties": {
-                  "dueDate": {
-                    "description": "Date the invoice is payable by.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "example": "2026-08-31"
-                  },
-                  "paymentTargetDiscountDate": {
-                    "description": "Last date the early payment discount may be taken. Null when no discount period applies.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "example": "2026-08-15"
-                  },
-                  "paymentTargetDiscount": {
-                    "description": "Early payment discount in percent.",
-                    "type": "number",
-                    "format": "float",
-                    "example": 2
-                  },
-                  "paymentTargetDiscountFixed": {
-                    "description": "Whether the early payment discount is fixed and not recalculated from the supplier's terms.",
-                    "type": "boolean",
-                    "example": false
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "dueDate": "2026-08-31",
-                  "paymentTargetDiscountDate": null,
-                  "paymentTargetDiscount": 2,
-                  "paymentTargetDiscountFixed": false
-                }
-              },
-              "payment": {
-                "description": "Payment details of the invoice.",
-                "required": [
-                  "paidAmount",
-                  "paidOnDate",
-                  "discountReceived"
-                ],
-                "properties": {
-                  "paidAmount": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/Money",
-                        "description": "Amount already paid. Null when the record carries no currency."
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "description": "Amount already paid. Null when the record carries no currency."
-                  },
-                  "paidOnDate": {
-                    "description": "Date the invoice was paid.",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "format": "date",
-                    "example": "2026-08-20"
-                  },
-                  "discountReceived": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/Money",
-                        "description": "Early payment discount amount actually received. Null when the record carries no currency."
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "description": "Early payment discount amount actually received. Null when the record carries no currency."
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "paidAmount": {
-                    "amount": "0.00",
-                    "currency": "EUR"
-                  },
-                  "paidOnDate": null,
-                  "discountReceived": {
-                    "amount": "0.00",
-                    "currency": "EUR"
-                  }
-                }
-              },
-              "generalLedgerAccount": {
-                "description": "General ledger account number.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "4400"
-              },
-              "costCenter": {
-                "description": "Cost center number.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "1000"
-              },
-              "isInNeedOfClarification": {
-                "description": "Whether the invoice is marked as a clarification case.",
-                "type": "boolean",
-                "example": false
-              },
-              "clarificationReason": {
-                "description": "Reason why the invoice needs clarification.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": ""
-              },
-              "goodsCheckAccepted": {
-                "description": "Whether the goods check has been accepted.",
-                "type": "boolean",
-                "example": false
-              },
-              "goodsCheckAcceptedBy": {
-                "description": "Name of the person who accepted the goods check. Null while nobody accepted it.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "Erika Musterfrau"
-              },
-              "invoiceCheckAccepted": {
-                "description": "Whether the invoice check has been accepted.",
-                "type": "boolean",
-                "example": false
-              },
-              "paymentStatus": {
-                "description": "Payment state of the invoice.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "enum": [
-                  "pending",
-                  "paid",
-                  "partiallyPaid",
-                  "cancelled"
-                ],
-                "example": "pending"
-              }
-            },
-            "type": "object"
-          }
-        ]
       },
       "SupplierTaxData": {
         "properties": {
@@ -19721,345 +18081,6 @@
         },
         "type": "object"
       },
-      "UpdateProductRequest": {
-        "description": "Fields to change on an existing product. Only the fields the request carries are written; everything else keeps its value. Where a field is nullable, null clears it.",
-        "properties": {
-          "name": {
-            "description": "Product name (primary language).",
-            "type": "string",
-            "maxLength": 255,
-            "example": "Widget Pro"
-          },
-          "number": {
-            "description": "SKU / product number. Must not be in use by another product; a taken number is rejected with 409 Conflict. Sending the number the product already carries is accepted and changes nothing. Note: deleting a product releases its number for reuse, but the placeholder number DEL stays permanently taken once any product has been deleted.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "SKU-1001"
-          },
-          "project": {
-            "description": "Project the product belongs to. Pass null to remove the project assignment, which makes the product visible regardless of project access.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Project ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "1"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "description": {
-            "description": "Product description (primary language).",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "A high-quality widget."
-          },
-          "ean": {
-            "description": "European Article Number.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 1024,
-            "example": "4001234567890"
-          },
-          "unit": {
-            "description": "Unit of measure.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "piece"
-          },
-          "customsTariffNumber": {
-            "description": "Customs tariff number.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 64,
-            "example": "85340011"
-          },
-          "internalComment": {
-            "description": "Internal comment (not shown to customers).",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "Handle with care"
-          },
-          "countryOfOrigin": {
-            "description": "Country of origin (ISO 3166-1 alpha-2).",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 2,
-            "pattern": "^[A-Z]{2}$",
-            "example": "DE"
-          },
-          "regionOfOrigin": {
-            "description": "German federal state of origin (two-digit code; 99 = foreign origin).",
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "01",
-              "02",
-              "03",
-              "04",
-              "05",
-              "06",
-              "07",
-              "08",
-              "09",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "99"
-            ],
-            "example": "08"
-          },
-          "ageRating": {
-            "description": "Age rating (DHL identity check), e.g. 16 or 18.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 3,
-            "example": "18"
-          },
-          "minimumOrderQuantity": {
-            "description": "Minimum order quantity.",
-            "type": "integer",
-            "minimum": 0,
-            "example": 10
-          },
-          "minimumStockLevel": {
-            "description": "Minimum stock level.",
-            "type": "integer",
-            "minimum": 0,
-            "example": 5
-          },
-          "taxRate": {
-            "description": "VAT rate tier applied to the product.",
-            "type": "string",
-            "enum": [
-              "standard",
-              "reduced",
-              "exempt"
-            ],
-            "example": "standard"
-          },
-          "serialNumberTracking": {
-            "description": "Serial-number tracking mode.",
-            "type": "string",
-            "enum": [
-              "none",
-              "stockGenerated",
-              "stockOriginal",
-              "trackOriginal"
-            ],
-            "example": "none"
-          },
-          "disabledReason": {
-            "description": "Reason/message for the internal block.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "Out of assortment"
-          },
-          "isStockItem": {
-            "description": "Whether the product is stock-managed.",
-            "type": "boolean",
-            "example": true
-          },
-          "isDisabled": {
-            "description": "Whether the product is internally blocked (disabled).",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBatches": {
-            "description": "Whether batch/charge management is active.",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBestBeforeDate": {
-            "description": "Whether best-before-date tracking is active.",
-            "type": "boolean",
-            "example": false
-          },
-          "hasBillOfMaterials": {
-            "description": "Whether the product has a bill of materials.",
-            "type": "boolean",
-            "example": false
-          },
-          "isAssembledJustInTime": {
-            "description": "Whether the BOM is assembled just-in-time.",
-            "type": "boolean",
-            "example": false
-          },
-          "isProductionProduct": {
-            "description": "Whether the product is produced in-house.",
-            "type": "boolean",
-            "example": false
-          },
-          "isExternallyProduced": {
-            "description": "Whether the product is produced externally.",
-            "type": "boolean",
-            "example": false
-          },
-          "isShippingCostsProduct": {
-            "description": "Whether the product represents shipping costs.",
-            "type": "boolean",
-            "example": false
-          },
-          "isMatrixProduct": {
-            "description": "Whether the product is a matrix (variant parent) product.",
-            "type": "boolean",
-            "example": false
-          },
-          "isStockTakingDisabled": {
-            "description": "Whether stock-taking is disabled for the product.",
-            "type": "boolean",
-            "example": false
-          },
-          "allowPurchaseFromAllSuppliers": {
-            "description": "Whether purchasing from all suppliers is allowed.",
-            "type": "boolean",
-            "example": false
-          },
-          "printSettings": {
-            "$ref": "#/components/schemas/ProductPrintSettingsData",
-            "description": "Document print settings applied when the product appears on a document."
-          },
-          "manufacturer": {
-            "description": "Manufacturer name.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "Dell"
-          },
-          "manufacturerProductNumber": {
-            "description": "Product number assigned by the manufacturer.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "MFR-77"
-          },
-          "manufacturerUrl": {
-            "description": "Manufacturer URL.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "https://dell.com"
-          },
-          "measurements": {
-            "$ref": "#/components/schemas/ProductMeasurementsData",
-            "description": "Physical measurements."
-          },
-          "isDiscountProduct": {
-            "description": "Whether the product is a discount product.",
-            "type": "boolean",
-            "example": false
-          },
-          "discountPercentage": {
-            "description": "Discount percentage.",
-            "type": "number",
-            "minimum": 0,
-            "example": 0
-          },
-          "stockTaking": {
-            "$ref": "#/components/schemas/ProductStockTakingData",
-            "description": "Stock-taking valuation."
-          },
-          "calculatedPurchasePrice": {
-            "$ref": "#/components/schemas/ProductCalculatedPurchasePriceData",
-            "description": "Calculated purchase price."
-          },
-          "calculatoryPurchasePriceSettings": {
-            "$ref": "#/components/schemas/ProductCalculatoryPurchasePriceSettingsData",
-            "description": "Calculatory purchase-price recalculation configuration."
-          },
-          "merchandiseGroup": {
-            "description": "Merchandise group of the product, used for account mapping and number ranges. Pass null to remove the assignment.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Merchandise group ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "7"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "defaultSupplier": {
-            "description": "Default supplier address. Pass null to remove the assignment.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Address ID of the default supplier.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "880"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          },
-          "variantOf": {
-            "description": "Parent product this product is a variant of. Pass null to detach the product from its parent, which also removes the option values that made it a variant.",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "description": "Parent product ID.",
-                "type": "string",
-                "pattern": "[0-9]+",
-                "example": "50000"
-              }
-            },
-            "type": [
-              "object",
-              "null"
-            ]
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
       "UpdateProformaInvoiceData": {
         "type": "object",
         "allOf": [
@@ -21264,232 +19285,6 @@
         "type": "object",
         "additionalProperties": false
       },
-      "Voucher": {
-        "description": "A voucher: a code that carries a monetary value and can be redeemed on a sales order or an invoice. Look a voucher up by its `code` to find out whether it exists and how much of its value is left. Fully redeemed vouchers keep being returned here, unlike in the voucher overview of the application, so that a used-up code can be told apart from an unknown one; filter by `remainingAmount` to exclude them. `createdAt` and `updatedAt` were introduced with this endpoint - on vouchers that already existed they report when the endpoint was rolled out, not when the voucher was issued. Use `issueDate` for that.",
-        "required": [
-          "id",
-          "code",
-          "issueDate",
-          "amount",
-          "remainingAmount",
-          "taxRate",
-          "validFrom",
-          "expiresAt",
-          "onlyForCustomer",
-          "printSettings",
-          "customer",
-          "salesManager",
-          "product",
-          "invoice",
-          "invoiceLineItem",
-          "createdAt",
-          "updatedAt"
-        ],
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TimestampsResource"
-          },
-          {
-            "properties": {
-              "id": {
-                "description": "The unique identifier of the voucher.",
-                "type": "string",
-                "example": "4711"
-              },
-              "code": {
-                "description": "The code the voucher is redeemed with. Codes are unique across all vouchers.",
-                "type": "string",
-                "example": "AB123456"
-              },
-              "issueDate": {
-                "description": "The date the voucher was issued. `null` when it was not recorded, which happens for vouchers imported from a webshop that reports no issue date.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-03-14"
-              },
-              "amount": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Money",
-                    "description": "The value the voucher was issued with. `null` when the stored currency is not a currency this API can express; the value itself is unaffected and still shown in the application."
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The value the voucher was issued with. `null` when the stored currency is not a currency this API can express; the value itself is unaffected and still shown in the application."
-              },
-              "remainingAmount": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/Money",
-                    "description": "The balance still available for redemption - the value to check before applying the voucher to an order. It is `0` once the voucher is fully redeemed, and it can exceed `amount` or be negative on vouchers whose balance was corrected by hand. `null` under the same condition as `amount`."
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "description": "The balance still available for redemption - the value to check before applying the voucher to an order. It is `0` once the voucher is fully redeemed, and it can exceed `amount` or be negative on vouchers whose balance was corrected by hand. `null` under the same condition as `amount`."
-              },
-              "taxRate": {
-                "description": "The tax treatment the voucher is redeemed with. `null` when none was recorded - which is the case both for vouchers imported from a webshop and for vouchers saved without a tax treatment. Redeeming such a voucher on a sales order or an invoice applies the exempt rate; redeeming it at the point of sale derives the rate from the document being paid.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "enum": [
-                  "standard",
-                  "reduced",
-                  "exempt"
-                ],
-                "example": "standard"
-              },
-              "validFrom": {
-                "description": "The first day the voucher can be redeemed. `null` when the validity has no start.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2026-03-14"
-              },
-              "expiresAt": {
-                "description": "The last day the voucher can be redeemed. `null` when the voucher does not expire.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date",
-                "example": "2027-03-13"
-              },
-              "onlyForCustomer": {
-                "description": "When true, only the customer the voucher is bound to may redeem it. Redeeming it on a document of any other customer is rejected. When false, whoever holds the code can redeem it.",
-                "type": "boolean",
-                "example": false
-              },
-              "printSettings": {
-                "properties": {
-                  "showCode": {
-                    "description": "Whether the voucher code is printed on the invoice the voucher was sold with.",
-                    "type": "boolean",
-                    "example": true
-                  }
-                },
-                "type": "object"
-              },
-              "customer": {
-                "description": "The customer the voucher is bound to. Returned as an ID reference; the list and get endpoints can return the full object via the `include` parameter. This is not a record of who bought the voucher: every redemption rebinds it to the customer of the document it was redeemed on. `null` when the voucher is bound to no customer.",
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/Address"
-                  },
-                  {
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "salesManager": {
-                "description": "The sales manager credited with the voucher and the commission they earn on it. Read-only: both are maintained in the voucher overview of the application. `null` when no sales manager is credited.",
-                "required": [
-                  "id",
-                  "commissionAmount"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "example": "880"
-                  },
-                  "commissionAmount": {
-                    "oneOf": [
-                      {
-                        "$ref": "#/components/schemas/Money",
-                        "description": "The commission as an amount, not as a percentage. `0` when no commission is recorded, and `null` under the same condition as `amount`."
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ],
-                    "description": "The commission as an amount, not as a percentage. `0` when no commission is recorded, and `null` under the same condition as `amount`."
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ],
-                "example": {
-                  "id": "880",
-                  "commissionAmount": {
-                    "amount": 5,
-                    "currency": "EUR"
-                  }
-                }
-              },
-              "product": {
-                "description": "The voucher product the voucher was sold as - the product that carries its revenue account and its tax settings. Returned as an ID reference; the list and get endpoints can return the product via the `include` parameter, limited to the fields the product endpoints serve without `product:read`. `null` for vouchers imported from a webshop, which name no product.",
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/Product"
-                  },
-                  {
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              },
-              "invoice": {
-                "description": "The invoice the voucher was sold with. Only the ID is returned; use the invoice endpoints for the full record. `null` for vouchers created by hand and for vouchers imported from a webshop, which is the majority of them.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ]
-              },
-              "invoiceLineItem": {
-                "description": "The line item of that invoice the voucher was sold on. Only the ID is returned. `null` when the voucher names no invoice, and for vouchers whose invoice records no line item.",
-                "required": [
-                  "id"
-                ],
-                "properties": {
-                  "id": {
-                    "type": "string"
-                  }
-                },
-                "type": [
-                  "object",
-                  "null"
-                ]
-              }
-            },
-            "type": "object"
-          }
-        ]
-      },
       "WarehouseReferenceData": {
         "required": [
           "id"
@@ -21592,10 +19387,6 @@
     {
       "name": "SalesOrder",
       "description": "SalesOrder"
-    },
-    {
-      "name": "Voucher",
-      "description": "Voucher"
     },
     {
       "name": "DeliveryNote",
@@ -33646,7 +31437,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`documentDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`writeProtection`: *equals*, *notEquals* \n\n`address.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`editor.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`status`: *equals*, *notEquals*, *in*, *notIn* \n\n`internalComment`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`internalDesignation`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`batch`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`bestBeforeDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionStartDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionEndDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockRetrievalDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockProvisioningDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`materialReservation`: *equals*, *notEquals*, *in*, *notIn* \n\n`materialRetrieval`: *equals*, *notEquals*, *in*, *notIn* \n\n`resolveMultiLevelBOM`: *equals*, *notEquals* \n\n`functionTest`: *equals*, *notEquals* \n\n`createSerialNumbers`: *equals*, *notEquals* \n\n`recordSubSerialNumbers`: *equals*, *notEquals* \n\n`printSettings.showTaskDescription`: *equals*, *notEquals* \n\n`bodyText`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`preferredWarehouse.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`documentDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`writeProtection`: *equals*, *notEquals* \n\n`address.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`status`: *equals*, *notEquals*, *in*, *notIn* \n\n`internalComment`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`internalDesignation`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`batch`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`bestBeforeDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionStartDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`productionEndDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockRetrievalDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`stockProvisioningDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`materialReservation`: *equals*, *notEquals*, *in*, *notIn* \n\n`materialRetrieval`: *equals*, *notEquals*, *in*, *notIn* \n\n`resolveMultiLevelBOM`: *equals*, *notEquals* \n\n`functionTest`: *equals*, *notEquals* \n\n`createSerialNumbers`: *equals*, *notEquals* \n\n`recordSubSerialNumbers`: *equals*, *notEquals* \n\n`printSettings.showTaskDescription`: *equals*, *notEquals* \n\n`bodyText`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`preferredWarehouse.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -33661,7 +31452,6 @@
                       "documentDate",
                       "writeProtection",
                       "address.id",
-                      "editor.id",
                       "project.id",
                       "tags",
                       "status",
@@ -33803,12 +31593,8 @@
                   "materials.product",
                   "materials.product.salesPrices",
                   "materials.product.customFields",
-                  "materials.customFields",
-                  "produceProduct",
                   "project",
-                  "relatedDocuments",
-                  "tags",
-                  "workInstructions"
+                  "tags"
                 ]
               }
             }
@@ -34081,13 +31867,8 @@
                   "materials.product",
                   "materials.product.salesPrices",
                   "materials.product.customFields",
-                  "materials.customFields",
-                  "materials.product.stock",
-                  "produceProduct",
                   "project",
-                  "relatedDocuments",
-                  "tags",
-                  "workInstructions"
+                  "tags"
                 ]
               }
             }
@@ -34868,13 +32649,13 @@
           "Product"
         ],
         "summary": "🔒 List products V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
         "operationId": "GET::api-v3-products",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals* \n\n`properties.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`properties.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`properties.value`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`properties.unit`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -34914,11 +32695,7 @@
                       "categories.id",
                       "salesChannel.id",
                       "isDisabled",
-                      "isDeleted",
-                      "properties.id",
-                      "properties.name",
-                      "properties.value",
-                      "properties.unit"
+                      "isDeleted"
                     ]
                   },
                   "op": {
@@ -35083,7 +32860,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters.",
+            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues.",
             "content": {
               "application/json": {
                 "schema": {
@@ -35365,126 +33142,6 @@
         "x-scopes": [
           "product:read"
         ]
-      },
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "🔒 Create product V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:create`.\n\nCreate a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict.",
-        "operationId": "POST::api-v3-products",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Create a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Product"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed validation",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/request-validation"
-                    },
-                    "title": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "Request payload validation failed."
-                    },
-                    "violations": {
-                      "description": "Error messages",
-                      "type": "object",
-                      "example": {
-                        "name": [
-                          "The name field is required."
-                        ],
-                        "number": [
-                          "The number field must be a string."
-                        ],
-                        "project": [
-                          "The project field is required."
-                        ]
-                      }
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "409": {
-            "description": "Problem occurred",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "A URI reference that identifies the problem type.",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/write-protected"
-                    },
-                    "title": {
-                      "description": "A short, human-readable summary of the problem type.",
-                      "type": "string",
-                      "example": "The resource is write-protected."
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "product:create"
-        ]
       }
     },
     "/api/v3/products/{id}": {
@@ -35590,139 +33247,6 @@
         "x-beta": true,
         "x-scopes": [
           "product:read"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "🔒 Update product V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:update`.\n\nUpdate a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. A number already used by another product is rejected with 409 Conflict.",
-        "operationId": "PATCH::api-v3-products-id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. A number already used by another product is rejected with 409 Conflict.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Product"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed validation",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/request-validation"
-                    },
-                    "title": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "Request payload validation failed."
-                    },
-                    "violations": {
-                      "description": "Error messages",
-                      "type": "object",
-                      "example": {
-                        "name": [
-                          "The name field must be a string."
-                        ],
-                        "number": [
-                          "The number field must be a string."
-                        ],
-                        "project": [
-                          "The project field is invalid."
-                        ]
-                      }
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Problem occurred",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "A URI reference that identifies the problem type.",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/write-protected"
-                    },
-                    "title": {
-                      "description": "A short, human-readable summary of the problem type.",
-                      "type": "string",
-                      "example": "The resource is write-protected."
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "product:update"
         ]
       }
     },
@@ -47033,106 +44557,6 @@
         ]
       }
     },
-    "/api/v3/supplierInvoices": {
-      "post": {
-        "tags": [
-          "SupplierInvoice"
-        ],
-        "summary": "🔒 Create supplier invoice V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `supplierInvoice:create`.\n\nCreate a supplier invoice (liability). The invoice is created as a draft without a document number; omitted fields are derived from the supplier and project defaults. Line items, purchase order assignments, account assignments and files are managed through the corresponding sub-resources.",
-        "operationId": "POST::api-v3-supplierinvoices",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSupplierInvoiceRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Create a supplier invoice (liability). The invoice is created as a draft without a document number; omitted fields are derived from the supplier and project defaults. Line items, purchase order assignments, account assignments and files are managed through the corresponding sub-resources.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/SupplierInvoice"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed validation",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/request-validation"
-                    },
-                    "title": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "Request payload validation failed."
-                    },
-                    "violations": {
-                      "description": "Error messages",
-                      "type": "object",
-                      "example": {
-                        "supplier": [
-                          "The supplier field is required."
-                        ],
-                        "supplierInvoiceNumber": [
-                          "The supplier invoice number field must be a string."
-                        ],
-                        "date": [
-                          "The date field must match the format Y-m-d."
-                        ]
-                      }
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "supplierInvoice:create"
-        ]
-      }
-    },
     "/api/v3/supplierInvoices/{id}/files": {
       "post": {
         "tags": [
@@ -49954,372 +47378,6 @@
         "x-beta": true,
         "x-scopes": [
           "supplier:update"
-        ]
-      }
-    },
-    "/api/v3/vouchers": {
-      "get": {
-        "tags": [
-          "Voucher"
-        ],
-        "summary": "🔒 List vouchers V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `voucher:read`.\n\nPaginated list of vouchers. Filter by `code` to look a single voucher up the way a webshop does - the code is what a customer enters, and `remainingAmount` is what is left to redeem. Vouchers whose balance is used up are part of the list; filter them out with `remainingAmount` if you only want the ones that can still be redeemed.",
-        "operationId": "GET::api-v3-vouchers",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn* \n\n`code`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`remainingAmount`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`issueDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`validFrom`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`expiresAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`customer.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`onlyForCustomer`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
-            "required": false,
-            "style": "deepObject",
-            "schema": {
-              "type": "array",
-              "items": {
-                "properties": {
-                  "key": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "code",
-                      "remainingAmount",
-                      "issueDate",
-                      "validFrom",
-                      "expiresAt",
-                      "customer.id",
-                      "onlyForCustomer",
-                      "createdAt",
-                      "updatedAt"
-                    ]
-                  },
-                  "op": {
-                    "description": "operator",
-                    "type": "string",
-                    "enum": [
-                      "equals",
-                      "notEquals",
-                      "in",
-                      "notIn",
-                      "contains",
-                      "notContains",
-                      "startsWith",
-                      "endsWith",
-                      "lessThan",
-                      "lessThanOrEquals",
-                      "greaterThan",
-                      "greaterThanOrEquals",
-                      "isNull",
-                      "isNotNull"
-                    ]
-                  },
-                  "value": {
-                    "description": "The property value.",
-                    "oneOf": [
-                      {
-                        "title": "String",
-                        "type": "string"
-                      },
-                      {
-                        "title": "Array",
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    ]
-                  }
-                },
-                "type": "object",
-                "additionalProperties": false
-              }
-            },
-            "examples": {
-              "Look one voucher up by its code": {
-                "summary": "",
-                "value": [
-                  {
-                    "key": "code",
-                    "op": "equals",
-                    "value": "AB123456"
-                  }
-                ]
-              },
-              "Vouchers of one customer that still carry a balance": {
-                "summary": "",
-                "value": [
-                  {
-                    "key": "customer.id",
-                    "op": "equals",
-                    "value": "1337"
-                  },
-                  {
-                    "key": "remainingAmount",
-                    "op": "notEquals",
-                    "value": "0"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort via id, -id, issueDate, -issueDate, expiresAt, -expiresAt, remainingAmount, -remainingAmount, createdAt, -createdAt, updatedAt and -updatedAt. Default sort is -id",
-            "required": false,
-            "style": "form",
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "enum": [
-                  "id",
-                  "-id",
-                  "issueDate",
-                  "-issueDate",
-                  "expiresAt",
-                  "-expiresAt",
-                  "remainingAmount",
-                  "-remainingAmount",
-                  "createdAt",
-                  "-createdAt",
-                  "updatedAt",
-                  "-updatedAt"
-                ]
-              }
-            }
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "required": false,
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "customer",
-                  "product"
-                ]
-              }
-            }
-          },
-          {
-            "name": "perPage",
-            "in": "query",
-            "description": "Number of items per page. Default: 15, Max: 100",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "example": 15
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page number.",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "example": 1
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Paginated list of vouchers. Filter by `code` to look a single voucher up the way a webshop does - the code is what a customer enters, and `remainingAmount` is what is left to redeem. Vouchers whose balance is used up are part of the list; filter them out with `remainingAmount` if you only want the ones that can still be redeemed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Voucher"
-                      },
-                      "x-description-ignore": true,
-                      "x-example-ignore": true
-                    },
-                    "meta": {
-                      "description": "Pagination meta data",
-                      "properties": {
-                        "currentPage": {
-                          "description": "The current page number",
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "from": {
-                          "description": "The first item being returned in the current page",
-                          "type": "integer",
-                          "example": 1,
-                          "nullable": true
-                        },
-                        "path": {
-                          "description": "The base path for the paginated results",
-                          "type": "string",
-                          "example": "https://api.example.com/items"
-                        },
-                        "perPage": {
-                          "description": "The number of items shown per page",
-                          "type": "integer",
-                          "example": 15
-                        },
-                        "to": {
-                          "description": "The last item being returned in the current page",
-                          "type": "integer",
-                          "example": 15,
-                          "nullable": true
-                        }
-                      },
-                      "type": "object",
-                      "x-example-ignore": true
-                    },
-                    "links": {
-                      "description": "Pagination links",
-                      "properties": {
-                        "first": {
-                          "description": "URL to the first page",
-                          "type": "string",
-                          "example": "https://api.example.com/items?page=1",
-                          "nullable": true
-                        },
-                        "last": {
-                          "description": "URL to the last page",
-                          "type": "string",
-                          "example": null,
-                          "nullable": true
-                        },
-                        "prev": {
-                          "description": "URL to the previous page",
-                          "type": "string",
-                          "example": null,
-                          "nullable": true
-                        },
-                        "next": {
-                          "description": "URL to the next page",
-                          "type": "string",
-                          "example": "https://api.example.com/items?page=17",
-                          "nullable": true
-                        }
-                      },
-                      "type": "object",
-                      "x-example-ignore": true
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "voucher:read"
-        ]
-      }
-    },
-    "/api/v3/vouchers/{id}": {
-      "get": {
-        "tags": [
-          "Voucher"
-        ],
-        "summary": "🔒 View voucher V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `voucher:read`.\n\nView a single voucher.",
-        "operationId": "GET::api-v3-vouchers-id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "required": false,
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "customer",
-                  "product"
-                ]
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "View a single voucher.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/Voucher"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "voucher:read"
         ]
       }
     }
