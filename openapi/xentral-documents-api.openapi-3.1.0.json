@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Xentral Business Documents API v3",
-    "description": "The Xentral Business Documents API v3 for working with sales orders, offers, invoices, credit notes, delivery notes, return orders, purchase orders, proforma invoices and productions.\n\nIndividual endpoints marked as *Beta* may still change without prior notice — see the respective endpoint descriptions.",
+    "description": "The Xentral Business Documents API v3 for working with sales orders, offers, invoices, credit notes, delivery notes, return orders, purchase orders, proforma invoices and productions.\n\nIndividual endpoints marked as *Beta* may still change without prior notice — see the respective endpoint descriptions.\n\nRequest payloads may contain properties that an endpoint does not define; these are ignored rather than rejected. Nothing is stored for them and no error is returned, so check the response body to confirm which values were actually applied.",
     "contact": {
       "name": "API Support",
       "url": "https://xentral.com",
@@ -175,7 +175,10 @@
             "example": "BY"
           },
           "country": {
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -199,8 +202,7 @@
             "example": "+4915112345672"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "AddressReferenceData": {
         "required": [
@@ -743,8 +745,7 @@
             "example": true
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CommunicationData": {
         "properties": {
@@ -786,8 +787,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CompleteProductionData": {
         "properties": {
@@ -833,8 +833,7 @@
             "example": "Completed after the second function test."
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ContactPerson": {
         "description": "Contact Person object",
@@ -1102,15 +1101,14 @@
             "example": "Available Mon-Fri 9-5"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CostCenter": {
         "properties": {
           "costCenter": {
             "description": "Cost center for the document",
             "type": "string",
-            "maxLength": 255,
+            "maxLength": 35,
             "example": "CC-1234"
           }
         },
@@ -1162,7 +1160,7 @@
             }
           },
           "documentAddress": {
-            "$ref": "#/components/schemas/PostalAddress",
+            "$ref": "#/components/schemas/CreateDocumentAddressData",
             "description": "The recipients postal address of the document. If not provided, the address of the business partner will be used."
           },
           "internalDesignation": {
@@ -1184,6 +1182,7 @@
           "vatId": {
             "description": "VAT ID of the business partner. Defaults to the VAT ID of the address when omitted.",
             "type": "string",
+            "maxLength": 255,
             "example": "DE123456789"
           },
           "deliveryTerms": {
@@ -1371,8 +1370,7 @@
                 "example": "Speaks fluent English, French and Mandarin"
               }
             },
-            "type": "object",
-            "additionalProperties": false
+            "type": "object"
           },
           "groups": {
             "description": "Groups to assign contact person to",
@@ -1388,8 +1386,7 @@
                   "example": "1"
                 }
               },
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             },
             "example": [
               {
@@ -1401,8 +1398,7 @@
             ]
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateCreditNoteData": {
         "type": "object",
@@ -1435,7 +1431,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateCreditNoteLineItemRequest"
-                }
+                },
+                "maxItems": 100
               },
               "deliveryDate": {
                 "description": "Delivery date for the credit note.",
@@ -1782,8 +1779,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateDeliveryAddressData": {
         "description": "Data for creating a new delivery address",
@@ -1862,8 +1858,10 @@
             "example": "BE"
           },
           "country": {
-            "description": "Country code in ISO 3166-1 alpha-2 format",
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -1898,8 +1896,7 @@
             "description": "Delivery-specific settings and information for the address"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateDeliveryNoteData": {
         "type": "object",
@@ -1960,7 +1957,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateDeliveryNoteLineItemRequest"
-                }
+                },
+                "maxItems": 100
               },
               "isDeliveryNoteToSupplier": {
                 "description": "Marks the document address as a supplier rather than a customer. The address must have a supplier number.",
@@ -2179,11 +2177,10 @@
             "example": "BY"
           },
           "country": {
-            "description": "Country",
-            "type": [
-              "string",
-              "null"
-            ],
+            "description": "Country (ISO 3166-1 alpha-2).",
+            "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -2498,7 +2495,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateInvoiceLineItemRequest"
-                }
+                },
+                "maxItems": 100
               },
               "documentNumber": {
                 "description": "Custom document number to assign to the invoice. By default, the document number is generated by Xentral when the invoice is released. Providing this field overrides that default: the supplied number is used and the invoice is created as `released` immediately (no separate `actions/release` call needed). Intended for use cases where the document number originates from an external system (e.g. Amazon VCS mirroring invoices from Amazon's own number range). The number must be unique across all invoices.",
@@ -2540,8 +2538,7 @@
             "type": "object"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateInvoiceFromSalesOrderData": {
         "required": [
@@ -2553,8 +2550,7 @@
             "description": "Reference to the sales order to create the invoice from"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateInvoiceLineItemData": {
         "allOf": [
@@ -2675,7 +2671,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateOfferLineItemRequest"
-                }
+                },
+                "maxItems": 100
               }
             },
             "type": "object"
@@ -2823,8 +2820,7 @@
             "example": "this is an internal comment"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateProductDeliveryThresholdData": {
         "description": "Data for creating a new product delivery threshold",
@@ -2866,8 +2862,7 @@
             "example": true
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateProductLineItemData": {
         "required": [
@@ -3276,10 +3271,25 @@
               "object",
               "null"
             ]
+          },
+          "categories": {
+            "description": "Product categories to assign the product to. A product can be assigned to any number of categories; addressing the same category twice is rejected.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryReferenceData"
+            },
+            "maxItems": 100
+          },
+          "customFields": {
+            "description": "Custom field values for the product. Accepts the `customField1` to `customField40` keys as well as any custom field configured for products in your Xentral instance. Listed keys are written, keys that are not listed keep their value. Pass `value: null` to clear a single field.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomFieldsData"
+            },
+            "maxItems": 100
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateProductionData": {
         "type": "object",
@@ -3508,7 +3518,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateProformaInvoiceLineItemRequest"
-                }
+                },
+                "maxItems": 100
               }
             },
             "type": "object"
@@ -3584,7 +3595,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreatePurchaseOrderLineItemRequest"
-                }
+                },
+                "maxItems": 100
               },
               "confirmedDeliveryDate": {
                 "description": "Confirmed delivery date of the purchase order.",
@@ -3722,17 +3734,17 @@
                 "maxLength": 255,
                 "example": "Tax exempt according to §19 UStG"
               },
+              "name": {
+                "description": "Line item name - on a purchase order the designation the document carries towards the supplier, which the PDF prints as the position name. If not provided, it defaults to the product name - or to the supplier's own designation for this product, when the purchase price carries one.",
+                "type": "string",
+                "maxLength": 255,
+                "example": "Widget Pro (supplier label)"
+              },
               "supplierProductNumber": {
                 "description": "The supplier-specific product number.",
                 "type": "string",
                 "maxLength": 255,
                 "example": "SUP-1234"
-              },
-              "supplierProductName": {
-                "description": "The supplier-specific product name.",
-                "type": "string",
-                "maxLength": 255,
-                "example": "Supplier Product Name"
               },
               "costCenter": {
                 "description": "Cost center for this line item.",
@@ -3852,7 +3864,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateReturnOrderLineItemRequest"
-                }
+                },
+                "maxItems": 100
               }
             },
             "type": "object"
@@ -3885,8 +3898,7 @@
             "minItems": 1
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateReturnOrderLineItemData": {
         "type": "object",
@@ -3983,7 +3995,8 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateSalesOrderLineItemRequest"
-                }
+                },
+                "maxItems": 100
               },
               "commissionConsignmentStorageLocation": {
                 "description": "Commission/consignment storage location for the sales order. This is used by the commission/consignment module.",
@@ -4283,8 +4296,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateSupplierFulfillmentData": {
         "properties": {
@@ -4334,8 +4346,7 @@
             "description": "Consignment storage location"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateSupplierInvoiceAccountAssignmentRequest": {
         "required": [
@@ -4389,8 +4400,7 @@
             "example": "RE-2026-0815"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateSupplierInvoiceLineItemRequest": {
         "required": [
@@ -4526,8 +4536,7 @@
             "example": "1000"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateSupplierInvoicePurchaseOrderAssignmentRequest": {
         "required": [
@@ -4635,8 +4644,7 @@
             "example": "Partial delivery, remainder invoiced separately"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreateSupplierInvoiceRequest": {
         "required": [
@@ -5181,8 +5189,7 @@
             "maxItems": 100
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CreditNote": {
         "description": "Credit note document",
@@ -6678,7 +6685,10 @@
             "example": "BY"
           },
           "country": {
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -6737,8 +6747,7 @@
           "phone": "+4915112345670",
           "mobile": "+4917612345671",
           "fax": "+4915112345672"
-        },
-        "additionalProperties": false
+        }
       },
       "CustomerPaymentTermsData": {
         "properties": {
@@ -6773,8 +6782,7 @@
             "example": 10
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "CustomerRoleData": {
         "properties": {
@@ -6817,8 +6825,7 @@
             "example": true
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "DeliveryAddress": {
         "description": "Delivery address entity",
@@ -7094,8 +7101,7 @@
             "example": "Deliveries after 10am only"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "DeliveryNote": {
         "type": "object",
@@ -8088,8 +8094,7 @@
             "example": 25000
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "FulfillmentData": {
         "properties": {
@@ -8185,8 +8190,7 @@
             "description": "Consignment storage location"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "Group": {
         "description": "Group object",
@@ -9493,8 +9497,7 @@
             "example": 10
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "PaypalData": {
         "properties": {
@@ -9525,8 +9528,7 @@
             "example": "EUR"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "PostalAddress": {
         "description": "Represents a postal address with contact information.",
@@ -9746,8 +9748,7 @@
             "description": "SEPA mandate information"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "PrinterReferenceData": {
         "required": [
@@ -10266,13 +10267,13 @@
                     ],
                     "example": "19.99"
                   },
-                  "suggestedStockQuantity": {
-                    "description": "Stock quantity reported to the sales channels instead of the actual stock. Only applied while the stock number synchronisation is active.",
+                  "stockQuantityFormula": {
+                    "description": "The rule that decides which stock quantity the sales channels are told instead of the actual stock, such as \"L:Main - RES\". A plain number is a valid rule.",
                     "type": [
                       "string",
                       "null"
                     ],
-                    "example": "100"
+                    "example": "L:Main - RES"
                   },
                   "deliveryTime": {
                     "description": "Delivery time text shown in the sales channels.",
@@ -10300,7 +10301,7 @@
                   "isStockNumberSyncActive": false,
                   "isRemainingQuantity": false,
                   "suggestedRetailPrice": "19.99",
-                  "suggestedStockQuantity": null,
+                  "stockQuantityFormula": "L:Main - RES",
                   "deliveryTime": null,
                   "createNewProductNumberDuringImport": false,
                   "stockCorrectionValue": 0
@@ -10624,21 +10625,21 @@
                   "$ref": "#/components/schemas/ProductMedia"
                 }
               },
-              "stock": {
-                "description": "Live warehouse stock, broken down per storage location including batch, best-before date and serial numbers. Only present when requested, and only on single-record endpoints: via include=stock on the single-product endpoint, or via include=materials.product.stock on a single production, where the production document prints the same breakdown for each material. On a production the physical fields are served and the `available` and `sellable` aggregates are omitted, because each material would pay for them separately. Reading it always requires the product:read scope, and it costs several warehouse round trips per product — which is why no list endpoint offers it.",
+              "storageLocations": {
+                "description": "Where the product physically lies: one entry per storage location, batch and best-before date, with serial numbers aggregated, plus the aggregates over them. Only present when requested, and only on single-record endpoints: via include=storageLocations on the single-product endpoint, or via include=materials.product.storageLocations on a single production, where the production document prints the same breakdown for each material. On a production the physical fields are served and the `available` and `sellable` aggregates are omitted, because each material would pay for them separately. Reading it always requires the product:read scope, and it costs several warehouse round trips per product - which is why no list endpoint offers it. A parts-list product assembled just in time lies in no storage location and its `quantity` is always \"0\"; for the units its components allow to be assembled, per warehouse and pooled, ask GET /api/v3/products/{id}/stock.",
                 "properties": {
                   "quantity": {
-                    "description": "Total physical stock on hand across all warehouses.",
+                    "description": "Total physical stock on hand across all warehouses. Always \"0\" for a product assembled just in time.",
                     "type": "string",
                     "example": "120.0000"
                   },
                   "available": {
-                    "description": "Physically available stock (on hand minus pending quality-control deferrals), summed across all storage locations.",
+                    "description": "Physically available stock (on hand minus pending quality-control deferrals), summed across all storage locations. For a product assembled just in time: the whole units its components still allow to be assembled across all warehouses once what they have committed elsewhere is deducted - the same figure GET /api/v3/products/{id}/stock reports as producibleAfterCommitments.",
                     "type": "string",
                     "example": "118.0000"
                   },
                   "sellable": {
-                    "description": "Sellable stock after subtracting open sales-order and reservation commitments, summed across all storage locations.",
+                    "description": "Sellable stock after subtracting open sales-order and reservation commitments, summed across all storage locations. For a product assembled just in time: the whole units its components still allow to be assembled across all warehouses once what they have committed elsewhere is deducted, which makes it the same figure as available here.",
                     "type": "string",
                     "example": "100.0000"
                   },
@@ -10826,8 +10827,7 @@
             "description": "Calculated purchase price."
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductCalculationLineItemResource": {
         "description": "A product calculation line item",
@@ -10996,8 +10996,7 @@
             "example": "movingAverage"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductCategory": {
         "description": "A product category (a node of the category tree) the product is assigned to.",
@@ -11039,6 +11038,39 @@
         },
         "type": "object",
         "additionalProperties": false
+      },
+      "ProductCategoryAssignmentData": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of the product category to assign the product to, or to remove the assignment from.",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "1337"
+          },
+          "deleted": {
+            "description": "Set to true to remove the assignment to this category. Defaults to false, which assigns it.",
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "type": "object"
+      },
+      "ProductCategoryReferenceData": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of the product category to assign the product to.",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "1337"
+          }
+        },
+        "type": "object"
       },
       "ProductCrossSelling": {
         "description": "A cross-selling relation of a product (linking it to a similar or accessory product).",
@@ -11231,6 +11263,247 @@
             ],
             "example": {
               "id": "3"
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterCondition": {
+        "title": "Condition",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "id",
+              "number",
+              "ean",
+              "name",
+              "description",
+              "manufacturer",
+              "manufacturerProductNumber",
+              "customsTariffNumber",
+              "uuid",
+              "minimumStockLevel",
+              "minimumOrderQuantity",
+              "project.id",
+              "defaultSupplier.id",
+              "variantOf.id",
+              "tags.id",
+              "externalReferences.number",
+              "externalReferences.name",
+              "externalReferences.salesChannel.id",
+              "isMatrixProduct",
+              "isStockItem",
+              "isDiscountProduct",
+              "isShippingCostsProduct",
+              "createdAt",
+              "updatedAt",
+              "hasBillOfMaterials",
+              "isAssembledJustInTime",
+              "merchandiseGroup.id",
+              "categories.id",
+              "salesChannel.id",
+              "isDisabled",
+              "isDeleted",
+              "properties.id",
+              "properties.name",
+              "properties.value",
+              "properties.unit"
+            ]
+          },
+          "op": {
+            "description": "operator",
+            "type": "string",
+            "enum": [
+              "equals",
+              "notEquals",
+              "in",
+              "notIn",
+              "isNull",
+              "isNotNull",
+              "contains",
+              "notContains",
+              "startsWith",
+              "endsWith",
+              "lessThan",
+              "lessThanOrEquals",
+              "greaterThan",
+              "greaterThanOrEquals"
+            ]
+          },
+          "value": {
+            "description": "The property value.",
+            "oneOf": [
+              {
+                "title": "String",
+                "type": "string"
+              },
+              {
+                "title": "Array",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterGroup": {
+        "title": "Filter group",
+        "description": "A boolean group of filter conditions. A condition may be a group itself, nesting to at most 5 levels.",
+        "required": [
+          "op",
+          "conditions"
+        ],
+        "properties": {
+          "op": {
+            "description": "Boolean operator combining the conditions.",
+            "type": "string",
+            "enum": [
+              "and",
+              "or"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ProductFilterCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductFilterGroupDepth2"
+                }
+              ]
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterGroupDepth2": {
+        "title": "Filter group, level 2",
+        "description": "A filter group nested at level 2 of at most 5.",
+        "required": [
+          "op",
+          "conditions"
+        ],
+        "properties": {
+          "op": {
+            "description": "Boolean operator combining the conditions.",
+            "type": "string",
+            "enum": [
+              "and",
+              "or"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ProductFilterCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductFilterGroupDepth3"
+                }
+              ]
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterGroupDepth3": {
+        "title": "Filter group, level 3",
+        "description": "A filter group nested at level 3 of at most 5.",
+        "required": [
+          "op",
+          "conditions"
+        ],
+        "properties": {
+          "op": {
+            "description": "Boolean operator combining the conditions.",
+            "type": "string",
+            "enum": [
+              "and",
+              "or"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ProductFilterCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductFilterGroupDepth4"
+                }
+              ]
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterGroupDepth4": {
+        "title": "Filter group, level 4",
+        "description": "A filter group nested at level 4 of at most 5.",
+        "required": [
+          "op",
+          "conditions"
+        ],
+        "properties": {
+          "op": {
+            "description": "Boolean operator combining the conditions.",
+            "type": "string",
+            "enum": [
+              "and",
+              "or"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ProductFilterCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/ProductFilterGroupDepth5"
+                }
+              ]
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ProductFilterGroupDepth5": {
+        "title": "Filter group, level 5",
+        "description": "A filter group at the deepest level, 5; its conditions cannot be groups.",
+        "required": [
+          "op",
+          "conditions"
+        ],
+        "properties": {
+          "op": {
+            "description": "Boolean operator combining the conditions.",
+            "type": "string",
+            "enum": [
+              "and",
+              "or"
+            ]
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductFilterCondition"
             }
           }
         },
@@ -11497,8 +11770,7 @@
             "example": 2
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductMedia": {
         "description": "A media file (image or document) linked to a product.",
@@ -11914,8 +12186,7 @@
             "example": false
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductProperty": {
         "description": "A property assigned to a product together with the value entries this product has for it.",
@@ -12123,14 +12394,14 @@
             ],
             "example": "19.99"
           },
-          "suggestedStockQuantity": {
-            "description": "Stock quantity reported to the sales channels instead of the actual stock. Only applied while the stock number synchronisation is active. Pass null to clear it.",
+          "stockQuantityFormula": {
+            "description": "The rule that decides which stock quantity the sales channels are told, instead of the actual stock. A plain number is a valid rule, and so is an expression over warehouses, reservations and open orders such as \"L:Main - RES\". Only applied while the stock number synchronisation is active. Pass null to clear it. What the rule currently yields is reported by GET /api/v3/products/{id}/stock.",
             "type": [
               "string",
               "null"
             ],
             "maxLength": 255,
-            "example": "100"
+            "example": "L:Main - RES"
           },
           "deliveryTime": {
             "description": "Delivery time text shown in the sales channels. Pass null to clear it.",
@@ -12152,8 +12423,7 @@
             "example": -5
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductSalesChannelSetting": {
         "description": "Per sales-channel settings of a product (one entry per online shop / sales channel).",
@@ -12216,13 +12486,13 @@
             "type": "string",
             "example": "19.99"
           },
-          "suggestedStockQuantity": {
-            "description": "Manually suggested stock quantity for this sales channel.",
+          "stockQuantityFormula": {
+            "description": "The rule that decides which stock quantity this sales channel is told instead of the actual stock, such as \"L:Main - RES\". A plain number is a valid rule.",
             "type": [
               "string",
               "null"
             ],
-            "example": "100"
+            "example": "L:Main - RES"
           },
           "deliveryTime": {
             "description": "Manually set delivery time for this sales channel.",
@@ -12370,6 +12640,224 @@
         "type": "object",
         "additionalProperties": false
       },
+      "ProductStock": {
+        "description": "What is on hand, what the bill of materials allows to be assembled, and what is committed. No sales-channel setting, such as a stock correction value or a pseudo stock rule, is applied to these values.",
+        "required": [
+          "id",
+          "isStockItem",
+          "hasBillOfMaterials",
+          "isAssembledJustInTime",
+          "isMatrixProduct",
+          "totals",
+          "warehouses",
+          "salesChannelDefaults",
+          "salesChannels"
+        ],
+        "properties": {
+          "id": {
+            "description": "The unique identifier of the product",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "58"
+          },
+          "isStockItem": {
+            "description": "Whether the product is stock-managed. While false, onHand is absent.",
+            "type": "boolean",
+            "example": false
+          },
+          "hasBillOfMaterials": {
+            "description": "Whether the product has a bill of materials. While false, producible and producibleAfterCommitments are absent.",
+            "type": "boolean",
+            "example": true
+          },
+          "isAssembledJustInTime": {
+            "description": "Whether the BOM is assembled just-in-time. Such a product carries no stock of its own.",
+            "type": "boolean",
+            "example": true
+          },
+          "isMatrixProduct": {
+            "description": "Whether the product is a matrix (variant parent) product. Its variants are products in their own right and carry the stock, so read their figures rather than this product's.",
+            "type": "boolean",
+            "example": false
+          },
+          "totals": {
+            "description": "The figures for the warehouses asked for, pooled.",
+            "required": [
+              "reserved",
+              "openSalesOrders"
+            ],
+            "properties": {
+              "onHand": {
+                "description": "Quantity booked on the product's own storage locations, before any deduction. Blocked storage locations are left out.",
+                "type": "number",
+                "format": "float",
+                "example": 13
+              },
+              "producible": {
+                "description": "Whole units the bill of materials allows to be assembled from the component stock of the requested warehouses, before any deduction.",
+                "type": "integer",
+                "example": 5
+              },
+              "producibleAfterCommitments": {
+                "description": "The same count after deducting what each component has committed elsewhere, plus what a linked pre-produced product can supply. This is the same calculation the stock synchronisation uses, so it matches the quantity a sales channel is sent. Use it to decide what to promise; it cannot be reproduced by subtracting reserved from producible.",
+                "type": "integer",
+                "example": 3
+              },
+              "reserved": {
+                "description": "Units of the product itself committed by reservation rows of any document type - sales orders, delivery notes and production orders alike. Always covers the whole instance, also when a warehouse filter is given. A just-in-time bill of materials holds none of its own.",
+                "type": "number",
+                "format": "float",
+                "example": 1
+              },
+              "openSalesOrders": {
+                "description": "Units of the product itself committed by released sales orders. Always covers the whole instance.",
+                "type": "number",
+                "format": "float",
+                "example": 2
+              }
+            },
+            "type": "object",
+            "example": {
+              "onHand": 13,
+              "producible": 5,
+              "producibleAfterCommitments": 3,
+              "reserved": 1,
+              "openSalesOrders": 2
+            },
+            "additionalProperties": false
+          },
+          "warehouses": {
+            "description": "One entry per requested warehouse, or per warehouse holding anything when no warehouse filter is given. An entry reports what that warehouse alone allows - do not add them up, ask for the set you need and read totals instead.",
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "description": "The unique identifier of the warehouse",
+                  "type": "string",
+                  "pattern": "[0-9]+",
+                  "example": "1"
+                },
+                "onHand": {
+                  "description": "Quantity booked on this warehouse's storage locations, before any deduction.",
+                  "type": "number",
+                  "format": "float",
+                  "example": 6
+                },
+                "producible": {
+                  "description": "Whole units assembled from this warehouse's component stock alone. Zero when it is missing any component.",
+                  "type": "integer",
+                  "example": 2
+                },
+                "producibleAfterCommitments": {
+                  "description": "The same count with the components' commitments deducted. A commitment belongs to no single warehouse, so it weighs on each one in full.",
+                  "type": "integer",
+                  "example": 1
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "salesChannelDefaults": {
+            "description": "The product's own settings. They are already resolved into each salesChannels entry, which is where to read what a channel is told; read them directly for a channel the product is not assigned to. No figure above has them applied.",
+            "required": [
+              "suggestedStockQuantity",
+              "stockCorrectionValue"
+            ],
+            "properties": {
+              "suggestedStockQuantity": {
+                "description": "The quantity the pseudo stock rule currently yields, or null while no rule is set.",
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "float",
+                "example": 12
+              },
+              "stockCorrectionValue": {
+                "description": "Quantity added to the stock reported to a sales channel. Zero while none is set.",
+                "type": "integer",
+                "example": -1
+              }
+            },
+            "type": "object",
+            "example": {
+              "suggestedStockQuantity": 12,
+              "stockCorrectionValue": -1
+            },
+            "additionalProperties": false
+          },
+          "salesChannels": {
+            "description": "One entry per sales channel the product is assigned to, narrowed by the salesChannel.id filter. An entry reports the settings that apply to that channel: its own while isActive and useIndividualSalesChannelSettings are both true, the ones from salesChannelDefaults otherwise, and the shop's own stock correction value on either level while the shop overrides it. Whether the channel synchronises stock at all is a setting of the assignment and is not part of this answer. An empty list means the product is assigned to no channel asked for.",
+            "type": "array",
+            "items": {
+              "required": [
+                "salesChannel",
+                "isActive",
+                "useIndividualSalesChannelSettings",
+                "suggestedStockQuantity",
+                "stockCorrectionValue",
+                "handlingTime"
+              ],
+              "properties": {
+                "salesChannel": {
+                  "required": [
+                    "id"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "pattern": "[0-9]+",
+                      "example": "1"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "isActive": {
+                  "description": "Whether the assignment is active. While false, this entry is answered from salesChannelDefaults rather than from the channel's own row.",
+                  "type": "boolean",
+                  "example": true
+                },
+                "useIndividualSalesChannelSettings": {
+                  "description": "Whether this channel uses its own settings instead of the defaults. While false, this entry is answered from salesChannelDefaults rather than from the channel's own row.",
+                  "type": "boolean",
+                  "example": true
+                },
+                "suggestedStockQuantity": {
+                  "description": "The quantity the pseudo stock rule that applies to this channel currently yields, or null while that rule is not set.",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "format": "float",
+                  "example": 2.5
+                },
+                "stockCorrectionValue": {
+                  "description": "Quantity added to the stock reported to this channel: the level the two flags select, or the shop's own value while the shop overrides the correction for every product. Zero while none is set.",
+                  "type": "integer",
+                  "example": -3
+                },
+                "handlingTime": {
+                  "description": "Days this channel is given as handling time, from the channel's own product settings; null while none is stored. It has no product-level value, so it does not follow the two flags above and is reported as stored for every channel.",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "example": 2
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "ProductStockTakingData": {
         "description": "Stock-taking valuation of the product. The two fields are independent: send only the value to change it without switching the valuation on or off, and only the flag to switch the valuation while keeping the value.",
         "properties": {
@@ -12385,8 +12873,7 @@
             "example": 9.99
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ProductText": {
         "description": "Language- and shop-specific texts of a product. Entries with an `id` are the stored per-language, per-sales-channel overrides; entries with `id: null` and `salesChannel: null` are the base texts kept on the product itself. Values are returned as stored — overrides are not collapsed over the base texts and variants do not inherit from their parent product.",
@@ -13030,7 +13517,7 @@
                 "example": 2
               },
               "product": {
-                "description": "The product master data of the material. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. What the embedded product contains follows the scope of the token, the same boundary the product endpoints draw: with `production:read` alone it is the curated subset a business document embeds — identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags — while a token that also holds `product:read` receives the full Product resource, and only then can it request `?include=materials.product.stock` for the material's physical stock per storage location. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
+                "description": "The product master data of the material. Only present when requested via `?include=materials.product`, otherwise the material carries the product id only. What the embedded product contains follows the scope of the token, the same boundary the product endpoints draw: with `production:read` alone it is the curated subset a business document embeds — identity and catalog data, logistics and customs facts, tax classification, lifecycle and print flags — while a token that also holds `product:read` receives the full Product resource, and only then can it request `?include=materials.product.storageLocations` for the material's physical stock per storage location. The product's own sub-resources are embedded on demand: `?include=materials.product.salesPrices` for the discount scales — only the rows a document would render: currently valid, not flagged as hidden for documents, no group tiers and no prices assigned to an individual customer; the internal price fields are likewise excluded — and `?include=materials.product.customFields` for the product custom fields.",
                 "anyOf": [
                   {
                     "$ref": "#/components/schemas/Product"
@@ -14145,14 +14632,6 @@
                 ],
                 "example": "SUP-1234"
               },
-              "supplierProductName": {
-                "description": "The supplier-specific product name (from purchase prices).",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "example": "Supplier Product Name"
-              },
               "costCenter": {
                 "description": "Cost center for this line item.",
                 "type": [
@@ -14264,8 +14743,7 @@
             "example": "Damaged packaging"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ReturnOrder": {
         "type": "object",
@@ -14631,8 +15109,7 @@
             "example": 4.5
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SalesOrder": {
         "description": "Sales order document",
@@ -15356,8 +15833,7 @@
             "example": true
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SalesOrderTrafficLightValue": {
         "description": "A traffic light value for a sales order",
@@ -15804,8 +16280,7 @@
             "example": true
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SendEmailData": {
         "required": [
@@ -15871,13 +16346,11 @@
                   "type": "string"
                 }
               },
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SendViaEmailData": {
         "properties": {
@@ -15914,8 +16387,7 @@
             "type": "string"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SepaData": {
         "properties": {
@@ -15969,8 +16441,7 @@
             "example": "Standard SEPA mandate for monthly invoice settlement"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "ShippingMethodReferenceData": {
         "required": [
@@ -17149,8 +17620,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SupplierDocumentDeliveryData": {
         "properties": {
@@ -17245,8 +17715,7 @@
             "example": 50000
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "SupplierInvoice": {
         "description": "A supplier invoice (liability / accounts payable document).",
@@ -18326,8 +18795,7 @@
             "example": "HS-Code 8471.30; Preferential origin: EU"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "Tag": {
         "description": "A tag (label) assigned to a resource.",
@@ -18421,8 +18889,7 @@
             "example": "HS‑Code 8542.31 – Integrated circuits, origin DE, duty‑free under EU‑US agreement"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "TaxDisplayResource": {
         "properties": {
@@ -18735,8 +19202,7 @@
                   "example": "1"
                 }
               },
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             },
             "example": [
               {
@@ -18748,8 +19214,7 @@
             ]
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateCreditNoteData": {
         "type": "object",
@@ -19103,7 +19568,10 @@
             "example": "BY"
           },
           "country": {
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -19142,8 +19610,7 @@
             "example": "+4915112345672"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateCustomerData": {
         "properties": {
@@ -19277,8 +19744,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateDeliveryAddressData": {
         "description": "Data for updating an existing delivery address",
@@ -19371,8 +19837,10 @@
             "example": "BE"
           },
           "country": {
-            "description": "Country code in ISO 3166-1 alpha-2 format",
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -19422,8 +19890,7 @@
             "description": "Delivery-specific settings and information for the address"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateDeliveryNoteData": {
         "type": "object",
@@ -20232,11 +20699,13 @@
             "example": "BY"
           },
           "country": {
-            "description": "Country",
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": [
               "string",
               "null"
             ],
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -20368,14 +20837,14 @@
             "example": "this is an internal comment"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateProductLineItemData": {
         "properties": {
           "name": {
             "description": "Name of the line item.",
             "type": "string",
+            "maxLength": 255,
             "example": "Product Name"
           },
           "description": {
@@ -20824,10 +21293,25 @@
               "object",
               "null"
             ]
+          },
+          "categories": {
+            "description": "Product categories to assign or unassign. An entry with an `id` assigns that category, an entry with `deleted: true` removes that assignment. Categories not included in the list are left unchanged - only an explicit `deleted` entry removes one, and an empty list changes nothing. Addressing the same category twice is rejected.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryAssignmentData"
+            },
+            "maxItems": 100
+          },
+          "customFields": {
+            "description": "Custom field values for the product. Accepts the `customField1` to `customField40` keys as well as any custom field configured for products in your Xentral instance. Listed keys are written, keys that are not listed keep their value. Pass `value: null` to clear a single field.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomFieldsData"
+            },
+            "maxItems": 100
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateProformaInvoiceData": {
         "type": "object",
@@ -21198,14 +21682,11 @@
                 "maxLength": 255,
                 "example": "SUP-1234"
               },
-              "supplierProductName": {
-                "description": "The supplier-specific product name.",
-                "type": [
-                  "string",
-                  "null"
-                ],
+              "name": {
+                "description": "Name of the line item - on a purchase order the designation the document carries towards the supplier, which the PDF prints as the position name.",
+                "type": "string",
                 "maxLength": 255,
-                "example": "Supplier Product Name"
+                "example": "Widget Pro (supplier label)"
               },
               "costCenter": {
                 "description": "Cost center for this line item.",
@@ -21798,7 +22279,10 @@
             "example": "BW"
           },
           "country": {
+            "description": "Country (ISO 3166-1 alpha-2).",
             "type": "string",
+            "maxLength": 2,
+            "pattern": "^[A-Z]{2}$",
             "example": "DE"
           },
           "gln": {
@@ -21837,8 +22321,7 @@
             "example": "+4971112345672"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateSupplierData": {
         "properties": {
@@ -21956,8 +22439,7 @@
             }
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateSupplierFulfillmentData": {
         "properties": {
@@ -22030,8 +22512,7 @@
             "description": "Consignment storage location"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "UpdateSupplierInvoiceAccountAssignmentRequest": {
         "properties": {
@@ -22081,8 +22562,7 @@
             "example": "RE-2026-0815"
           }
         },
-        "type": "object",
-        "additionalProperties": false
+        "type": "object"
       },
       "Voucher": {
         "description": "A voucher: a code that carries a monetary value and can be redeemed on a sales order or an invoice. Look a voucher up by its `code` to find out whether it exists and how much of its value is left. Fully redeemed vouchers keep being returned here, unlike in the voucher overview of the application, so that a used-up code can be told apart from an unknown one; filter by `remainingAmount` to exclude them. `createdAt` and `updatedAt` were introduced with this endpoint - on vouchers that already existed they report when the endpoint was rolled out, not when the voucher was issued. Use `issueDate` for that.",
@@ -22977,8 +23457,8 @@
         "tags": [
           "CreditNote"
         ],
-        "summary": "🔒 Create credit note V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:create`.\n\nCreate a new credit note.",
+        "summary": "Create credit note V3",
+        "description": "This endpoint requires the following scopes: `creditNote:create`.\n\nCreate a new credit note.",
         "operationId": "POST::api-v3-creditnotes",
         "requestBody": {
           "content": {
@@ -23066,7 +23546,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "creditNote:create"
         ]
@@ -23253,8 +23732,8 @@
         "tags": [
           "CreditNote"
         ],
-        "summary": "🔒 Update credit note V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
+        "summary": "Update credit note V3",
+        "description": "This endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a credit note. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-creditnotes-id",
         "parameters": [
           {
@@ -23377,7 +23856,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "creditNote:update"
         ]
@@ -24157,8 +24635,8 @@
         "tags": [
           "CreditNote"
         ],
-        "summary": "🔒 Create credit note line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:update`.\n\nCreate a new credit note line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
+        "summary": "Create credit note line item V3",
+        "description": "This endpoint requires the following scopes: `creditNote:update`.\n\nCreate a new credit note line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
         "operationId": "POST::api-v3-creditnotes-id-lineitems",
         "parameters": [
           {
@@ -24281,7 +24759,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "creditNote:update"
         ]
@@ -24462,8 +24939,8 @@
         "tags": [
           "CreditNote"
         ],
-        "summary": "🔒 Update credit note line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a line item in a credit note. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
+        "summary": "Update credit note line item V3",
+        "description": "This endpoint requires the following scopes: `creditNote:update`.\n\nUpdate a line item in a credit note. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
         "operationId": "PATCH::api-v3-creditnotes-id-lineitems-lineitemid",
         "parameters": [
           {
@@ -24594,7 +25071,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "creditNote:update"
         ]
@@ -30140,8 +30616,8 @@
         "tags": [
           "Invoice"
         ],
-        "summary": "🔒 Create invoice V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:create`.\n\nCreate a new invoice.",
+        "summary": "Create invoice V3",
+        "description": "This endpoint requires the following scopes: `invoice:create`.\n\nCreate a new invoice.",
         "operationId": "POST::api-v3-invoices",
         "requestBody": {
           "content": {
@@ -30229,7 +30705,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "invoice:create"
         ]
@@ -30604,8 +31079,8 @@
         "tags": [
           "Invoice"
         ],
-        "summary": "🔒 Update invoice V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:update`.\n\nUpdate an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
+        "summary": "Update invoice V3",
+        "description": "This endpoint requires the following scopes: `invoice:update`.\n\nUpdate an invoice. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-invoices-id",
         "parameters": [
           {
@@ -30728,7 +31203,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "invoice:update"
         ]
@@ -31508,8 +31982,8 @@
         "tags": [
           "Invoice"
         ],
-        "summary": "🔒 Create invoice line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:update`.\n\nCreate a new invoice line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
+        "summary": "Create invoice line item V3",
+        "description": "This endpoint requires the following scopes: `invoice:update`.\n\nCreate a new invoice line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
         "operationId": "POST::api-v3-invoices-id-lineitems",
         "parameters": [
           {
@@ -31632,7 +32106,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "invoice:update"
         ]
@@ -31813,8 +32286,8 @@
         "tags": [
           "Invoice"
         ],
-        "summary": "🔒 Update invoice line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `invoice:update`.\n\nUpdate a line item in an invoice. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
+        "summary": "Update invoice line item V3",
+        "description": "This endpoint requires the following scopes: `invoice:update`.\n\nUpdate a line item in an invoice. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
         "operationId": "PATCH::api-v3-invoices-id-lineitems-lineitemid",
         "parameters": [
           {
@@ -31945,7 +32418,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "invoice:update"
         ]
@@ -32496,8 +32968,8 @@
         "tags": [
           "Offer"
         ],
-        "summary": "🔒 Create offer V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:create`.\n\nCreate an offer.",
+        "summary": "Create offer V3",
+        "description": "This endpoint requires the following scopes: `offer:create`.\n\nCreate an offer.",
         "operationId": "POST::api-v3-offers",
         "requestBody": {
           "content": {
@@ -32585,7 +33057,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "offer:create"
         ]
@@ -32772,8 +33243,8 @@
         "tags": [
           "Offer"
         ],
-        "summary": "🔒 Update offer V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:update`.\n\nUpdate an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
+        "summary": "Update offer V3",
+        "description": "This endpoint requires the following scopes: `offer:update`.\n\nUpdate an offer. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-offers-id",
         "parameters": [
           {
@@ -32896,7 +33367,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "offer:update"
         ]
@@ -33757,8 +34227,8 @@
         "tags": [
           "Offer"
         ],
-        "summary": "🔒 Create offer line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:update`.\n\nCreate a new offer line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
+        "summary": "Create offer line item V3",
+        "description": "This endpoint requires the following scopes: `offer:update`.\n\nCreate a new offer line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
         "operationId": "POST::api-v3-offers-id-lineitems",
         "parameters": [
           {
@@ -33881,7 +34351,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "offer:update"
         ]
@@ -34062,8 +34531,8 @@
         "tags": [
           "Offer"
         ],
-        "summary": "🔒 Update offer line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `offer:update`.\n\nUpdate a line item in an offer. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
+        "summary": "Update offer line item V3",
+        "description": "This endpoint requires the following scopes: `offer:update`.\n\nUpdate a line item in an offer. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
         "operationId": "PATCH::api-v3-offers-id-lineitems-lineitemid",
         "parameters": [
           {
@@ -34194,7 +34663,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "offer:update"
         ]
@@ -34930,7 +35398,7 @@
                   "materials.product.salesPrices",
                   "materials.product.customFields",
                   "materials.customFields",
-                  "materials.product.stock",
+                  "materials.product.storageLocations",
                   "produceProduct",
                   "project",
                   "relatedDocuments",
@@ -35716,99 +36184,107 @@
           "Product"
         ],
         "summary": "🔒 List products V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
         "operationId": "GET::api-v3-products",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals* \n\n`properties.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`properties.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`properties.value`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`properties.unit`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals* \n\n`properties.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`properties.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`properties.value`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`properties.unit`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull*\n\nAlternatively the filter accepts a single group object `{op, conditions}`: `or` matches records satisfying at least one condition, `and` all of them. A condition may itself be such a group, nesting to at most 5 levels.",
             "required": false,
             "style": "deepObject",
             "schema": {
-              "type": "array",
-              "items": {
-                "properties": {
-                  "key": {
-                    "type": "string",
-                    "enum": [
-                      "id",
-                      "number",
-                      "ean",
-                      "name",
-                      "description",
-                      "manufacturer",
-                      "manufacturerProductNumber",
-                      "customsTariffNumber",
-                      "uuid",
-                      "minimumStockLevel",
-                      "minimumOrderQuantity",
-                      "project.id",
-                      "defaultSupplier.id",
-                      "variantOf.id",
-                      "tags.id",
-                      "externalReferences.number",
-                      "externalReferences.name",
-                      "externalReferences.salesChannel.id",
-                      "isMatrixProduct",
-                      "isStockItem",
-                      "isDiscountProduct",
-                      "isShippingCostsProduct",
-                      "createdAt",
-                      "updatedAt",
-                      "hasBillOfMaterials",
-                      "isAssembledJustInTime",
-                      "merchandiseGroup.id",
-                      "categories.id",
-                      "salesChannel.id",
-                      "isDisabled",
-                      "isDeleted",
-                      "properties.id",
-                      "properties.name",
-                      "properties.value",
-                      "properties.unit"
-                    ]
-                  },
-                  "op": {
-                    "description": "operator",
-                    "type": "string",
-                    "enum": [
-                      "equals",
-                      "notEquals",
-                      "in",
-                      "notIn",
-                      "isNull",
-                      "isNotNull",
-                      "contains",
-                      "notContains",
-                      "startsWith",
-                      "endsWith",
-                      "lessThan",
-                      "lessThanOrEquals",
-                      "greaterThan",
-                      "greaterThanOrEquals"
-                    ]
-                  },
-                  "value": {
-                    "description": "The property value.",
-                    "oneOf": [
-                      {
-                        "title": "String",
-                        "type": "string"
+              "oneOf": [
+                {
+                  "title": "Conditions",
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "enum": [
+                          "id",
+                          "number",
+                          "ean",
+                          "name",
+                          "description",
+                          "manufacturer",
+                          "manufacturerProductNumber",
+                          "customsTariffNumber",
+                          "uuid",
+                          "minimumStockLevel",
+                          "minimumOrderQuantity",
+                          "project.id",
+                          "defaultSupplier.id",
+                          "variantOf.id",
+                          "tags.id",
+                          "externalReferences.number",
+                          "externalReferences.name",
+                          "externalReferences.salesChannel.id",
+                          "isMatrixProduct",
+                          "isStockItem",
+                          "isDiscountProduct",
+                          "isShippingCostsProduct",
+                          "createdAt",
+                          "updatedAt",
+                          "hasBillOfMaterials",
+                          "isAssembledJustInTime",
+                          "merchandiseGroup.id",
+                          "categories.id",
+                          "salesChannel.id",
+                          "isDisabled",
+                          "isDeleted",
+                          "properties.id",
+                          "properties.name",
+                          "properties.value",
+                          "properties.unit"
+                        ]
                       },
-                      {
-                        "title": "Array",
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
+                      "op": {
+                        "description": "operator",
+                        "type": "string",
+                        "enum": [
+                          "equals",
+                          "notEquals",
+                          "in",
+                          "notIn",
+                          "isNull",
+                          "isNotNull",
+                          "contains",
+                          "notContains",
+                          "startsWith",
+                          "endsWith",
+                          "lessThan",
+                          "lessThanOrEquals",
+                          "greaterThan",
+                          "greaterThanOrEquals"
+                        ]
+                      },
+                      "value": {
+                        "description": "The property value.",
+                        "oneOf": [
+                          {
+                            "title": "String",
+                            "type": "string"
+                          },
+                          {
+                            "title": "Array",
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ]
                       }
-                    ]
+                    },
+                    "type": "object",
+                    "additionalProperties": false
                   }
                 },
-                "type": "object",
-                "additionalProperties": false
-              }
+                {
+                  "$ref": "#/components/schemas/ProductFilterGroup"
+                }
+              ]
             }
           },
           {
@@ -35933,7 +36409,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters.",
+            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
             "content": {
               "application/json": {
                 "schema": {
@@ -36221,7 +36697,7 @@
           "Product"
         ],
         "summary": "🔒 Create product V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:create`.\n\nCreate a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:create`.\n\nCreate a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict. The response body carries the assigned categories and the custom fields, so they can be checked without a follow-up read.",
         "operationId": "POST::api-v3-products",
         "requestBody": {
           "content": {
@@ -36234,7 +36710,7 @@
         },
         "responses": {
           "201": {
-            "description": "Create a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict.",
+            "description": "Create a product. If number is omitted, the next number is drawn from the merchandise group's number range, falling back to the general product number range, scoped by the project. An explicitly requested number that is already in use is rejected with 409 Conflict. The response body carries the assigned categories and the custom fields, so they can be checked without a follow-up read.",
             "content": {
               "application/json": {
                 "schema": {
@@ -36388,7 +36864,7 @@
                   "properties",
                   "salesChannels",
                   "media",
-                  "stock"
+                  "storageLocations"
                 ]
               }
             }
@@ -36447,7 +36923,7 @@
           "Product"
         ],
         "summary": "🔒 Update product V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:update`.\n\nUpdate a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. A number already used by another product is rejected with 409 Conflict.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:update`.\n\nUpdate a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. Categories are written as a delta: an entry with an `id` assigns that category, an entry with `deleted: true` removes the assignment, and a category the list does not mention keeps its state. Custom fields work the same way per key. A number already used by another product is rejected with 409 Conflict. The response body carries the assigned categories and the custom fields, so they can be checked without a follow-up read.",
         "operationId": "PATCH::api-v3-products-id",
         "parameters": [
           {
@@ -36470,7 +36946,7 @@
         },
         "responses": {
           "200": {
-            "description": "Update a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. A number already used by another product is rejected with 409 Conflict.",
+            "description": "Update a product. Only the fields the request carries are written, everything else keeps its value; a nullable field is cleared by passing null. Categories are written as a delta: an entry with an `id` assigns that category, an entry with `deleted: true` removes the assignment, and a category the list does not mention keeps its state. Custom fields work the same way per key. A number already used by another product is rejected with 409 Conflict. The response body carries the assigned categories and the custom fields, so they can be checked without a follow-up read.",
             "content": {
               "application/json": {
                 "schema": {
@@ -37365,6 +37841,120 @@
         },
         "x-scopes": [
           "productCalculation:update"
+        ]
+      }
+    },
+    "/api/v3/products/{id}/stock": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "🔒 View stock figures of a product V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `productStock:read`.\n\nStock figures of a product, per warehouse and pooled over the warehouses asked for, together with the sales-channel settings that decide which number a channel is shown. The four flags in the answer say which figures the product has; one that does not apply to it is absent rather than zero. No setting is applied to any figure.",
+        "operationId": "GET::api-v3-products-id-stock",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`warehouse.id`: *equals*, *in* \n\n`salesChannel.id`: *equals*, *in*",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "warehouse.id",
+                      "salesChannel.id"
+                    ]
+                  },
+                  "op": {
+                    "description": "operator",
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "in"
+                    ]
+                  },
+                  "value": {
+                    "description": "The property value.",
+                    "oneOf": [
+                      {
+                        "title": "String",
+                        "type": "string"
+                      },
+                      {
+                        "title": "Array",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stock figures of a product, per warehouse and pooled over the warehouses asked for, together with the sales-channel settings that decide which number a channel is shown. The four flags in the answer say which figures the product has; one that does not apply to it is absent rather than zero. No setting is applied to any figure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ProductStock"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "productStock:read"
         ]
       }
     },
@@ -40116,8 +40706,8 @@
         "tags": [
           "PurchaseOrder"
         ],
-        "summary": "🔒 Create purchase order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:create`.\n\nCreate a new purchase order.",
+        "summary": "Create purchase order V3",
+        "description": "This endpoint requires the following scopes: `purchaseOrder:create`.\n\nCreate a new purchase order.",
         "operationId": "POST::api-v3-purchaseorders",
         "requestBody": {
           "content": {
@@ -40205,7 +40795,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "purchaseOrder:create"
         ]
@@ -40392,8 +40981,8 @@
         "tags": [
           "PurchaseOrder"
         ],
-        "summary": "🔒 Update purchase order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
+        "summary": "Update purchase order V3",
+        "description": "This endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a purchase order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-purchaseorders-id",
         "parameters": [
           {
@@ -40516,7 +41105,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "purchaseOrder:update"
         ]
@@ -41458,8 +42046,8 @@
         "tags": [
           "PurchaseOrder"
         ],
-        "summary": "🔒 Create purchase order line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:update`.\n\nCreate a new purchase order line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
+        "summary": "Create purchase order line item V3",
+        "description": "This endpoint requires the following scopes: `purchaseOrder:update`.\n\nCreate a new purchase order line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
         "operationId": "POST::api-v3-purchaseorders-id-lineitems",
         "parameters": [
           {
@@ -41582,7 +42170,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "purchaseOrder:update"
         ]
@@ -41763,8 +42350,8 @@
         "tags": [
           "PurchaseOrder"
         ],
-        "summary": "🔒 Update purchase order line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a line item in a purchase order. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
+        "summary": "Update purchase order line item V3",
+        "description": "This endpoint requires the following scopes: `purchaseOrder:update`.\n\nUpdate a line item in a purchase order. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
         "operationId": "PATCH::api-v3-purchaseorders-id-lineitems-lineitemid",
         "parameters": [
           {
@@ -41832,11 +42419,11 @@
                         "price.net": [
                           "The price.net field is invalid."
                         ],
+                        "name": [
+                          "The name field must be a string."
+                        ],
                         "taxLegalNotice": [
                           "The tax legal notice field must be a string."
-                        ],
-                        "supplierProductNumber": [
-                          "The supplier product number field must be a string."
                         ]
                       }
                     }
@@ -41895,7 +42482,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "purchaseOrder:update"
         ]
@@ -45029,8 +45615,8 @@
         "tags": [
           "SalesOrder"
         ],
-        "summary": "🔒 Create sales order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:create`.\n\nCreate a new sales order.",
+        "summary": "Create sales order V3",
+        "description": "This endpoint requires the following scopes: `salesOrder:create`.\n\nCreate a new sales order.",
         "operationId": "POST::api-v3-salesorders",
         "requestBody": {
           "content": {
@@ -45118,7 +45704,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "salesOrder:create"
         ]
@@ -45307,8 +45892,8 @@
         "tags": [
           "SalesOrder"
         ],
-        "summary": "🔒 Update sales order V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
+        "summary": "Update sales order V3",
+        "description": "This endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a sales order. Line items can be written inline through `lineItems`: an entry with an `id` updates, an entry without one creates, an entry with `deleted: true` deletes. The response body carries the updated line items and tags, so an inline-created line item comes back with its new id.",
         "operationId": "PATCH::api-v3-salesorders-id",
         "parameters": [
           {
@@ -45431,7 +46016,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "salesOrder:update"
         ]
@@ -46373,8 +46957,8 @@
         "tags": [
           "SalesOrder"
         ],
-        "summary": "🔒 Create sales order line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:update`.\n\nCreate a new sales order line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
+        "summary": "Create sales order line item V3",
+        "description": "This endpoint requires the following scopes: `salesOrder:update`.\n\nCreate a new sales order line item. Pass `type` naming an intermediate type (heading, subtotal, group total, image, page break) to create an intermediate line item instead of a product line item.",
         "operationId": "POST::api-v3-salesorders-id-lineitems",
         "parameters": [
           {
@@ -46497,7 +47081,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "salesOrder:update"
         ]
@@ -46678,8 +47261,8 @@
         "tags": [
           "SalesOrder"
         ],
-        "summary": "🔒 Update sales order line item V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a line item in a sales order. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
+        "summary": "Update sales order line item V3",
+        "description": "This endpoint requires the following scopes: `salesOrder:update`.\n\nUpdate a line item in a sales order. Intermediate line items are addressed by their `il-` prefixed id and take the intermediate line item payload.",
         "operationId": "PATCH::api-v3-salesorders-id-lineitems-lineitemid",
         "parameters": [
           {
@@ -46810,7 +47393,6 @@
             }
           }
         },
-        "x-beta": true,
         "x-scopes": [
           "salesOrder:update"
         ]
@@ -47113,8 +47695,8 @@
                         "customer": [
                           "The customer field must be an array."
                         ],
-                        "price.amount": [
-                          "The price.amount field is required."
+                        "price": [
+                          "The price field is required."
                         ]
                       }
                     }
