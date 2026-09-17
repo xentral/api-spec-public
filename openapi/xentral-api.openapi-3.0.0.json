@@ -68976,8 +68976,8 @@
                                 }
                               },
                               "isStockNumberSyncActive": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the stock number synchronization to the sales channel is active.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69003,8 +69003,8 @@
                                 ]
                               },
                               "isSoldOut": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the product is sold out.",
+                                "example": false,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69030,8 +69030,8 @@
                                 ]
                               },
                               "isRemainingQuantity": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if only the remaining quantity of the product is left.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69064,8 +69064,8 @@
                                 "example": "99.99"
                               },
                               "isVisible": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "example": true,
+                                "description": "Shows if a product is visible in all sales channels.",
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69138,7 +69138,7 @@
                                       }
                                     },
                                     "isActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the sales channel connection is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69165,7 +69165,7 @@
                                       ]
                                     },
                                     "useIndividualSalesChannelSettings": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69192,7 +69192,7 @@
                                       ]
                                     },
                                     "isStockNumberSyncActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the stock number synchronization to the sales channel is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69219,8 +69219,8 @@
                                       ]
                                     },
                                     "isRemainingQuantity": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if only the remaining quantity of the product is left.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -69267,8 +69267,8 @@
                                       "example": "5"
                                     },
                                     "createNewProductDuringImport": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -70823,7 +70823,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -70839,8 +70840,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "isShippingCostsProduct": {
                     "type": "boolean",
@@ -71859,7 +71859,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -71875,8 +71876,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "isShippingCostsProduct": {
                     "type": "boolean",
@@ -76549,7 +76549,11 @@
                       }
                     },
                     "defaultStorageLocation": {
-                      "description": "Reference to another resource",
+                      "nullable": true,
+                      "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
+                      "example": {
+                        "id": "7"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "required": [
@@ -76562,11 +76566,7 @@
                           "example": "17",
                           "description": "Resource identifier."
                         }
-                      },
-                      "example": {
-                        "id": "1337"
-                      },
-                      "nullable": true
+                      }
                     },
                     "isShippingCostsProduct": {
                       "type": "boolean",
@@ -80207,8 +80207,8 @@
                               }
                             },
                             "isStockNumberSyncActive": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if the stock number synchronization to the sales channel is active.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -80234,7 +80234,7 @@
                               ]
                             },
                             "isSoldOut": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                              "description": "Shows if the product is sold out.",
                               "example": "'true'",
                               "oneOf": [
                                 {
@@ -80261,8 +80261,8 @@
                               ]
                             },
                             "isRemainingQuantity": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if only the remaining quantity of the product is left.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -80294,8 +80294,8 @@
                               "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
                             },
                             "isVisible": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if a product is visible in all sales channels.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -80368,7 +80368,7 @@
                                     }
                                   },
                                   "isActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the sales channel connection is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -80395,7 +80395,7 @@
                                     ]
                                   },
                                   "useIndividualSalesChannelSettings": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -80422,7 +80422,7 @@
                                     ]
                                   },
                                   "isStockNumberSyncActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the stock number synchronization to the sales channel is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -80449,8 +80449,8 @@
                                     ]
                                   },
                                   "isRemainingQuantity": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if only the remaining quantity of the product is left.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -80497,8 +80497,8 @@
                                     "example": "5"
                                   },
                                   "createNewProductDuringImport": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -82281,7 +82281,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -82297,8 +82298,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "freeFields": {
                     "type": "array",
@@ -84144,10 +84144,10 @@
                             "description": "Represents a purchase order containing details about the order, including its identifier, number, delivery date, and supplier information.",
                             "properties": {
                               "id": {
+                                "description": "Unique identifier for the purchase order.",
+                                "example": "PO123456",
                                 "type": "string",
-                                "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "pattern": "\\d+"
                               },
                               "number": {
                                 "type": "string",
@@ -84161,7 +84161,11 @@
                                 "example": "2024-10-15"
                               },
                               "supplier": {
-                                "description": "An object with id and name",
+                                "description": "Details about the supplier providing the goods.",
+                                "example": {
+                                  "id": "SUP123",
+                                  "name": "Test Supplies Inc."
+                                },
                                 "type": "object",
                                 "additionalProperties": false,
                                 "required": [
@@ -84178,10 +84182,6 @@
                                   "name": {
                                     "type": "string"
                                   }
-                                },
-                                "example": {
-                                  "id": "1337",
-                                  "name": "Diamond"
                                 }
                               }
                             },
@@ -84450,10 +84450,10 @@
                             "description": "Represents a sales order containing details such as order ID, status, date, and customer information.",
                             "properties": {
                               "id": {
+                                "description": "Unique identifier for the sales order.",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "number": {
                                 "type": "string",
@@ -84498,10 +84498,10 @@
                                 "description": "Information about the customer associated with the sales order.",
                                 "properties": {
                                   "id": {
+                                    "description": "Unique identifier for the customer.",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
-                                    "description": "Resource identifier."
+                                    "example": "17"
                                   },
                                   "name": {
                                     "type": "string",
@@ -88034,9 +88034,9 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "example": "123456",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
                                 "description": "Resource identifier."
                               },
                               "name": {
@@ -94351,8 +94351,8 @@
                               }
                             },
                             "isStockNumberSyncActive": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if the stock number synchronization to the sales channel is active.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -94378,7 +94378,7 @@
                               ]
                             },
                             "isSoldOut": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                              "description": "Shows if the product is sold out.",
                               "example": "'true'",
                               "oneOf": [
                                 {
@@ -94405,8 +94405,8 @@
                               ]
                             },
                             "isRemainingQuantity": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if only the remaining quantity of the product is left.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -94438,8 +94438,8 @@
                               "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
                             },
                             "isVisible": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if a product is visible in all sales channels.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -94512,7 +94512,7 @@
                                     }
                                   },
                                   "isActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the sales channel connection is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -94539,7 +94539,7 @@
                                     ]
                                   },
                                   "useIndividualSalesChannelSettings": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -94566,7 +94566,7 @@
                                     ]
                                   },
                                   "isStockNumberSyncActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the stock number synchronization to the sales channel is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -94593,8 +94593,8 @@
                                     ]
                                   },
                                   "isRemainingQuantity": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if only the remaining quantity of the product is left.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -94641,8 +94641,8 @@
                                     "example": "5"
                                   },
                                   "createNewProductDuringImport": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -103733,8 +103733,8 @@
                                 }
                               },
                               "isStockNumberSyncActive": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the stock number synchronization to the sales channel is active.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -103760,8 +103760,8 @@
                                 ]
                               },
                               "isSoldOut": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the product is sold out.",
+                                "example": false,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -103787,8 +103787,8 @@
                                 ]
                               },
                               "isRemainingQuantity": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if only the remaining quantity of the product is left.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -103821,8 +103821,8 @@
                                 "example": "99.99"
                               },
                               "isVisible": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "example": true,
+                                "description": "Shows if a product is visible in all sales channels.",
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -103895,7 +103895,7 @@
                                       }
                                     },
                                     "isActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the sales channel connection is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -103922,7 +103922,7 @@
                                       ]
                                     },
                                     "useIndividualSalesChannelSettings": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -103949,7 +103949,7 @@
                                       ]
                                     },
                                     "isStockNumberSyncActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the stock number synchronization to the sales channel is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -103976,8 +103976,8 @@
                                       ]
                                     },
                                     "isRemainingQuantity": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if only the remaining quantity of the product is left.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -104024,8 +104024,8 @@
                                       "example": "5"
                                     },
                                     "createNewProductDuringImport": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -121040,7 +121040,7 @@
                             "description": "Delivery information of the purchase order.",
                             "properties": {
                               "deliveryTerms": {
-                                "description": "Nullable reference to another resource",
+                                "description": "ID of the delivery terms used for the purchase order.",
                                 "type": "object",
                                 "additionalProperties": false,
                                 "nullable": true,
@@ -121383,7 +121383,7 @@
                     }
                   },
                   "requestForQuotation": {
-                    "description": "Reference to another resource",
+                    "description": "ID of the request for quotation.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -121461,7 +121461,7 @@
                     "description": "Financial information about the purchase order.",
                     "properties": {
                       "paymentMethod": {
-                        "description": "Reference to another resource",
+                        "description": "ID of the payment method used for the purchase order.",
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
@@ -121750,7 +121750,7 @@
                           }
                         },
                         "salesOrderPosition": {
-                          "description": "Nullable reference to another resource",
+                          "description": "Link the purchase order position to an existing sales order position id (or null if not linked)",
                           "type": "object",
                           "additionalProperties": false,
                           "nullable": true,
@@ -122672,7 +122672,7 @@
                           "description": "Delivery information of the purchase order.",
                           "properties": {
                             "deliveryTerms": {
-                              "description": "Nullable reference to another resource",
+                              "description": "ID of the delivery terms used for the purchase order.",
                               "type": "object",
                               "additionalProperties": false,
                               "nullable": true,
@@ -123259,7 +123259,7 @@
                     }
                   },
                   "requestForQuotation": {
-                    "description": "Reference to another resource",
+                    "description": "ID of the request for quotation.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -123339,7 +123339,7 @@
                     "description": "Financial information about the purchase order.",
                     "properties": {
                       "paymentMethod": {
-                        "description": "Reference to another resource",
+                        "description": "ID of the payment method used for the purchase order.",
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
@@ -124234,9 +124234,9 @@
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "example": "product-1",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
                               "description": "Resource identifier."
                             }
                           }
@@ -124251,9 +124251,9 @@
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "example": "purchase-order-position-1",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
                               "description": "Resource identifier."
                             }
                           }
@@ -124274,9 +124274,9 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "id": {
+                                    "example": "warehouse-1",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
                                     "description": "Resource identifier."
                                   }
                                 }
@@ -124286,9 +124286,9 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "id": {
+                                    "example": "storage-location-1",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
                                     "description": "Resource identifier."
                                   }
                                 }
@@ -133073,9 +133073,9 @@
                   "additionalProperties": false,
                   "properties": {
                     "id": {
+                      "example": "17",
                       "type": "string",
                       "pattern": "\\d+",
-                      "example": "17",
                       "description": "Resource identifier."
                     },
                     "title": {
@@ -135474,7 +135474,7 @@
                             "example": "Additional info"
                           },
                           "date": {
-                            "description": "a yyyy-mm-dd formatted date",
+                            "description": "Date of creation of a Sales Order",
                             "type": "string",
                             "format": "date",
                             "example": "2023-08-13"
@@ -135619,7 +135619,7 @@
                             "type": "object",
                             "properties": {
                               "createdAt": {
-                                "description": "a atom formatted date time",
+                                "description": "Creation date of the Sales Order",
                                 "type": "string",
                                 "format": "date-time",
                                 "example": "2023-08-13T14:45:36+02:00"
@@ -136146,13 +136146,13 @@
                             }
                           },
                           "createdAt": {
-                            "description": "a atom formatted date time",
+                            "description": "Creation date of the Sales Order",
                             "type": "string",
                             "format": "date-time",
                             "example": "2023-08-13T14:45:36+02:00"
                           },
                           "updatedAt": {
-                            "description": "a atom formatted date time",
+                            "description": "Last update date of the Sales Order",
                             "type": "string",
                             "format": "date-time",
                             "example": "2023-08-13T14:45:36+02:00"
@@ -136336,7 +136336,7 @@
                             "example": "SO-1234"
                           },
                           "date": {
-                            "description": "a yyyy-mm-dd formatted date",
+                            "description": "Date of creation of a Sales Order",
                             "type": "string",
                             "format": "date",
                             "example": "2023-08-13"
@@ -138895,7 +138895,7 @@
                           "example": "InternalSO1"
                         },
                         "date": {
-                          "description": "a yyyy-mm-dd formatted date",
+                          "description": "Date of creation of a Sales Order",
                           "type": "string",
                           "format": "date",
                           "example": "2023-08-13"
@@ -139038,7 +139038,7 @@
                           "type": "object",
                           "properties": {
                             "createdAt": {
-                              "description": "a atom formatted date time",
+                              "description": "Creation date of the Sales Order",
                               "type": "string",
                               "format": "date-time",
                               "example": "2023-08-13T14:45:36+02:00"
@@ -140247,13 +140247,13 @@
                           "description": "Items included within the Sales Order"
                         },
                         "createdAt": {
-                          "description": "a atom formatted date time",
+                          "description": "Creation date of the Sales Order",
                           "type": "string",
                           "format": "date-time",
                           "example": "2023-08-13T14:45:36+02:00"
                         },
                         "updatedAt": {
-                          "description": "a atom formatted date time",
+                          "description": "Last update date of the Sales Order",
                           "type": "string",
                           "format": "date-time",
                           "example": "2023-08-13T14:45:36+02:00"
@@ -140376,7 +140376,7 @@
                           "example": "SO-1234"
                         },
                         "date": {
-                          "description": "a yyyy-mm-dd formatted date",
+                          "description": "Date of creation of a Sales Order",
                           "type": "string",
                           "format": "date",
                           "example": "2023-08-13"
@@ -161381,10 +161381,10 @@
                               "additionalProperties": false,
                               "properties": {
                                 "id": {
+                                  "description": "The identifier of the free field",
                                   "type": "string",
                                   "pattern": "\\d+",
-                                  "example": "17",
-                                  "description": "Resource identifier."
+                                  "example": "17"
                                 },
                                 "value": {
                                   "description": "The value of the free field",
@@ -169408,10 +169408,10 @@
                         "additionalProperties": false,
                         "properties": {
                           "id": {
+                            "description": "The unique identifier for the file.",
                             "type": "string",
                             "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
+                            "example": "17"
                           },
                           "entity": {
                             "description": "The type of business document the file is related to, such as an invoice, delivery note, or order.",
@@ -169476,10 +169476,10 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "description": "The unique identifier for the file version",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "version": {
                                 "type": "integer",
@@ -169929,10 +169929,10 @@
                       "additionalProperties": false,
                       "properties": {
                         "id": {
+                          "description": "The unique identifier for the file.",
                           "type": "string",
                           "pattern": "\\d+",
-                          "example": "17",
-                          "description": "Resource identifier."
+                          "example": "17"
                         },
                         "entity": {
                           "description": "The type of business document the file is related to, such as an invoice, delivery note, or order.",
@@ -170000,10 +170000,10 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "description": "The unique identifier for the file version",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "version": {
                                 "type": "integer",
@@ -170065,15 +170065,15 @@
                           }
                         },
                         "currentVersion": {
-                          "description": "Represents a specific version of a file, including metadata such as version number, filename, remarks, file size, and update timestamp.",
+                          "description": "The current version of the file.",
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "description": "The unique identifier for the file version",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
-                              "description": "Resource identifier."
+                              "example": "17"
                             },
                             "version": {
                               "type": "integer",
