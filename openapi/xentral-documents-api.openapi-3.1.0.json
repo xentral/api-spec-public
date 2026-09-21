@@ -1168,7 +1168,7 @@
             "example": "en"
           },
           "tags": {
-            "description": "List of tags associated with the document. New tags will be automatically created if they do not exist.",
+            "description": "Tags assigned to the document. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -1794,7 +1794,7 @@
             "example": "Key account – high‑value contracts expected in FY 2026."
           },
           "tags": {
-            "description": "Tags to assign to the customer",
+            "description": "Tags assigned to the customer. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -3309,6 +3309,13 @@
               "$ref": "#/components/schemas/CustomFieldsData"
             },
             "maxItems": 100
+          },
+          "tags": {
+            "description": "Tags assigned to the product. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagReferenceData"
+            }
           }
         },
         "type": "object"
@@ -3447,7 +3454,7 @@
                 "example": false
               },
               "tags": {
-                "description": "Tags for categorizing the production. New tags will be automatically created if they do not exist.",
+                "description": "Tags assigned to the production. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/TagReferenceData"
@@ -4318,7 +4325,7 @@
             "description": "Account manager reference"
           },
           "tags": {
-            "description": "Tags to assign to the supplier",
+            "description": "Tags assigned to the supplier. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -7751,6 +7758,386 @@
           }
         },
         "type": "object"
+      },
+      "EmailAccount": {
+        "description": "An email account Xentral sends from and, optionally, imports tickets into.",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "type",
+          "isSystemDefault",
+          "canSendEmails",
+          "owner",
+          "projects",
+          "tags",
+          "smtp",
+          "imap",
+          "ticket",
+          "webmail",
+          "autoResponse",
+          "signature"
+        ],
+        "properties": {
+          "id": {
+            "description": "Identifier of the email account.",
+            "type": "string",
+            "example": "3"
+          },
+          "email": {
+            "description": "Address recipients see when this account sends. Empty when the account has none.",
+            "type": "string",
+            "example": "service@example.com"
+          },
+          "name": {
+            "description": "Display name of the account inside Xentral. For Microsoft and Google accounts it is generated from the part before the @ when the account is connected.",
+            "type": "string",
+            "example": "Service"
+          },
+          "type": {
+            "description": "How the account authenticates. `basic` is a manually configured SMTP/IMAP account, the others are connected through their provider. Null when the account carries a type this version does not know.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "basic",
+              "google_smtp",
+              "microsoft",
+              "google"
+            ],
+            "example": "basic"
+          },
+          "isSystemDefault": {
+            "description": "Whether this is the address Xentral sends automatic mail from when nothing else is configured.",
+            "type": "boolean",
+            "example": false
+          },
+          "canSendEmails": {
+            "description": "Whether sending through this account can currently be set up. False when no outgoing server is configured, and for provider-connected accounts also when the authorisation is missing or has been revoked - reconnect the account to restore it. A true value means the configuration is complete, not that the provider will accept every message.",
+            "type": "boolean",
+            "example": true
+          },
+          "owner": {
+            "description": "The address this account is restricted to. Null means every user with access to the ticket module and the email archive can read its mail and send through it.",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "42"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "example": {
+              "id": "42"
+            }
+          },
+          "projects": {
+            "description": "Projects that send their outgoing mail through this account. Empty when no project overrides the default account.",
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "7"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "tags": {
+            "description": "Tags assigned to the account.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "support"
+            ]
+          },
+          "smtp": {
+            "description": "Outgoing mail server settings.",
+            "required": [
+              "server",
+              "port",
+              "encryption"
+            ],
+            "properties": {
+              "server": {
+                "description": "Outgoing mail server. Null when none is configured, in which case the account cannot send.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "smtp.example.com"
+              },
+              "port": {
+                "description": "Port of the outgoing mail server.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "example": 587
+              },
+              "encryption": {
+                "description": "Transport encryption used for outgoing mail. Null when the connection is unencrypted.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "tls",
+                  "ssl"
+                ],
+                "example": "tls"
+              }
+            },
+            "type": "object",
+            "example": {
+              "server": "smtp.example.com",
+              "port": 587,
+              "encryption": "tls"
+            }
+          },
+          "imap": {
+            "description": "Incoming mail server settings.",
+            "required": [
+              "username",
+              "server",
+              "port",
+              "encryption"
+            ],
+            "properties": {
+              "username": {
+                "description": "User name the incoming mail server is accessed with.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "service@example.com"
+              },
+              "server": {
+                "description": "Incoming mail server.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "imap.example.com"
+              },
+              "port": {
+                "description": "Port of the incoming mail server.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "example": 993
+              },
+              "encryption": {
+                "description": "Transport encryption used for incoming mail. Null only for a plain IMAP account; every other kind connects over SSL.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "ssl"
+                ],
+                "example": "ssl"
+              }
+            },
+            "type": "object",
+            "example": {
+              "username": "service@example.com",
+              "server": "imap.example.com",
+              "port": 993,
+              "encryption": "ssl"
+            }
+          },
+          "ticket": {
+            "description": "How incoming mail of this account is turned into tickets.",
+            "required": [
+              "isActive",
+              "project",
+              "queue",
+              "importStartDate",
+              "deleteEmailAfterImport",
+              "closeAutomatically",
+              "limitAutomaticResponse"
+            ],
+            "properties": {
+              "isActive": {
+                "description": "Whether incoming mail is imported into the ticket module.",
+                "type": "boolean",
+                "example": false
+              },
+              "project": {
+                "description": "Project imported tickets are assigned to. Null when none is set.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "1"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "queue": {
+                "description": "Ticket queue imported tickets are assigned to. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "support"
+              },
+              "importStartDate": {
+                "description": "Date from which mail is fetched and turned into tickets. Older mail is left untouched. Null when no start date is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2026-01-31"
+              },
+              "deleteEmailAfterImport": {
+                "description": "Whether mail is deleted at the provider once it has been imported. Deleted mail cannot be recovered.",
+                "type": "boolean",
+                "example": false
+              },
+              "closeAutomatically": {
+                "description": "Whether imported tickets are marked as closed straight away.",
+                "type": "boolean",
+                "example": false
+              },
+              "limitAutomaticResponse": {
+                "description": "Whether the automatic response is sent only once per ticket rather than for every incoming message of that ticket.",
+                "type": "boolean",
+                "example": false
+              }
+            },
+            "type": "object",
+            "example": {
+              "isActive": true,
+              "project": {
+                "id": "1"
+              },
+              "queue": "support",
+              "importStartDate": "2026-01-31",
+              "deleteEmailAfterImport": false,
+              "closeAutomatically": false,
+              "limitAutomaticResponse": false
+            }
+          },
+          "webmail": {
+            "description": "Archiving of this account in the email archive.",
+            "required": [
+              "isActive",
+              "deleteAfterDays"
+            ],
+            "properties": {
+              "isActive": {
+                "description": "Whether mail of this account is stored in the email archive.",
+                "type": "boolean",
+                "example": false
+              },
+              "deleteAfterDays": {
+                "description": "Number of days archived mail is kept before it is deleted permanently. 0 keeps it indefinitely; null when no retention has been configured.",
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "example": 30
+              }
+            },
+            "type": "object",
+            "example": {
+              "isActive": true,
+              "deleteAfterDays": 30
+            }
+          },
+          "autoResponse": {
+            "description": "Automatic reply sent when mail arrives on this account.",
+            "required": [
+              "isActive",
+              "isLimited",
+              "subject",
+              "message"
+            ],
+            "properties": {
+              "isActive": {
+                "description": "Whether an automatic reply is sent at all.",
+                "type": "boolean",
+                "example": false
+              },
+              "isLimited": {
+                "description": "Whether the automatic reply is sent at most once a day per sender instead of for every incoming message.",
+                "type": "boolean",
+                "example": true
+              },
+              "subject": {
+                "description": "Subject of the automatic reply. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "We have received your message"
+              },
+              "message": {
+                "description": "Body of the automatic reply, which may contain HTML. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": "object",
+            "example": {
+              "isActive": false,
+              "isLimited": true,
+              "subject": "We have received your message",
+              "message": "<p>Thank you for getting in touch.</p>"
+            }
+          },
+          "signature": {
+            "description": "Signature appended to mail sent from this account.",
+            "required": [
+              "isActive",
+              "message"
+            ],
+            "properties": {
+              "isActive": {
+                "description": "Whether the signature is appended.",
+                "type": "boolean",
+                "example": false
+              },
+              "message": {
+                "description": "Signature text, which may contain HTML. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "type": "object",
+            "example": {
+              "isActive": true,
+              "message": "<p>Kind regards</p>"
+            }
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
       },
       "FileReferenceData": {
         "required": [
@@ -19279,17 +19666,33 @@
         "additionalProperties": false
       },
       "TagReferenceData": {
-        "required": [
-          "title"
-        ],
+        "description": "References an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
         "properties": {
+          "id": {
+            "description": "ID of an existing tag to assign. Unlike `title`, an unknown id never creates a tag.",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "1337"
+          },
           "title": {
-            "description": "Title of the Tag",
+            "description": "Title of the Tag. A tag with this title is created if none exists.",
             "type": "string",
             "example": "important"
           }
         },
-        "type": "object"
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
+        ]
       },
       "TaxData": {
         "properties": {
@@ -19481,7 +19884,7 @@
             "type": "object"
           },
           "tags": {
-            "description": "List of tags associated with the document. The passed list replaces the currently associated tags.",
+            "description": "Tags assigned to the document. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -20192,7 +20595,7 @@
             "example": "Key account – high‑value contracts expected in FY 2026."
           },
           "tags": {
-            "description": "Tags to assign to the customer",
+            "description": "Tags assigned to the customer. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -21764,6 +22167,13 @@
               "$ref": "#/components/schemas/CustomFieldsData"
             },
             "maxItems": 100
+          },
+          "tags": {
+            "description": "Tags assigned to the product. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagReferenceData"
+            }
           }
         },
         "type": "object"
@@ -22894,7 +23304,7 @@
             "example": "Always confirm delivery dates before ordering."
           },
           "tags": {
-            "description": "Tags to assign to the supplier",
+            "description": "Tags assigned to the supplier. The passed list replaces the currently assigned tags; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
@@ -23346,6 +23756,10 @@
       "description": "SupplierInvoice"
     },
     {
+      "name": "EmailAccount",
+      "description": "EmailAccount"
+    },
+    {
       "name": "CustomField",
       "description": "CustomField"
     },
@@ -23428,10 +23842,6 @@
     {
       "name": "StockMovement",
       "description": "StockMovement"
-    },
-    {
-      "name": "EmailAccount",
-      "description": "EmailAccount"
     },
     {
       "name": "MobileApi",
@@ -30483,6 +30893,496 @@
         "x-beta": true,
         "x-scopes": [
           "deliveryNote:update"
+        ]
+      }
+    },
+    "/api/v3/emailAccounts": {
+      "get": {
+        "tags": [
+          "EmailAccount"
+        ],
+        "summary": "🔒 List email accounts V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `mailAcct:read`.\n\nPaginated list of the email accounts the authenticated user may see. Accounts restricted to another user are left out; an administrator sees all of them.",
+        "operationId": "GET::api-v3-emailaccounts",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`email`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`type`: *equals*, *notEquals*, *in*, *notIn* \n\n`isSystemDefault`: *equals*, *notEquals* \n\n`canSendEmails`: *equals*, *notEquals*",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "email",
+                      "name",
+                      "type",
+                      "isSystemDefault",
+                      "canSendEmails"
+                    ]
+                  },
+                  "op": {
+                    "description": "operator",
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "isNull",
+                      "isNotNull",
+                      "contains",
+                      "notContains",
+                      "startsWith",
+                      "endsWith"
+                    ]
+                  },
+                  "value": {
+                    "description": "The property value.",
+                    "oneOf": [
+                      {
+                        "title": "String",
+                        "type": "string"
+                      },
+                      {
+                        "title": "Array",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              }
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort via id, -id, name, -name, email and -email. Default sort is id",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "id",
+                  "-id",
+                  "name",
+                  "-name",
+                  "email",
+                  "-email"
+                ]
+              }
+            }
+          },
+          {
+            "name": "x-pagination",
+            "in": "header",
+            "description": "Controls the pagination format. Available types: simple, table, cursor. Defaults to 'simple' if not specified.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "table",
+                "cursor"
+              ],
+              "example": "simple"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of items per page. Default: 15, Max: 100. A larger value is reduced to the maximum; omitting it or sending 0 selects the default.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 15
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number. Only used with simple and table pagination. Omitting it or sending 0 selects the first page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 1
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "The cursor to use for the paginated call. Only used with cursor pagination. Not compatible with page parameter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "eyJpZCI6MTUsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of the email accounts the authenticated user may see. Accounts restricted to another user are left out; an administrator sees all of them.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "title": "Paginated Response: simple",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/EmailAccount"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "description": "Pagination meta data",
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "description": "Pagination links",
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=17",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "title": "Paginated Response: table",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/EmailAccount"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=10",
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=2",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "lastPage": {
+                              "description": "The last page number",
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            },
+                            "total": {
+                              "description": "The total number of items",
+                              "type": "integer",
+                              "example": 150
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "title": "Paginated Response: cursor",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/EmailAccount"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "description": "Pagination links",
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?cursor=eyJpZCI6MSwiX3BvaW50c1RvTmV4dEl0ZW1zIjp0cnVlfQ",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?cursor=eyJpZCI6MTYsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "description": "Pagination meta data",
+                          "properties": {
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "nextCursor": {
+                              "description": "Cursor for the next page",
+                              "type": "string",
+                              "example": "eyJpZCI6MTYsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0",
+                              "nullable": true
+                            },
+                            "prevCursor": {
+                              "description": "Cursor for the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "mailAcct:read"
+        ]
+      }
+    },
+    "/api/v3/emailAccounts/{id}": {
+      "get": {
+        "tags": [
+          "EmailAccount"
+        ],
+        "summary": "🔒 View email account V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `mailAcct:read`.\n\nView a single email account. An account restricted to another user is reported as not found.",
+        "operationId": "GET::api-v3-emailaccounts-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "View a single email account. An account restricted to another user is reported as not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/EmailAccount"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "mailAcct:read"
         ]
       }
     },
