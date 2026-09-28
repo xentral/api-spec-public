@@ -15884,776 +15884,6 @@
         }
       }
     },
-    "/api/v1/paymentServiceProviders/{id}/transactions": {
-      "get": {
-        "tags": [
-          "Payment Service Provider"
-        ],
-        "operationId": "paymentServiceProvider.transaction.list.v1",
-        "summary": "List payment service provider transactions",
-        "description": "Returns a collection of transactions for a specific payment service provider.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "pattern": "\\d+",
-              "example": "17",
-              "description": "Resource identifier."
-            },
-            "description": "This is the account identifier",
-            "example": "123"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation completed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": [
-                    "data",
-                    "extra"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
-                          },
-                          "businessAccountId": {
-                            "type": "string",
-                            "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
-                          },
-                          "externalId": {
-                            "type": "string",
-                            "description": "Unique identifier of the transaction in the payment service provider's system",
-                            "example": "txn_123"
-                          },
-                          "externalParentId": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Identifier of the parent transaction if this is a child transaction",
-                            "example": "parent_123"
-                          },
-                          "externalReferenceNumber": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Reference number associated with the transaction",
-                            "example": "ref_123"
-                          },
-                          "externalMerchantId": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Identifier of the merchant in the payment service provider's system",
-                            "example": "merchant_123"
-                          },
-                          "externalCreatedAt": {
-                            "description": "a atom formatted date time",
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2023-08-13T14:45:36+02:00"
-                          },
-                          "externalUpdatedAt": {
-                            "description": "a atom formatted date time",
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2023-08-13T14:45:36+02:00"
-                          },
-                          "vendorKey": {
-                            "type": "string",
-                            "description": "Key identifying the payment service provider vendor",
-                            "enum": [
-                              "paypal"
-                            ],
-                            "example": "paypal"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of the transaction",
-                            "example": "payment"
-                          },
-                          "status": {
-                            "type": "string",
-                            "description": "Current status of the transaction",
-                            "example": "completed"
-                          },
-                          "amount": {
-                            "description": "Money object with amount and currency",
-                            "example": {
-                              "amount": "13.37",
-                              "currency": "EUR"
-                            },
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                              "amount": {
-                                "description": "A string representing the amount",
-                                "type": "string",
-                                "format": "float",
-                                "example": "24.99"
-                              },
-                              "currency": {
-                                "type": "string",
-                                "pattern": "[A-Z]{3}",
-                                "enum": [
-                                  "EUR",
-                                  "USD",
-                                  "JPY",
-                                  "BGN",
-                                  "CZK",
-                                  "DKK",
-                                  "GBP",
-                                  "HUF",
-                                  "PLN",
-                                  "RON",
-                                  "SEK",
-                                  "CHF",
-                                  "ISK",
-                                  "NOK",
-                                  "HRK",
-                                  "RUB",
-                                  "TRY",
-                                  "AUD",
-                                  "BRL",
-                                  "CAD",
-                                  "CNY",
-                                  "HKD",
-                                  "IDR",
-                                  "ILS",
-                                  "INR",
-                                  "KRW",
-                                  "MXN",
-                                  "MYR",
-                                  "NZD",
-                                  "PHP",
-                                  "SGD",
-                                  "THB",
-                                  "ZAR",
-                                  "ARS",
-                                  "CLP",
-                                  "SAR",
-                                  "AED",
-                                  "QAR"
-                                ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217.",
-                                "example": "PLN"
-                              }
-                            }
-                          },
-                          "currency": {
-                            "type": "string",
-                            "description": "Currency code of the transaction",
-                            "example": "USD"
-                          },
-                          "descriptiveText": {
-                            "type": "string",
-                            "description": "Human-readable description of the transaction",
-                            "example": "Test transaction"
-                          },
-                          "feeType": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Type of fee associated with the transaction",
-                            "example": "processing_fee"
-                          },
-                          "feeAmount": {
-                            "description": "Money object with amount and currency",
-                            "example": {
-                              "amount": "13.37",
-                              "currency": "EUR"
-                            },
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                              "amount": {
-                                "description": "A string representing the amount",
-                                "type": "string",
-                                "format": "float",
-                                "example": "24.99"
-                              },
-                              "currency": {
-                                "type": "string",
-                                "pattern": "[A-Z]{3}",
-                                "enum": [
-                                  "EUR",
-                                  "USD",
-                                  "JPY",
-                                  "BGN",
-                                  "CZK",
-                                  "DKK",
-                                  "GBP",
-                                  "HUF",
-                                  "PLN",
-                                  "RON",
-                                  "SEK",
-                                  "CHF",
-                                  "ISK",
-                                  "NOK",
-                                  "HRK",
-                                  "RUB",
-                                  "TRY",
-                                  "AUD",
-                                  "BRL",
-                                  "CAD",
-                                  "CNY",
-                                  "HKD",
-                                  "IDR",
-                                  "ILS",
-                                  "INR",
-                                  "KRW",
-                                  "MXN",
-                                  "MYR",
-                                  "NZD",
-                                  "PHP",
-                                  "SGD",
-                                  "THB",
-                                  "ZAR",
-                                  "ARS",
-                                  "CLP",
-                                  "SAR",
-                                  "AED",
-                                  "QAR"
-                                ],
-                                "description": "Currency matches one of currency values as specified in ISO-4217.",
-                                "example": "PLN"
-                              }
-                            }
-                          },
-                          "paymentMethodType": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Type of payment method used for the transaction",
-                            "example": "credit_card"
-                          },
-                          "payoutId": {
-                            "type": "string",
-                            "nullable": true,
-                            "description": "Identifier of the associated payout",
-                            "example": "payout_123"
-                          },
-                          "payerInfo": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "Information about the payer of the transaction",
-                            "example": {
-                              "accountId": "payer_123",
-                              "email": "payer@example.com",
-                              "firstName": "John",
-                              "lastName": "Doe",
-                              "countryCode": "DE"
-                            },
-                            "properties": {
-                              "accountId": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Identifier of the payer's account",
-                                "example": "payer_123"
-                              },
-                              "email": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Email address of the payer",
-                                "example": "payer@example.com"
-                              },
-                              "firstName": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "First name of the payer",
-                                "example": "John"
-                              },
-                              "lastName": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Last name of the payer",
-                                "example": "Doe"
-                              },
-                              "countryCode": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Country code of the payer's location",
-                                "example": "DE"
-                              }
-                            }
-                          },
-                          "shippingInfo": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "Shipping information for the transaction",
-                            "example": {
-                              "recipientName": "Jane Doe",
-                              "addressLine1": "123 Main St",
-                              "addressLine2": "Apt 4B",
-                              "city": "Berlin",
-                              "zipCode": "10001",
-                              "countryCode": "DE"
-                            },
-                            "properties": {
-                              "recipientName": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Name of the shipping recipient",
-                                "example": "Jane Doe"
-                              },
-                              "addressLine1": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "First line of the shipping address",
-                                "example": "123 Main St"
-                              },
-                              "addressLine2": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Second line of the shipping address",
-                                "example": "Apt 4B"
-                              },
-                              "city": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "City of the shipping address",
-                                "example": "Berlin"
-                              },
-                              "zipCode": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Postal code of the shipping address",
-                                "example": "10001"
-                              },
-                              "countryCode": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Country code of the shipping address",
-                                "example": "DE"
-                              }
-                            }
-                          },
-                          "bankView": {
-                            "type": "object",
-                            "nullable": true,
-                            "description": "Banking information associated with the transaction",
-                            "example": {
-                              "iban": "DE89370400440532013000",
-                              "accountNumber": "123456789",
-                              "bic": "BIC12345678",
-                              "bankName": "Test Bank"
-                            },
-                            "properties": {
-                              "iban": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "International Bank Account Number",
-                                "example": "DE89370400440532013000"
-                              },
-                              "accountNumber": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Bank account number",
-                                "example": "123456789"
-                              },
-                              "bic": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Bank Identification Code (BIC)",
-                                "example": "BIC12345678"
-                              },
-                              "bankName": {
-                                "type": "string",
-                                "nullable": true,
-                                "description": "Name of the bank",
-                                "example": "Test Bank"
-                              }
-                            }
-                          },
-                          "createdAt": {
-                            "description": "a atom formatted date time",
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2023-08-13T14:45:36+02:00"
-                          },
-                          "updatedAt": {
-                            "description": "a atom formatted date time",
-                            "type": "string",
-                            "format": "date-time",
-                            "example": "2023-08-13T14:45:36+02:00"
-                          }
-                        },
-                        "example": {
-                          "id": "1",
-                          "businessAccountId": "123",
-                          "externalId": "txn_123",
-                          "externalParentId": "parent_123",
-                          "externalReferenceNumber": "ref_123",
-                          "externalMerchantId": "merchant_123",
-                          "externalCreatedAt": "2023-10-05T14:30:00+01:00",
-                          "externalUpdatedAt": "2023-10-05T15:30:00+01:00",
-                          "vendorKey": "paypal",
-                          "type": "payment",
-                          "status": "completed",
-                          "amount": {
-                            "amount": "100.50",
-                            "currency": "USD"
-                          },
-                          "descriptiveText": "Test transaction",
-                          "feeType": "processing_fee",
-                          "feeAmount": {
-                            "amount": "10.25",
-                            "currency": "USD"
-                          },
-                          "paymentMethodType": "credit_card",
-                          "payoutId": "payout_123",
-                          "payerInfo": {
-                            "accountId": "payer_123",
-                            "email": "payer@example.com",
-                            "firstName": "John",
-                            "lastName": "Doe",
-                            "countryCode": "DE"
-                          },
-                          "shippingInfo": {
-                            "recipientName": "Jane Doe",
-                            "addressLine1": "123 Main St",
-                            "addressLine2": "Apt 4B",
-                            "city": "Berlin",
-                            "zipCode": "10001",
-                            "countryCode": "DE"
-                          },
-                          "bankView": {
-                            "iban": "DE89370400440532013000",
-                            "accountNumber": "123456789",
-                            "bic": "BIC12345678",
-                            "bankName": "Test Bank"
-                          },
-                          "createdAt": "2023-10-05T14:30:00+01:00",
-                          "updatedAt": "2023-10-05T15:30:00+01:00"
-                        }
-                      }
-                    },
-                    "extra": {
-                      "type": "object",
-                      "required": [
-                        "totalCount",
-                        "page"
-                      ],
-                      "additionalProperties": false,
-                      "x-description-ignore": true,
-                      "properties": {
-                        "totalCount": {
-                          "description": "the total count of all items",
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "page": {
-                          "description": "The pagination object containing the current page number and size",
-                          "type": "object",
-                          "required": [
-                            "number",
-                            "size"
-                          ],
-                          "additionalProperties": false,
-                          "properties": {
-                            "number": {
-                              "description": "The current page number",
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "size": {
-                              "description": "The size of the pages",
-                              "type": "integer",
-                              "example": 10
-                            }
-                          },
-                          "example": {
-                            "number": 1,
-                            "size": 10
-                          }
-                        }
-                      },
-                      "example": {
-                        "totalCount": 1,
-                        "page": {
-                          "number": 1,
-                          "size": 10
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "IETF RFC 9457 Problem API compliant response",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "violations"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/request-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1,
-                          "example": "Request payload validation failed."
-                        },
-                        "violations": {
-                          "oneOf": [
-                            {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "example": {
-                                  "username": [
-                                    "This value should not be blank."
-                                  ],
-                                  "email": [
-                                    "This value is not a valid email address."
-                                  ]
-                                }
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            },
-                            {
-                              "type": "object",
-                              "example": {
-                                "_": [
-                                  "This value should contain at most `9` elements."
-                                ]
-                              },
-                              "description": "This field will be a mirrored request payload with only invalid fields and values replaced by error messages."
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflict"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "items"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/conflictItems"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                              "id",
-                              "title",
-                              "messages"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "integer"
-                              },
-                              "title": {
-                                "type": "string",
-                                "minLength": 1
-                              },
-                              "messages": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "scopes"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://developer.xentral.com/reference/problems#token-scopes"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "scopes": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": [
-                        "type",
-                        "title",
-                        "messages"
-                      ],
-                      "properties": {
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "https://api.xentral.biz/problems/generic-validation"
-                          ]
-                        },
-                        "title": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "messages": {
-                          "type": "object",
-                          "additionalProperties": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unable to authenticate the client",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message explaining why the request failed.",
-                      "example": "Missing required scopes: customer:create."
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Missing required scopes: customer:create."
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Unable to authorize the client"
-          },
-          "406": {
-            "description": "Requested resource representation does not exist."
-          },
-          "415": {
-            "description": "Resource representation send in the request is not supported."
-          },
-          "429": {
-            "description": "Too many API calls made."
-          }
-        }
-      }
-    },
     "/api/v1/customers/{id}": {
       "delete": {
         "tags": [
@@ -69746,8 +68976,8 @@
                                 }
                               },
                               "isStockNumberSyncActive": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the stock number synchronization to the sales channel is active.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69773,8 +69003,8 @@
                                 ]
                               },
                               "isSoldOut": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the product is sold out.",
+                                "example": false,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69800,8 +69030,8 @@
                                 ]
                               },
                               "isRemainingQuantity": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if only the remaining quantity of the product is left.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69834,8 +69064,8 @@
                                 "example": "99.99"
                               },
                               "isVisible": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "example": true,
+                                "description": "Shows if a product is visible in all sales channels.",
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -69908,7 +69138,7 @@
                                       }
                                     },
                                     "isActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the sales channel connection is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69935,7 +69165,7 @@
                                       ]
                                     },
                                     "useIndividualSalesChannelSettings": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69962,7 +69192,7 @@
                                       ]
                                     },
                                     "isStockNumberSyncActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the stock number synchronization to the sales channel is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -69989,8 +69219,8 @@
                                       ]
                                     },
                                     "isRemainingQuantity": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if only the remaining quantity of the product is left.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -70037,8 +69267,8 @@
                                       "example": "5"
                                     },
                                     "createNewProductDuringImport": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -71593,7 +70823,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -71609,8 +70840,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "isShippingCostsProduct": {
                     "type": "boolean",
@@ -72629,7 +71859,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -72645,8 +71876,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "isShippingCostsProduct": {
                     "type": "boolean",
@@ -77319,7 +76549,11 @@
                       }
                     },
                     "defaultStorageLocation": {
-                      "description": "Reference to another resource",
+                      "nullable": true,
+                      "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
+                      "example": {
+                        "id": "7"
+                      },
                       "type": "object",
                       "additionalProperties": false,
                       "required": [
@@ -77332,11 +76566,7 @@
                           "example": "17",
                           "description": "Resource identifier."
                         }
-                      },
-                      "example": {
-                        "id": "1337"
-                      },
-                      "nullable": true
+                      }
                     },
                     "isShippingCostsProduct": {
                       "type": "boolean",
@@ -80977,8 +80207,8 @@
                               }
                             },
                             "isStockNumberSyncActive": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if the stock number synchronization to the sales channel is active.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -81004,7 +80234,7 @@
                               ]
                             },
                             "isSoldOut": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                              "description": "Shows if the product is sold out.",
                               "example": "'true'",
                               "oneOf": [
                                 {
@@ -81031,8 +80261,8 @@
                               ]
                             },
                             "isRemainingQuantity": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if only the remaining quantity of the product is left.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -81064,8 +80294,8 @@
                               "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
                             },
                             "isVisible": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if a product is visible in all sales channels.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -81138,7 +80368,7 @@
                                     }
                                   },
                                   "isActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the sales channel connection is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -81165,7 +80395,7 @@
                                     ]
                                   },
                                   "useIndividualSalesChannelSettings": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -81192,7 +80422,7 @@
                                     ]
                                   },
                                   "isStockNumberSyncActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the stock number synchronization to the sales channel is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -81219,8 +80449,8 @@
                                     ]
                                   },
                                   "isRemainingQuantity": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if only the remaining quantity of the product is left.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -81267,8 +80497,8 @@
                                     "example": "5"
                                   },
                                   "createNewProductDuringImport": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -83051,7 +82281,8 @@
                     }
                   },
                   "defaultStorageLocation": {
-                    "description": "Reference to another resource",
+                    "nullable": true,
+                    "description": "Default storage location (storage bin) for the product. Maps to artikel.lager_platz.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -83067,8 +82298,7 @@
                     },
                     "example": {
                       "id": "1337"
-                    },
-                    "nullable": true
+                    }
                   },
                   "freeFields": {
                     "type": "array",
@@ -84914,10 +84144,10 @@
                             "description": "Represents a purchase order containing details about the order, including its identifier, number, delivery date, and supplier information.",
                             "properties": {
                               "id": {
+                                "description": "Unique identifier for the purchase order.",
+                                "example": "PO123456",
                                 "type": "string",
-                                "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "pattern": "\\d+"
                               },
                               "number": {
                                 "type": "string",
@@ -84931,7 +84161,11 @@
                                 "example": "2024-10-15"
                               },
                               "supplier": {
-                                "description": "An object with id and name",
+                                "description": "Details about the supplier providing the goods.",
+                                "example": {
+                                  "id": "SUP123",
+                                  "name": "Test Supplies Inc."
+                                },
                                 "type": "object",
                                 "additionalProperties": false,
                                 "required": [
@@ -84948,10 +84182,6 @@
                                   "name": {
                                     "type": "string"
                                   }
-                                },
-                                "example": {
-                                  "id": "1337",
-                                  "name": "Diamond"
                                 }
                               }
                             },
@@ -85220,10 +84450,10 @@
                             "description": "Represents a sales order containing details such as order ID, status, date, and customer information.",
                             "properties": {
                               "id": {
+                                "description": "Unique identifier for the sales order.",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "number": {
                                 "type": "string",
@@ -85268,10 +84498,10 @@
                                 "description": "Information about the customer associated with the sales order.",
                                 "properties": {
                                   "id": {
+                                    "description": "Unique identifier for the customer.",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
-                                    "description": "Resource identifier."
+                                    "example": "17"
                                   },
                                   "name": {
                                     "type": "string",
@@ -88804,9 +88034,9 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "example": "123456",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
                                 "description": "Resource identifier."
                               },
                               "name": {
@@ -95121,8 +94351,8 @@
                               }
                             },
                             "isStockNumberSyncActive": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if the stock number synchronization to the sales channel is active.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -95148,7 +94378,7 @@
                               ]
                             },
                             "isSoldOut": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                              "description": "Shows if the product is sold out.",
                               "example": "'true'",
                               "oneOf": [
                                 {
@@ -95175,8 +94405,8 @@
                               ]
                             },
                             "isRemainingQuantity": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if only the remaining quantity of the product is left.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -95208,8 +94438,8 @@
                               "description": "Was earlier called shopPriceDisplay. Only used by some online shops. For more information have a look into our handbook."
                             },
                             "isVisible": {
-                              "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                              "example": "'true'",
+                              "description": "Shows if a product is visible in all sales channels.",
+                              "example": true,
                               "oneOf": [
                                 {
                                   "type": "boolean"
@@ -95282,7 +94512,7 @@
                                     }
                                   },
                                   "isActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the sales channel connection is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -95309,7 +94539,7 @@
                                     ]
                                   },
                                   "useIndividualSalesChannelSettings": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -95336,7 +94566,7 @@
                                     ]
                                   },
                                   "isStockNumberSyncActive": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                    "description": "Shows if the stock number synchronization to the sales channel is active.",
                                     "example": "'true'",
                                     "oneOf": [
                                       {
@@ -95363,8 +94593,8 @@
                                     ]
                                   },
                                   "isRemainingQuantity": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if only the remaining quantity of the product is left.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -95411,8 +94641,8 @@
                                     "example": "5"
                                   },
                                   "createNewProductDuringImport": {
-                                    "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                    "example": "'true'",
+                                    "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                    "example": true,
                                     "oneOf": [
                                       {
                                         "type": "boolean"
@@ -104503,8 +103733,8 @@
                                 }
                               },
                               "isStockNumberSyncActive": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the stock number synchronization to the sales channel is active.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -104530,8 +103760,8 @@
                                 ]
                               },
                               "isSoldOut": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if the product is sold out.",
+                                "example": false,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -104557,8 +103787,8 @@
                                 ]
                               },
                               "isRemainingQuantity": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "description": "Shows if only the remaining quantity of the product is left.",
+                                "example": true,
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -104591,8 +103821,8 @@
                                 "example": "99.99"
                               },
                               "isVisible": {
-                                "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                "example": "'true'",
+                                "example": true,
+                                "description": "Shows if a product is visible in all sales channels.",
                                 "oneOf": [
                                   {
                                     "type": "boolean"
@@ -104665,7 +103895,7 @@
                                       }
                                     },
                                     "isActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the sales channel connection is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -104692,7 +103922,7 @@
                                       ]
                                     },
                                     "useIndividualSalesChannelSettings": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the individual sales channel settings should be used instead of the general sales channel settings.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -104719,7 +103949,7 @@
                                       ]
                                     },
                                     "isStockNumberSyncActive": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
+                                      "description": "Shows if the stock number synchronization to the sales channel is active.",
                                       "example": "'true'",
                                       "oneOf": [
                                         {
@@ -104746,8 +103976,8 @@
                                       ]
                                     },
                                     "isRemainingQuantity": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if only the remaining quantity of the product is left.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -104794,8 +104024,8 @@
                                       "example": "5"
                                     },
                                     "createNewProductDuringImport": {
-                                      "description": "Loose boolean type which accepts boolean, number 0 or 1 and string 'true' or 'false'",
-                                      "example": "'true'",
+                                      "description": "Shows if a new product is generated during the sales order import from a sales channel.",
+                                      "example": true,
                                       "oneOf": [
                                         {
                                           "type": "boolean"
@@ -121810,7 +121040,7 @@
                             "description": "Delivery information of the purchase order.",
                             "properties": {
                               "deliveryTerms": {
-                                "description": "Nullable reference to another resource",
+                                "description": "ID of the delivery terms used for the purchase order.",
                                 "type": "object",
                                 "additionalProperties": false,
                                 "nullable": true,
@@ -122153,7 +121383,7 @@
                     }
                   },
                   "requestForQuotation": {
-                    "description": "Reference to another resource",
+                    "description": "ID of the request for quotation.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -122231,7 +121461,7 @@
                     "description": "Financial information about the purchase order.",
                     "properties": {
                       "paymentMethod": {
-                        "description": "Reference to another resource",
+                        "description": "ID of the payment method used for the purchase order.",
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
@@ -122520,7 +121750,7 @@
                           }
                         },
                         "salesOrderPosition": {
-                          "description": "Nullable reference to another resource",
+                          "description": "Link the purchase order position to an existing sales order position id (or null if not linked)",
                           "type": "object",
                           "additionalProperties": false,
                           "nullable": true,
@@ -123442,7 +122672,7 @@
                           "description": "Delivery information of the purchase order.",
                           "properties": {
                             "deliveryTerms": {
-                              "description": "Nullable reference to another resource",
+                              "description": "ID of the delivery terms used for the purchase order.",
                               "type": "object",
                               "additionalProperties": false,
                               "nullable": true,
@@ -124029,7 +123259,7 @@
                     }
                   },
                   "requestForQuotation": {
-                    "description": "Reference to another resource",
+                    "description": "ID of the request for quotation.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -124109,7 +123339,7 @@
                     "description": "Financial information about the purchase order.",
                     "properties": {
                       "paymentMethod": {
-                        "description": "Reference to another resource",
+                        "description": "ID of the payment method used for the purchase order.",
                         "type": "object",
                         "additionalProperties": false,
                         "required": [
@@ -124993,6 +124223,20 @@
                     "format": "date",
                     "example": "2024-09-24"
                   },
+                  "deliveryNoteNumber": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "description": "Number of the supplier's delivery note enclosed with the parcel.",
+                    "example": "LS-2024-001"
+                  },
+                  "invoiceNumber": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "description": "Number of the supplier's invoice enclosed with the parcel.",
+                    "example": "RE-2024-001"
+                  },
                   "positions": {
                     "type": "array",
                     "items": {
@@ -125004,9 +124248,9 @@
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "example": "product-1",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
                               "description": "Resource identifier."
                             }
                           }
@@ -125021,9 +124265,9 @@
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "example": "purchase-order-position-1",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
                               "description": "Resource identifier."
                             }
                           }
@@ -125044,9 +124288,9 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "id": {
+                                    "example": "warehouse-1",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
                                     "description": "Resource identifier."
                                   }
                                 }
@@ -125056,9 +124300,9 @@
                                 "additionalProperties": false,
                                 "properties": {
                                   "id": {
+                                    "example": "storage-location-1",
                                     "type": "string",
                                     "pattern": "\\d+",
-                                    "example": "17",
                                     "description": "Resource identifier."
                                   }
                                 }
@@ -125103,6 +124347,8 @@
                 "example": {
                   "value": {
                     "date": "2024-09-24",
+                    "deliveryNoteNumber": "LS-2024-001",
+                    "invoiceNumber": "RE-2024-001",
                     "positions": [
                       {
                         "product": {
@@ -133843,9 +133089,9 @@
                   "additionalProperties": false,
                   "properties": {
                     "id": {
+                      "example": "17",
                       "type": "string",
                       "pattern": "\\d+",
-                      "example": "17",
                       "description": "Resource identifier."
                     },
                     "title": {
@@ -136244,7 +135490,7 @@
                             "example": "Additional info"
                           },
                           "date": {
-                            "description": "a yyyy-mm-dd formatted date",
+                            "description": "Date of creation of a Sales Order",
                             "type": "string",
                             "format": "date",
                             "example": "2023-08-13"
@@ -136389,7 +135635,7 @@
                             "type": "object",
                             "properties": {
                               "createdAt": {
-                                "description": "a atom formatted date time",
+                                "description": "Creation date of the Sales Order",
                                 "type": "string",
                                 "format": "date-time",
                                 "example": "2023-08-13T14:45:36+02:00"
@@ -136916,13 +136162,13 @@
                             }
                           },
                           "createdAt": {
-                            "description": "a atom formatted date time",
+                            "description": "Creation date of the Sales Order",
                             "type": "string",
                             "format": "date-time",
                             "example": "2023-08-13T14:45:36+02:00"
                           },
                           "updatedAt": {
-                            "description": "a atom formatted date time",
+                            "description": "Last update date of the Sales Order",
                             "type": "string",
                             "format": "date-time",
                             "example": "2023-08-13T14:45:36+02:00"
@@ -137106,7 +136352,7 @@
                             "example": "SO-1234"
                           },
                           "date": {
-                            "description": "a yyyy-mm-dd formatted date",
+                            "description": "Date of creation of a Sales Order",
                             "type": "string",
                             "format": "date",
                             "example": "2023-08-13"
@@ -139665,7 +138911,7 @@
                           "example": "InternalSO1"
                         },
                         "date": {
-                          "description": "a yyyy-mm-dd formatted date",
+                          "description": "Date of creation of a Sales Order",
                           "type": "string",
                           "format": "date",
                           "example": "2023-08-13"
@@ -139808,7 +139054,7 @@
                           "type": "object",
                           "properties": {
                             "createdAt": {
-                              "description": "a atom formatted date time",
+                              "description": "Creation date of the Sales Order",
                               "type": "string",
                               "format": "date-time",
                               "example": "2023-08-13T14:45:36+02:00"
@@ -141017,13 +140263,13 @@
                           "description": "Items included within the Sales Order"
                         },
                         "createdAt": {
-                          "description": "a atom formatted date time",
+                          "description": "Creation date of the Sales Order",
                           "type": "string",
                           "format": "date-time",
                           "example": "2023-08-13T14:45:36+02:00"
                         },
                         "updatedAt": {
-                          "description": "a atom formatted date time",
+                          "description": "Last update date of the Sales Order",
                           "type": "string",
                           "format": "date-time",
                           "example": "2023-08-13T14:45:36+02:00"
@@ -141146,7 +140392,7 @@
                           "example": "SO-1234"
                         },
                         "date": {
-                          "description": "a yyyy-mm-dd formatted date",
+                          "description": "Date of creation of a Sales Order",
                           "type": "string",
                           "format": "date",
                           "example": "2023-08-13"
@@ -151477,6 +150723,10 @@
                     "type": "string",
                     "description": "Reason for adding to the stock"
                   },
+                  "editor": {
+                    "type": "string",
+                    "description": "Name recorded as the editor of the resulting stock movement. Defaults to the name of the authenticated user when omitted."
+                  },
                   "project": {
                     "required": [
                       "id"
@@ -151920,6 +151170,10 @@
                   "reason": {
                     "type": "string",
                     "description": "Reason for the retrieve"
+                  },
+                  "editor": {
+                    "type": "string",
+                    "description": "Name recorded as the editor of the resulting stock movement. Defaults to the name of the authenticated user when omitted."
                   },
                   "project": {
                     "required": [
@@ -153122,28 +152376,6 @@
                         "example": "https://xentral.someUrl.com",
                         "description": "The base URL at which the Carrier Service that you want to connect to can be reached."
                       },
-                      "extra": {
-                        "type": "object",
-                        "description": "Additional fields for the carrier or service.",
-                        "properties": {
-                          "field1": {
-                            "type": "string",
-                            "description": "An extra field for custom data.",
-                            "example": "value1"
-                          },
-                          "field2": {
-                            "type": "string",
-                            "description": "Another extra field for custom data.",
-                            "example": "value2"
-                          }
-                        },
-                        "example": {
-                          "extra": {
-                            "field1": "value1",
-                            "field2": "value2"
-                          }
-                        }
-                      },
                       "id": {
                         "type": "string",
                         "description": "The unique identifier of the carrier.",
@@ -153184,10 +152416,6 @@
                           }
                         },
                         "serviceUrl": "https://api.example.com",
-                        "extra": {
-                          "field1": "value1",
-                          "field2": "value2"
-                        },
                         "id": "post-ch",
                         "product": {
                           "id": "post-ch-express",
@@ -153355,10 +152583,6 @@
                         }
                       },
                       "serviceUrl": "https://api.example.com",
-                      "extra": {
-                        "field1": "value1",
-                        "field2": "value2"
-                      },
                       "id": "post-ch",
                       "product": {
                         "id": "post-ch-express"
@@ -153830,28 +153054,6 @@
                           "example": "https://xentral.someUrl.com",
                           "description": "The base URL at which the Carrier Service that you want to connect to can be reached."
                         },
-                        "extra": {
-                          "type": "object",
-                          "description": "Additional fields for the carrier or service.",
-                          "properties": {
-                            "field1": {
-                              "type": "string",
-                              "description": "An extra field for custom data.",
-                              "example": "value1"
-                            },
-                            "field2": {
-                              "type": "string",
-                              "description": "Another extra field for custom data.",
-                              "example": "value2"
-                            }
-                          },
-                          "example": {
-                            "extra": {
-                              "field1": "value1",
-                              "field2": "value2"
-                            }
-                          }
-                        },
                         "id": {
                           "type": "string",
                           "description": "The unique identifier of the carrier.",
@@ -153892,10 +153094,6 @@
                             }
                           },
                           "serviceUrl": "https://api.example.com",
-                          "extra": {
-                            "field1": "value1",
-                            "field2": "value2"
-                          },
                           "id": "post-ch",
                           "product": {
                             "id": "post-ch-express",
@@ -154385,28 +153583,6 @@
                         "example": "https://xentral.someUrl.com",
                         "description": "The base URL at which the Carrier Service that you want to connect to can be reached."
                       },
-                      "extra": {
-                        "type": "object",
-                        "description": "Additional fields for the carrier or service.",
-                        "properties": {
-                          "field1": {
-                            "type": "string",
-                            "description": "An extra field for custom data.",
-                            "example": "value1"
-                          },
-                          "field2": {
-                            "type": "string",
-                            "description": "Another extra field for custom data.",
-                            "example": "value2"
-                          }
-                        },
-                        "example": {
-                          "extra": {
-                            "field1": "value1",
-                            "field2": "value2"
-                          }
-                        }
-                      },
                       "id": {
                         "type": "string",
                         "description": "The unique identifier of the carrier.",
@@ -154447,10 +153623,6 @@
                           }
                         },
                         "serviceUrl": "https://api.example.com",
-                        "extra": {
-                          "field1": "value1",
-                          "field2": "value2"
-                        },
                         "id": "post-ch",
                         "product": {
                           "id": "post-ch-express",
@@ -154618,10 +153790,6 @@
                         }
                       },
                       "serviceUrl": "https://api.example.com",
-                      "extra": {
-                        "field1": "value1",
-                        "field2": "value2"
-                      },
                       "id": "post-ch",
                       "product": {
                         "id": "post-ch-express"
@@ -162143,10 +161311,10 @@
                               "additionalProperties": false,
                               "properties": {
                                 "id": {
+                                  "description": "The identifier of the free field",
                                   "type": "string",
                                   "pattern": "\\d+",
-                                  "example": "17",
-                                  "description": "Resource identifier."
+                                  "example": "17"
                                 },
                                 "value": {
                                   "description": "The value of the free field",
@@ -170170,10 +169338,10 @@
                         "additionalProperties": false,
                         "properties": {
                           "id": {
+                            "description": "The unique identifier for the file.",
                             "type": "string",
                             "pattern": "\\d+",
-                            "example": "17",
-                            "description": "Resource identifier."
+                            "example": "17"
                           },
                           "entity": {
                             "description": "The type of business document the file is related to, such as an invoice, delivery note, or order.",
@@ -170238,10 +169406,10 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "description": "The unique identifier for the file version",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "version": {
                                 "type": "integer",
@@ -170691,10 +169859,10 @@
                       "additionalProperties": false,
                       "properties": {
                         "id": {
+                          "description": "The unique identifier for the file.",
                           "type": "string",
                           "pattern": "\\d+",
-                          "example": "17",
-                          "description": "Resource identifier."
+                          "example": "17"
                         },
                         "entity": {
                           "description": "The type of business document the file is related to, such as an invoice, delivery note, or order.",
@@ -170762,10 +169930,10 @@
                             "additionalProperties": false,
                             "properties": {
                               "id": {
+                                "description": "The unique identifier for the file version",
                                 "type": "string",
                                 "pattern": "\\d+",
-                                "example": "17",
-                                "description": "Resource identifier."
+                                "example": "17"
                               },
                               "version": {
                                 "type": "integer",
@@ -170827,15 +169995,15 @@
                           }
                         },
                         "currentVersion": {
-                          "description": "Represents a specific version of a file, including metadata such as version number, filename, remarks, file size, and update timestamp.",
+                          "description": "The current version of the file.",
                           "type": "object",
                           "additionalProperties": false,
                           "properties": {
                             "id": {
+                              "description": "The unique identifier for the file version",
                               "type": "string",
                               "pattern": "\\d+",
-                              "example": "17",
-                              "description": "Resource identifier."
+                              "example": "17"
                             },
                             "version": {
                               "type": "integer",
