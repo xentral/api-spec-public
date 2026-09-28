@@ -7418,6 +7418,13 @@
                   }
                 },
                 "type": "object"
+              },
+              "shipments": {
+                "description": "Every dispatch of the delivery note, with the tracking data and weight of each parcel. Only present when requested via ?include=shipments. Requesting the include additionally requires the right to the shipping centre, the same right `GET /api/v3/shipments` sits behind; a token whose user lacks it receives a 403 with an empty body, while a request that does not ask for the include is served normally. A delivery note that went to the shipping centre more than once reports one entry per dispatch, and a document the caller may see reports all of its parcels even where a dispatch was booked under a project the token cannot access.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Shipment"
+                }
               }
             },
             "type": "object"
@@ -26041,13 +26048,13 @@
           "Customer"
         ],
         "summary": "🔒 List customers V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `customer:read`.\n\nPaginated list of customers.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `customer:read`.\n\nPaginated list of customers. The mainProject.id filter matches the main project on the address itself. Customers without one are stored as project 0 and rendered as null, so isNull returns them and notEquals/notIn return them as well. The customerRoles.project.id filter matches the projects a customer holds a customer role for. A role that applies to all projects matches every project id, and only roles that are currently valid count, so every customer in the result carries a matching entry under include=customerRoles. On that key a value list under equals requires a role for every value, in matches any of them, and notEquals/notIn match customers holding no role for any of the given projects at all, which also excludes the customers whose role covers every project.",
         "operationId": "GET::api-v3-customers",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`email`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`street`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`zipCode`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`city`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`state`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`country`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`salesManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`accountManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`groups`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`email`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`street`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`zipCode`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`city`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`state`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`country`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`salesManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`accountManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`mainProject.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`customerRoles.project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`groups`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -26068,6 +26075,8 @@
                       "country",
                       "salesManager.id",
                       "accountManager.id",
+                      "mainProject.id",
+                      "customerRoles.project.id",
                       "groups",
                       "tags",
                       "tags.id",
@@ -26225,7 +26234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of customers.",
+            "description": "Paginated list of customers. The mainProject.id filter matches the main project on the address itself. Customers without one are stored as project 0 and rendered as null, so isNull returns them and notEquals/notIn return them as well. The customerRoles.project.id filter matches the projects a customer holds a customer role for. A role that applies to all projects matches every project id, and only roles that are currently valid count, so every customer in the result carries a matching entry under include=customerRoles. On that key a value list under equals requires a role for every value, in matches any of them, and notEquals/notIn match customers holding no role for any of the given projects at all, which also excludes the customers whose role covers every project.",
             "content": {
               "application/json": {
                 "schema": {
@@ -28757,7 +28766,8 @@
                   "lineItems.customFields",
                   "lineItems.stockMovements",
                   "relatedDocuments",
-                  "files"
+                  "files",
+                  "shipments"
                 ]
               }
             }
@@ -29232,7 +29242,8 @@
                   "lineItems.customFields",
                   "lineItems.stockMovements",
                   "relatedDocuments",
-                  "files"
+                  "files",
+                  "shipments"
                 ]
               }
             }
@@ -51746,13 +51757,13 @@
           "Supplier"
         ],
         "summary": "🔒 List suppliers V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `supplier:read`.\n\nPaginated list of suppliers.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `supplier:read`.\n\nPaginated list of suppliers. The mainProject.id filter matches the main project on the address itself. Suppliers without one are stored as project 0 and rendered as null, so isNull returns them and notEquals/notIn return them as well. The supplierRoles.project.id filter matches the projects a supplier holds a supplier role for. A role that applies to all projects matches every project id, and only roles that are currently valid count, so every supplier in the result carries a matching entry under include=supplierRoles. On that key a value list under equals requires a role for every value, in matches any of them, and notEquals/notIn match suppliers holding no role for any of the given projects at all, which also excludes the suppliers whose role covers every project.",
         "operationId": "GET::api-v3-suppliers",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`email`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`street`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`zipCode`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`city`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`state`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`country`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`accountManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`groups`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`email`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`street`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`zipCode`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`city`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`state`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`country`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`accountManager.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`mainProject.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`supplierRoles.project.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`groups`: *equals*, *notEquals*, *in*, *notIn* \n\n`tags`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -51772,6 +51783,8 @@
                       "state",
                       "country",
                       "accountManager.id",
+                      "mainProject.id",
+                      "supplierRoles.project.id",
                       "groups",
                       "tags",
                       "tags.id",
@@ -51928,7 +51941,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of suppliers.",
+            "description": "Paginated list of suppliers. The mainProject.id filter matches the main project on the address itself. Suppliers without one are stored as project 0 and rendered as null, so isNull returns them and notEquals/notIn return them as well. The supplierRoles.project.id filter matches the projects a supplier holds a supplier role for. A role that applies to all projects matches every project id, and only roles that are currently valid count, so every supplier in the result carries a matching entry under include=supplierRoles. On that key a value list under equals requires a role for every value, in matches any of them, and notEquals/notIn match suppliers holding no role for any of the given projects at all, which also excludes the suppliers whose role covers every project.",
             "content": {
               "application/json": {
                 "schema": {
