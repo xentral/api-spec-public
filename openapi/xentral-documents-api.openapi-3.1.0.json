@@ -1727,6 +1727,11 @@
             "type": "string",
             "example": "711999"
           },
+          "routingId": {
+            "description": "Routing ID (German: Leitweg-ID) used as the buyer reference on e-invoices. Takes precedence over the legacy free field 20.",
+            "type": "string",
+            "example": "04011000-1234512345-06"
+          },
           "mainProject": {
             "$ref": "#/components/schemas/ProjectReferenceData",
             "description": "Main project the customer belongs to"
@@ -5751,6 +5756,14 @@
                   "null"
                 ],
                 "example": "711999"
+              },
+              "routingId": {
+                "description": "Routing ID (German: Leitweg-ID) used as the buyer reference on e-invoices. Takes precedence over the legacy free field 20.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "04011000-1234512345-06"
               },
               "mainProject": {
                 "description": "Main project the customer belongs to",
@@ -16742,6 +16755,51 @@
         },
         "type": "object"
       },
+      "SalesPriceDeleteData": {
+        "description": "Reference to a sales price to delete",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "description": "Unique identifier of the sales price to delete. A price that is already deleted is accepted and stays deleted.",
+            "type": "string",
+            "pattern": "[0-9]+",
+            "example": "1337"
+          }
+        },
+        "type": "object",
+        "example": {
+          "id": "1337"
+        }
+      },
+      "SalesPriceDeleteMultipleData": {
+        "description": "The sales prices to delete",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SalesPriceDeleteData"
+            },
+            "maxItems": 100,
+            "minItems": 1
+          }
+        },
+        "type": "object",
+        "example": {
+          "items": [
+            {
+              "id": "1337"
+            },
+            {
+              "id": "1338"
+            }
+          ]
+        }
+      },
       "SalesPriceUpdateData": {
         "description": "SalesPrice update payload",
         "required": [
@@ -16875,16 +16933,26 @@
         "type": "object"
       },
       "SalesPriceUpdateMultipleData": {
-        "description": "SalesPrice update multiple data",
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/SalesPriceUpdateData"
-        },
-        "example": [
-          {
-            "id": "1337"
+        "description": "The sales prices to update",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SalesPriceUpdateData"
+            }
           }
-        ]
+        },
+        "type": "object",
+        "example": {
+          "items": [
+            {
+              "id": "1337"
+            }
+          ]
+        }
       },
       "SalesPriceUpdateSingleData": {
         "description": "SalesPrice update payload. The sales price to update is addressed by the id in the URL.",
@@ -20520,6 +20588,14 @@
               "null"
             ],
             "example": "711999"
+          },
+          "routingId": {
+            "description": "Routing ID (German: Leitweg-ID) used as the buyer reference on e-invoices. Takes precedence over the legacy free field 20.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "04011000-1234512345-06"
           },
           "mainProject": {
             "oneOf": [
@@ -26575,8 +26651,8 @@
                         "deviatingDebtorAccountNumber": [
                           "The deviating debtor account number field must be a string."
                         ],
-                        "mainProject": [
-                          "The main project field must be an array."
+                        "routingId": [
+                          "The routing id field must be a string."
                         ]
                       }
                     }
@@ -28535,8 +28611,8 @@
                         "deviatingDebtorAccountNumber": [
                           "The deviating debtor account number field must be a string."
                         ],
-                        "mainProject": [
-                          "The main project field must be an array."
+                        "routingId": [
+                          "The routing id field must be a string."
                         ]
                       }
                     }
@@ -49281,8 +49357,8 @@
                       "description": "Error messages",
                       "type": "object",
                       "example": {
-                        "": [
-                          "The  field must be an array."
+                        "items": [
+                          "The items field must be an array."
                         ]
                       }
                     }
@@ -49322,6 +49398,88 @@
         "x-beta": true,
         "x-scopes": [
           "salesPrice:update"
+        ]
+      }
+    },
+    "/api/v3/salesPrices/actions/delete": {
+      "post": {
+        "tags": [
+          "SalesPrice"
+        ],
+        "summary": "🔒 Delete multiple sales prices V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesPrice:delete`.\n\nDelete several sales prices in one request. A price that is already deleted is accepted and stays deleted; an id that does not exist rejects the whole request, and then no price of the request is deleted.",
+        "operationId": "POST::api-v3-salesprices-actions-delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalesPriceDeleteMultipleData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Failed validation",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/request-validation"
+                    },
+                    "title": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "Request payload validation failed."
+                    },
+                    "violations": {
+                      "description": "Error messages",
+                      "type": "object",
+                      "example": {
+                        "items": [
+                          "The items field is invalid."
+                        ]
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "salesPrice:delete"
         ]
       }
     },
