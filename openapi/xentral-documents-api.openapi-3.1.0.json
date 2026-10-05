@@ -259,6 +259,33 @@
         "type": "object",
         "additionalProperties": false
       },
+      "BookedStorageLocationData": {
+        "description": "The storage location a quantity of a line item was booked from or into.",
+        "required": [
+          "id",
+          "name",
+          "order"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of the storage location.",
+            "type": "string",
+            "example": "13"
+          },
+          "name": {
+            "description": "Short name of the storage location, as printed on delivery notes and picking lists.",
+            "type": "string",
+            "example": "A-03"
+          },
+          "order": {
+            "description": "Position of the storage location in the walking order through the warehouse, as used to sort picking lists. Lower values come first; several storage locations can share a value, and 0 means none is maintained. Not the position of this entry in the list.",
+            "type": "integer",
+            "example": 7
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "BusinessDocument": {
         "type": "object",
         "allOf": [
@@ -1949,7 +1976,8 @@
           {
             "properties": {
               "salesOrder": {
-                "$ref": "#/components/schemas/SalesOrderReferenceData"
+                "$ref": "#/components/schemas/SalesOrderReferenceData",
+                "description": "Linked sales order to the delivery note. The sales order must have a document number (i.e. be released)."
               },
               "orderPicking": {
                 "$ref": "#/components/schemas/OrderPickingReferenceData"
@@ -4127,7 +4155,7 @@
                 "example": false
               },
               "autoDispatch": {
-                "description": "Indicates if the sales order is available for auto dispatch.",
+                "description": "Whether the sales order may be picked up by the automatic dispatch run. If omitted, it is derived from the auto-shipping setting of the project the sales order ends up with, and defaults to true when it has no project. Setting it dispatches nothing by itself: the automatic dispatch run only picks up released sales orders that also pass its own checks.",
                 "type": "boolean",
                 "example": true
               },
@@ -15870,7 +15898,7 @@
                 "example": false
               },
               "autoDispatch": {
-                "description": "Indicates if the sales order is available for auto dispatch.",
+                "description": "Whether the sales order may be picked up by the automatic dispatch run. The run only picks up released sales orders that also pass its own checks.",
                 "type": "boolean",
                 "example": true
               },
@@ -17583,7 +17611,7 @@
           "storageLocation": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/StorageLocationReferenceData",
+                "$ref": "#/components/schemas/BookedStorageLocationData",
                 "description": "Storage location the quantity was booked from or into. Null if it can no longer be determined."
               },
               {
@@ -17705,8 +17733,11 @@
                 "example": "1"
               },
               "number": {
-                "description": "Supplier number",
-                "type": "string",
+                "description": "Supplier number. Null when the number was cleared while the supplier role stays active.",
+                "type": [
+                  "string",
+                  "null"
+                ],
                 "example": "800042"
               },
               "deviatingSupplierNumber": {
@@ -20886,8 +20917,16 @@
           {
             "properties": {
               "salesOrder": {
-                "$ref": "#/components/schemas/SalesOrderReferenceData",
-                "description": "Linked sales order to the delivery note"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SalesOrderReferenceData",
+                    "description": "Linked sales order to the delivery note. The sales order must have a document number (i.e. be released)."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Linked sales order to the delivery note. The sales order must have a document number (i.e. be released)."
               },
               "orderPicking": {
                 "$ref": "#/components/schemas/OrderPickingReferenceData",
@@ -22290,6 +22329,198 @@
         },
         "type": "object"
       },
+      "UpdateProductionData": {
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/AddressReferenceData",
+            "description": "The customer the production is for. Changing it also sets the project and the preferred warehouse the new customer brings, unless they are sent in the same request."
+          },
+          "project": {
+            "$ref": "#/components/schemas/ProjectReferenceData"
+          },
+          "salesOrder": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SalesOrderReferenceData",
+                "description": "The sales order the production is made for. Set to null to detach the production from its sales order."
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The sales order the production is made for. Set to null to detach the production from its sales order."
+          },
+          "preferredWarehouse": {
+            "description": "The warehouse the production takes its materials from and books the produced goods into. When the customer changes and this is omitted, it is set to the production warehouse of the new project. Set to null to remove it.",
+            "properties": {
+              "id": {
+                "description": "Preferred warehouse ID",
+                "type": "string",
+                "example": "42"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "produceProduct": {
+            "$ref": "#/components/schemas/ProductReferenceData",
+            "description": "The product this production produces. Changing it replaces all line items: the materials are resolved anew from the bill of materials of the new product, so materials adjusted on this production are lost. Only possible while the production is a draft or released and none of its goods are booked into stock. Without produceQuantity the current quantity is kept."
+          },
+          "produceQuantity": {
+            "description": "Quantity of the product to produce. Changing it scales the produced line and every material by the same factor, so materials adjusted on this production keep their proportion. At most four decimal places. Only possible while the production is a draft or released and none of its goods are booked into stock.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "exclusiveMinimum": 0,
+            "example": 100
+          },
+          "documentDate": {
+            "description": "Document creation date",
+            "type": "string",
+            "format": "date",
+            "example": "2024-01-10"
+          },
+          "productionStartDate": {
+            "description": "Production start date. Can still be changed after the production has started. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2024-01-15"
+          },
+          "productionEndDate": {
+            "description": "Production end date. Can still be changed after the production has started. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2024-01-20"
+          },
+          "stockRetrievalDate": {
+            "description": "Stock retrieval date. Can still be changed after the production has started. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2024-01-25"
+          },
+          "stockProvisioningDate": {
+            "description": "Stock provisioning date. Can still be changed after the production has started. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2024-01-20"
+          },
+          "batch": {
+            "description": "Batch number for the goods this production produces. Used when the production is completed, unless the completion gives a different one, and only booked into batch stock if the produced product is managed in batches. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "example": "CH-2026-07"
+          },
+          "bestBeforeDate": {
+            "description": "Best-before date for the goods this production produces. Used when the production is completed, unless the completion gives a different one, and only booked if the produced product carries a best-before date. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "example": "2027-01-31"
+          },
+          "bodyText": {
+            "description": "Body text for production notes. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Additional production notes"
+          },
+          "internalDesignation": {
+            "description": "Internal designation for production. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "example": "Internal production reference"
+          },
+          "internalComment": {
+            "description": "Internal comment for production. Set to null to remove it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Internal production comment"
+          },
+          "functionTest": {
+            "description": "Whether function testing is required",
+            "type": "boolean",
+            "example": true
+          },
+          "createSerialNumbers": {
+            "description": "Whether to create serial numbers",
+            "type": "boolean",
+            "example": false
+          },
+          "recordSubSerialNumbers": {
+            "description": "Whether to record sub-serial numbers",
+            "type": "boolean",
+            "example": false
+          },
+          "materialReservation": {
+            "description": "Material reservation method",
+            "type": "string",
+            "enum": [
+              "instant",
+              "onRelease",
+              "onStart"
+            ],
+            "example": "onRelease"
+          },
+          "materialRetrieval": {
+            "description": "Material retrieval method",
+            "type": "string",
+            "enum": [
+              "single",
+              "collective"
+            ],
+            "example": "collective"
+          },
+          "printSettings": {
+            "description": "Print settings for the production",
+            "properties": {
+              "showTaskDescription": {
+                "description": "Whether to show task descriptions when printing",
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "type": "object"
+          },
+          "resolveMultiLevelBOM": {
+            "description": "Whether to resolve multi-level bill of materials",
+            "type": "boolean",
+            "example": false
+          },
+          "tags": {
+            "description": "Tags assigned to the production. The passed list replaces the currently assigned tags, an empty list removes them all; omit the property to leave them unchanged. Each entry references an existing tag by `id` or names a tag by `title`, which is created if it does not exist; exactly one of the two.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagReferenceData"
+            }
+          }
+        },
+        "type": "object"
+      },
       "UpdateProformaInvoiceData": {
         "type": "object",
         "allOf": [
@@ -23019,7 +23250,7 @@
                 "example": false
               },
               "autoDispatch": {
-                "description": "Indicates if the sales order is available for auto dispatch.",
+                "description": "Whether the sales order may be picked up by the automatic dispatch run. Changing the customer re-derives this value from the auto-shipping setting of the project the sales order ends up with, unless it is sent in the same request. Setting it dispatches nothing by itself: the automatic dispatch run only picks up released sales orders that also pass its own checks.",
                 "type": "boolean",
                 "example": true
               },
@@ -37078,6 +37309,139 @@
         "x-scopes": [
           "production:delete"
         ]
+      },
+      "patch": {
+        "tags": [
+          "Production"
+        ],
+        "summary": "🔒 Update production V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `production:update`.\n\nUpdate a production. Only the properties sent are changed. A different produceProduct replaces all line items from its bill of materials, a different produceQuantity scales them; both only while the production is a draft or released and none of its goods are booked into stock. Once a production has started it is write-protected: productionStartDate, productionEndDate, stockRetrievalDate and stockProvisioningDate can still be changed, any other change is rejected with a conflict.",
+        "operationId": "PATCH::api-v3-productions-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductionData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update a production. Only the properties sent are changed. A different produceProduct replaces all line items from its bill of materials, a different produceQuantity scales them; both only while the production is a draft or released and none of its goods are booked into stock. Once a production has started it is write-protected: productionStartDate, productionEndDate, stockRetrievalDate and stockProvisioningDate can still be changed, any other change is rejected with a conflict.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Production"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed validation",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/request-validation"
+                    },
+                    "title": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "Request payload validation failed."
+                    },
+                    "violations": {
+                      "description": "Error messages",
+                      "type": "object",
+                      "example": {
+                        "address": [
+                          "The address field must be an array."
+                        ],
+                        "project": [
+                          "The project field must be an array."
+                        ],
+                        "salesOrder": [
+                          "The sales order field must be an array."
+                        ]
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/write-protected"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "The resource is write-protected."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "production:update"
+        ]
       }
     },
     "/api/v3/productions/{id}/actions/complete": {
@@ -37380,6 +37744,160 @@
         },
         "x-scopes": [
           "production:release"
+        ]
+      }
+    },
+    "/api/v3/productions/{id}/actions/removeWriteProtection": {
+      "patch": {
+        "tags": [
+          "Production"
+        ],
+        "summary": "🔒 Remove production write protection V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `production:removeWriteProtection`.\n\nRemove write protection from a production. Starting a production sets the write protection; it can be removed in every status.",
+        "operationId": "PATCH::api-v3-productions-id-actions-removewriteprotection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/write-protected"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "The resource is write-protected."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "production:removeWriteProtection"
+        ]
+      }
+    },
+    "/api/v3/productions/{id}/actions/setWriteProtection": {
+      "patch": {
+        "tags": [
+          "Production"
+        ],
+        "summary": "🔒 Set production write protection V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `production:setWriteProtection`.\n\nSet write protection for a production. This is possible in every status.",
+        "operationId": "PATCH::api-v3-productions-id-actions-setwriteprotection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/write-protected"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "The resource is write-protected."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "production:setWriteProtection"
         ]
       }
     },
