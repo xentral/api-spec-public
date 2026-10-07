@@ -938,7 +938,6 @@
 </div></div></div><div class="flex "></div></div></div></div></div></div><div class="panel-item--right px-8"><div class="bg-gray-800 px-8 py-4 mt-4 -mx-8 2xl:mx-0 2xl:px-4 2xl:rounded examples"><h4 class="text-white text-lg">Examples</h4><div class="mt-4"><div><button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 " type="button"><div class="inline-block"><span class="inline-block w-20 py-0.5 mr-1 text-gray-200 text-sm border text-center rounded focus:outline-none">Payload</span></div><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="inline-block align-baseline cursor-pointer ml-0.5 -mb-1 w-5 h-5 transform transition-transform duration-150 ease-linear  fill-current text-gray-200"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg></button></div><div class="hidden"><div class="mt-4"><div class="prose max-w-none text-sm"><pre><code class="hljs language-json">{
   <span class="hljs-attr">"shipmentId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"deliveryNoteId"</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">"salesOrderId"</span>: <span class="hljs-number">0</span>,
   <span class="hljs-attr">"carrier"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"trackingNumber"</span>: <span class="hljs-string">"string"</span>,
   <span class="hljs-attr">"trackingUrl"</span>: <span class="hljs-string">"string"</span>,
@@ -7800,13 +7799,6 @@
               "deliveryNoteId": {
                 "type": "integer",
                 "description": "Unique identifier for the deliver note"
-              },
-              "salesOrderId": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Unique identifier for the corresponding sales order"
               },
               "carrier": {
                 "type": [
