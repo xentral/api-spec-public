@@ -4965,7 +4965,7 @@
                     "example": 19
                   },
                   "amount": {
-                    "description": "Net amount taxed at the standard rate.",
+                    "description": "Tax amount at the standard rate.",
                     "type": [
                       "number",
                       "null"
@@ -4973,7 +4973,7 @@
                     "format": "float",
                     "maximum": 999999.9999,
                     "minimum": -999999.9999,
-                    "example": 100
+                    "example": 19
                   }
                 },
                 "type": "object"
@@ -4992,7 +4992,7 @@
                     "example": 7
                   },
                   "amount": {
-                    "description": "Net amount taxed at the reduced rate.",
+                    "description": "Tax amount at the reduced rate.",
                     "type": [
                       "number",
                       "null"
@@ -5019,7 +5019,7 @@
                     "example": 5.5
                   },
                   "amount": {
-                    "description": "Net amount taxed at the first custom rate.",
+                    "description": "Tax amount at the first custom rate.",
                     "type": [
                       "number",
                       "null"
@@ -5055,7 +5055,7 @@
                     "example": 0
                   },
                   "amount": {
-                    "description": "Net amount taxed at the second custom rate.",
+                    "description": "Tax amount at the second custom rate.",
                     "type": [
                       "number",
                       "null"
@@ -5084,7 +5084,7 @@
             "description": "Payment terms of the invoice.",
             "properties": {
               "dueDate": {
-                "description": "Date the invoice is payable by. Defaults to today plus the supplier's payment target days.",
+                "description": "Date the invoice is payable by. Defaults to the invoice date plus the supplier's payment target days.",
                 "type": [
                   "string",
                   "null"
@@ -18966,13 +18966,13 @@
                         "example": 19
                       },
                       "amount": {
-                        "description": "Net amount taxed at the standard rate.",
+                        "description": "Tax amount at the standard rate.",
                         "type": [
                           "number",
                           "null"
                         ],
                         "format": "float",
-                        "example": 100
+                        "example": 19
                       }
                     },
                     "type": "object"
@@ -18993,7 +18993,7 @@
                         "example": 7
                       },
                       "amount": {
-                        "description": "Net amount taxed at the reduced rate.",
+                        "description": "Tax amount at the reduced rate.",
                         "type": [
                           "number",
                           "null"
@@ -19021,7 +19021,7 @@
                         "example": 5.5
                       },
                       "amount": {
-                        "description": "Net amount taxed at the first custom rate.",
+                        "description": "Tax amount at the first custom rate.",
                         "type": [
                           "number",
                           "null"
@@ -19057,7 +19057,7 @@
                         "example": 0
                       },
                       "amount": {
-                        "description": "Net amount taxed at the second custom rate.",
+                        "description": "Tax amount at the second custom rate.",
                         "type": [
                           "number",
                           "null"
@@ -19081,7 +19081,7 @@
                 "example": {
                   "normalTax": {
                     "rate": 19,
-                    "amount": 100
+                    "amount": 19
                   },
                   "reducedTax": {
                     "rate": 7,
@@ -24101,6 +24101,10 @@
     {
       "name": "EmailAccount",
       "description": "EmailAccount"
+    },
+    {
+      "name": "SalesChannel",
+      "description": "SalesChannel"
     },
     {
       "name": "CustomField",
@@ -46984,6 +46988,61 @@
         "x-beta": true,
         "x-scopes": [
           "return:update"
+        ]
+      }
+    },
+    "/api/v3/salesChannels/{id}": {
+      "delete": {
+        "tags": [
+          "SalesChannel"
+        ],
+        "summary": "🔒 Delete sales channel V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `salesChannel:delete`.\n\nDelete a sales channel. This performs a soft delete on the sales channel, which also deactivates it, and permanently removes the products' settings for this sales channel. A sales channel in a project the user cannot access is reported as not found.",
+        "operationId": "DELETE::api-v3-saleschannels-id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "salesChannel:delete"
         ]
       }
     },
