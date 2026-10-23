@@ -152561,6 +152561,11 @@
                       },
                       "phone": {
                         "type": "string"
+                      },
+                      "contactPerson": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Named contact person for the sender, sent to the carrier on outbound shipments only. Omit the property to store none; on replace, omitting it clears a previously stored value."
                       }
                     }
                   }
@@ -152866,6 +152871,32 @@
                       }
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message explaining why the request failed.",
+                      "example": "Missing required scopes: customer:create."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Missing required scopes: customer:create."
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
@@ -153406,6 +153437,32 @@
               }
             }
           },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message explaining why the request failed.",
+                      "example": "Missing required scopes: customer:create."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Missing required scopes: customer:create."
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Resource was not found or not enough access privileges"
           },
@@ -153768,6 +153825,11 @@
                       },
                       "phone": {
                         "type": "string"
+                      },
+                      "contactPerson": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "Named contact person for the sender, sent to the carrier on outbound shipments only. Omit the property to store none; on replace, omitting it clears a previously stored value."
                       }
                     }
                   }
@@ -154053,6 +154115,32 @@
                       }
                     }
                   ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unable to authenticate the client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message explaining why the request failed.",
+                      "example": "Missing required scopes: customer:create."
+                    }
+                  }
+                },
+                "example": {
+                  "message": "Missing required scopes: customer:create."
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
