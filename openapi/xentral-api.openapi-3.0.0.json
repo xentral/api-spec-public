@@ -164786,11 +164786,6 @@
                           "description": "A boolean value indicating if the user is a support (key) user",
                           "type": "boolean",
                           "example": false
-                        },
-                        "intercomUserId": {
-                          "description": "The user_id the in-app messenger identifies the user by in Intercom. Missing when there is none.",
-                          "type": "string",
-                          "example": "f7b3b3b3-7b3b-4b3b-8b3b-3b3b3b3b3b3b"
                         }
                       },
                       "example": {
