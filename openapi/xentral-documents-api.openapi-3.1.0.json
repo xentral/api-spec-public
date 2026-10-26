@@ -3279,10 +3279,6 @@
             "$ref": "#/components/schemas/ProductSalesChannelDefaultsData",
             "description": "Default sales-channel settings, applied in every sales channel that does not use individual settings."
           },
-          "baseTexts": {
-            "$ref": "#/components/schemas/ProductBaseTextsData",
-            "description": "The product's own texts in German (de) and English (en). Merged field by field."
-          },
           "merchandiseGroup": {
             "description": "Merchandise group of the product, used for account mapping and number ranges.",
             "required": [
@@ -3353,107 +3349,6 @@
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
             }
-          }
-        },
-        "type": "object"
-      },
-      "CreateProductTextData": {
-        "description": "A stored product text for one language and, optionally, one sales channel. A product holds at most one text per language and sales channel; a second one is rejected with 409. The German and English texts without a sales channel usually belong in the product's baseTexts block instead.",
-        "required": [
-          "language",
-          "name"
-        ],
-        "properties": {
-          "language": {
-            "description": "Language of the text in an ISO-639-1 format. Any letter case is accepted.",
-            "type": "string",
-            "example": "fr"
-          },
-          "salesChannel": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SalesChannelReferenceData",
-                "description": "Sales channel the text applies to. Omit it or send null for a text without a sales channel."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Sales channel the text applies to. Omit it or send null for a text without a sales channel."
-          },
-          "name": {
-            "description": "Product name in this language, at most 255 characters.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "Vis cylindrique M8"
-          },
-          "shortDescription": {
-            "description": "Short description in this language.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "galvanisée"
-          },
-          "description": {
-            "description": "Description of the product in this language.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "shopDescription": {
-            "description": "Description written for the online shop export.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaTitle": {
-            "description": "Meta title of the product in the online shop, at most 255 characters.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255
-          },
-          "metaDescription": {
-            "description": "Meta description of the product in the online shop.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaKeywords": {
-            "description": "Meta keywords of the product in the online shop.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "isInCatalog": {
-            "description": "Whether the product is included in the catalog with this text. Defaults to false.",
-            "type": "boolean",
-            "example": false
-          },
-          "catalogName": {
-            "description": "Name of the product as a catalog article in this language.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "catalogText": {
-            "description": "Catalog text of the product in this language.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "isActive": {
-            "description": "Whether this text is active. Defaults to true.",
-            "type": "boolean",
-            "example": true
           }
         },
         "type": "object"
@@ -10772,7 +10667,7 @@
                 "example": false
               },
               "isInCatalog": {
-                "description": "Whether the product is included in the catalog. The catalog name and text are per language: `baseTexts.<de|en>.catalogName` and `baseTexts.<de|en>.catalogText` on the product itself, and the catalog fields of each row in the texts include.",
+                "description": "Whether the product is included in the catalog. The catalog name and text are per language and part of the texts include.",
                 "type": "boolean",
                 "example": false
               },
@@ -10904,49 +10799,6 @@
                 "example": {
                   "addPurchasePriceToCalculationTrigger": "manual",
                   "calculatoryPurchasePriceRecalculationMethod": "allRecordedPurchasesWeightedAverage"
-                },
-                "additionalProperties": false
-              },
-              "baseTexts": {
-                "description": "The product's own texts in German (de) and English (en), kept on the product itself. de.name and de.description are the product's name and description, the same values as the flat name and description fields. Texts for other languages or per sales channel are rows of the texts include. An unset field reads as null.",
-                "required": [
-                  "de",
-                  "en"
-                ],
-                "properties": {
-                  "de": {
-                    "$ref": "#/components/schemas/ProductBaseText",
-                    "description": "The product's own texts in German."
-                  },
-                  "en": {
-                    "$ref": "#/components/schemas/ProductBaseText",
-                    "description": "The product's own texts in English."
-                  }
-                },
-                "type": "object",
-                "example": {
-                  "de": {
-                    "name": "Zylinderschraube M8",
-                    "shortDescription": "verzinkt",
-                    "description": null,
-                    "shopDescription": null,
-                    "metaTitle": null,
-                    "metaDescription": null,
-                    "metaKeywords": null,
-                    "catalogName": null,
-                    "catalogText": null
-                  },
-                  "en": {
-                    "name": "Cylinder screw M8",
-                    "shortDescription": "galvanised",
-                    "description": null,
-                    "shopDescription": null,
-                    "metaTitle": null,
-                    "metaDescription": null,
-                    "metaKeywords": null,
-                    "catalogName": null,
-                    "catalogText": null
-                  }
                 },
                 "additionalProperties": false
               },
@@ -11132,7 +10984,7 @@
                 }
               },
               "texts": {
-                "description": "Stored product texts, one per language and sales channel (include=texts). The product's own base texts are the baseTexts block.",
+                "description": "Language/shop texts (include=texts). Contains both the stored overrides and the base texts of the product itself.",
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/ProductText"
@@ -11448,178 +11300,6 @@
             "type": "object"
           }
         ]
-      },
-      "ProductBaseText": {
-        "description": "The product's own texts in one language. Every field is always present; a field that has not been set is null.",
-        "required": [
-          "name",
-          "shortDescription",
-          "description",
-          "shopDescription",
-          "metaTitle",
-          "metaDescription",
-          "metaKeywords",
-          "catalogName",
-          "catalogText"
-        ],
-        "properties": {
-          "name": {
-            "description": "Product name in this language. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "Cylinder screw M8"
-          },
-          "shortDescription": {
-            "description": "Short description in this language, used for the full-text search or as the group text in the online shop. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "galvanised"
-          },
-          "description": {
-            "description": "Description of the product in this language. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "shopDescription": {
-            "description": "Description written for the online shop export; the shop shows it as the product description. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaTitle": {
-            "description": "Meta title of the product in the online shop, used to make the product easier to find. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaDescription": {
-            "description": "Meta description of the product in the online shop, used to make the product easier to find. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaKeywords": {
-            "description": "Meta keywords of the product in the online shop, used to make the product easier to find. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "catalogName": {
-            "description": "Name of the product as a catalog article in this language. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255
-          },
-          "catalogText": {
-            "description": "Catalog text of the product in this language. Null while none is set.",
-            "type": [
-              "string",
-              "null"
-            ]
-          }
-        },
-        "type": "object",
-        "additionalProperties": false
-      },
-      "ProductBaseTextLanguageData": {
-        "description": "The nine base text fields of one language. On write, send only the fields to change; null clears a field, except de.name, which is the product's display name (the flat name field) and cannot be cleared.",
-        "properties": {
-          "name": {
-            "description": "Product name in this language, at most 255 characters. The German name is the product's display name and cannot be cleared; null clears the English name.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255,
-            "example": "Cylinder screw M8"
-          },
-          "shortDescription": {
-            "description": "Short description in this language, used for the full-text search or as the group text in the online shop. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "galvanised"
-          },
-          "description": {
-            "description": "Description of the product in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "shopDescription": {
-            "description": "Description written for the online shop export; the shop shows it as the product description. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaTitle": {
-            "description": "Meta title of the product in the online shop, used to make the product easier to find. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaDescription": {
-            "description": "Meta description of the product in the online shop, used to make the product easier to find. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaKeywords": {
-            "description": "Meta keywords of the product in the online shop, used to make the product easier to find. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "catalogName": {
-            "description": "Name of the product as a catalog article in this language, at most 255 characters. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255
-          },
-          "catalogText": {
-            "description": "Catalog text of the product in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          }
-        },
-        "type": "object"
-      },
-      "ProductBaseTextsData": {
-        "description": "The product's own texts per language. Only de and en exist; each language merges field by field. de.name and de.description are the product's name and description, the same values as the flat name and description fields: sending both with different values is rejected.",
-        "properties": {
-          "de": {
-            "$ref": "#/components/schemas/ProductBaseTextLanguageData",
-            "description": "The German texts. On update, fields that are not sent stay unchanged."
-          },
-          "en": {
-            "$ref": "#/components/schemas/ProductBaseTextLanguageData",
-            "description": "The English texts. On update, fields that are not sent stay unchanged."
-          }
-        },
-        "type": "object"
       },
       "ProductBomItem": {
         "description": "A bill-of-materials line. The linked product is the component for include=parts and the parent (assembly) for include=usedIn.",
@@ -12235,20 +11915,7 @@
               "customFields.customField37",
               "customFields.customField38",
               "customFields.customField39",
-              "customFields.customField40",
-              "texts.language",
-              "texts.salesChannel.id",
-              "texts.name",
-              "texts.shortDescription",
-              "texts.description",
-              "texts.shopDescription",
-              "texts.metaTitle",
-              "texts.metaDescription",
-              "texts.metaKeywords",
-              "texts.isActive",
-              "texts.isInCatalog",
-              "texts.catalogName",
-              "texts.catalogText"
+              "customFields.customField40"
             ]
           },
           "op": {
@@ -13815,22 +13482,24 @@
         "type": "object"
       },
       "ProductText": {
-        "description": "A stored product text: one entry per language and sales channel. Values are returned as stored; nothing is collapsed over the product's own base texts (see the baseTexts block on the product) and variants do not inherit from their parent product.",
+        "description": "Language- and shop-specific texts of a product. Entries with an `id` are the stored per-language, per-sales-channel overrides; entries with `id: null` and `salesChannel: null` are the base texts kept on the product itself. Values are returned as stored — overrides are not collapsed over the base texts and variants do not inherit from their parent product.",
         "required": [
-          "id",
           "language",
           "isInCatalog",
           "isActive"
         ],
         "properties": {
           "id": {
-            "description": "Product text ID.",
-            "type": "string",
+            "description": "Product text ID. Null for the base texts stored on the product itself, which have no row of their own.",
+            "type": [
+              "string",
+              "null"
+            ],
             "pattern": "[0-9]+",
             "example": "1337"
           },
           "language": {
-            "description": "ISO 639-1 language code of the text, lowercase. The legacy codes cz, dk and se and codes defined in the language settings (for example c1) are returned as stored.",
+            "description": "Language code, e.g. \"de\".",
             "type": "string",
             "example": "de"
           },
@@ -22580,10 +22249,6 @@
             "$ref": "#/components/schemas/ProductSalesChannelDefaultsData",
             "description": "Default sales-channel settings, applied in every sales channel that does not use individual settings."
           },
-          "baseTexts": {
-            "$ref": "#/components/schemas/ProductBaseTextsData",
-            "description": "The product's own texts in German (de) and English (en). Merged field by field."
-          },
           "merchandiseGroup": {
             "description": "Merchandise group of the product, used for account mapping and number ranges. Pass null to remove the assignment.",
             "required": [
@@ -22660,103 +22325,6 @@
             "items": {
               "$ref": "#/components/schemas/TagReferenceData"
             }
-          }
-        },
-        "type": "object"
-      },
-      "UpdateProductTextData": {
-        "description": "Partial update of a stored product text: send only the fields to change; null clears a text field. Changing language or salesChannel moves the text to that pair, which must not be taken by another text of the product (409 otherwise).",
-        "properties": {
-          "language": {
-            "description": "Language of the text in an ISO-639-1 format. Any letter case is accepted.",
-            "type": "string",
-            "example": "fr"
-          },
-          "salesChannel": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/SalesChannelReferenceData",
-                "description": "Sales channel the text applies to. Null moves the text to no sales channel."
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Sales channel the text applies to. Null moves the text to no sales channel."
-          },
-          "name": {
-            "description": "Product name in this language, at most 255 characters. It cannot be cleared.",
-            "type": "string",
-            "maxLength": 255,
-            "example": "Vis cylindrique M8"
-          },
-          "shortDescription": {
-            "description": "Short description in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "example": "galvanisée"
-          },
-          "description": {
-            "description": "Description of the product in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "shopDescription": {
-            "description": "Description written for the online shop export. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaTitle": {
-            "description": "Meta title of the product in the online shop, at most 255 characters. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ],
-            "maxLength": 255
-          },
-          "metaDescription": {
-            "description": "Meta description of the product in the online shop. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "metaKeywords": {
-            "description": "Meta keywords of the product in the online shop. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "isInCatalog": {
-            "description": "Whether the product is included in the catalog with this text.",
-            "type": "boolean",
-            "example": false
-          },
-          "catalogName": {
-            "description": "Name of the product as a catalog article in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "catalogText": {
-            "description": "Catalog text of the product in this language. Null clears it.",
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "isActive": {
-            "description": "Whether this text is active.",
-            "type": "boolean",
-            "example": true
           }
         },
         "type": "object"
@@ -38677,13 +38245,13 @@
           "Product"
         ],
         "summary": "🔒 List products V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. The customFields.customField1 to customFields.customField40 filters match the value a product carries in that custom field, the value include=customFields reports under that key - not its per-language translations. On these keys isNull matches a custom field that is not set. v2 exposes the same 40 fields under the names freeField1 to freeField40. A custom field that is configured rather than one of these 40 carries an instance-specific key and is not filterable. The texts.* filters match per stored text row (include=texts), with the pairing, repetition and exclusion semantics of the properties filters. They do not reach the product's own base texts (baseTexts): of those, the name and description filters match the German name and description, and search covers name, shortDescription and description in German and English. texts.language accepts de and DE alike and matches a row by the language include=texts reports for it. texts.salesChannel.id uses isNull for texts without a sales channel; 0 is not an id. On the text fields, isNull matches a row whose field is not set. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties and texts filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `product:read`.\n\nPaginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. The customFields.customField1 to customFields.customField40 filters match the value a product carries in that custom field, the value include=customFields reports under that key - not its per-language translations. On these keys isNull matches a custom field that is not set. v2 exposes the same 40 fields under the names freeField1 to freeField40. A custom field that is configured rather than one of these 40 carries an instance-specific key and is not filterable. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
         "operationId": "GET::api-v3-products",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals* \n\n`properties.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`properties.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`properties.value`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`properties.unit`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField1`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField2`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField3`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField4`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField5`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField6`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField7`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField8`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField9`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField10`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField11`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField12`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField13`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField14`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField15`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField16`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField17`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField18`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField19`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField20`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField21`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField22`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField23`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField24`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField25`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField26`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField27`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField28`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField29`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField30`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField31`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField32`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField33`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField34`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField35`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField36`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField37`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField38`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField39`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField40`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.language`: *equals*, *notEquals*, *in*, *notIn* \n\n`texts.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`texts.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.shortDescription`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.shopDescription`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.metaTitle`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.metaDescription`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.metaKeywords`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.isActive`: *equals*, *notEquals* \n\n`texts.isInCatalog`: *equals*, *notEquals* \n\n`texts.catalogName`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`texts.catalogText`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull*\n\nAlternatively the filter accepts a single group object `{op, conditions}`: `or` matches records satisfying at least one condition, `and` all of them. A condition may itself be such a group, nesting to at most 5 levels.",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`ean`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`description`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturer`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`manufacturerProductNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customsTariffNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`uuid`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`minimumStockLevel`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`minimumOrderQuantity`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`defaultSupplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`variantOf.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`tags.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`externalReferences.number`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`externalReferences.salesChannel.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`isMatrixProduct`: *equals*, *notEquals* \n\n`isStockItem`: *equals*, *notEquals* \n\n`isDiscountProduct`: *equals*, *notEquals* \n\n`isShippingCostsProduct`: *equals*, *notEquals* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`hasBillOfMaterials`: *equals*, *notEquals* \n\n`isAssembledJustInTime`: *equals*, *notEquals* \n\n`merchandiseGroup.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`categories.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`salesChannel.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`isDisabled`: *equals*, *notEquals* \n\n`isDeleted`: *equals*, *notEquals* \n\n`properties.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`properties.name`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith* \n\n`properties.value`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`properties.unit`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField1`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField2`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField3`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField4`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField5`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField6`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField7`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField8`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField9`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField10`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField11`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField12`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField13`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField14`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField15`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField16`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField17`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField18`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField19`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField20`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField21`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField22`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField23`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField24`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField25`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField26`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField27`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField28`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField29`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField30`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField31`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField32`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField33`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField34`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField35`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField36`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField37`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField38`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField39`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`customFields.customField40`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull*\n\nAlternatively the filter accepts a single group object `{op, conditions}`: `or` matches records satisfying at least one condition, `and` all of them. A condition may itself be such a group, nesting to at most 5 levels.",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -38770,20 +38338,7 @@
                           "customFields.customField37",
                           "customFields.customField38",
                           "customFields.customField39",
-                          "customFields.customField40",
-                          "texts.language",
-                          "texts.salesChannel.id",
-                          "texts.name",
-                          "texts.shortDescription",
-                          "texts.description",
-                          "texts.shopDescription",
-                          "texts.metaTitle",
-                          "texts.metaDescription",
-                          "texts.metaKeywords",
-                          "texts.isActive",
-                          "texts.isInCatalog",
-                          "texts.catalogName",
-                          "texts.catalogText"
+                          "customFields.customField40"
                         ]
                       },
                       "op": {
@@ -38955,7 +38510,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. The customFields.customField1 to customFields.customField40 filters match the value a product carries in that custom field, the value include=customFields reports under that key - not its per-language translations. On these keys isNull matches a custom field that is not set. v2 exposes the same 40 fields under the names freeField1 to freeField40. A custom field that is configured rather than one of these 40 carries an instance-specific key and is not filterable. The texts.* filters match per stored text row (include=texts), with the pairing, repetition and exclusion semantics of the properties filters. They do not reach the product's own base texts (baseTexts): of those, the name and description filters match the German name and description, and search covers name, shortDescription and description in German and English. texts.language accepts de and DE alike and matches a row by the language include=texts reports for it. texts.salesChannel.id uses isNull for texts without a sales channel; 0 is not an id. On the text fields, isNull matches a row whose field is not set. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties and texts filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
+            "description": "Paginated list of products. Embed sub-resources with ?include=. The categories.id filter matches products assigned to the given category or to any of its descendant categories. On the relation filters categories.id, salesChannel.id and tags.id, a value list under equals requires every value to match, in matches any of them, and notEquals/notIn match products not assigned to any of the given values at all. The salesChannel.id filter matches by the numeric sales channel id. The externalReferences.salesChannel.id filter matches by the sales channel id of an external reference. A matrix product holds its options under include=options, while each of its variants carries one value per option under include=optionValues, reachable for every variant at once via include=variants.optionValues. The properties.id, properties.name, properties.value and properties.unit filters match per property entry: all of them have to be satisfied by the same entry, so properties.name = Material together with properties.value = Aluminium does not match a product that has Material: Stahl and Farbe: Aluminium. Repeat the keys to require a further entry - the n-th condition of each properties.* key describes the n-th entry. A value list matches any of its values under both equals and in. notEquals, notIn and notContains exclude: they match products that have no entry satisfying the rest of their conditions together with the given value, so on its own such a filter excludes every product carrying that property. On properties.value and properties.unit, isNull matches entries whose value or unit is not set. properties.id is the property definition id that include=properties reports, and deleted property definitions are returned by neither the include nor the filters. The customFields.customField1 to customFields.customField40 filters match the value a product carries in that custom field, the value include=customFields reports under that key - not its per-language translations. On these keys isNull matches a custom field that is not set. v2 exposes the same 40 fields under the names freeField1 to freeField40. A custom field that is configured rather than one of these 40 carries an instance-specific key and is not filterable. A filter group condition may itself be a group, nesting to at most 5 levels, so mixed expressions like (A and B) or (C and D) are expressible. isDisabled and isDeleted switch the query as a whole rather than describing one product, and the properties filters pair their conditions across keys, so none of them can be used inside an or filter group or a nested group: they stay valid as direct conditions of a top-level and group only. The search parameter stays conjunctive as well - it narrows whatever the filter returns.",
             "content": {
               "application/json": {
                 "schema": {
@@ -40613,345 +40168,6 @@
         },
         "x-scopes": [
           "deliveryThreshold:create"
-        ]
-      }
-    },
-    "/api/v3/products/{productId}/texts": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "🔒 Create product text V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `productText:create`.\n\nCreate a stored text of a product for one language and, optionally, one sales channel. A product holds at most one text per language and sales channel; a second one is rejected with 409 Conflict. The German and English texts without a sales channel are usually the product's own base texts, written through the baseTexts block of POST and PATCH /api/v3/products. The stored texts are read through include=texts.",
-        "operationId": "POST::api-v3-products-productid-texts",
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductTextData"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Create a stored text of a product for one language and, optionally, one sales channel. A product holds at most one text per language and sales channel; a second one is rejected with 409 Conflict. The German and English texts without a sales channel are usually the product's own base texts, written through the baseTexts block of POST and PATCH /api/v3/products. The stored texts are read through include=texts.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/ProductText"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed validation",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/request-validation"
-                    },
-                    "title": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "Request payload validation failed."
-                    },
-                    "violations": {
-                      "description": "Error messages",
-                      "type": "object",
-                      "example": {
-                        "language": [
-                          "The language field is required."
-                        ],
-                        "salesChannel": [
-                          "The sales channel field must be an array."
-                        ],
-                        "name": [
-                          "The name field is required."
-                        ]
-                      }
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Problem occurred",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "A URI reference that identifies the problem type.",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/write-protected"
-                    },
-                    "title": {
-                      "description": "A short, human-readable summary of the problem type.",
-                      "type": "string",
-                      "example": "The resource is write-protected."
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "productText:create"
-        ]
-      }
-    },
-    "/api/v3/products/{productId}/texts/{textId}": {
-      "delete": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "🔒 Delete product text V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `productText:delete`.\n\nDelete a stored text of a product. The product's own base texts are not stored texts; clear them through the baseTexts block of PATCH /api/v3/products/{id}.",
-        "operationId": "DELETE::api-v3-products-productid-texts-textid",
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "textId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Resource successfully deleted"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "productText:delete"
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "🔒 Update product text V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `productText:update`.\n\nUpdate a stored text of a product. Only the fields sent are written; null clears a text field. Changing language or salesChannel moves the text to that pair and is rejected with 409 Conflict when another text of the product already holds it.",
-        "operationId": "PATCH::api-v3-products-productid-texts-textid",
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "textId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductTextData"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update a stored text of a product. Only the fields sent are written; null clears a text field. Changing language or salesChannel moves the text to that pair and is rejected with 409 Conflict when another text of the product already holds it.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/ProductText"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Failed validation",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/request-validation"
-                    },
-                    "title": {
-                      "description": "Error messages",
-                      "type": "string",
-                      "example": "Request payload validation failed."
-                    },
-                    "violations": {
-                      "description": "Error messages",
-                      "type": "object",
-                      "example": {
-                        "language": [
-                          "The language field must be a string."
-                        ],
-                        "salesChannel": [
-                          "The sales channel field must be an array."
-                        ],
-                        "name": [
-                          "The name field must be a string."
-                        ]
-                      }
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Problem occurred",
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "properties": {
-                    "type": {
-                      "description": "A URI reference that identifies the problem type.",
-                      "type": "string",
-                      "example": "https://api.xentral.biz/problems/write-protected"
-                    },
-                    "title": {
-                      "description": "A short, human-readable summary of the problem type.",
-                      "type": "string",
-                      "example": "The resource is write-protected."
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "message": {
-                      "description": "Too Many Requests",
-                      "type": "string",
-                      "example": "Too Many Requests"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            }
-          }
-        },
-        "x-beta": true,
-        "x-scopes": [
-          "productText:update"
         ]
       }
     },
