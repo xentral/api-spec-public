@@ -674,6 +674,15 @@
                     "type": "string",
                     "example": "EUR"
                   },
+                  "priceInputMode": {
+                    "description": "Whether the line item prices of this document are entered as `net` (the default) or as `gross`. In gross mode each line sends `price.gross` instead of `price.net` and the XGL tax engine derives the net, tax amount and tax rate. Gross mode is only accepted once the XGL migration has been confirmed; sending it otherwise is rejected. Omitted, the document stays in net mode and behaves exactly as before.",
+                    "type": "string",
+                    "enum": [
+                      "net",
+                      "gross"
+                    ],
+                    "example": "gross"
+                  },
                   "paymentMethod": {
                     "$ref": "#/components/schemas/PaymentMethodReferenceData",
                     "description": "Reference to the payment method used for the document. Defaults to the customer or supplier payment settings when omitted on create."
@@ -3160,6 +3169,76 @@
           "position": {
             "$ref": "#/components/schemas/LineItemPositionData",
             "description": "Where to place the line item. If omitted, it is appended after the last line item of the document."
+          }
+        },
+        "type": "object"
+      },
+      "CreateProductPackagingUnitData": {
+        "description": "A packaging unit of a product: a box holding a fixed number of items, together with the pallet layout it is stacked in. Every field except quantity is optional; an omitted measure or pallet value is 0. The computed fields boxVolume, netWeight and grossWeight of the response are read-only: sending one, even as null, is rejected with 400.",
+        "required": [
+          "quantity"
+        ],
+        "properties": {
+          "quantity": {
+            "description": "Number of items contained in one box. Must be greater than 0, with at most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "exclusiveMinimum": 0,
+            "example": 12
+          },
+          "barcode": {
+            "description": "Barcode of the packaging unit, scanned to identify the box during stock-in. It must not be used by another packaging unit of any product, deleted ones included, or as a product number (409 Conflict otherwise). Null or an empty string stores no barcode. Requests writing the same barcode run one after the other; one that waits longer than 5 seconds is refused with 409 and the problem type https://api.xentral.biz/problems/resource-locked.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "example": "4260123456789"
+          },
+          "description": {
+            "description": "Free-text description of the packaging unit. Null stores no description.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Retail carton"
+          },
+          "length": {
+            "description": "Length of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 40
+          },
+          "width": {
+            "description": "Width of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 30
+          },
+          "height": {
+            "description": "Height of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 20
+          },
+          "tareWeight": {
+            "description": "Weight of the empty packaging (tare) in grams. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 250
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/ProductPackagingUnitPalletData",
+            "description": "Pallet layout of the packaging unit."
           }
         },
         "type": "object"
@@ -8588,6 +8667,14 @@
             "format": "float",
             "example": 19
           },
+          "taxCode": {
+            "description": "Name of the XGL tax the tax engine applied to this line item. Free-form text with no fixed format, for example \"DE-19\" or \"Reverse Charge DE\". Read-only and only populated for customers who have confirmed the XGL migration; null otherwise.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "DE-19"
+          },
           "price": {
             "description": "Price information for this line item",
             "properties": {
@@ -8868,6 +8955,15 @@
                   "null"
                 ],
                 "example": "EUR"
+              },
+              "priceInputMode": {
+                "description": "Whether the line item prices of this document were entered as `net` or as `gross`. `gross` is only available to customers who have confirmed the XGL migration; every other document is `net`.",
+                "type": "string",
+                "enum": [
+                  "net",
+                  "gross"
+                ],
+                "example": "net"
               },
               "exchangeRate": {
                 "description": "Per-document exchange rate snapshot. `null` means the document type does not carry a per-document exchange rate (e.g. purchase orders, proforma invoices); `0` means the document type supports it but no override is set — the system falls back to the global currency exchange table; any other value is the document-specific override.",
@@ -9794,24 +9890,15 @@
             "example": 5
           },
           "price": {
-            "description": "Price information",
+            "description": "Price information. Send `net` in the document's net price mode (the default) and `gross` in its gross price mode (`financials.priceInputMode: gross`, available once the XGL migration is confirmed). The two are mutually exclusive; in gross mode the XGL tax engine derives the net, tax amount and tax rate.",
             "properties": {
               "net": {
-                "description": "Net price",
-                "properties": {
-                  "amount": {
-                    "description": "Net amount",
-                    "type": "number",
-                    "format": "float",
-                    "example": 99.99
-                  },
-                  "currency": {
-                    "description": "Currency code",
-                    "type": "string",
-                    "example": "EUR"
-                  }
-                },
-                "type": "object"
+                "$ref": "#/components/schemas/Money",
+                "description": "Net price. The only price in net mode."
+              },
+              "gross": {
+                "$ref": "#/components/schemas/Money",
+                "description": "Gross price the line is charged at. Only accepted in the document's gross price mode; the XGL tax engine derives the net from it. Across a document, the line item gross values must add up to the document gross."
               }
             },
             "type": "object"
@@ -13399,6 +13486,41 @@
         },
         "type": "object",
         "additionalProperties": false
+      },
+      "ProductPackagingUnitPalletData": {
+        "description": "Pallet layout of a packaging unit. The pallet totals of the response are computed from it and read-only: sending boxes, units or netWeight, even as null, is rejected with 400.",
+        "properties": {
+          "boxesPerLayer": {
+            "description": "Number of boxes per layer.",
+            "type": "integer",
+            "maximum": 2147483647,
+            "minimum": 0,
+            "example": 8
+          },
+          "layers": {
+            "description": "Number of layers stacked on the pallet.",
+            "type": "integer",
+            "maximum": 2147483647,
+            "minimum": 0,
+            "example": 5
+          },
+          "additionalBoxes": {
+            "description": "Additional boxes placed on top of the full layers.",
+            "type": "integer",
+            "maximum": 2147483647,
+            "minimum": 0,
+            "example": 2
+          },
+          "height": {
+            "description": "Height of the loaded pallet in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 120
+          }
+        },
+        "type": "object"
       },
       "ProductPrintSettingsData": {
         "description": "Document print settings applied when the product appears on a document. Both fields are independent: send only the one you want to change.",
@@ -25300,6 +25422,73 @@
           "position": {
             "$ref": "#/components/schemas/LineItemPositionData",
             "description": "Moves the line item to a new position. The line items that follow are renumbered, and the intermediate line items anchored to them keep their place."
+          }
+        },
+        "type": "object"
+      },
+      "UpdateProductPackagingUnitData": {
+        "description": "Partial update of a packaging unit: send only the fields to change. Within pallet, too, only the values sent are changed. The computed fields boxVolume, netWeight and grossWeight of the response are read-only: sending one, even as null, is rejected with 400, so a packaging unit read back has to be sent without them.",
+        "properties": {
+          "quantity": {
+            "description": "Number of items contained in one box. Must be greater than 0, with at most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "exclusiveMinimum": 0,
+            "example": 12
+          },
+          "barcode": {
+            "description": "Barcode of the packaging unit, scanned to identify the box during stock-in. A changed barcode must not be used by another packaging unit of any product, deleted ones included, or as a product number (409 Conflict otherwise). Null or an empty string removes the barcode. Requests writing the same barcode run one after the other; one that waits longer than 5 seconds is refused with 409 and the problem type https://api.xentral.biz/problems/resource-locked.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 255,
+            "example": "4260123456789"
+          },
+          "description": {
+            "description": "Free-text description of the packaging unit. Null clears it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Retail carton"
+          },
+          "length": {
+            "description": "Length of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 40
+          },
+          "width": {
+            "description": "Width of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 30
+          },
+          "height": {
+            "description": "Height of the box in centimeters. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 20
+          },
+          "tareWeight": {
+            "description": "Weight of the empty packaging (tare) in grams. At most four decimal places.",
+            "type": "number",
+            "format": "float",
+            "maximum": 9999999999.9999,
+            "minimum": 0,
+            "example": 250
+          },
+          "pallet": {
+            "$ref": "#/components/schemas/ProductPackagingUnitPalletData",
+            "description": "Pallet layout of the packaging unit."
           }
         },
         "type": "object"
@@ -44030,6 +44219,355 @@
         },
         "x-scopes": [
           "deliveryThreshold:create"
+        ]
+      }
+    },
+    "/api/v3/products/{productId}/packagingUnits": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "🔒 Create product packaging unit V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `packagingUnit:create`.\n\nCreate a packaging unit of a product. A barcode must not be used by another packaging unit of any product or as a product number; such a barcode is rejected with 409 Conflict. Packaging units are read through include=packagingUnits on the product.",
+        "operationId": "POST::api-v3-products-productid-packagingunits",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductPackagingUnitData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a packaging unit of a product. A barcode must not be used by another packaging unit of any product or as a product number; such a barcode is rejected with 409 Conflict. Packaging units are read through include=packagingUnits on the product.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ProductPackagingUnit"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed validation",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/request-validation"
+                    },
+                    "title": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "Request payload validation failed."
+                    },
+                    "violations": {
+                      "description": "Error messages",
+                      "type": "object",
+                      "example": {
+                        "quantity": [
+                          "The quantity field is required."
+                        ],
+                        "barcode": [
+                          "The barcode field must be a string."
+                        ],
+                        "description": [
+                          "The description field must be a string."
+                        ]
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/invalid-status"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "The resource cannot be modified in its current status."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "Only a draft BusinessDocument can be deleted."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "packagingUnit:create"
+        ]
+      }
+    },
+    "/api/v3/products/{productId}/packagingUnits/{packagingUnitId}": {
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "🔒 Delete product packaging unit V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `packagingUnit:delete`.\n\nDelete a packaging unit of a product; its barcode is free again afterwards. Deleting the product itself does not delete its packaging units: they stay stored and keep their barcodes.",
+        "operationId": "DELETE::api-v3-products-productid-packagingunits-packagingunitid",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "packagingUnitId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "packagingUnit:delete"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "🔒 Update product packaging unit V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `packagingUnit:update`.\n\nUpdate a packaging unit of a product. Only the fields sent are written. A changed barcode must not be used by another packaging unit of any product or as a product number; such a barcode is rejected with 409 Conflict. A packaging unit whose barcode is already shared stays writable as long as the barcode is not changed.",
+        "operationId": "PATCH::api-v3-products-productid-packagingunits-packagingunitid",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "packagingUnitId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductPackagingUnitData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update a packaging unit of a product. Only the fields sent are written. A changed barcode must not be used by another packaging unit of any product or as a product number; such a barcode is rejected with 409 Conflict. A packaging unit whose barcode is already shared stays writable as long as the barcode is not changed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/ProductPackagingUnit"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed validation",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/request-validation"
+                    },
+                    "title": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "Request payload validation failed."
+                    },
+                    "violations": {
+                      "description": "Error messages",
+                      "type": "object",
+                      "example": {
+                        "quantity": [
+                          "The quantity field must be a number."
+                        ],
+                        "barcode": [
+                          "The barcode field must be a string."
+                        ],
+                        "description": [
+                          "The description field must be a string."
+                        ]
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/invalid-status"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "The resource cannot be modified in its current status."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "Only a draft BusinessDocument can be deleted."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-scopes": [
+          "packagingUnit:update"
         ]
       }
     },
