@@ -476,10 +476,6 @@
       "description": "Polling is used to check the connection to the Xentral backend."
     },
     {
-      "name": "Intercom",
-      "description": "Intercom Messenger sign-in for the signed-in user."
-    },
-    {
       "name": "Group",
       "description": "Group resource."
     },
@@ -150001,6 +149997,32 @@
             }
           },
           {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
             "name": "filter",
             "in": "query",
             "style": "deepObject",
@@ -150052,11 +150074,161 @@
           }
         ],
         "summary": "List storage items V1",
-        "description": "Returns all storage location items for the specified warehouse / location. If no Accept header is provided, or if Accept: application/json is specified, the response format is identical to version 2.",
+        "description": "Deprecated, use version 2. Without an Accept header or with `Accept: application/json`, returns the same response as version 2: one page of products at a time, 10 per page by default, `page[size]` accepts 10 to 50; fetch the remaining pages by sending `page[number]` together with `page[size]`.",
         "responses": {
           "200": {
             "description": "Operation completed successfully.",
             "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "description": "Representation of a list of Items in storage",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "productId": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "sku": {
+                            "type": "string",
+                            "description": "SKU code of the item",
+                            "example": "ABC-12345-S-BL"
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "description": "Quantity of the item to stock to storage location",
+                            "example": 5
+                          },
+                          "qualityControlAttributes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "quantity": {
+                                  "type": "number",
+                                  "description": "Quantity of the item to stock to storage location"
+                                },
+                                "batch": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "Batch of the item"
+                                },
+                                "bestBeforeDate": {
+                                  "type": "string",
+                                  "format": "date",
+                                  "nullable": true,
+                                  "description": "Best before date of the item"
+                                },
+                                "serialNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "number": {
+                                        "type": "string",
+                                        "description": "The serial numbers of the item"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "description": "List of Product unit specific quality properties",
+                            "example": [
+                              {
+                                "quantity": 5,
+                                "batch": "Batch1",
+                                "bestBeforeDate": "2025-01-01",
+                                "serialNumbers": [
+                                  {
+                                    "number": "001"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "productId": "1",
+                          "sku": "ABC-12345-S-BL",
+                          "quantity": 5,
+                          "qualityControlAttributes": [
+                            {
+                              "quantity": 5,
+                              "batch": "Batch1",
+                              "bestBeforeDate": "2025-01-01",
+                              "serialNumbers": [
+                                {
+                                  "number": "001"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
@@ -151533,10 +151705,86 @@
               "example": "17",
               "description": "Resource identifier."
             }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "productId"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "greaterThan",
+                      "lessThan",
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "lessThanOrEquals",
+                      "greaterThanOrEquals"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Product ID value. For the operations 'in' and 'notIn', a comma-separated list of product IDs.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         ],
         "summary": "List storage items V2",
-        "description": "Returns all storage location items for the specified warehouse / location.",
+        "description": "Returns the products stored on the specified storage location, one page at a time: 10 products per page by default, `page[size]` accepts 10 to 50. `extra.totalCount` is the number of matching products; fetch the remaining pages by sending `page[number]` together with `page[size]`, or request only specific products with a `productId` filter.",
         "responses": {
           "200": {
             "description": "Operation completed successfully. Support for products where a product is both serial number tracked AND batch/best before date tracked at the same time is limited. In case serial number tracking is set to \"Generate own\" in the product master data, the qualityControlAttribute quantities will be reported (a) for the serial numbers on shelf and (b) for the batch/bestBeforeDate records on shelf, thus potentially resulting in a double count in the total across all qualityControlAttribute->quantity values. The quantity on the product->quantity level reflects the correct quantity on shelf in any case.",
