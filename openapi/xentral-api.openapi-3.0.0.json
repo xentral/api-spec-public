@@ -135868,43 +135868,25 @@
                           "delivery": {
                             "allOf": [
                               {
-                                "type": "object",
-                                "properties": {
-                                  "autoShipping": {
-                                    "type": "boolean",
-                                    "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
-                                  },
-                                  "fastLane": {
-                                    "type": "boolean"
-                                  },
-                                  "shippingCosts": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "additionalProperties": false,
-                                      "required": [
-                                        "shippingCostProduct",
-                                        "quantity"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string",
-                                          "pattern": "\\d+",
-                                          "example": "17",
-                                          "description": "Resource identifier."
-                                        },
-                                        "quantity": {
-                                          "type": "number",
-                                          "format": "double"
-                                        },
-                                        "comment": {
-                                          "type": "string"
-                                        },
-                                        "shippingCostProduct": {
+                                "allOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "autoShipping": {
+                                        "type": "boolean",
+                                        "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
+                                      },
+                                      "fastLane": {
+                                        "type": "boolean"
+                                      },
+                                      "shippingCosts": {
+                                        "type": "array",
+                                        "items": {
                                           "type": "object",
                                           "additionalProperties": false,
                                           "required": [
-                                            "id"
+                                            "shippingCostProduct",
+                                            "quantity"
                                           ],
                                           "properties": {
                                             "id": {
@@ -135913,224 +135895,251 @@
                                               "example": "17",
                                               "description": "Resource identifier."
                                             },
-                                            "name": {
+                                            "quantity": {
+                                              "type": "number",
+                                              "format": "double"
+                                            },
+                                            "comment": {
                                               "type": "string"
                                             },
-                                            "description": {
-                                              "type": "string"
-                                            },
-                                            "freeFields": {
-                                              "type": "array",
-                                              "nullable": true,
-                                              "items": {
-                                                "type": "object",
-                                                "additionalProperties": false,
-                                                "required": [
-                                                  "id",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "id": {
-                                                    "type": "string",
-                                                    "pattern": "\\d+",
-                                                    "example": "17",
-                                                    "description": "Resource identifier."
-                                                  },
-                                                  "value": {
-                                                    "type": "string"
+                                            "shippingCostProduct": {
+                                              "type": "object",
+                                              "additionalProperties": false,
+                                              "required": [
+                                                "id"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string",
+                                                  "pattern": "\\d+",
+                                                  "example": "17",
+                                                  "description": "Resource identifier."
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "freeFields": {
+                                                  "type": "array",
+                                                  "nullable": true,
+                                                  "items": {
+                                                    "type": "object",
+                                                    "additionalProperties": false,
+                                                    "required": [
+                                                      "id",
+                                                      "value"
+                                                    ],
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string",
+                                                        "pattern": "\\d+",
+                                                        "example": "17",
+                                                        "description": "Resource identifier."
+                                                      },
+                                                      "value": {
+                                                        "type": "string"
+                                                      }
+                                                    }
                                                   }
+                                                },
+                                                "number": {
+                                                  "type": "string",
+                                                  "nullable": true
                                                 }
                                               }
                                             },
-                                            "number": {
-                                              "type": "string",
-                                              "nullable": true
-                                            }
-                                          }
-                                        },
-                                        "tax": {
-                                          "type": "object",
-                                          "required": [
-                                            "taxText"
-                                          ],
-                                          "properties": {
-                                            "vatCategory": {
-                                              "type": "string",
-                                              "nullable": true,
-                                              "enum": [
-                                                "reduced",
-                                                "normal",
-                                                "exempt"
+                                            "tax": {
+                                              "type": "object",
+                                              "required": [
+                                                "taxText"
                                               ],
-                                              "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
-                                              "example": "reduced"
+                                              "properties": {
+                                                "vatCategory": {
+                                                  "type": "string",
+                                                  "nullable": true,
+                                                  "enum": [
+                                                    "reduced",
+                                                    "normal",
+                                                    "exempt"
+                                                  ],
+                                                  "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
+                                                  "example": "reduced"
+                                                },
+                                                "rate": {
+                                                  "type": "number",
+                                                  "format": "float",
+                                                  "example": 0.5,
+                                                  "nullable": true,
+                                                  "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                                                },
+                                                "taxText": {
+                                                  "type": "string",
+                                                  "example": "Tax Text",
+                                                  "nullable": true,
+                                                  "description": "Tax Text"
+                                                }
+                                              }
                                             },
-                                            "rate": {
+                                            "price": {
+                                              "description": "Money object with amount and currency",
+                                              "example": {
+                                                "amount": "13.37",
+                                                "currency": "EUR"
+                                              },
+                                              "type": "object",
+                                              "additionalProperties": false,
+                                              "properties": {
+                                                "amount": {
+                                                  "description": "A string representing the amount",
+                                                  "type": "string",
+                                                  "format": "float",
+                                                  "example": "24.99"
+                                                },
+                                                "currency": {
+                                                  "type": "string",
+                                                  "pattern": "[A-Z]{3}",
+                                                  "enum": [
+                                                    "EUR",
+                                                    "USD",
+                                                    "JPY",
+                                                    "BGN",
+                                                    "CZK",
+                                                    "DKK",
+                                                    "GBP",
+                                                    "HUF",
+                                                    "PLN",
+                                                    "RON",
+                                                    "SEK",
+                                                    "CHF",
+                                                    "ISK",
+                                                    "NOK",
+                                                    "HRK",
+                                                    "RUB",
+                                                    "TRY",
+                                                    "AUD",
+                                                    "BRL",
+                                                    "CAD",
+                                                    "CNY",
+                                                    "HKD",
+                                                    "IDR",
+                                                    "ILS",
+                                                    "INR",
+                                                    "KRW",
+                                                    "MXN",
+                                                    "MYR",
+                                                    "NZD",
+                                                    "PHP",
+                                                    "SGD",
+                                                    "THB",
+                                                    "ZAR",
+                                                    "ARS",
+                                                    "CLP",
+                                                    "SAR",
+                                                    "AED",
+                                                    "QAR"
+                                                  ],
+                                                  "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                                  "example": "PLN"
+                                                }
+                                              }
+                                            },
+                                            "discount": {
                                               "type": "number",
                                               "format": "float",
-                                              "example": 0.5,
-                                              "nullable": true,
-                                              "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                                              "description": "percentage discount to be applied to the position, expressed as a decimal value (<code>0.15</code> = 15% discount)"
                                             },
-                                            "taxText": {
+                                            "webId": {
                                               "type": "string",
-                                              "example": "Tax Text",
-                                              "nullable": true,
-                                              "description": "Tax Text"
+                                              "description": "technical position ID in the originating shop system / platform (e.g. Shopify, Amazon, etc). This ID is used to sync info back to the originating shop / platform"
                                             }
                                           }
+                                        }
+                                      },
+                                      "storageCountry": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use storageCountry for external fulfillment without delivery notes to set the country of fulfillment. If using delivery notes, do not use storageCountry."
+                                      },
+                                      "preferredWarehouse": {
+                                        "type": "object",
+                                        "nullable": true,
+                                        "properties": {
+                                          "id": {
+                                            "type": "string",
+                                            "nullable": false
+                                          }
                                         },
-                                        "price": {
-                                          "description": "Money object with amount and currency",
-                                          "example": {
-                                            "amount": "13.37",
-                                            "currency": "EUR"
+                                        "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use preferredWarehouse for fulfillment with delivery notes to define which warehouse should be used."
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "shippingAddress": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": [
+                                          "name",
+                                          "country"
+                                        ],
+                                        "properties": {
+                                          "type": {
+                                            "type": "string",
+                                            "enum": [
+                                              "mr",
+                                              "mrs",
+                                              "company",
+                                              "other"
+                                            ]
                                           },
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                            "amount": {
-                                              "description": "A string representing the amount",
-                                              "type": "string",
-                                              "format": "float",
-                                              "example": "24.99"
-                                            },
-                                            "currency": {
-                                              "type": "string",
-                                              "pattern": "[A-Z]{3}",
-                                              "enum": [
-                                                "EUR",
-                                                "USD",
-                                                "JPY",
-                                                "BGN",
-                                                "CZK",
-                                                "DKK",
-                                                "GBP",
-                                                "HUF",
-                                                "PLN",
-                                                "RON",
-                                                "SEK",
-                                                "CHF",
-                                                "ISK",
-                                                "NOK",
-                                                "HRK",
-                                                "RUB",
-                                                "TRY",
-                                                "AUD",
-                                                "BRL",
-                                                "CAD",
-                                                "CNY",
-                                                "HKD",
-                                                "IDR",
-                                                "ILS",
-                                                "INR",
-                                                "KRW",
-                                                "MXN",
-                                                "MYR",
-                                                "NZD",
-                                                "PHP",
-                                                "SGD",
-                                                "THB",
-                                                "ZAR",
-                                                "ARS",
-                                                "CLP",
-                                                "SAR",
-                                                "AED",
-                                                "QAR"
-                                              ],
-                                              "description": "Currency matches one of currency values as specified in ISO-4217.",
-                                              "example": "PLN"
-                                            }
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "department": {
+                                            "type": "string"
+                                          },
+                                          "contactPerson": {
+                                            "type": "string"
+                                          },
+                                          "subDepartment": {
+                                            "type": "string"
+                                          },
+                                          "street": {
+                                            "type": "string"
+                                          },
+                                          "zipCode": {
+                                            "type": "string"
+                                          },
+                                          "city": {
+                                            "type": "string"
+                                          },
+                                          "state": {
+                                            "type": "string"
+                                          },
+                                          "country": {
+                                            "type": "string"
+                                          },
+                                          "addressSupplement": {
+                                            "type": "string"
+                                          },
+                                          "gln": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "email": {
+                                            "type": "string",
+                                            "format": "email"
                                           }
-                                        },
-                                        "discount": {
-                                          "type": "number",
-                                          "format": "float",
-                                          "description": "percentage discount to be applied to the position, expressed as a decimal value (<code>0.15</code> = 15% discount)"
-                                        },
-                                        "webId": {
-                                          "type": "string",
-                                          "description": "technical position ID in the originating shop system / platform (e.g. Shopify, Amazon, etc). This ID is used to sync info back to the originating shop / platform"
                                         }
                                       }
                                     }
-                                  },
-                                  "storageCountry": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use storageCountry for external fulfillment without delivery notes to set the country of fulfillment. If using delivery notes, do not use storageCountry."
-                                  },
-                                  "preferredWarehouse": {
-                                    "type": "object",
-                                    "nullable": true,
-                                    "properties": {
-                                      "id": {
-                                        "type": "string",
-                                        "nullable": false
-                                      }
-                                    },
-                                    "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use preferredWarehouse for fulfillment with delivery notes to define which warehouse should be used."
-                                  },
-                                  "shippingAddress": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "name",
-                                      "country"
-                                    ],
-                                    "properties": {
-                                      "type": {
-                                        "type": "string",
-                                        "enum": [
-                                          "mr",
-                                          "mrs",
-                                          "company",
-                                          "other"
-                                        ]
-                                      },
-                                      "name": {
-                                        "type": "string"
-                                      },
-                                      "department": {
-                                        "type": "string"
-                                      },
-                                      "contactPerson": {
-                                        "type": "string"
-                                      },
-                                      "subDepartment": {
-                                        "type": "string"
-                                      },
-                                      "street": {
-                                        "type": "string"
-                                      },
-                                      "zipCode": {
-                                        "type": "string"
-                                      },
-                                      "city": {
-                                        "type": "string"
-                                      },
-                                      "state": {
-                                        "type": "string"
-                                      },
-                                      "country": {
-                                        "type": "string"
-                                      },
-                                      "addressSupplement": {
-                                        "type": "string"
-                                      },
-                                      "gln": {
-                                        "type": "string"
-                                      },
-                                      "title": {
-                                        "type": "string"
-                                      },
-                                      "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                      }
-                                    }
                                   }
-                                }
+                                ]
                               },
                               {
                                 "type": "object",
@@ -136674,11 +136683,6 @@
                       "costCenter": {
                         "type": "object",
                         "additionalProperties": false,
-                        "nullable": true,
-                        "required": [
-                          "id",
-                          "number"
-                        ],
                         "properties": {
                           "id": {
                             "type": "string",
@@ -136688,7 +136692,7 @@
                           },
                           "number": {
                             "type": "string",
-                            "nullable": true
+                            "pattern": "^[0-9]+$"
                           }
                         },
                         "example": {
@@ -136738,7 +136742,9 @@
                             "type": "string"
                           },
                           "fax": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "Fax number of the customer at the billing address."
                           },
                           "state": {
                             "type": "string"
@@ -136753,13 +136759,20 @@
                             "type": "string"
                           },
                           "phoneNumber": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "Phone number of the customer at the billing address."
                           },
                           "mobile": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64,
+                            "description": "Mobile number of the customer at the billing address."
                           },
                           "salutation": {
-                            "type": "string"
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "Personal salutation for letters and emails to the customer, for example \"Dear Mr. Smith\"."
                           },
                           "email": {
                             "type": "string",
@@ -136829,7 +136842,7 @@
                         }
                       }
                     },
-                    "description": "Financial information for a Sales Order",
+                    "description": "Financial information for a Sales Order import",
                     "example": {
                       "paymentMethod": {
                         "id": "3"
@@ -137042,7 +137055,12 @@
                               }
                             },
                             "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use preferredWarehouse for fulfillment with delivery notes to define which warehouse should be used."
-                          },
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
                           "shippingAddress": {
                             "type": "object",
                             "additionalProperties": false,
@@ -137099,6 +137117,30 @@
                               "email": {
                                 "type": "string",
                                 "format": "email"
+                              },
+                              "phoneNumber": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 64,
+                                "description": "Phone number of the recipient at the shipping address."
+                              },
+                              "fax": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 64,
+                                "description": "Fax number of the recipient at the shipping address."
+                              },
+                              "mobile": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 64,
+                                "description": "Mobile number of the recipient at the shipping address."
+                              },
+                              "salutation": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 64,
+                                "description": "Personal salutation for letters and emails to the recipient, for example \"Dear Mr. Smith\"."
                               }
                             }
                           }
@@ -139293,43 +139335,25 @@
                         "delivery": {
                           "allOf": [
                             {
-                              "type": "object",
-                              "properties": {
-                                "autoShipping": {
-                                  "type": "boolean",
-                                  "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
-                                },
-                                "fastLane": {
-                                  "type": "boolean"
-                                },
-                                "shippingCosts": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "required": [
-                                      "shippingCostProduct",
-                                      "quantity"
-                                    ],
-                                    "properties": {
-                                      "id": {
-                                        "type": "string",
-                                        "pattern": "\\d+",
-                                        "example": "17",
-                                        "description": "Resource identifier."
-                                      },
-                                      "quantity": {
-                                        "type": "number",
-                                        "format": "double"
-                                      },
-                                      "comment": {
-                                        "type": "string"
-                                      },
-                                      "shippingCostProduct": {
+                              "allOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "autoShipping": {
+                                      "type": "boolean",
+                                      "description": "Indicates if automatic shipping is enabled, this is part of the sales order traffic light"
+                                    },
+                                    "fastLane": {
+                                      "type": "boolean"
+                                    },
+                                    "shippingCosts": {
+                                      "type": "array",
+                                      "items": {
                                         "type": "object",
                                         "additionalProperties": false,
                                         "required": [
-                                          "id"
+                                          "shippingCostProduct",
+                                          "quantity"
                                         ],
                                         "properties": {
                                           "id": {
@@ -139338,224 +139362,251 @@
                                             "example": "17",
                                             "description": "Resource identifier."
                                           },
-                                          "name": {
+                                          "quantity": {
+                                            "type": "number",
+                                            "format": "double"
+                                          },
+                                          "comment": {
                                             "type": "string"
                                           },
-                                          "description": {
-                                            "type": "string"
-                                          },
-                                          "freeFields": {
-                                            "type": "array",
-                                            "nullable": true,
-                                            "items": {
-                                              "type": "object",
-                                              "additionalProperties": false,
-                                              "required": [
-                                                "id",
-                                                "value"
-                                              ],
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string",
-                                                  "pattern": "\\d+",
-                                                  "example": "17",
-                                                  "description": "Resource identifier."
-                                                },
-                                                "value": {
-                                                  "type": "string"
+                                          "shippingCostProduct": {
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "required": [
+                                              "id"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string",
+                                                "pattern": "\\d+",
+                                                "example": "17",
+                                                "description": "Resource identifier."
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              },
+                                              "freeFields": {
+                                                "type": "array",
+                                                "nullable": true,
+                                                "items": {
+                                                  "type": "object",
+                                                  "additionalProperties": false,
+                                                  "required": [
+                                                    "id",
+                                                    "value"
+                                                  ],
+                                                  "properties": {
+                                                    "id": {
+                                                      "type": "string",
+                                                      "pattern": "\\d+",
+                                                      "example": "17",
+                                                      "description": "Resource identifier."
+                                                    },
+                                                    "value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
                                                 }
+                                              },
+                                              "number": {
+                                                "type": "string",
+                                                "nullable": true
                                               }
                                             }
                                           },
-                                          "number": {
-                                            "type": "string",
-                                            "nullable": true
-                                          }
-                                        }
-                                      },
-                                      "tax": {
-                                        "type": "object",
-                                        "required": [
-                                          "taxText"
-                                        ],
-                                        "properties": {
-                                          "vatCategory": {
-                                            "type": "string",
-                                            "nullable": true,
-                                            "enum": [
-                                              "reduced",
-                                              "normal",
-                                              "exempt"
+                                          "tax": {
+                                            "type": "object",
+                                            "required": [
+                                              "taxText"
                                             ],
-                                            "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
-                                            "example": "reduced"
+                                            "properties": {
+                                              "vatCategory": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "enum": [
+                                                  "reduced",
+                                                  "normal",
+                                                  "exempt"
+                                                ],
+                                                "description": "VAT category. When importing a position only one of `rate` or `vatCategory` must be used.",
+                                                "example": "reduced"
+                                              },
+                                              "rate": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 0.5,
+                                                "nullable": true,
+                                                "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                                              },
+                                              "taxText": {
+                                                "type": "string",
+                                                "example": "Tax Text",
+                                                "nullable": true,
+                                                "description": "Tax Text"
+                                              }
+                                            }
                                           },
-                                          "rate": {
+                                          "price": {
+                                            "description": "Money object with amount and currency",
+                                            "example": {
+                                              "amount": "13.37",
+                                              "currency": "EUR"
+                                            },
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "properties": {
+                                              "amount": {
+                                                "description": "A string representing the amount",
+                                                "type": "string",
+                                                "format": "float",
+                                                "example": "24.99"
+                                              },
+                                              "currency": {
+                                                "type": "string",
+                                                "pattern": "[A-Z]{3}",
+                                                "enum": [
+                                                  "EUR",
+                                                  "USD",
+                                                  "JPY",
+                                                  "BGN",
+                                                  "CZK",
+                                                  "DKK",
+                                                  "GBP",
+                                                  "HUF",
+                                                  "PLN",
+                                                  "RON",
+                                                  "SEK",
+                                                  "CHF",
+                                                  "ISK",
+                                                  "NOK",
+                                                  "HRK",
+                                                  "RUB",
+                                                  "TRY",
+                                                  "AUD",
+                                                  "BRL",
+                                                  "CAD",
+                                                  "CNY",
+                                                  "HKD",
+                                                  "IDR",
+                                                  "ILS",
+                                                  "INR",
+                                                  "KRW",
+                                                  "MXN",
+                                                  "MYR",
+                                                  "NZD",
+                                                  "PHP",
+                                                  "SGD",
+                                                  "THB",
+                                                  "ZAR",
+                                                  "ARS",
+                                                  "CLP",
+                                                  "SAR",
+                                                  "AED",
+                                                  "QAR"
+                                                ],
+                                                "description": "Currency matches one of currency values as specified in ISO-4217.",
+                                                "example": "PLN"
+                                              }
+                                            }
+                                          },
+                                          "discount": {
                                             "type": "number",
                                             "format": "float",
-                                            "example": 0.5,
-                                            "nullable": true,
-                                            "description": "VAT rate. When importing a position only one of `rate` or `vatCategory` must be used."
+                                            "description": "percentage discount to be applied to the position, expressed as a decimal value (<code>0.15</code> = 15% discount)"
                                           },
-                                          "taxText": {
+                                          "webId": {
                                             "type": "string",
-                                            "example": "Tax Text",
-                                            "nullable": true,
-                                            "description": "Tax Text"
+                                            "description": "technical position ID in the originating shop system / platform (e.g. Shopify, Amazon, etc). This ID is used to sync info back to the originating shop / platform"
                                           }
                                         }
+                                      }
+                                    },
+                                    "storageCountry": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use storageCountry for external fulfillment without delivery notes to set the country of fulfillment. If using delivery notes, do not use storageCountry."
+                                    },
+                                    "preferredWarehouse": {
+                                      "type": "object",
+                                      "nullable": true,
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "nullable": false
+                                        }
                                       },
-                                      "price": {
-                                        "description": "Money object with amount and currency",
-                                        "example": {
-                                          "amount": "13.37",
-                                          "currency": "EUR"
+                                      "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use preferredWarehouse for fulfillment with delivery notes to define which warehouse should be used."
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "shippingAddress": {
+                                      "type": "object",
+                                      "additionalProperties": false,
+                                      "required": [
+                                        "name",
+                                        "country"
+                                      ],
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "mr",
+                                            "mrs",
+                                            "company",
+                                            "other"
+                                          ]
                                         },
-                                        "type": "object",
-                                        "additionalProperties": false,
-                                        "properties": {
-                                          "amount": {
-                                            "description": "A string representing the amount",
-                                            "type": "string",
-                                            "format": "float",
-                                            "example": "24.99"
-                                          },
-                                          "currency": {
-                                            "type": "string",
-                                            "pattern": "[A-Z]{3}",
-                                            "enum": [
-                                              "EUR",
-                                              "USD",
-                                              "JPY",
-                                              "BGN",
-                                              "CZK",
-                                              "DKK",
-                                              "GBP",
-                                              "HUF",
-                                              "PLN",
-                                              "RON",
-                                              "SEK",
-                                              "CHF",
-                                              "ISK",
-                                              "NOK",
-                                              "HRK",
-                                              "RUB",
-                                              "TRY",
-                                              "AUD",
-                                              "BRL",
-                                              "CAD",
-                                              "CNY",
-                                              "HKD",
-                                              "IDR",
-                                              "ILS",
-                                              "INR",
-                                              "KRW",
-                                              "MXN",
-                                              "MYR",
-                                              "NZD",
-                                              "PHP",
-                                              "SGD",
-                                              "THB",
-                                              "ZAR",
-                                              "ARS",
-                                              "CLP",
-                                              "SAR",
-                                              "AED",
-                                              "QAR"
-                                            ],
-                                            "description": "Currency matches one of currency values as specified in ISO-4217.",
-                                            "example": "PLN"
-                                          }
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "department": {
+                                          "type": "string"
+                                        },
+                                        "contactPerson": {
+                                          "type": "string"
+                                        },
+                                        "subDepartment": {
+                                          "type": "string"
+                                        },
+                                        "street": {
+                                          "type": "string"
+                                        },
+                                        "zipCode": {
+                                          "type": "string"
+                                        },
+                                        "city": {
+                                          "type": "string"
+                                        },
+                                        "state": {
+                                          "type": "string"
+                                        },
+                                        "country": {
+                                          "type": "string"
+                                        },
+                                        "addressSupplement": {
+                                          "type": "string"
+                                        },
+                                        "gln": {
+                                          "type": "string"
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "email": {
+                                          "type": "string",
+                                          "format": "email"
                                         }
-                                      },
-                                      "discount": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "description": "percentage discount to be applied to the position, expressed as a decimal value (<code>0.15</code> = 15% discount)"
-                                      },
-                                      "webId": {
-                                        "type": "string",
-                                        "description": "technical position ID in the originating shop system / platform (e.g. Shopify, Amazon, etc). This ID is used to sync info back to the originating shop / platform"
                                       }
                                     }
                                   }
-                                },
-                                "storageCountry": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use storageCountry for external fulfillment without delivery notes to set the country of fulfillment. If using delivery notes, do not use storageCountry."
-                                },
-                                "preferredWarehouse": {
-                                  "type": "object",
-                                  "nullable": true,
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "nullable": false
-                                    }
-                                  },
-                                  "description": "Only use preferredWarehouse OR storageCountry. You cannot use both at the same time. Use preferredWarehouse for fulfillment with delivery notes to define which warehouse should be used."
-                                },
-                                "shippingAddress": {
-                                  "type": "object",
-                                  "additionalProperties": false,
-                                  "required": [
-                                    "name",
-                                    "country"
-                                  ],
-                                  "properties": {
-                                    "type": {
-                                      "type": "string",
-                                      "enum": [
-                                        "mr",
-                                        "mrs",
-                                        "company",
-                                        "other"
-                                      ]
-                                    },
-                                    "name": {
-                                      "type": "string"
-                                    },
-                                    "department": {
-                                      "type": "string"
-                                    },
-                                    "contactPerson": {
-                                      "type": "string"
-                                    },
-                                    "subDepartment": {
-                                      "type": "string"
-                                    },
-                                    "street": {
-                                      "type": "string"
-                                    },
-                                    "zipCode": {
-                                      "type": "string"
-                                    },
-                                    "city": {
-                                      "type": "string"
-                                    },
-                                    "state": {
-                                      "type": "string"
-                                    },
-                                    "country": {
-                                      "type": "string"
-                                    },
-                                    "addressSupplement": {
-                                      "type": "string"
-                                    },
-                                    "gln": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "email": {
-                                      "type": "string",
-                                      "format": "email"
-                                    }
-                                  }
                                 }
-                              }
+                              ]
                             },
                             {
                               "type": "object",
@@ -150001,6 +150052,32 @@
             }
           },
           {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
             "name": "filter",
             "in": "query",
             "style": "deepObject",
@@ -150052,11 +150129,161 @@
           }
         ],
         "summary": "List storage items V1",
-        "description": "Returns all storage location items for the specified warehouse / location. If no Accept header is provided, or if Accept: application/json is specified, the response format is identical to version 2.",
+        "description": "Deprecated, use version 2. Without an Accept header or with `Accept: application/json`, returns the same response as version 2: one page of products at a time, 10 per page by default, `page[size]` accepts 10 to 50; fetch the remaining pages by sending `page[number]` together with `page[size]`.",
         "responses": {
           "200": {
             "description": "Operation completed successfully.",
             "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "description": "Representation of a list of Items in storage",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "productId": {
+                            "type": "string",
+                            "pattern": "\\d+",
+                            "example": "17",
+                            "description": "Resource identifier."
+                          },
+                          "sku": {
+                            "type": "string",
+                            "description": "SKU code of the item",
+                            "example": "ABC-12345-S-BL"
+                          },
+                          "quantity": {
+                            "type": "number",
+                            "description": "Quantity of the item to stock to storage location",
+                            "example": 5
+                          },
+                          "qualityControlAttributes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "quantity": {
+                                  "type": "number",
+                                  "description": "Quantity of the item to stock to storage location"
+                                },
+                                "batch": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "Batch of the item"
+                                },
+                                "bestBeforeDate": {
+                                  "type": "string",
+                                  "format": "date",
+                                  "nullable": true,
+                                  "description": "Best before date of the item"
+                                },
+                                "serialNumbers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "number": {
+                                        "type": "string",
+                                        "description": "The serial numbers of the item"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "description": "List of Product unit specific quality properties",
+                            "example": [
+                              {
+                                "quantity": 5,
+                                "batch": "Batch1",
+                                "bestBeforeDate": "2025-01-01",
+                                "serialNumbers": [
+                                  {
+                                    "number": "001"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "productId": "1",
+                          "sku": "ABC-12345-S-BL",
+                          "quantity": 5,
+                          "qualityControlAttributes": [
+                            {
+                              "quantity": 5,
+                              "batch": "Batch1",
+                              "bestBeforeDate": "2025-01-01",
+                              "serialNumbers": [
+                                {
+                                  "number": "001"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "extra": {
+                      "type": "object",
+                      "required": [
+                        "totalCount",
+                        "page"
+                      ],
+                      "additionalProperties": false,
+                      "x-description-ignore": true,
+                      "properties": {
+                        "totalCount": {
+                          "description": "the total count of all items",
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "page": {
+                          "description": "The pagination object containing the current page number and size",
+                          "type": "object",
+                          "required": [
+                            "number",
+                            "size"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "number": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "size": {
+                              "description": "The size of the pages",
+                              "type": "integer",
+                              "example": 10
+                            }
+                          },
+                          "example": {
+                            "number": 1,
+                            "size": 10
+                          }
+                        }
+                      },
+                      "example": {
+                        "totalCount": 1,
+                        "page": {
+                          "number": 1,
+                          "size": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              },
               "application/vnd.xentral.default.v1-beta+json": {
                 "schema": {
                   "type": "object",
@@ -151533,10 +151760,86 @@
               "example": "17",
               "description": "Resource identifier."
             }
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "style": "deepObject",
+            "schema": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "number",
+                "size"
+              ],
+              "properties": {
+                "number": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page number should be an integer greater than or equal to 1"
+                },
+                "size": {
+                  "type": "string",
+                  "pattern": "\\d+",
+                  "description": "Page size should usually be an integer between 10 and 50."
+                }
+              }
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "style": "deepObject",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "enum": [
+                      "productId"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "greaterThan",
+                      "lessThan",
+                      "equals",
+                      "notEquals",
+                      "in",
+                      "notIn",
+                      "lessThanOrEquals",
+                      "greaterThanOrEquals"
+                    ]
+                  },
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "description": "Product ID value. For the operations 'in' and 'notIn', a comma-separated list of product IDs.",
+                        "title": "String"
+                      },
+                      {
+                        "type": "array",
+                        "description": "Used for the operations 'in', 'notIn'.",
+                        "title": "Array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         ],
         "summary": "List storage items V2",
-        "description": "Returns all storage location items for the specified warehouse / location.",
+        "description": "Returns the products stored on the specified storage location, one page at a time: 10 products per page by default, `page[size]` accepts 10 to 50. `extra.totalCount` is the number of matching products; fetch the remaining pages by sending `page[number]` together with `page[size]`, or request only specific products with a `productId` filter.",
         "responses": {
           "200": {
             "description": "Operation completed successfully. Support for products where a product is both serial number tracked AND batch/best before date tracked at the same time is limited. In case serial number tracking is set to \"Generate own\" in the product master data, the qualityControlAttribute quantities will be reported (a) for the serial numbers on shelf and (b) for the batch/bestBeforeDate records on shelf, thus potentially resulting in a double count in the total across all qualityControlAttribute->quantity values. The quantity on the product->quantity level reflects the correct quantity on shelf in any case.",
@@ -163535,7 +163838,8 @@
                     "type": "string"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 12
                   },
                   "description": {
                     "type": "string"
@@ -163563,7 +163867,7 @@
                   "value": {
                     "username": "Test user name",
                     "email": "test@example.com",
-                    "password": "1234",
+                    "password": "abc123ghj987!?",
                     "description": "Test user description",
                     "color": "ff0000",
                     "locale": "de_DE"
@@ -164891,6 +165195,7 @@
                   },
                   "password": {
                     "type": "string",
+                    "minLength": 12,
                     "example": "abc123ghj987!?"
                   },
                   "description": {
