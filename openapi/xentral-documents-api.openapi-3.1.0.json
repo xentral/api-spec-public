@@ -238,6 +238,28 @@
         },
         "type": "object"
       },
+      "AssignTaxGroupProductRequest": {
+        "required": [
+          "product"
+        ],
+        "properties": {
+          "product": {
+            "description": "The product to assign to the tax group.",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "description": "ID of the product.",
+                "type": "string",
+                "example": "42"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
       "BookedQualityControlAttributesData": {
         "description": "The serial numbers, batch and best before date recorded for one booking of a line item.",
         "required": [
@@ -804,6 +826,1075 @@
         },
         "type": "object"
       },
+      "CiscShippingMethodSettings": {
+        "description": "Settings of a shipping method with the module `cisc`, which requests its shipping labels from a carrier integration service. The carrier credentials are never returned.",
+        "required": [
+          "carrier",
+          "sender",
+          "parcel",
+          "reference",
+          "label",
+          "insurance"
+        ],
+        "properties": {
+          "carrier": {
+            "description": "Carrier integration service the shipping labels are requested from, and the shipping product they are created for.",
+            "required": [
+              "serviceUrl",
+              "id",
+              "product",
+              "shipmentType"
+            ],
+            "properties": {
+              "serviceUrl": {
+                "description": "Base URL of the carrier integration service. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "https://cis.example.com/v1"
+              },
+              "id": {
+                "description": "Identifier of the carrier at the carrier integration service. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "gls"
+              },
+              "product": {
+                "description": "Shipping product of the carrier, a specific service the carrier offers.",
+                "required": [
+                  "id",
+                  "options",
+                  "optionDefinitions"
+                ],
+                "properties": {
+                  "id": {
+                    "description": "Identifier of the shipping product at the carrier integration service. Null when none is set.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "gls-parcel"
+                  },
+                  "options": {
+                    "description": "Values set for the options of the shipping product, sent with every shipping label request.",
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "id",
+                        "value",
+                        "valueId"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Identifier of the option, as in `optionDefinitions`. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "service"
+                        },
+                        "value": {
+                          "description": "Value of an option that takes a free value. Null when the option is set through `valueId`, or not set.",
+                          "example": 500,
+                          "oneOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "valueId": {
+                          "description": "Identifier of the chosen value, for an option with `availableValues`. Null otherwise.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "flex"
+                        }
+                      },
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "optionDefinitions": {
+                    "description": "Options the shipping product offers, as the carrier integration service described them when the shipping method was set up.",
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "id",
+                        "type",
+                        "name",
+                        "description",
+                        "required",
+                        "displayContext",
+                        "availableValues"
+                      ],
+                      "properties": {
+                        "id": {
+                          "description": "Identifier of the option. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "service"
+                        },
+                        "type": {
+                          "description": "Kind of value the option takes, for example `select`, `boolean`, `string` or `number`. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "select"
+                        },
+                        "name": {
+                          "description": "Name of the option as shown in Xentral. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "Service"
+                        },
+                        "description": {
+                          "description": "Explanation of the option. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "GLS service of the parcel"
+                        },
+                        "required": {
+                          "description": "Whether the option needs a value.",
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "displayContext": {
+                          "description": "Where the option is set: `configuration` on the shipping method, `labelPrint` when a shipping label is created, `both` in either place. Null when none is stored.",
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "configuration"
+                        },
+                        "availableValues": {
+                          "description": "Values to choose from, for an option of type `select`.",
+                          "type": "array",
+                          "items": {
+                            "required": [
+                              "id",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "description": "Identifier of the value, as set in `valueId`. Null when none is stored.",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "flex"
+                              },
+                              "name": {
+                                "description": "Name of the value as shown in Xentral. Null when none is stored.",
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Flex Delivery"
+                              }
+                            },
+                            "type": "object",
+                            "additionalProperties": false
+                          }
+                        }
+                      },
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              },
+              "shipmentType": {
+                "description": "Whether the shipping method creates shipping labels for deliveries (`outbound`) or for returns (`return`), as `supportsDeliveries` and `supportsReturns` show.",
+                "type": "string",
+                "enum": [
+                  "outbound",
+                  "return"
+                ],
+                "example": "outbound"
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          },
+          "sender": {
+            "description": "Sender address sent to the carrier with shipping labels for deliveries; a return label carries the customer as its sender instead. Null when none is set; shipping labels for deliveries then carry an empty sender.",
+            "required": [
+              "name",
+              "address",
+              "city",
+              "zip",
+              "country",
+              "state",
+              "email",
+              "phone",
+              "contactPerson"
+            ],
+            "properties": {
+              "name": {
+                "description": "Name of the sender, usually the company. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Xentral GmbH"
+              },
+              "address": {
+                "description": "Street and house number. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Fuggerstraße 11"
+              },
+              "city": {
+                "description": "City. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Augsburg"
+              },
+              "zip": {
+                "description": "Postal code. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "86150"
+              },
+              "country": {
+                "description": "Country, for example `DE`. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "DE"
+              },
+              "state": {
+                "description": "State or region. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "BY"
+              },
+              "email": {
+                "description": "Email address. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "shipping@example.com"
+              },
+              "phone": {
+                "description": "Phone number. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "+49 821 123456"
+              },
+              "contactPerson": {
+                "description": "Contact person of the sender, sent to the carrier with deliveries only. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Jane Doe"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false
+          },
+          "parcel": {
+            "description": "Defaults for the parcels shipped with this shipping method.",
+            "required": [
+              "defaultDimensions",
+              "minimumWeight"
+            ],
+            "properties": {
+              "defaultDimensions": {
+                "description": "Dimensions sent for a parcel whose own dimensions are not known. Null when none are set.",
+                "required": [
+                  "length",
+                  "width",
+                  "height"
+                ],
+                "properties": {
+                  "length": {
+                    "description": "Length of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Length in `unit`. Null when none is set.",
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "example": 30
+                      },
+                      "unit": {
+                        "description": "Unit of `value`, `cm`. Null when none is set.",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "width": {
+                    "description": "Width of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Width in `unit`. Null when none is set.",
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "example": 20
+                      },
+                      "unit": {
+                        "description": "Unit of `value`, `cm`. Null when none is set.",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "height": {
+                    "description": "Height of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Height in `unit`. Null when none is set.",
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "example": 10
+                      },
+                      "unit": {
+                        "description": "Unit of `value`, `cm`. Null when none is set.",
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false
+              },
+              "minimumWeight": {
+                "description": "Minimum parcel weight: a parcel that weighs less is sent to the carrier with this weight.",
+                "required": [
+                  "value",
+                  "unit"
+                ],
+                "properties": {
+                  "value": {
+                    "description": "Weight in `unit`. Null when none is set.",
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "example": 0.5
+                  },
+                  "unit": {
+                    "description": "Unit of `value`, `kg`. Null when none is set.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "kg"
+                  }
+                },
+                "type": "object",
+                "additionalProperties": false
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          },
+          "reference": {
+            "description": "Reference sent to the carrier with a shipping label for a delivery that has a delivery note; return labels carry none. The placeholders `{LIEFERSCHEIN}`, `{AUFTRAG}`, `{PROJEKT}`, `{IHREBESTELLNUMMER}` and `{INTERNET}` are replaced for each shipment. Null when none is set.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Order {AUFTRAG}"
+          },
+          "label": {
+            "description": "Format of the shipping labels. Null when none is set.",
+            "required": [
+              "type",
+              "size",
+              "orientation"
+            ],
+            "properties": {
+              "type": {
+                "description": "File format: `pdf`, `png`, `zpl` or `gif`. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "pdf"
+              },
+              "size": {
+                "description": "Label size, for example `A6`. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "A6"
+              },
+              "orientation": {
+                "description": "`portrait` or `landscape`. Null when none is set.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "portrait"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false
+          },
+          "insurance": {
+            "description": "Insurance of the shipments.",
+            "required": [
+              "available"
+            ],
+            "properties": {
+              "available": {
+                "description": "Whether a shipment can be insured when its shipping label is created.",
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
+      "CiscShippingMethodSettingsRequest": {
+        "description": "Settings of a shipping method with the module `cisc`, which requests its shipping labels from a carrier integration service. They replace the stored settings as a whole: a part left out is stored as not set.",
+        "required": [
+          "carrier",
+          "parcel"
+        ],
+        "properties": {
+          "carrier": {
+            "description": "Carrier integration service the shipping labels are requested from, and the shipping product they are created for.",
+            "required": [
+              "serviceUrl",
+              "id",
+              "credentials",
+              "product",
+              "shipmentType"
+            ],
+            "properties": {
+              "serviceUrl": {
+                "description": "Base URL of the carrier integration service, starting with `http://` or `https://`.",
+                "type": "string",
+                "format": "uri",
+                "example": "https://cis.example.com/v1"
+              },
+              "id": {
+                "description": "Identifier of the carrier at the carrier integration service.",
+                "type": "string",
+                "example": "gls"
+              },
+              "credentials": {
+                "description": "Credentials Xentral authenticates with at the carrier integration service: exactly one of `basic`, `bearer` and `oauthClientCredentials`. They are stored and never returned.",
+                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "basic"
+                    ],
+                    "properties": {
+                      "basic": {
+                        "description": "HTTP basic authentication.",
+                        "required": [
+                          "username",
+                          "password"
+                        ],
+                        "properties": {
+                          "username": {
+                            "description": "User name.",
+                            "type": "string",
+                            "example": "xentral"
+                          },
+                          "password": {
+                            "description": "Password.",
+                            "type": "string",
+                            "format": "password",
+                            "example": "secret"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "bearer"
+                    ],
+                    "properties": {
+                      "bearer": {
+                        "description": "A fixed bearer token.",
+                        "required": [
+                          "token"
+                        ],
+                        "properties": {
+                          "token": {
+                            "description": "Token sent with every request.",
+                            "type": "string",
+                            "format": "password",
+                            "example": "secret"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "oauthClientCredentials"
+                    ],
+                    "properties": {
+                      "oauthClientCredentials": {
+                        "description": "OAuth 2.0 client credentials: Xentral fetches an access token from `tokenUrl` before it calls the service.",
+                        "required": [
+                          "tokenUrl",
+                          "username",
+                          "password"
+                        ],
+                        "properties": {
+                          "tokenUrl": {
+                            "description": "URL the access token is requested from, starting with `http://` or `https://`.",
+                            "type": "string",
+                            "format": "uri",
+                            "example": "https://auth.example.com/oauth/token"
+                          },
+                          "username": {
+                            "description": "Client id.",
+                            "type": "string",
+                            "example": "xentral-client"
+                          },
+                          "password": {
+                            "description": "Client secret.",
+                            "type": "string",
+                            "format": "password",
+                            "example": "secret"
+                          },
+                          "audience": {
+                            "description": "Audience requested for the access token. Leave it out or send null when the service needs none.",
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "example": "https://cis.example.com"
+                          }
+                        },
+                        "type": "object"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
+              },
+              "product": {
+                "description": "Shipping product of the carrier, a specific service the carrier offers.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "description": "Identifier of the shipping product at the carrier integration service.",
+                    "type": "string",
+                    "example": "gls-parcel"
+                  },
+                  "options": {
+                    "description": "Values set for the options of the shipping product, sent with every shipping label request. Each option must be one of `optionDefinitions`, and every required option set on the shipping method (`displayContext` `configuration`, `both` or none) needs a value.",
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "description": "Identifier of the option, as in `optionDefinitions`.",
+                              "type": "string",
+                              "example": "service"
+                            },
+                            "value": {
+                              "description": "Value of an option that takes a free value.",
+                              "example": 500,
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "valueId": {
+                              "description": "Identifier of the chosen value, one of the `availableValues` of the option.",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "example": "flex"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "optionDefinitions": {
+                    "description": "Options the shipping product offers, as the carrier integration service describes them.",
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "required": [
+                            "id"
+                          ],
+                          "properties": {
+                            "id": {
+                              "description": "Identifier of the option.",
+                              "type": "string",
+                              "example": "service"
+                            },
+                            "type": {
+                              "description": "Kind of value the option takes, for example `select`, `boolean`, `string` or `number`.",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "example": "select"
+                            },
+                            "name": {
+                              "description": "Name of the option as shown in Xentral.",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "example": "Service"
+                            },
+                            "description": {
+                              "description": "Explanation of the option.",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "example": "GLS service of the parcel"
+                            },
+                            "required": {
+                              "description": "Whether the option needs a value.",
+                              "type": [
+                                "boolean",
+                                "null"
+                              ],
+                              "example": true
+                            },
+                            "displayContext": {
+                              "description": "Where the option is set: `configuration` on the shipping method, `labelPrint` when a shipping label is created, `both` in either place.",
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "enum": [
+                                "configuration",
+                                "labelPrint",
+                                "both"
+                              ],
+                              "example": "configuration"
+                            },
+                            "availableValues": {
+                              "description": "Values to choose from, for an option of type `select`.",
+                              "oneOf": [
+                                {
+                                  "type": "array",
+                                  "items": {
+                                    "required": [
+                                      "id",
+                                      "name"
+                                    ],
+                                    "properties": {
+                                      "id": {
+                                        "description": "Identifier of the value, as set in `valueId`.",
+                                        "type": "string",
+                                        "example": "flex"
+                                      },
+                                      "name": {
+                                        "description": "Name of the value as shown in Xentral.",
+                                        "type": "string",
+                                        "example": "Flex Delivery"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "type": "object"
+              },
+              "shipmentType": {
+                "description": "Whether the shipping method creates shipping labels for deliveries (`outbound`) or for returns (`return`). It sets `supportsDeliveries` and `supportsReturns`.",
+                "type": "string",
+                "enum": [
+                  "outbound",
+                  "return"
+                ],
+                "example": "outbound"
+              }
+            },
+            "type": "object"
+          },
+          "sender": {
+            "description": "Sender address sent to the carrier with shipping labels for deliveries; a return label carries the customer as its sender instead. Leave it out or send null to store none: shipping labels for deliveries then carry an empty sender, and where a label request carries customs data, such as the declared value and export declarations, it carries them for every parcel, because without a sender country no parcel counts as domestic.",
+            "required": [
+              "name",
+              "address",
+              "city",
+              "zip",
+              "country"
+            ],
+            "properties": {
+              "name": {
+                "description": "Name of the sender, usually the company.",
+                "type": "string",
+                "example": "Xentral GmbH"
+              },
+              "address": {
+                "description": "Street and house number.",
+                "type": "string",
+                "example": "Fuggerstraße 11"
+              },
+              "city": {
+                "description": "City.",
+                "type": "string",
+                "example": "Augsburg"
+              },
+              "zip": {
+                "description": "Postal code.",
+                "type": "string",
+                "example": "86150"
+              },
+              "country": {
+                "description": "Country, for example `DE`.",
+                "type": "string",
+                "example": "DE"
+              },
+              "state": {
+                "description": "State or region.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "BY"
+              },
+              "email": {
+                "description": "Email address.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "shipping@example.com"
+              },
+              "phone": {
+                "description": "Phone number.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "+49 821 123456"
+              },
+              "contactPerson": {
+                "description": "Contact person of the sender, sent to the carrier with deliveries only.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Jane Doe"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "parcel": {
+            "description": "Defaults for the parcels shipped with this shipping method.",
+            "required": [
+              "minimumWeight"
+            ],
+            "properties": {
+              "defaultDimensions": {
+                "description": "Dimensions sent for a parcel whose own dimensions are not known. Leave it out or send null to store none.",
+                "required": [
+                  "length",
+                  "width",
+                  "height"
+                ],
+                "properties": {
+                  "length": {
+                    "description": "Length of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Length in `unit`.",
+                        "type": "number",
+                        "minimum": 0,
+                        "example": 30
+                      },
+                      "unit": {
+                        "description": "Unit of `value`.",
+                        "type": "string",
+                        "enum": [
+                          "cm"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "width": {
+                    "description": "Width of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Width in `unit`.",
+                        "type": "number",
+                        "minimum": 0,
+                        "example": 20
+                      },
+                      "unit": {
+                        "description": "Unit of `value`.",
+                        "type": "string",
+                        "enum": [
+                          "cm"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "height": {
+                    "description": "Height of the parcel.",
+                    "required": [
+                      "value",
+                      "unit"
+                    ],
+                    "properties": {
+                      "value": {
+                        "description": "Height in `unit`.",
+                        "type": "number",
+                        "minimum": 0,
+                        "example": 10
+                      },
+                      "unit": {
+                        "description": "Unit of `value`.",
+                        "type": "string",
+                        "enum": [
+                          "cm"
+                        ],
+                        "example": "cm"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "minimumWeight": {
+                "description": "Minimum parcel weight: a parcel that weighs less is sent to the carrier with this weight.",
+                "required": [
+                  "value",
+                  "unit"
+                ],
+                "properties": {
+                  "value": {
+                    "description": "Weight in `unit`.",
+                    "type": "number",
+                    "minimum": 0,
+                    "example": 0.5
+                  },
+                  "unit": {
+                    "description": "Unit of `value`.",
+                    "type": "string",
+                    "enum": [
+                      "kg"
+                    ],
+                    "example": "kg"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "reference": {
+            "description": "Reference sent to the carrier with a shipping label for a delivery that has a delivery note; return labels carry none. The placeholders `{LIEFERSCHEIN}`, `{AUFTRAG}`, `{PROJEKT}`, `{IHREBESTELLNUMMER}` and `{INTERNET}` are replaced for each shipment.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Order {AUFTRAG}"
+          },
+          "label": {
+            "description": "Format of the shipping labels. Leave it out or send null to store none.",
+            "required": [
+              "type",
+              "size",
+              "orientation"
+            ],
+            "properties": {
+              "type": {
+                "description": "File format.",
+                "type": "string",
+                "enum": [
+                  "pdf",
+                  "png",
+                  "zpl",
+                  "gif"
+                ],
+                "example": "pdf"
+              },
+              "size": {
+                "description": "Label size, for example `A6`.",
+                "type": "string",
+                "example": "A6"
+              },
+              "orientation": {
+                "description": "Orientation of the label.",
+                "type": "string",
+                "enum": [
+                  "portrait",
+                  "landscape"
+                ],
+                "example": "portrait"
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "insurance": {
+            "description": "Insurance of the shipments. Leaving it out stores that a shipment cannot be insured.",
+            "required": [
+              "available"
+            ],
+            "properties": {
+              "available": {
+                "description": "Whether a shipment can be insured when its shipping label is created.",
+                "type": "boolean",
+                "example": true
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
       "CommitShippingScanSessionRequest": {
         "required": [
           "commitId",
@@ -1212,6 +2303,178 @@
         },
         "type": "object"
       },
+      "Correspondence": {
+        "description": "An entry in the contact history of an address - a letter, an email, a phone call or a note, as listed on the CRM tab of the customer, supplier or other address. An entry documents the contact; creating one through this API sends nothing.",
+        "required": [
+          "id",
+          "type",
+          "date",
+          "time",
+          "subject",
+          "content",
+          "sender",
+          "address",
+          "recipient",
+          "isSent",
+          "editor",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TimestampsResource"
+          },
+          {
+            "properties": {
+              "id": {
+                "description": "The unique identifier of the entry.",
+                "type": "string",
+                "example": "4711"
+              },
+              "type": {
+                "description": "The kind of contact; `letterFax` is a letter sent by post or fax. `null` when none is stored or the stored one is not a kind this API knows.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "email",
+                  "letter",
+                  "letterFax",
+                  "phone",
+                  "note"
+                ],
+                "example": "email"
+              },
+              "date": {
+                "description": "The day the entry is dated, usually the day it was created; a user can change it on the CRM tab. `null` when none was recorded.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date",
+                "example": "2026-11-17"
+              },
+              "time": {
+                "description": "The local time of day the entry is dated, as `HH:MM:SS`. `null` when none was recorded; the application treats midnight the same way.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "14:30:00"
+              },
+              "subject": {
+                "description": "The subject of the entry.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Question about delivery 1002"
+              },
+              "content": {
+                "description": "The text of the entry, as plain text or HTML. Four-byte characters such as emojis that were written through this API come back as numeric HTML entities, for instance `&#x1F642;`.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "<p>Thank you for your message.</p>"
+              },
+              "sender": {
+                "description": "Who the letter or email is from: a name, or for an email sent from the application the sending account as `Name <address>`. Saving the entry on the CRM tab replaces it with the selected mail account for an email and empties it for a note.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Jane Doe"
+              },
+              "address": {
+                "description": "The customer, supplier or other address whose contact history lists the entry.",
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "1337"
+                  }
+                },
+                "type": "object",
+                "example": {
+                  "id": "1337"
+                }
+              },
+              "recipient": {
+                "description": "Who the letter or email was addressed to.",
+                "required": [
+                  "name",
+                  "company",
+                  "email"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "The name of the recipient.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "John Doe"
+                  },
+                  "company": {
+                    "description": "The company of the recipient.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "ACME GmbH"
+                  },
+                  "email": {
+                    "description": "The email address the entry was addressed to, possibly as `Name <address>`.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "example": "john.doe@acme.example"
+                  }
+                },
+                "type": "object",
+                "example": {
+                  "name": "John Doe",
+                  "company": "ACME GmbH",
+                  "email": "john.doe@acme.example"
+                }
+              },
+              "isSent": {
+                "description": "Whether the entry went out: the application sets it once it has printed, exported as PDF or mailed the entry, and an entry created through the API carries what the client sent.",
+                "type": "boolean",
+                "example": false
+              },
+              "editor": {
+                "description": "Who wrote or last saved the entry, as the contact history shows it: the recorded name, or else the name of the user who last saved it on the CRM tab, which empties the recorded one. A plain name, not a reference to a user record.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "example": "Max Mustermann"
+              },
+              "createdAt": {
+                "description": "The date and time the entry was stored. Entries from before March 2025 carry the time the instance was updated instead.",
+                "type": "string",
+                "format": "date-time",
+                "example": "2026-11-17T14:30:00+01:00"
+              },
+              "updatedAt": {
+                "description": "The date and time the entry was last changed.",
+                "type": "string",
+                "format": "date-time",
+                "example": "2026-11-17T14:30:00+01:00"
+              }
+            },
+            "type": "object"
+          }
+        ],
+        "additionalProperties": false
+      },
       "CostCenter": {
         "properties": {
           "costCenter": {
@@ -1531,6 +2794,85 @@
                 "id": "7"
               }
             ]
+          }
+        },
+        "type": "object"
+      },
+      "CreateCorrespondenceRequest": {
+        "description": "The payload for a new entry in the contact history of an address. The entry is dated with the day and time it is created, and its editor is the user or integration the token belongs to.",
+        "required": [
+          "type",
+          "address"
+        ],
+        "properties": {
+          "type": {
+            "description": "The kind of contact; `letterFax` is a letter sent by post or fax.",
+            "type": "string",
+            "enum": [
+              "email",
+              "letter",
+              "letterFax",
+              "phone",
+              "note"
+            ],
+            "example": "email"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressReferenceData",
+            "description": "The customer, supplier or other address whose contact history the entry belongs to. An address that does not exist, is deleted or belongs to a project you cannot access is rejected."
+          },
+          "subject": {
+            "description": "The subject of the entry.",
+            "type": "string",
+            "maxLength": 1023,
+            "example": "Question about delivery 1002"
+          },
+          "content": {
+            "description": "The text of the entry, as plain text or HTML. HTML is stored without escaping; four-byte characters such as emojis are stored as numeric HTML entities, for instance `&#x1F642;`, and read back so.",
+            "type": "string",
+            "maxLength": 65535,
+            "example": "<p>Thank you for your message.</p>"
+          },
+          "sender": {
+            "description": "Who the letter or email is from. Saving the entry on the CRM tab later replaces it with the selected mail account for an email and empties it for a note.",
+            "type": "string",
+            "maxLength": 512,
+            "example": "Jane Doe"
+          },
+          "recipient": {
+            "description": "Who the letter or email was addressed to.",
+            "properties": {
+              "name": {
+                "description": "The name of the recipient.",
+                "type": "string",
+                "maxLength": 512,
+                "example": "John Doe"
+              },
+              "company": {
+                "description": "The company of the recipient.",
+                "type": "string",
+                "maxLength": 255,
+                "example": "ACME GmbH"
+              },
+              "email": {
+                "description": "The email address the entry was addressed to.",
+                "type": "string",
+                "maxLength": 255,
+                "example": "john.doe@acme.example"
+              }
+            },
+            "type": "object",
+            "example": {
+              "name": "John Doe",
+              "company": "ACME GmbH",
+              "email": "john.doe@acme.example"
+            }
+          },
+          "isSent": {
+            "description": "Whether the message has already gone out, for instance through your own mail system. Creating the entry sends nothing. Defaults to false.",
+            "type": "boolean",
+            "default": false,
+            "example": true
           }
         },
         "type": "object"
@@ -10702,6 +12044,110 @@
         },
         "type": "object"
       },
+      "GlsapiShippingMethodSettings": {
+        "description": "Settings of a shipping method with the module `glsapi`, which creates GLS shipping labels through the GLS Web API. The GLS username and password are never returned.",
+        "required": [
+          "customerId",
+          "contactId",
+          "service",
+          "incoterm",
+          "reference",
+          "minimumWeight",
+          "weightAdjustmentUnit",
+          "weightAdjustmentQuantity",
+          "autoTracking",
+          "preGenerateParcel"
+        ],
+        "properties": {
+          "customerId": {
+            "description": "GLS customer ID the shipping labels are created under. Null when none is set.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "2764200001"
+          },
+          "contactId": {
+            "description": "GLS contact ID, as stated in the GLS contract documents. Null when none is set.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "276a165p4e"
+          },
+          "service": {
+            "description": "GLS service the parcels are shipped with. `flexDelivery` is the Flex Delivery Service, `deposit` the Deposit Service and `guaranteed24` Express / Guaranteed 24. A shipping method saved without a service ships with `normal` and reads as `normal`. Null when no service is stored at all, or one that is none of these.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "normal",
+              "flexDelivery",
+              "deposit",
+              "guaranteed24",
+              "cashOnDelivery"
+            ],
+            "example": "normal"
+          },
+          "incoterm": {
+            "description": "GLS incoterm code sent with parcels to countries outside the EU, for example `20` (DAP) or `10` (DDP). A shipping method saved without an incoterm sends `20` and reads as `20`. Null when no incoterm is stored at all.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "20"
+          },
+          "reference": {
+            "description": "Reference sent to GLS with every parcel, and with a cash-on-delivery parcel also as its cash-on-delivery reference. The placeholders `{AUFTRAGSNUMMER}`, `{RECHNUNGSNUMMER}`, `{LIEFERSCHEINNUMMER}` and `{INTERNET}` are replaced for each shipment. Null when none is set.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "Order {AUFTRAGSNUMMER}"
+          },
+          "minimumWeight": {
+            "description": "Minimum parcel weight in kg: a parcel that weighs less is sent to GLS with this weight. Null when none is set.",
+            "type": [
+              "number",
+              "null"
+            ],
+            "example": 0.5
+          },
+          "weightAdjustmentUnit": {
+            "description": "How `weightAdjustmentQuantity` adds to the weight of each parcel: `kg` adds that many kilograms, `percentage` that percentage of the weight. Null when the stored unit is neither.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "kg",
+              "percentage"
+            ],
+            "example": "kg"
+          },
+          "weightAdjustmentQuantity": {
+            "description": "Weight added to each parcel before it is sent to GLS, for example for the packaging, in the unit of `weightAdjustmentUnit`. Null when none is set, in which case nothing is added.",
+            "type": [
+              "number",
+              "null"
+            ],
+            "example": 0.2
+          },
+          "autoTracking": {
+            "description": "Whether the tracking number is taken over into Xentral as soon as the shipping label is created, so that it does not have to be scanned.",
+            "type": "boolean",
+            "example": true
+          },
+          "preGenerateParcel": {
+            "description": "Whether shipping labels are generated in the background in advance, once a sales order with this shipping method is handed over to automatic shipping. GLS charges every label generated this way.",
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
+      },
       "Group": {
         "description": "Group object",
         "properties": {
@@ -12031,6 +13477,18 @@
             "maxLength": 255,
             "minLength": 1,
             "example": "Transferred to accounting system."
+          }
+        },
+        "type": "object"
+      },
+      "MigrateShippingMethodRequest": {
+        "required": [
+          "settings"
+        ],
+        "properties": {
+          "settings": {
+            "$ref": "#/components/schemas/CiscShippingMethodSettingsRequest",
+            "description": "Complete settings of the carrier integration service the shipping method uses from now on, including the carrier credentials."
           }
         },
         "type": "object"
@@ -23925,7 +25383,8 @@
           "skipPostageCheck",
           "supportsDeliveries",
           "supportsReturns",
-          "preferredReturnShippingMethod"
+          "preferredReturnShippingMethod",
+          "settings"
         ],
         "properties": {
           "id": {
@@ -24108,6 +25567,21 @@
             "example": {
               "id": "5"
             }
+          },
+          "settings": {
+            "description": "Settings of the carrier integration in `module`, in the shape that module defines. Credentials are never returned. Null when the shipping method has no integration, or when the settings of its integration are not available through the API yet.",
+            "example": null,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/GlsapiShippingMethodSettings"
+              },
+              {
+                "$ref": "#/components/schemas/CiscShippingMethodSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -28196,6 +29670,143 @@
           }
         },
         "type": "object"
+      },
+      "TaxGroup": {
+        "description": "A tax group: which tax type its products are taxed with in each country.",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "isActive",
+          "countryCount",
+          "productCount"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TimestampsResource"
+          },
+          {
+            "properties": {
+              "id": {
+                "description": "Identifier of the tax group.",
+                "type": "string",
+                "example": "7"
+              },
+              "name": {
+                "description": "Name of the tax group as it appears in the tax settings.",
+                "type": "string",
+                "example": "Books"
+              },
+              "description": {
+                "description": "Free-text description of what the group is for. Empty when none was given.",
+                "type": "string",
+                "example": "Printed books taxed at the reduced rate"
+              },
+              "isActive": {
+                "description": "Whether the group is applied when tax is determined. An inactive group keeps its products but has no effect on their taxation.",
+                "type": "boolean",
+                "example": true
+              },
+              "countryCount": {
+                "description": "How many countries the group defines a tax type for.",
+                "type": "integer",
+                "example": 3
+              },
+              "productCount": {
+                "description": "How many products are assigned to the group.",
+                "type": "integer",
+                "example": 42
+              },
+              "countryTaxTypes": {
+                "description": "The tax type the group applies per country. Only returned when a single tax group is requested.",
+                "type": "array",
+                "items": {
+                  "required": [
+                    "countryCode",
+                    "taxType"
+                  ],
+                  "properties": {
+                    "countryCode": {
+                      "description": "ISO 3166-1 alpha-2 code of the country this tax type applies in.",
+                      "type": "string",
+                      "example": "DE"
+                    },
+                    "taxType": {
+                      "description": "The tax type applied in that country.",
+                      "type": "string",
+                      "enum": [
+                        "standard",
+                        "reduced",
+                        "super_reduced",
+                        "free",
+                        "special",
+                        "export",
+                        "reverse_charge"
+                      ],
+                      "example": "reduced"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "TaxGroupProduct": {
+        "required": [
+          "id",
+          "number",
+          "name",
+          "taxGroup"
+        ],
+        "properties": {
+          "id": {
+            "description": "Identifier of the product.",
+            "type": "string",
+            "example": "1024"
+          },
+          "number": {
+            "description": "Product number as shown on the product.",
+            "type": "string",
+            "example": "SP-WR47M5"
+          },
+          "name": {
+            "description": "Name of the product.",
+            "type": "string",
+            "example": "Hardcover notebook"
+          },
+          "taxGroup": {
+            "description": "The tax group the product belongs to. A product belongs to at most one; a product in none is taxed with its country default and is not listed here.",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "description": "Identifier of the tax group.",
+                "type": "string",
+                "example": "7"
+              },
+              "name": {
+                "description": "Name of the tax group.",
+                "type": "string",
+                "example": "Books"
+              }
+            },
+            "type": "object",
+            "example": {
+              "id": "7",
+              "name": "Books"
+            },
+            "additionalProperties": false
+          }
+        },
+        "type": "object",
+        "additionalProperties": false
       },
       "TimestampsResource": {
         "properties": {
@@ -33516,6 +35127,10 @@
   ],
   "tags": [
     {
+      "name": "TaxGroup",
+      "description": "Tax groups decide which tax type a product is taxed with per country. Tax groups are held in the XGL general ledger, so they need it set up for the instance."
+    },
+    {
       "name": "CreditNote",
       "description": "CreditNote"
     },
@@ -33526,6 +35141,10 @@
     {
       "name": "SupplierInvoice",
       "description": "SupplierInvoice"
+    },
+    {
+      "name": "Correspondence",
+      "description": "Correspondence"
     },
     {
       "name": "EmailAccount",
@@ -62933,13 +64552,13 @@
           "SupplierInvoice"
         ],
         "summary": "🔒 List supplier invoices V3",
-        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `supplierInvoice:read`.\n\nPaginated list of supplier invoices (liabilities). Cancelled invoices are part of the list; filter them in or out with `documentStatus` or the `isCancelled` flag. `purchaseOrder.id` finds an invoice wherever it names that purchase order: for the whole invoice, in a purchase order assignment, or on a line item. Invoices belonging to a project the authenticated user cannot access are not listed.",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint requires the following scopes: `supplierInvoice:read`.\n\nPaginated list of supplier invoices (liabilities). Cancelled invoices are part of the list; filter them in or out with `documentStatus` or the `isCancelled` flag. `paymentStatus` finds the invoices that report the given payment state. Cancelling an invoice leaves its payment state as it was, so combine that filter with `documentStatus` to leave cancelled invoices out. `purchaseOrder.id` finds an invoice wherever it names that purchase order: for the whole invoice, in a purchase order assignment, or on a line item. Invoices belonging to a project the authenticated user cannot access are not listed.",
         "operationId": "GET::api-v3-supplierinvoices",
         "parameters": [
           {
             "name": "filter",
             "in": "query",
-            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`supplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`supplierInvoiceNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`documentStatus`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`purchaseOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`costCenter`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`amountGross`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`isInNeedOfClarification`: *equals*, *notEquals* \n\n`date`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`receiptDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`dueDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`isPaymentApprovalMissing`: *equals*, *notEquals* \n\n`isGoodsCheckMissing`: *equals*, *notEquals* \n\n`isInvoiceCheckMissing`: *equals*, *notEquals* \n\n`isAccountAssignmentMissing`: *equals*, *notEquals* \n\n`isPaymentMissing`: *equals*, *notEquals* \n\n`isPaid`: *equals*, *notEquals* \n\n`isCancelled`: *equals*, *notEquals* \n\n`isDocumentMissing`: *equals*, *notEquals* \n\n`hasDateAndReceiptDateInDifferentMonths`: *equals*, *notEquals*",
+            "description": "The filter parameter is used to filter the results of the given endpoint. \n\n\n**Supported filter operators by key:** \n\n`id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`supplier.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`documentNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`supplierInvoiceNumber`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`documentStatus`: *equals*, *notEquals*, *in*, *notIn* \n\n`paymentStatus`: *equals*, *notEquals*, *in*, *notIn* \n\n`project.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`salesOrder.id`: *equals*, *notEquals*, *in*, *notIn*, *isNull*, *isNotNull* \n\n`purchaseOrder.id`: *equals*, *notEquals*, *in*, *notIn* \n\n`costCenter`: *equals*, *notEquals*, *in*, *notIn*, *contains*, *notContains*, *startsWith*, *endsWith*, *isNull*, *isNotNull* \n\n`amountGross`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals* \n\n`isInNeedOfClarification`: *equals*, *notEquals* \n\n`date`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`receiptDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`dueDate`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`createdAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`updatedAt`: *equals*, *notEquals*, *lessThan*, *lessThanOrEquals*, *greaterThan*, *greaterThanOrEquals*, *isNull*, *isNotNull* \n\n`isPaymentApprovalMissing`: *equals*, *notEquals* \n\n`isGoodsCheckMissing`: *equals*, *notEquals* \n\n`isInvoiceCheckMissing`: *equals*, *notEquals* \n\n`isAccountAssignmentMissing`: *equals*, *notEquals* \n\n`isPaymentMissing`: *equals*, *notEquals* \n\n`isPaid`: *equals*, *notEquals* \n\n`isCancelled`: *equals*, *notEquals* \n\n`isDocumentMissing`: *equals*, *notEquals* \n\n`hasDateAndReceiptDateInDifferentMonths`: *equals*, *notEquals*",
             "required": false,
             "style": "deepObject",
             "schema": {
@@ -62954,6 +64573,7 @@
                       "documentNumber",
                       "supplierInvoiceNumber",
                       "documentStatus",
+                      "paymentStatus",
                       "project.id",
                       "salesOrder.id",
                       "purchaseOrder.id",
@@ -63123,7 +64743,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated list of supplier invoices (liabilities). Cancelled invoices are part of the list; filter them in or out with `documentStatus` or the `isCancelled` flag. `purchaseOrder.id` finds an invoice wherever it names that purchase order: for the whole invoice, in a purchase order assignment, or on a line item. Invoices belonging to a project the authenticated user cannot access are not listed.",
+            "description": "Paginated list of supplier invoices (liabilities). Cancelled invoices are part of the list; filter them in or out with `documentStatus` or the `isCancelled` flag. `paymentStatus` finds the invoices that report the given payment state. Cancelling an invoice leaves its payment state as it was, so combine that filter with `documentStatus` to leave cancelled invoices out. `purchaseOrder.id` finds an invoice wherever it names that purchase order: for the whole invoice, in a purchase order assignment, or on a line item. Invoices belonging to a project the authenticated user cannot access are not listed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -66751,6 +68371,911 @@
         "x-beta": true,
         "x-scopes": [
           "supplier:update"
+        ]
+      }
+    },
+    "/api/v3/taxGroups": {
+      "get": {
+        "tags": [
+          "TaxGroup"
+        ],
+        "summary": "🔒 List tax groups V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint is only available if the feature flag `xgl-migration` is enabled.\n\nThis endpoint requires the following scopes: `taxGroup:read`.\n\nPaginated list of the tax groups. Each entry reports how many countries and products it covers; request a single group to see the per-country tax types. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+        "operationId": "GET::api-v3-taxgroups",
+        "parameters": [
+          {
+            "name": "x-pagination",
+            "in": "header",
+            "description": "Controls the pagination format. Available types: simple, table. Defaults to 'simple' if not specified.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "table"
+              ],
+              "example": "simple"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of items per page. Default: 15, Max: 100. A larger value is reduced to the maximum; omitting it or sending 0 selects the default.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 15
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number. Only used with simple and table pagination. Omitting it or sending 0 selects the first page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of the tax groups. Each entry reports how many countries and products it covers; request a single group to see the per-country tax types. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "title": "Paginated Response: simple",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TaxGroup"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "description": "Pagination meta data",
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "description": "Pagination links",
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=17",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "title": "Paginated Response: table",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TaxGroup"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=10",
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=2",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "lastPage": {
+                              "description": "The last page number",
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            },
+                            "total": {
+                              "description": "The total number of items",
+                              "type": "integer",
+                              "example": 150
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/bad-gateway"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Bad gateway."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "The general ledger service is not available. Please try again later."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-feature_flag": "xgl-migration",
+        "x-scopes": [
+          "taxGroup:read"
+        ]
+      }
+    },
+    "/api/v3/taxGroups/{taxGroupId}": {
+      "get": {
+        "tags": [
+          "TaxGroup"
+        ],
+        "summary": "🔒 View a tax group V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint is only available if the feature flag `xgl-migration` is enabled.\n\nThis endpoint requires the following scopes: `taxGroup:read`.\n\nA single tax group, including the tax type it applies in each country. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+        "operationId": "GET::api-v3-taxgroups-taxgroupid",
+        "parameters": [
+          {
+            "name": "taxGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single tax group, including the tax type it applies in each country. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/TaxGroup"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/bad-gateway"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Bad gateway."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "The general ledger service is not available. Please try again later."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-feature_flag": "xgl-migration",
+        "x-scopes": [
+          "taxGroup:read"
+        ]
+      }
+    },
+    "/api/v3/taxGroups/{taxGroupId}/products": {
+      "get": {
+        "tags": [
+          "TaxGroup"
+        ],
+        "summary": "🔒 List the products of a tax group V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint is only available if the feature flag `xgl-migration` is enabled.\n\nThis endpoint requires the following scopes: `taxGroup:read`.\n\nPaginated list of the products assigned to a tax group. A product belongs to at most one group, so a product listed here is in no other. Tax group membership is not limited by project: every product of the group is listed, whichever project it belongs to. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+        "operationId": "GET::api-v3-taxgroups-taxgroupid-products",
+        "parameters": [
+          {
+            "name": "taxGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-pagination",
+            "in": "header",
+            "description": "Controls the pagination format. Available types: simple, table. Defaults to 'simple' if not specified.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "simple",
+                "table"
+              ],
+              "example": "simple"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "Number of items per page. Default: 15, Max: 100. A larger value is reduced to the maximum; omitting it or sending 0 selects the default.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 15
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number. Only used with simple and table pagination. Omitting it or sending 0 selects the first page.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of the products assigned to a tax group. A product belongs to at most one group, so a product listed here is in no other. Tax group membership is not limited by project: every product of the group is listed, whichever project it belongs to. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "title": "Paginated Response: simple",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TaxGroupProduct"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "description": "Pagination meta data",
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "description": "Pagination links",
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=17",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "title": "Paginated Response: table",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TaxGroupProduct"
+                          },
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "links": {
+                          "properties": {
+                            "first": {
+                              "description": "URL to the first page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=1",
+                              "nullable": true
+                            },
+                            "last": {
+                              "description": "URL to the last page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=10",
+                              "nullable": true
+                            },
+                            "prev": {
+                              "description": "URL to the previous page",
+                              "type": "string",
+                              "example": null,
+                              "nullable": true
+                            },
+                            "next": {
+                              "description": "URL to the next page",
+                              "type": "string",
+                              "example": "https://api.example.com/items?page=2",
+                              "nullable": true
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        },
+                        "meta": {
+                          "properties": {
+                            "currentPage": {
+                              "description": "The current page number",
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "from": {
+                              "description": "The first item being returned in the current page",
+                              "type": "integer",
+                              "example": 1,
+                              "nullable": true
+                            },
+                            "lastPage": {
+                              "description": "The last page number",
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "path": {
+                              "description": "The base path for the paginated results",
+                              "type": "string",
+                              "example": "https://api.example.com/items"
+                            },
+                            "perPage": {
+                              "description": "The number of items shown per page",
+                              "type": "integer",
+                              "example": 15
+                            },
+                            "to": {
+                              "description": "The last item being returned in the current page",
+                              "type": "integer",
+                              "example": 15,
+                              "nullable": true
+                            },
+                            "total": {
+                              "description": "The total number of items",
+                              "type": "integer",
+                              "example": 150
+                            }
+                          },
+                          "type": "object",
+                          "x-description-ignore": true,
+                          "x-example-ignore": true
+                        }
+                      },
+                      "type": "object"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/not_found"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Resource not found"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/bad-gateway"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Bad gateway."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "The general ledger service is not available. Please try again later."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-feature_flag": "xgl-migration",
+        "x-scopes": [
+          "taxGroup:read"
+        ]
+      },
+      "post": {
+        "tags": [
+          "TaxGroup"
+        ],
+        "summary": "🔒 Assign a product to a tax group V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint is only available if the feature flag `xgl-migration` is enabled.\n\nThis endpoint requires the following scopes: `taxGroup:update`.\n\nAssign a product to a tax group. The product is moved out of any other group it was in (a product belongs to at most one tax group). Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+        "operationId": "POST::api-v3-taxgroups-taxgroupid-products",
+        "parameters": [
+          {
+            "name": "taxGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignTaxGroupProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Failed validation",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/request-validation"
+                    },
+                    "title": {
+                      "description": "Error messages",
+                      "type": "string",
+                      "example": "Request payload validation failed."
+                    },
+                    "violations": {
+                      "description": "Error messages",
+                      "type": "object",
+                      "example": {
+                        "product": [
+                          "The product field is required."
+                        ]
+                      }
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/bad-gateway"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Bad gateway."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "The general ledger service is not available. Please try again later."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-feature_flag": "xgl-migration",
+        "x-scopes": [
+          "taxGroup:update"
+        ]
+      }
+    },
+    "/api/v3/taxGroups/{taxGroupId}/products/{productId}": {
+      "delete": {
+        "tags": [
+          "TaxGroup"
+        ],
+        "summary": "🔒 Remove a product from a tax group V3",
+        "description": "This endpoint is currently in Beta and available for testing. It may contain bugs, and breaking changes can occur at any time without prior notice. We do not recommend using Beta endpoints in production environments. Should you choose to use it in production, you assume full responsibility for any resulting issues.\n\nThis endpoint is only available if the feature flag `xgl-migration` is enabled.\n\nThis endpoint requires the following scopes: `taxGroup:update`.\n\nRemove a product from a tax group. The product then falls back to the default country tax. Removing a product that is not in the group is a no-op. Only products of the caller's projects can be removed, although the group's product list shows products of every project. Tax groups are held in the XGL general ledger, so they need it set up for the instance.",
+        "operationId": "DELETE::api-v3-taxgroups-taxgroupid-products-productid",
+        "parameters": [
+          {
+            "name": "taxGroupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource successfully deleted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "description": "Too Many Requests",
+                      "type": "string",
+                      "example": "Too Many Requests"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Problem occurred",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "properties": {
+                    "type": {
+                      "description": "A URI reference that identifies the problem type.",
+                      "type": "string",
+                      "example": "https://api.xentral.biz/problems/bad-gateway"
+                    },
+                    "title": {
+                      "description": "A short, human-readable summary of the problem type.",
+                      "type": "string",
+                      "example": "Bad gateway."
+                    },
+                    "detail": {
+                      "description": "A human-readable explanation specific to this occurrence of the problem.",
+                      "type": "string",
+                      "example": "The general ledger service is not available. Please try again later."
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-beta": true,
+        "x-feature_flag": "xgl-migration",
+        "x-scopes": [
+          "taxGroup:update"
         ]
       }
     },
