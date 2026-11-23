@@ -159957,7 +159957,7 @@
         ],
         "operationId": "deliveryNotes.assignQualityControlAttributes",
         "summary": "Assign quality control attributes to delivery note",
-        "description": "Assign quality control attributes to a delivery note.",
+        "description": "Assign quality control attributes to a delivery note.\n\nA serial number that is in stock leaves its storage location, as when it is entered on the delivery note in Xentral. For a delivery note into a commission consignment warehouse it stays in stock and records its storage location, which the consignment stock-in uses. A serial number already assigned to the position is skipped, so a repeated request books nothing twice. The serial numbers of a position may not outnumber its quantity; a request that would exceed it is rejected with 400 and changes nothing.",
         "parameters": [
           {
             "in": "path",
@@ -160369,7 +160369,7 @@
         ],
         "operationId": "storageLocations.setTotalStock",
         "summary": "Set total stock on storage locations",
-        "description": "This endpoint sets the total stock for one or more storage locations.<br>The stock data provided in the payload, including quality control attributes (batch, best-before date, and serial number), will be taken over as the new stock for the specified storage location(s).<br><br><strong>CAUTION: Any stock that was previously present in the storage location and is not specified in the payload will be removed from the storage location. This also includes the quality control attributes.</strong>",
+        "description": "This endpoint sets the total stock for one or more storage locations.<br>The stock data provided in the payload, including quality control attributes (batch, best-before date, and serial number), will be taken over as the new stock for the specified storage location(s).<br><br><strong>CAUTION: Any stock that was previously present in the storage location and is not specified in the payload will be removed from the storage location. This also includes the quality control attributes.</strong><br><br>Exception: if a product has no stock left on the storage location, its batch, best-before date and serial number stock is kept as long as it still has to be captured, either for a released delivery note in a project that captures these attributes in the shipping center, or as an open deferral of the warehouse logic. The same applies when such a product is sent with quantity 0 and no quality control attributes.",
         "requestBody": {
           "description": "Overwrite stock for given products and storage Location",
           "content": {
@@ -160483,7 +160483,7 @@
                             "quantity": 5,
                             "qualityControlAttributes": {
                               "batch": "L12345",
-                              "bestBefore": "2030-12-31",
+                              "bestBeforeDate": "2030-12-31",
                               "serialNumbers": [
                                 {
                                   "number": "10001"
@@ -165167,7 +165167,7 @@
         ],
         "operationId": "user.update",
         "summary": "Update user",
-        "description": "Update a set of changes of an user.",
+        "description": "Update a set of changes of an user. With the content type application/vnd.xentral.mfa+json, switching the mfa of another user requires an administrator and, for a token, the scope mfa:update; a user switches their own mfa without either.",
         "parameters": [
           {
             "in": "path",
